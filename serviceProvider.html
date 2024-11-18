@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Service Provider</title>
+        <!--<link rel="stylesheet" type="text/css" href="css/serviceProvider.css">-->
+        <meta charset="utf-8">
+    </head>
+    <body>
+        <form action="schedule.php" method="post">
+            <!--post: enviar informação (encriptada)-->
+            <!--get: receber informação (envia pelo url)-->
+            <fieldset>
+                <legend>Schedule</legend>
+                <label>Service Type: 
+                    <input type="checkbox" name="serviceType" value="petSitting">Pet Sitting
+                    <input type="checkbox" name="serviceType" value="petWalking">Pet Walking
+                </label><br><br>
+                <label>Date: <input type="date" name="serviceDate" required="required"></label><br><br>
+                <label>Start Time: <input type="time" name="startTime" required="required"></label>
+                <label>End Time: <input type="time" name="endTime" required="required"></label><br><br>
+                <input type="submit" value="Add Availability">
+                <!--podemos usar submit em vez de button porque já dissemos o method no form-->
+            </fieldset>
+        </form>
+        <section id="scheduledBookings">
+            <h2>Scheduled Bookings</h2>
+            <article>
+                <p>Service Type</p>
+                <a href="">Name Person</a>
+                <p>Name Animal</p>
+                <p>Name Species</p>
+                <p>Medical Needs</p>
+                <p>Date and Time</p>
+            </article>
+        </section>
+    </body>
+</html>
