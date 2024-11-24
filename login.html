@@ -1,0 +1,26 @@
+<!-- Login page -->
+ <!-- Nome ou emmail (ou username ou email) --> 
+  <!-- password -->
+  <!DOCTYPE html>
+  <html lang="en">
+    <head>
+        <title>Login</title>
+    </head>
+<body>
+    <form class="login-form" action="login.php" method="POST">
+        <h2>Login</h2>
+        <div class="form-group"> <!-- faria mais sentido se calhar ser o mail ou o username, se for o username metemos no register para meter-->
+            <label for="name">Name</label>
+            <input type="text" id="name" name="name" required>
+        </div>
+        <div class="form-group">
+            <label for="password">Password</label>
+            <input type="password" id="password" name="password" required>
+        </div>
+        <div class="form-group">
+            <input type="submit" value="Login">
+        </div>
+    </form>
+</body>
+
+  </html>
