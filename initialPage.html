@@ -2,12 +2,20 @@
     <head>
         <title>Initial Page</title>
         <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!--define this for responsive design-->
+        <link href="css/style.css" rel="stylesheet">
+        <link href="css/layout.css" rel="stylesheet">
     </head>
     <body>
         <header id="navigationBar">
-            <h1><a href="initialPage.html">Pet Patrol</a></h1>
-            <h2><a href="initialPage.html">Sit and Walk</a></h2>
-            <nav>
+            <a href="initialPage.html">
+                <div id="logo">
+                    <h1>Pet Patrol</h1>
+                    <h2>Sit and Walk</h2>
+                    <img src="images/logo1.png" alt="Logo of Pet Patrol">
+                </div>
+            </a>
+            <nav id="menu">
                 <ul>
                     <li><a href="serviceProvider.html">SERVICES</a></li>
                     <li><a href="serviceProvider.html">DO A SERVICE</a></li>
@@ -22,9 +30,11 @@
         </header>
         <section id="mainContent">
             <article>
-                <img src="images/initial_page_img.jpeg" alt="A cat and two dogs.">
-                <p>The platform for your 4-paw-besties</p>
-                <ul>
+                <div class="imageContainer">
+                    <img src="images/initial_page_img.jpeg" alt="A cat and two dogs.">
+                    <p class="overlayText">The platform for your 4-paw-besties</p>
+                </div>
+                <ul id="services">
                     <li><a href="register.html">PET SITTING</a></li>
                     <li><a href="register.html">PET WALKING</a></li>
                     <li><a href="register.html">BECOME A SITTER/WALKER</a></li>
