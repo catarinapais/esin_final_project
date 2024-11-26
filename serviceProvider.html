@@ -35,13 +35,14 @@
             <!--get: receber informação (envia pelo url)-->
             <fieldset>
                 <legend>Schedule</legend>
-                <label>Service Type: 
+                <p>Service Type:   </p>
+                <label>
                     <input type="checkbox" name="serviceType" value="petSitting">Pet Sitting
                     <input type="checkbox" name="serviceType" value="petWalking">Pet Walking
-                </label><br><br>
-                <label>Date: <input type="date" name="serviceDate" required="required"></label><br><br>
-                <label>Start Time: <input type="time" name="startTime" required="required"></label>
-                <label>End Time: <input type="time" name="endTime" required="required"></label><br><br>
+                </label>
+                <p>Date: <input type="date" name="serviceDate" required="required"></p>
+                <p>Start Time: <input type="time" name="startTime" required="required"></p>
+                <p>End Time: <input type="time" name="endTime" required="required"></p>
                 <input type="submit" value="Add Availability">
                 <!--podemos usar submit em vez de button porque já dissemos o method no form-->
             </fieldset>

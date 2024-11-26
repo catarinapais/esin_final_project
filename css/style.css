@@ -59,3 +59,124 @@ ul#services li a {
 #signup a:last-child {
     background-color: #D6ABAB;
 }
+
+/* Estilo geral para o formulário */
+form {
+    max-width: 500px; /* Largura máxima do formulário */
+    margin: 50px auto; /* Centraliza na página */
+    padding: 20px; /* Espaçamento interno */
+    background-color: #f9f9f9; /* Fundo claro */
+    border: 1px solid #ddd; /* Borda discreta */
+    border-radius: 8px; /* Bordas arredondadas */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra suave */
+    font-family: Arial, sans-serif; /* Fonte padrão */
+}
+
+
+
+
+/* Estilo para os campos de entrada (input, textarea, etc.) */
+form input,
+form textarea,
+form select {
+    width: 100%; /* Preenche toda a largura do formulário */
+    padding: 10px; /* Espaçamento interno */
+    margin-bottom: 15px; /* Espaçamento entre os campos */
+    border: 1px solid #ccc; /* Borda leve */
+    border-radius: 4px; /* Bordas arredondadas */
+    font-size: 16px; /* Tamanho da fonte */
+    font-family: inherit; /* Mesma fonte do formulário */
+    box-sizing: border-box; /* Inclui padding e border no tamanho total */
+    background-color: #e7e6e6;
+}
+
+/* Colocar a verde a caixa quando clicamos no campo */
+form input:focus,
+form textarea:focus,
+form select:focus {
+    outline: none;
+    border-color: #4caf50;
+    box-shadow: 0 0 4px rgba(76, 175, 80, 0.6); 
+}
+/* Estilo para o botão */
+form button {
+    width: 100%; /* Botão ocupa toda a largura */
+    padding: 12px; /* Espaçamento interno */
+    background-color: #4caf50; /* Cor principal (verde) */
+    color: white; /* Texto branco */
+    border: none; /* Remove a borda */
+    border-radius: 4px; /* Bordas arredondadas */
+    font-size: 16px; /* Tamanho do texto */
+    cursor: pointer; /* Muda o cursor ao passar por cima */
+    transition: background-color 0.3s ease; /* Efeito de transição */
+}
+
+
+form p {
+    font-weight:  bold;
+    font-size:18px;
+}
+
+
+/* Fundo e cores do formulário */
+form {
+    background-color: #f9f9f9; /* Fundo do formulário */
+}
+
+/* Estilos para rótulos */
+form label {
+    color: #333;
+}
+
+/* Campos de entrada (input, textarea, select) */
+form input,
+form textarea,
+form select {
+    padding: 10px;
+    margin-bottom: 7px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+    font-family: inherit;
+}
+
+form input:focus,
+form textarea:focus,
+form select:focus {
+    outline: none;
+    border-color: #4caf50;
+    box-shadow: 0 0 4px rgba(76, 175, 80, 0.6);
+}
+
+/* Botão */
+input[type="submit"]{
+    padding: 12px;
+    background-color: #D6ABAB;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+
+input[type="submit"]:hover{
+    transform: scale(1.05); /* Grows the button by 10% */
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2); /* Adds a soft shadow for depth */
+}
+
+fieldset {
+    border: 2px solid #ccc; /* Border color */
+    padding: 20px;
+    border-radius: 8px;
+}
+
+legend {
+    font-size: 1.5em;
+    color: #333; /* Dark color for the legend text */
+    font-weight: bold;
+    text-align: center; /* Centers the text horizontally */
+   
+   
+}

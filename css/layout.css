@@ -90,3 +90,51 @@ ul#services li {
 ul#services li a {
     display: block;
 }
+
+/* Configurações gerais de layout */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f0; /* Fundo da página */
+    color: #333; /* Cor padrão do texto */
+}
+
+/* Estrutura do formulário */
+form {
+    max-width: 500px;
+    margin: 50px auto; /* Centraliza o formulário */
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column; /* Organiza os filhos verticalmente */
+}
+
+
+
+
+form label {
+    display: flex;  /* Faz os elementos filhos da label (texto e input) ficarem na mesma linha */
+    align-items: center; /* Alinha os itens na vertical */
+    margin-bottom: 10px;    /* Espaço entre as labels */
+    font-size: 16px;
+   
+}
+
+/* Campos de entrada (input, textarea, select) */
+form input,
+form textarea,
+form select {
+    width: auto; /* Tamanho ajustável, sem forçar a largura a 100% */
+    margin-left: 10px; /* Espaço entre o texto e o campo de entrada */
+}
+
+/* Botão */
+form button {
+    display: block; /* Ocupa uma nova linha */
+    width: 100%; /* Botão ocupa toda a largura */
+}
+
+
