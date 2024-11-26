@@ -1,6 +1,7 @@
 body {
     background-color: #EDE8DC;
     font-family: 'Geneva', 'Roboto', 'Verdana', 'Tahoma', 'sans-serif';
+    color: #333; /* Cor padrão do texto */
 }
 
 body>header, nav {
@@ -9,7 +10,7 @@ body>header, nav {
 }
 
 a {
-    color: #000;
+    color: #333; /* Cor padrão do texto */
     text-decoration: none;
 }
 
@@ -21,18 +22,27 @@ ul {
     list-style-type: none;
 }
 
-ul#services li {
+#services li {
     background-color: #D6ABAB;
     margin-bottom: 1em;
-    border-radius: 35px;
+    border-radius: 4em;
     padding: 0.5em 1em;
     text-align: center;
     cursor: pointer;
 }
 
-ul#services li a {
+article h2 {
+    font-size: 2em;
+}
+
+#services li:last-child {
+    background-color: #B88080;
+}
+
+#services li a {
     color: inherit;
     padding: 0.5em;
+    font-size: inherit;
 }
 
 .imageContainer img {
@@ -42,7 +52,7 @@ ul#services li a {
 }
 
 .overlayText {
-    color: #000;
+    color: #333;
     font-weight:550;
     padding: 0em;
     font-size: 1.5em;
@@ -71,9 +81,6 @@ form {
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra suave */
     font-family: Arial, sans-serif; /* Fonte padrão */
 }
-
-
-
 
 /* Estilo para os campos de entrada (input, textarea, etc.) */
 form input,

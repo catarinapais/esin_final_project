@@ -17,26 +17,26 @@ DROP TABLE IF EXISTS PetMedicalNeed;
 
 -- Table Person --
 CREATE TABLE Person (
-id INTEGER PRIMARY KEY,
-name TEXT NOT NULL,
-phone_number TEXT,
-adress TEXT,
-email TEXT NOT NULL,
-city TEXT NOT NULL
+    id INTEGER PRIMARY KEY,
+    name TEXT NOT NULL,
+    phone_number TEXT,
+    adress TEXT,
+    email TEXT NOT NULL,
+    city TEXT NOT NULL
 );
 
 -- Table PetOwner -- 
 CREATE TABLE PetOwner(
-person   INTEGER PRIMARY KEY REFERENCES Person,
-avg_rating REAL
+    person   INTEGER PRIMARY KEY REFERENCES Person,
+    avg_rating REAL
 );
 
 -- Table ServiceProvider -- 
 CREATE TABLE ServiceProvider(
-person INTEGER PRIMARY KEY REFERENCES Person,
-iban TEXT UNIQUE NOT NULL,
-service_type TEXT CHECK(service_type IN ('sitting','walking','both')),
-avg_rating REAL
+    person INTEGER PRIMARY KEY REFERENCES Person,
+    iban TEXT UNIQUE NOT NULL,
+    service_type TEXT CHECK(service_type IN ('sitting','walking','both')),
+    avg_rating REAL
 );
 
 -- Table Schedule --
@@ -61,64 +61,64 @@ CREATE TABLE Message (
 
 -- Table BookingType --
 CREATE TABLE BookingType (
-type TEXT PRIMARY KEY CHECK (type IN ('sitting', 'walking'))
+    type TEXT PRIMARY KEY CHECK (type IN ('sitting', 'walking'))
 );
 
 -- Table Payement --
 CREATE TABLE Payment(
-id INTEGER PRIMARY KEY,
-is_paid BOOLEAN,
-price REAL CHECK (price>0),
-payment_date TEXT CHECK (is_paid = 0 OR payment_date IS NOT NULL)
+    id INTEGER PRIMARY KEY,
+    is_paid BOOLEAN,
+    price REAL CHECK (price>0),
+    payment_date TEXT CHECK (is_paid = 0 OR payment_date IS NOT NULL)
 );
 
 -- Table Review -- 
 CREATE TABLE Review(
-id INTEGER PRIMARY KEY,
-rating INTEGER CHECK (rating IS NULL OR (rating>=0 AND rating <=5)),
-description TEXT,
-date_review TEXT
+    id INTEGER PRIMARY KEY,
+    rating INTEGER CHECK (rating IS NULL OR (rating>=0 AND rating <=5)),
+    description TEXT,
+    date_review TEXT
 );
 
 -- Table Pet --
 CREATE TABLE Pet (
-id INTEGER PRIMARY KEY,
-name TEXT NOT NULL,
-species TEXT NOT NULL,
-size REAL CHECK (size>0),
-age INTEGER CHECK (age>0),
-profile_picture IMAGE,
-owner INTEGER REFERENCES PetOwner
+    id INTEGER PRIMARY KEY,
+    name TEXT NOT NULL,
+    species TEXT NOT NULL,
+    size REAL CHECK (size>0),
+    age INTEGER CHECK (age>0),
+    profile_picture IMAGE,
+    owner INTEGER REFERENCES PetOwner
 );
 
 -- Table MedicalNeed --
 CREATE TABLE MedicalNeed (
-type TEXT PRIMARY KEY,
-description TEXT
+    type TEXT PRIMARY KEY,
+    description TEXT
 );
 
 -- Table PetMedicalNeed --
 CREATE TABLE PetMedicalNeed(
-pet INTEGER REFERENCES PET,
-medicalNeed TEXT REFERENCES MedicalNeed,
-PRIMARY KEY (pet,medicalNeed)
+    pet INTEGER REFERENCES PET,
+    medicalNeed TEXT REFERENCES MedicalNeed,
+    PRIMARY KEY (pet,medicalNeed)
 );
 
 -- Table Booking --
 CREATE TABLE Booking (
-id INTEGER PRIMARY KEY,
-start_time TEXT,
-end_time TEXT CHECK(end_time IS NULL OR end_time>start_time),
-duration REAL CHECK (duration>0),
-accepted_by_provider BOOLEAN,
-adress_collect TEXT NOT NULL,
-adress_dropoff TEXT NOT NULL,
-provider INTEGER NOT NULL REFERENCES ServiceProvider(person),
-type TEXT NOT NULL REFERENCES BookingType,
-pet INTEGER NOT NULL REFERENCES Pet, -- (id)
-payment INTEGER REFERENCES Payment, -- (id)
-ownerReview INTEGER REFERENCES Review,-- ... --
-providerReview INTEGER REFERENCES Review
+    id INTEGER PRIMARY KEY,
+    start_time TEXT,
+    end_time TEXT CHECK(end_time IS NULL OR end_time>start_time),
+    duration REAL CHECK (duration>0),
+    accepted_by_provider BOOLEAN,
+    adress_collect TEXT NOT NULL,
+    adress_dropoff TEXT NOT NULL,
+    provider INTEGER NOT NULL REFERENCES ServiceProvider(person),
+    type TEXT NOT NULL REFERENCES BookingType,
+    pet INTEGER NOT NULL REFERENCES Pet, -- (id)
+    payment INTEGER REFERENCES Payment, -- (id)
+    ownerReview INTEGER REFERENCES Review,-- ... --
+    providerReview INTEGER REFERENCES Review
 );
 
 -- Trigger to calculate duration on INSERT
