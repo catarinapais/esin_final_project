@@ -14,6 +14,11 @@ a {
     text-decoration: none;
 }
 
+#authenticationLink {
+    text-decoration: underline;
+    color: blue;
+}
+
 nav#menu li a:hover, div#signup a:hover {
     text-decoration: underline;
 }
@@ -73,7 +78,7 @@ article h2 {
 /* Estilo geral para o formulário */
 form {
     max-width: 500px; /* Largura máxima do formulário */
-    margin: 50px auto; /* Centraliza na página */
+    margin: 50px auto 0 auto; /* Centraliza na página */
     padding: 20px; /* Espaçamento interno */
     background-color: #f9f9f9; /* Fundo claro */
     border: 1px solid #ddd; /* Borda discreta */
@@ -118,16 +123,9 @@ form button {
     transition: background-color 0.3s ease; /* Efeito de transição */
 }
 
-
 form p {
     font-weight:  bold;
     font-size:18px;
-}
-
-
-/* Fundo e cores do formulário */
-form {
-    background-color: #f9f9f9; /* Fundo do formulário */
 }
 
 /* Estilos para rótulos */
@@ -167,7 +165,6 @@ input[type="submit"]{
     transition: background-color 0.3s ease;
 }
 
-
 input[type="submit"]:hover{
     transform: scale(1.05); /* Grows the button by 10% */
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2); /* Adds a soft shadow for depth */
@@ -184,6 +181,4 @@ legend {
     color: #333; /* Dark color for the legend text */
     font-weight: bold;
     text-align: center; /* Centers the text horizontally */
-   
-   
 }

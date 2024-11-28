@@ -5,41 +5,31 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pet Care Booking</title>
-    <link rel="stylesheet" href="style.css"> <!-- ligar ao CSS-->
+    <link href="css/style.css" rel="stylesheet">
+    <link href="css/layout.css" rel="stylesheet">
 </head>
 <body>
-    <header>
-        <head>
-            <title>Account</title>
-            <meta charset="utf-8">
-            <meta name="viewport" content="width=device-width, initial-scale=1.0">
-            <link href="css/style.css" rel="stylesheet">
-            <link href="css/layout.css" rel="stylesheet">
-        </head>
-        <body>
-            <header id="navigationBar">
-                <a href="initialPage.html">
-                    <div id="logo">
-                        <h1>Pet Patrol</h1>
-                        <h2>Sit and Walk</h2>
-                        <img src="images/logo1.png" alt="Logo of Pet Patrol">
-                    </div>
-                </a>
-                <nav id="menu">
-                    <ul>
-                        <li><a href="serviceProvider.html">SERVICES</a></li>
-                        <li><a href="serviceProvider.html">DO A SERVICE</a></li>
-                        <li><a href="account.html">ACCOUNT</a></li>
-                        <li><a href=".html">ABOUT US</a></li>
-                    </ul>
-                    <div id="signup">
-                        <a href="register.html">REGISTER</a>
-                        <a href="login.html">LOGIN</a>
-                    </div>
-                </nav>
-            </header>
+    <header id="navigationBar">
+        <a href="initialPage.html">
+            <div id="logo">
+                <h1>Pet Patrol</h1>
+                <h2>Sit and Walk</h2>
+                <img src="images/logo1.png" alt="Logo of Pet Patrol">
+            </div>
+        </a>
+        <nav id="menu">
+            <ul>
+                <li><a href="serviceProvider.html">SERVICES</a></li>
+                <li><a href="serviceProvider.html">DO A SERVICE</a></li>
+                <li><a href="account.html">ACCOUNT</a></li>
+                <li><a href="aboutus.html">ABOUT US</a></li>
+            </ul>
+            <div id="signup">
+                <a href="register.html">REGISTER</a>
+                <a href="login.html">LOGIN</a>
+            </div>
+        </nav>
     </header>
-    
     <form action="save.php" method="post">
         <fieldset>
             <legend>Booking</legend>
@@ -94,8 +84,7 @@
             <input type="radio" name="photo_consent" value="no" required> No
         </label>
         <br>
-        <input type="submit" value="Submit Reservation">
-
+        <input type="submit" value="Calculate">
         <br>
     </fieldset>
 

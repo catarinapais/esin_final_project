@@ -117,6 +117,7 @@ article p {
 
 /* Estrutura do formulário */
 form {
+    width: 100%;
     max-width: 500px;
     margin: 50px auto; /* Centraliza o formulário */
     padding: 20px;
@@ -132,15 +133,20 @@ form label {
     align-items: center; /* Alinha os itens na vertical */
     margin-bottom: 10px;    /* Espaço entre as labels */
     font-size: 16px;
-   
 }
 
 /* Campos de entrada (input, textarea, select) */
 form input,
 form textarea,
 form select {
-    width: auto; /* Tamanho ajustável, sem forçar a largura a 100% */
+    width: 100%; /* Tamanho ajustável, sem forçar a largura a 100% */
     margin-left: 10px; /* Espaço entre o texto e o campo de entrada */
+}
+
+form input[type="radio"],
+form input[type="checkbox"] {
+    width: auto; /* Set width to auto for radio inputs */
+    margin-left: 10px; /* Optional: Keep the margin for consistency */
 }
 
 /* Botão */
@@ -149,4 +155,15 @@ form button {
     width: 100%; /* Botão ocupa toda a largura */
 }
 
+#authentication {
+    display: flex;
+    flex-direction: column; /* Stack children vertically */
+    align-items: center; /* Center items horizontally */
+    justify-content: center; /* Center items vertically */
+    min-height: 100vh;
+    text-align: center;
+}
 
+.registration-form, .login-form {
+    margin-bottom: 1em;
+}
