@@ -140,7 +140,8 @@ form input,
 form textarea,
 form select {
     width: 100%; /* Tamanho ajustável, sem forçar a largura a 100% */
-    margin-left: 10px; /* Espaço entre o texto e o campo de entrada */
+    margin-left: 0; /* Espaço entre o texto e o campo de entrada */
+
 }
 
 form input[type="radio"],
@@ -166,4 +167,8 @@ form button {
 
 .registration-form, .login-form {
     margin-bottom: 1em;
+}
+
+#authenticationLink:hover {
+    text-decoration: underline;
 }

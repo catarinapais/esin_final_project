@@ -126,6 +126,7 @@ form button {
 form p {
     font-weight:  bold;
     font-size:18px;
+    text-align: left; /* Garante alinhamento à esquerda */
 }
 
 /* Estilos para rótulos */
@@ -182,3 +183,4 @@ legend {
     font-weight: bold;
     text-align: center; /* Centers the text horizontally */
 }
+

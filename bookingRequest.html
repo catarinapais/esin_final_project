@@ -19,7 +19,7 @@
         </a>
         <nav id="menu">
             <ul>
-                <li><a href="serviceProvider.html">SERVICES</a></li>
+                <li><a href="serviceProvider.html">BOOK A SERVICE</a></li>
                 <li><a href="serviceProvider.html">DO A SERVICE</a></li>
                 <li><a href="account.html">ACCOUNT</a></li>
                 <li><a href="aboutus.html">ABOUT US</a></li>
@@ -33,36 +33,40 @@
     <form action="save.php" method="post">
         <fieldset>
             <legend>Booking</legend>
-       <p>Pet's name:</p>
-        <select name="pet_name" id="pet-name">
-            <option value="selecionar">Select</option>
-            <option value="dosmeus">Dos Meus</option>
-            <option value="pets">Pets</option>
-        </select>
-        <br>
-
-        <p>Service Type:</p>
-        <label>
     
-            <input type="radio" name="service_type" value="petwalking" required>  Pet Walking
-        </label>
-        <label>
-
-            <input type="radio" name="service_type" value="petsitting" required>  Pet Sitting
-        </label>
-        <br>
-
-        <p>Pick-Up and Drop-Off Location:</p>
-        <label>
-            <input type="radio" name="location" value="myplace" required>  My Place
-        </label>
-        <label>
-            <input type="radio" name="location" value="providersplace" required>   Pet Sitter/Walker's Place
-        </label>
-        <label>
-            <input type="radio" name="location" value="other" required>   Other Location
-        </label>
-        <textarea name="other_address" id="other-address" rows="3" cols="30" placeholder="Enter address here..."></textarea>
+            <p>Pet's name:</p>
+            <select name="pet_name" id="pet-name">
+                <option value="selecionar">Select</option>
+                <option value="dosmeus">Dos Meus</option>
+                <option value="pets">Pets</option>
+            </select>
+            <br>
+    
+            <p>Service Type:</p>
+            <label>
+                <input type="radio" name="service_type" value="petwalking" required> Pet Walking
+            </label>
+            <label>
+                <input type="radio" name="service_type" value="petsitting" required> Pet Sitting
+            </label>
+            <br>
+    
+            <p>Pick-Up and Drop-Off Location:</p>
+            <label>
+                <input type="radio" name="location" id="myPlace" value="myplace" required> My Place
+            </label>
+            <label>
+                <input type="radio" name="location" id="providersPlace" value="providersplace" required> Pet Sitter/Walker's Place
+            </label>
+            <label>
+                <input type="radio" name="location" id="otherLocation" value="other" required> Other Location
+            </label>
+            
+            <!-- Move this div directly after the #otherLocation radio button -->
+            <div id="otherLocationDiv">
+                <textarea name="other_address" id="other-address" rows="3" cols="30" placeholder="Enter address here..."></textarea>
+            </div>
+            
         <br>
 
       <p>Date:</p>
