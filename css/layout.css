@@ -172,3 +172,33 @@ form button {
 #authenticationLink:hover {
     text-decoration: underline;
 }
+
+/*
+#navigationBar {
+    position: sticky;
+    top: 0;
+    z-index: 100; 
+}
+*/
+
+.mainContent {
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* Two equal columns */
+    grid-template-rows: auto auto; /* Two rows */
+    gap: 1em; /* Optional: Add some gap between grid items */
+}
+
+#scheduleForm {
+    grid-column: 1 / 2; /* First column */
+    grid-row: 1 / 2; /* First row */
+}
+
+#availability {
+    grid-column: 2 / 3; /* Second column */
+    grid-row: 1 / 2; /* First row */
+}
+
+#scheduledBookings {
+    grid-column: 1 / 3; /* Span both columns */
+    grid-row: 2 / 3; /* Second row */
+}

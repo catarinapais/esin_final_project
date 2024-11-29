@@ -63,6 +63,8 @@
             </label>
             
             <!-- Move this div directly after the #otherLocation radio button -->
+            <!--TODO: nao deixar aumentar o tamanho do textarea para os lados-->
+            <!--na review nao permite aumentar mais para os aldos, acredito que seja pelo fieldset-->
             <div id="otherLocationDiv">
                 <textarea name="other_address" id="other-address" rows="3" cols="30" placeholder="Enter address here..."></textarea>
             </div>
@@ -73,6 +75,8 @@
         <input name="date" id="date" type="date" required>
         <p>Start Time:</p>
         <input name="starttime" id="starttime" type="time" required>
+        <!--TODO: por condiçao para o endtime > starttime-->
+        <!--TODO: condição para os serviços sejam apenas a horas decentes ???? tipo day time-->
         <p>End time:</p>
         <input name="endtime" id="endtime" type="time" required>
         <br>

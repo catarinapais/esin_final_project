@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Review</title>
+        <link href="css/style.css" rel="stylesheet">
+        <link href="css/layout.css" rel="stylesheet">
+    </head>
+    <body>
+        <header id="navigationBar">
+            <a href="initialPage.html">
+                <div id="logo">
+                    <h1>Pet Patrol</h1>
+                    <h2>Sit and Walk</h2>
+                    <img src="images/logo1.png" alt="Logo of Pet Patrol">
+                </div>
+            </a>
+            <nav id="menu">
+                <ul>
+                    <li><a href="bookingRequest.html">BOOK A SERVICE</a></li>
+                    <li><a href="serviceProvider.html">DO A SERVICE</a></li>
+                    <li><a href="account.html">ACCOUNT</a></li>
+                    <li><a href="aboutus.html">ABOUT US</a></li>
+                </ul>
+                <div id="signup">
+                    <a href="register.html">REGISTER</a>
+                    <a href="login.html">LOGIN</a>
+                </div>
+            </nav>
+        </header>
+
+        <section id="pastService"><!--querying info about this service-->
+            <h2>Past Service</h2>
+            <h3>Pet Sitting to Leia</h3>
+            <p>Service by: John Doe</p>
+            <p>21/12/2023 15:00</p>
+        </section>
+        <section id="review">
+            <form action="account.php" method="post">
+                <h2>Review</h2>
+                <div id="starReview">
+                    <input type="radio" id="star5" name="review" value="5" required="required">
+                    <label for="star5" title="5 stars">★</label>
+                    <input type="radio" id="star4" name="review" value="4" required="required">
+                    <label for="star4" title="4 stars">★</label>
+                    <input type="radio" id="star3" name="review" value="3" required="required">
+                    <label for="star3" title="3 stars">★</label>
+                    <input type="radio" id="star2" name="review" value="2" required="required">
+                    <label for="star2" title="2 stars">★</label>
+                    <input type="radio" id="star1" name="review" value="1" required="required">
+                    <label for="star1" title="1 star">★</label>
+                </div>
+                <label>
+                    Description: 
+                    <textarea id="reviewDescription" name="reviewDescription" rows="3" cols="30" placeholder="Describe your experience!" required="required"></textarea>
+                </label>
+                <label>
+                    <br>
+                    <input type="checkbox" name="makePublic" value="1">
+                    I allow this review to be made public in the website.
+                </label>
+                <input type="submit" value="Submit Review">
+    </body>
+</html>
