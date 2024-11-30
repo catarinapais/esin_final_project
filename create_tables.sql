@@ -2,18 +2,18 @@ PRAGMA foreign_keys= ON;
 .headers ON
 .mode columns
 
-DROP TABLE IF EXISTS Person;
-DROP TABLE IF EXISTS PetOwner;
-DROP TABLE IF EXISTS ServiceProvider;
-DROP TABLE IF EXISTS Schedule;
-DROP TABLE IF EXISTS Message;
-DROP TABLE IF EXISTS Pet;
-DROP TABLE IF EXISTS MedicalNeed;
-DROP TABLE IF EXISTS BookingType;
-DROP TABLE IF EXISTS Payment;
-DROP TABLE IF EXISTS Review;
-DROP TABLE IF EXISTS Booking;
 DROP TABLE IF EXISTS PetMedicalNeed;
+DROP TABLE IF EXISTS Booking;
+DROP TABLE IF EXISTS Review;
+DROP TABLE IF EXISTS Payment;
+DROP TABLE IF EXISTS BookingType;
+DROP TABLE IF EXISTS MedicalNeed;
+DROP TABLE IF EXISTS Pet;
+DROP TABLE IF EXISTS Message;
+DROP TABLE IF EXISTS Schedule;
+DROP TABLE IF EXISTS ServiceProvider;
+DROP TABLE IF EXISTS PetOwner;
+DROP TABLE IF EXISTS Person;
 
 -- Table Person --
 CREATE TABLE Person (
@@ -142,3 +142,7 @@ BEGIN
     SET duration = (julianday(NEW.end_time) - julianday(NEW.start_time)) * 24 * 60
     WHERE id = NEW.id;
 END;
+
+INSERT INTO Person (id, name, phone_number, adress, email, city) VALUES (1, 'John Doe', '123456789', 'Rua do Ouro 100', 'johndoe@gmail.com', 'Porto');
+INSERT INTO ServiceProvider (person, iban, service_type, avg_rating) VALUES (1, 'PT50000201231234567890154', 'sitting', 4.5);
+INSERT INTO Schedule (id, day_week, start_time, end_time, service_provider) VALUES (1, 'Monday', '10:00', '12:00', 1);
