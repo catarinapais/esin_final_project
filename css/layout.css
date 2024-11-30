@@ -341,59 +341,71 @@ body > *:not(footer) {
 }
 
 
-#about-content {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    
+#accountcontent {
+    font-family: 'Segoe UI', Tahoma,Verdana, sans-serif;
     padding: 60px 20px;
+  
 }
 
-
-.about-container {
+.account-container {
     width: 100%;
     max-width: 1200px;
-    margin: 0 auto; 
+    margin: 0 auto;
     padding: 0 15px;
 }
 
-.about-section {
+.staticTags {
     background-color: #fff;
-    padding: 10px 30px;
+    padding: 30px 40px;
     margin-bottom: 40px;
     border-radius: 10px;
     box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
-    transition: all 0.3s ease-in-out; 
+    transition: all 0.3s ease-in-out;
 }
 
-.about-section:hover {
+.staticTags:hover {
     transform: translateY(-5px); /* Efeito de elevação */
     box-shadow: 0 15px 25px rgba(0, 0, 0, 0.15);
 }
 
-.about-section h2 {
+.staticTags h2 {
     font-size: 36px;
     color: #2C3E50;
     font-weight: 600;
     margin-bottom: 20px;
-    text-align: center; 
+    text-align: center;
     letter-spacing: 1px;
 }
 
-.about-section p {
+.staticTags p {
     font-size: 18px;
     color: #7F8C8D;
     line-height: 1.8;
-    text-align: justify; 
+    text-align: left; /* Ajustado para alinhamento à esquerda */
     margin-bottom: 20px;
 }
 
-
-.about-section p:last-child {
-    margin-bottom:0;
+.staticTags p:last-child {
+    margin-bottom: 0;
     padding-bottom: 30px;
 }
 
+.staticTags p span {
+    font-weight: bold;
+    color: #2C3E50;
+}
 
+.pet-icon {
+    width: 40px; /* Define o tamanho da imagem */
+    height: 40px; /* Define a altura da imagem */
+    margin-left: 12px; /* Dá um espaço entre a imagem e o título */
+    vertical-align: middle; /* Garante que a imagem fique alinhada com o texto */
+}
 
+#pets legend{
+    display:flex;
+    align-items: center;
+}
 
 
 #ceos {
