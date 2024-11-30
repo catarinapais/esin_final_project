@@ -180,3 +180,170 @@ legend {
     text-align: center; /* Centers the text horizontally */
 }
 
+
+* star review system */
+#starReview {
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: center;
+    gap: 5px;
+}
+
+#starReview input {
+    display: none;
+}
+
+#starReview label {
+    font-size: 2rem;
+    color: #ddd;
+    cursor: pointer;
+    transition: color 0.3s;
+}
+
+#starReview input:checked~label {
+    color: gold;
+}
+
+#starReview label:hover,
+#starReview label:hover~label {
+    color: gold;
+}
+
+/*for the service provider's availability schedule*/
+#availability .availabilityTimetable {
+    border-collapse: collapse;
+    border-color: #B88080;
+    border-spacing: 0;
+}
+
+#availability .availabilityTimetable td, 
+#availability .availabilityTimetable th {
+    border: 1px solid #B88080;
+    padding: 10px 5px;
+    font-size: 14px;
+    text-align: center;
+    vertical-align: top;
+}
+
+#availability .availabilityTimetable th.tg-header {
+    background-color: #B88080;
+    color: #EDE8DC;
+    font-weight: bolder;
+}
+
+#availability .availabilityTimetable td.tg-top {
+    background-color: #EDE8DC;
+    color: #333;
+}
+
+#availability .availabilityTimetable td.tg-available {
+    background-color: #A7BDC3;
+    color: #333;
+}
+
+#availability .availabilityTimetable td.tg-all {
+    background-color: #EDE8DC;
+    color: #333;
+}
+
+
+
+/* Footer Styling */
+footer {
+    background-color:#E7CCCC; 
+    padding: 20px; 
+    text-align: center; 
+    border-top: 1px solid #ddd;
+}
+
+.footer-container {
+    display: flex;
+    flex-wrap: wrap; /* Allows sections to wrap on smaller screens */
+    justify-content: space-evenly;
+    max-width: 1200px; 
+    margin: 0 auto; /* Center the footer on the page */
+    padding: 0 20px;
+}
+
+.footer-section {
+    flex: 1 1 200px; 
+    margin: 10px;
+}
+
+.footer-section h3 {
+    font-size: 1.2em;
+    margin-bottom: 10px;
+    color: #000000;
+    font-weight: bold;
+    
+}
+
+.footer-section ul {
+    list-style: none; 
+    padding: 0;
+    margin: 0;
+}
+
+.footer-section li {
+    margin: 5px 0; 
+}
+
+.footer-section a {
+    text-decoration: none;
+}
+
+.footer-section a:hover {
+    text-decoration: underline;
+}
+
+.footer-section p {
+    margin: 5px 0;
+}
+
+.footer-section form {
+    display: flex;
+    flex-direction: column; /* Stack input and button vertically */
+    margin:0;
+    background: none; 
+    padding: 0; 
+    border: none; 
+    outline: none; 
+    box-shadow: none; 
+
+}
+
+.footer-section input[type="email"] {
+    padding: 10px;
+    margin-bottom: 10px;
+    border: none;
+    border-radius: 4px;
+}
+
+.footer-section button {
+    padding: 10px;
+    background-color:  #D6ABAB;
+    border: none;
+    border-radius: 4px;
+    color: #fff;
+    cursor: pointer;
+    font-size: 1em;
+}
+
+.footer-legal {
+    text-align: center;
+    margin-top: 20px;
+    font-size: 0.9em;
+    border-top: 1px solid #444; /* Subtle separation line */
+    padding-top: 10px;
+}
+
+.footer-legal a {
+    color: #9fd4e7;
+    text-decoration: none;
+}
+
+.footer-legal a:hover {
+    text-decoration: underline;
+}
+
+

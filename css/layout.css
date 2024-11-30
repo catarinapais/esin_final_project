@@ -173,3 +173,281 @@ form button {
 #authenticationLink:hover {
     text-decoration: underline;
 }
+
+
+/*
+#navigationBar {
+    position: sticky;
+    top: 0;
+    z-index: 100; 
+}
+*/
+
+.mainContent {
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* Two equal columns */
+    grid-template-rows: auto auto; /* Two rows */
+    gap: 1em; /* Optional: Add some gap between grid items */
+}
+
+#scheduleForm {
+    grid-column: 1 / 2; /* First column */
+    grid-row: 1 / 2; /* First row */
+}
+
+#availability {
+    grid-column: 2 / 3; /* Second column */
+    grid-row: 1 / 2; /* First row */
+}
+
+#scheduledBookings {
+    grid-column: 1 / 3; /* Span both columns */
+    grid-row: 2 / 3; /* Second row */
+}
+
+
+
+
+
+
+/* Garante que o conteúdo principal expanda para preencher o espaço disponível */
+body > *:not(footer) {
+    flex: 1; /* Expande o conteúdo para preencher o espaço disponível */
+}
+
+
+
+/* FAQs*/
+#faq-section {
+    margin-top: 30px;
+}
+
+
+.faq-item {
+    background-color: #ffffff;
+    margin-bottom: 20px;
+    border-radius: 8px;
+    border: 1px solid #ddd;
+    padding: 20px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+
+.faq-item:hover {
+    background-color: #f7f7f7;
+    transform: translateY(-5px);
+}
+
+
+.faq-item h3 {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: #000000;
+    margin-bottom: 10px;
+}
+
+
+.faq-item p {
+    font-size: 1rem;
+    color: #555;
+    line-height: 1.6;
+    margin: 0;
+}
+
+
+#faq-section {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+#FAQcontent h1{
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: #333;
+    text-align: center;
+    margin-top: 40px;
+    margin-bottom: 30px;
+    
+
+}
+
+/* Estilo para as seções */
+ #accountcontent h1 {
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: #333;
+    text-align: center;
+    margin-top: 40px;
+    margin-bottom: 20px;
+    
+}
+#accountcontent section {
+    margin: 30px auto;
+    max-width: 900px;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    border: 1px solid #ddd;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+
+#accountcontent section h2 {
+    font-size: 1.75rem;
+    color:  #D6ABAB;
+    margin-bottom: 15px;
+}
+
+
+#accountcontent section p {
+    font-size: 1.1rem;
+    color: #555;
+    margin: 10px 0;
+    line-height: 1.6;
+}
+
+#petslInformation article {
+    display: block; 
+    background-color: #f9f9f9; 
+    padding: 20px; 
+    border-radius: 8px;
+    border: 1px solid #ddd; 
+    margin-top: 15px; 
+    }
+  
+
+
+#petslInformation article p {
+    font-size: 1.1rem; 
+    color: #333; 
+    margin: 8px 0; 
+    text-align: left; 
+    padding-left: 0;
+}
+
+#petslInformation a {
+    font-size:1.2rem;
+    display: inline-block; 
+    margin-top: 0; 
+    color: #D6ABAB; 
+    text-decoration: none;
+    font-weight: bold; 
+}
+
+#petslInformation a:hover {
+    text-decoration: underline; 
+}
+
+
+#about-content {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    
+    padding: 60px 20px;
+}
+
+
+.about-container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto; 
+    padding: 0 15px;
+}
+
+.about-section {
+    background-color: #fff;
+    padding: 10px 30px;
+    margin-bottom: 40px;
+    border-radius: 10px;
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease-in-out; 
+}
+
+.about-section:hover {
+    transform: translateY(-5px); /* Efeito de elevação */
+    box-shadow: 0 15px 25px rgba(0, 0, 0, 0.15);
+}
+
+.about-section h2 {
+    font-size: 36px;
+    color: #2C3E50;
+    font-weight: 600;
+    margin-bottom: 20px;
+    text-align: center; 
+    letter-spacing: 1px;
+}
+
+.about-section p {
+    font-size: 18px;
+    color: #7F8C8D;
+    line-height: 1.8;
+    text-align: justify; 
+    margin-bottom: 20px;
+}
+
+
+.about-section p:last-child {
+    margin-bottom:0;
+    padding-bottom: 30px;
+}
+
+
+
+
+
+#ceos {
+    margin-top: 40px;
+    text-align: center;
+}
+
+#ceos h2 {
+    font-size: 2rem;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+#ceos p {
+    font-size: 1.2rem;
+    color: #555;
+    margin-bottom: 20px;
+}
+
+.ceo-container {
+    display: flex; /*põe as fotos em linha*/
+    justify-content: space-evenly;
+    gap: 20px;
+    flex-wrap: wrap;
+    align-items: center; 
+}
+
+/* Estilo de cada CEO */
+.ceo {
+    display:flex;
+    flex-direction: column;
+   align-items: center;
+    width: 200px; 
+    text-align: center;
+    flex-shrink: 0; /* Impede que o item encolha */
+}
+
+/* Imagens dos CEOs */
+.ceo img {
+    width: 300px; /* Tamanho fixo */
+    height: 300px; /* Tamanho fixo */
+    border-radius: 50%; /* Faz a imagem ficar redonda */
+    object-fit: cover; /* Ajusta a imagem para preencher a esfera */
+    margin-bottom: 10px;
+    border: 2px solid #ddd; /* Borda fina ao redor da imagem */
+    transition: transform 0.3s ease-in-out; /* Efeito de transição */
+}
+
+.ceo img:hover {
+    transform: scale(1.1); 
+}
+
+.ceo p {
+    font-size: 1rem;
+    color: #333;
+    margin: 5px 0;
+}
