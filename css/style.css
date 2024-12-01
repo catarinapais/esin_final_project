@@ -19,7 +19,7 @@ a {
     color: blue;
 }
 
-nav#menu li a:hover, div#signup a:hover {
+nav#menu li a:hover {
     text-decoration: underline;
 }
 
@@ -62,19 +62,24 @@ article h2 {
     padding: 0em;
     font-size: 1.5em;
 }
-#signup {
-    margin-left: 0;
+
+/*TODO:arranjar o login ficar com a cor escura*/
+#menuItems {
+    margin-left: 0em;
     margin-right: 0.5em;
 }
-#signup a {
-    padding: 0.5em 1em;
+#menuItems li a {
+    padding: 0.5em 0.25em;
     border-radius: 19px;
     margin-left: 0.5em;
+    align-content: center;
 }
-#signup a:last-child {
+#menuItems li:last-child {
     background-color: #D6ABAB;
+    border-radius: 19px;
+    align-content: center;
 }
-
+/*TODO: arranjar ate aqui ficar com a cor escura*/
 
 /* Estilo geral para o formulário */
 form {
@@ -183,7 +188,7 @@ legend {
 }
 
 
-* star review system */
+/* star review system */
 #starReview {
     display: flex;
     flex-direction: row-reverse;

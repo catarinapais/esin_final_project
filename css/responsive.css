@@ -1,0 +1,103 @@
+/* Default styles for the menu */
+#menu {
+    display: flex;
+    align-items: center;
+    position: relative;
+}
+
+#menuItems {
+    display: flex;
+}
+
+#hamburger, .hamburger {
+    display: none;
+}
+
+/* Media query for smaller screens */
+@media (max-width: 1023px) {
+    #menu {
+        position: relative;
+    }
+    #hamburger {
+        display: none !important; /* Forcefully hide the checkbox */
+        visibility: hidden;       /* Additional hiding for extra measure */
+        position: absolute;       /* Remove it from normal flow */
+        width: 0;
+        height: 0;
+    }
+
+    #menuItems {
+        display: none; /* Hide menu items by default on small screens */
+        flex-direction: column;
+        position: fixed; /* Use fixed position so it always stays to the left of the hamburger */
+        top: 0; 
+        left: 0;
+        width: 70%; /* Take up part of the screen */
+        height: 100%; /* Full height of the viewport */
+        background-color: #edeff0; /* Background color of the dropdown */
+        margin: 0;
+        padding: 2em 1em;
+        box-shadow: 2px 0 5px rgba(0, 0, 0, 0.3); /* Add shadow for better visibility */
+        z-index: 1;
+        transform: translateX(-100%); /* Hide it to the left by default */
+    }
+
+    #menuItems li {
+        list-style: none;
+        padding: 1em 0;
+        text-align: left;
+        opacity: 1;
+        transition: all 0.3s ease-in-out;
+    }
+
+    #menuItems li a {
+        text-decoration: none;
+        color: black;
+    }
+
+    #hamburger {
+        display: block;
+        cursor: pointer;
+        z-index: 2;
+        position: relative;
+    }
+
+    .hamburger {
+        display: block;
+        color: #333;
+        padding: 0.5em 1.5em;
+        cursor: pointer;
+    }
+
+    .hamburger:before {
+        content: '\2630'; /* Hamburger icon */
+        font-size: 1.5em;
+    }
+
+    #hamburger:checked + .hamburger:before {
+        content: '\2715'; /* Change to close icon */
+    }
+
+    #hamburger:checked + .hamburger + #menuItems {
+        transform: translateX(0); /* Bring the dropdown in from the left */
+        display: flex;
+        transition: transform 0.5s ease-in-out;
+        background-color: #edeff0;
+    }
+    #hamburger:checked + .hamburger + #menuItems li {
+        background-color: #edeff0;
+    }
+    
+}
+
+@media (max-width: 600px) {
+    .overlayText {
+        font-size: 1.2em;
+    }
+}
+
+@media (max-width: 374px) {
+    #logo h1, #logo h2 {
+        display: none;
+    }
+}

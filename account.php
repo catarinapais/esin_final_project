@@ -100,7 +100,7 @@ try {
                     <section id="pets">
                         <legend>
                         <h2>Pets</h2>
-                        <img src="pata.png" alt="Pet" class="pet-icon">
+                        <img src="images/pata.png" alt="Pet" class="pet-icon">
                 </legend>
                         <?php foreach ($petOwnerInfo as $pet): ?>
                             <fieldset class="pet">

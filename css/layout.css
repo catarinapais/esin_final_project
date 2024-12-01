@@ -3,6 +3,7 @@ body {
     margin: 0;
     padding: 0;
     height: 100%; /* Ocupa 100% da altura do navegador */
+    min-height: 100vh; /* Ocupa 100% da altura da tela */
 }
 
 .imageContainer {
@@ -63,6 +64,14 @@ body {
 #menu {
     display: flex;
     align-items: center;
+    justify-items: center;
+    padding-top: 0;
+    padding-bottom: 0;
+    height:2em;
+}
+
+#menu ul {
+    height:100%;
 }
 
 #menu ul {
@@ -75,11 +84,8 @@ body {
 
 #menu ul li {
     margin-right: 1em; /* Adjust spacing as needed */
-}
-
-#signup {
-    display: flex;
-    align-items: center;
+    align-content: center;
+    justify-content: center;
 }
 
 article {
@@ -175,13 +181,13 @@ form button {
 }
 
 
-/*
+
 #navigationBar {
     position: sticky;
     top: 0;
     z-index: 100; 
 }
-*/
+
 
 .mainContent {
     display: grid;
@@ -205,23 +211,15 @@ form button {
     grid-row: 2 / 3; /* Second row */
 }
 
-
-
-
-
-
 /* Garante que o conteúdo principal expanda para preencher o espaço disponível */
 body > *:not(footer) {
     flex: 1; /* Expande o conteúdo para preencher o espaço disponível */
 }
 
-
-
 /* FAQs*/
 #faq-section {
     margin-top: 30px;
 }
-
 
 .faq-item {
     background-color: #ffffff;
