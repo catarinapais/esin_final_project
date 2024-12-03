@@ -126,48 +126,46 @@ article p {
 form {
     width: 100%;
     max-width: 500px;
-    margin: 50px auto; /* Centraliza o formulário */
+    margin: 50px auto; 
     padding: 20px;
     border: 1px solid #ddd;
     border-radius: 10px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     display: flex;
-    flex-direction: column; /* Organiza os filhos verticalmente */
+    flex-direction: column; 
 }
 
 form label {
     display: flex;  /* Faz os elementos filhos da label (texto e input) ficarem na mesma linha */
-    align-items: center; /* Alinha os itens na vertical */
-    margin-bottom: 10px;    /* Espaço entre as labels */
+    align-items: center; 
+    margin-bottom: 10px;   
     font-size: 16px;
 }
 
-/* Campos de entrada (input, textarea, select) */
+
 form input,
 form textarea,
 form select {
-    width: 100%; /* Tamanho ajustável, sem forçar a largura a 100% */
-    margin-left: 0; /* Espaço entre o texto e o campo de entrada */
-
+    width: 100%;
+    margin-left: 0;
 }
 
 form input[type="radio"],
 form input[type="checkbox"] {
-    width: auto; /* Set width to auto for radio inputs */
-    margin-left: 10px; /* Optional: Keep the margin for consistency */
+    width: auto; 
+    margin-left: 10px; 
 }
 
-/* Botão */
 form button {
-    display: block; /* Ocupa uma nova linha */
-    width: 100%; /* Botão ocupa toda a largura */
+    display: block;
+    width: 100%; 
 }
 
 #authentication {
     display: flex;
-    flex-direction: column; /* Stack children vertically */
-    align-items: center; /* Center items horizontally */
-    justify-content: center; /* Center items vertically */
+    flex-direction: column; 
+    align-items: center; 
+    justify-content: center; 
     min-height: 100vh;
     text-align: center;
 }
@@ -394,10 +392,10 @@ body > *:not(footer) {
 }
 
 .pet-icon {
-    width: 40px; /* Define o tamanho da imagem */
-    height: 40px; /* Define a altura da imagem */
-    margin-left: 12px; /* Dá um espaço entre a imagem e o título */
-    vertical-align: middle; /* Garante que a imagem fique alinhada com o texto */
+    width: 40px; 
+    height: 40px; 
+    margin-left: 12px; 
+    vertical-align: middle; 
 }
 
 #pets legend{
@@ -406,58 +404,127 @@ body > *:not(footer) {
 }
 
 
+
+
+
+/* AboutUs section */
+
+#about-content {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  
+    padding: 60px 20px;
+}
+.about-container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto; 
+    padding: 0 15px;
+}
+.about-section {
+    background-color: #fff;
+    padding: 10px 30px;
+    margin-bottom: 40px;
+    border-radius: 10px;
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease-in-out; 
+}
+.about-section:hover {
+    transform: translateY(-5px); /* Efeito de elevação */
+    box-shadow: 0 15px 25px rgba(0, 0, 0, 0.15);
+}
+.about-section h2 {
+    font-size: 36px;
+    color: #333;;
+    font-weight: 600;
+    margin-bottom: 20px;
+    text-align: center; 
+    letter-spacing: 1px;
+}
+
+.about-section p {
+    font-size: 1.2rem;
+    color: #333;;
+    line-height: 1.8;
+    margin-bottom: 15px;
+}
+
+
 #ceos {
-    margin-top: 40px;
     text-align: center;
+    
 }
 
 #ceos h2 {
-    font-size: 2rem;
-    color: #333;
+    font-size: 2.5rem;
+    color: #333;;
     margin-bottom: 10px;
+    font-weight: bold;
 }
 
 #ceos p {
     font-size: 1.2rem;
-    color: #555;
-    margin-bottom: 20px;
+    color: #666;
+    margin-bottom: 40px;
 }
 
 .ceo-container {
-    display: flex; /*põe as fotos em linha*/
-    justify-content: space-evenly;
-    gap: 20px;
+    display: flex;
+    justify-content: center;
     flex-wrap: wrap;
-    align-items: center; 
+    gap: 60px; 
 }
 
-/* Estilo de cada CEO */
 .ceo {
-    display:flex;
+    display: flex;
     flex-direction: column;
-   align-items: center;
-    width: 200px; 
+    align-items: center;
     text-align: center;
-    flex-shrink: 0; /* Impede que o item encolha */
+    width: 240px; 
 }
 
-/* Imagens dos CEOs */
+
 .ceo img {
-    width: 300px; /* Tamanho fixo */
-    height: 300px; /* Tamanho fixo */
-    border-radius: 50%; /* Faz a imagem ficar redonda */
-    object-fit: cover; /* Ajusta a imagem para preencher a esfera */
-    margin-bottom: 10px;
-    border: 2px solid #ddd; /* Borda fina ao redor da imagem */
-    transition: transform 0.3s ease-in-out; /* Efeito de transição */
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    object-fit: cover;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2); 
+    margin-bottom: 15px;
 }
 
-.ceo img:hover {
-    transform: scale(1.1); 
-}
 
 .ceo p {
-    font-size: 1rem;
+    font-size: 1.1rem;
     color: #333;
-    margin: 5px 0;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+    .ceo-container {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .about-section {
+        padding: 20px;
+    }
+
+    #ceos h2 {
+        font-size: 2rem;
+    }
+
+    #ceos p {
+        font-size: 1rem;
+    }
+
+    .ceo img {
+        width: 150px;
+        height: 150px;
+    }
+}
+
+
+#bookingcontent a {
+    text-align: center;
+    margin-top:20px
 }

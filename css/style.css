@@ -29,13 +29,17 @@ ul {
 
 #services li {
     background-color: #D6ABAB;
-    margin-bottom: 1em;
+    margin-bottom: 4em;
     border-radius: 4em;
     padding: 0.5em 1em;
     text-align: center;
     cursor: pointer;
 }
 
+#services li:hover {
+    background-color: #B88080;
+    transform: scale(1.05); /* Efeito de leve aumento */
+} 
 article h2 {
     font-size: 2em;
 }
@@ -62,6 +66,8 @@ article h2 {
     padding: 0em;
     font-size: 1.5em;
 }
+
+
 
 /*TODO:arranjar o login ficar com a cor escura*/
 #menuItems {
