@@ -144,15 +144,21 @@ BEGIN
 END;
 
 INSERT INTO Person (id, name, phone_number, adress, email, city) VALUES (1, 'John Doe', '123456789', 'Rua do Ouro 100', 'johndoe@gmail.com', 'Porto');
+INSERT INTO Person (id, name, phone_number, adress, email, city) VALUES (2, 'Ema Beira', '987654321', 'Rua do Ouro 101', 'ema@gmail.com', 'Aldoar');
 INSERT INTO ServiceProvider (person, iban, service_type, avg_rating) VALUES (1, 'PT50000201231234567890154', 'sitting', 4.5);
 INSERT INTO Schedule (id, day_week, start_time, end_time, service_provider) VALUES (1, 'Monday', '10:00', '12:00', 1);
 INSERT INTO Schedule (id, day_week, start_time, end_time, service_provider) VALUES (2, 'Tuesday', '07:00', '11:00', 1);
 
+INSERT INTO PetOwner(person, avg_rating) VALUES (1, 4.5);
+INSERT INTO ServiceProvider(person, iban, service_type, avg_rating) VALUES (2, 111, 'both', 4.5);
 
 
 INSERT INTO PetOwner (person, avg_rating) VALUES (1, 4.5);
 INSERT INTO Pet (name, species, size, age, profile_picture, owner)  VALUES ('Rex', 'Dog', 'Large', 5, 'cat.jpg',1);
 
 INSERT INTO Pet (name, species, size, age, owner) VALUES ('Whiskers', 'Cat', 'Small', 3, 1);
-
 INSERT INTO Pet (name, species, size, age, owner) VALUES ('Buddy', 'Dog', 'Medium', 2, 1);
+
+INSERT INTO Message(id, sender, message_body, send_time, is_read, owner, provider) VALUES (1,1,'Hello', '15:20', 0, 1, 2);
+INSERT INTO Message(id, sender, message_body, send_time, is_read, owner, provider) VALUES (2,1,'Hi', '15:21', 0, 1, 2);
+INSERT INTO Message(id, sender, message_body, send_time, is_read, owner, provider) VALUES (3,2,'How are you?', '15:22', 0, 1, 2);
