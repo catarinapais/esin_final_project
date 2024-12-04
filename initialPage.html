@@ -36,18 +36,27 @@
             <article>
                 <div class="imageContainer">
                     <img src="images/initial_page_img.jpeg" alt="A cat and two dogs.">
-                    <p class="overlayText">The platform for your 4-paw-besties</p>
+                    <p class="overlayText">The platform for your 4-paw besties</p>
                 </div>
             </article>
             <article id="services">
-                <h2>Book with us!</h2>
-                <ul>
-                    <!--TODO: por os links a apontar para diferentes radios ativados-->
-                    <li><a href="bookingRequest.html">PET SITTING</a></li>
-                    <li><a href="bookingRequest.html">PET WALKING</a></li>
-                    <li><a href="serviceProvider.html">BECOME A SITTER/WALKER</a></li>
-                </ul>
+                <h2>Book with us</h2>
+                <div class="services-container">
+                    <a href="bookingRequest.php?service=petsitting" class="service-card">
+                        <h3>PET SITTING</h3>
+                        <p>Reliable and loving care for your pets at home.</p>
+                    </a>
+                    <a href="bookingRequest.php?service=petwalking" class="service-card">
+                        <h3>PET WALKING</h3>
+                        <p>Healthy and fun walks for your furry friends.</p>
+                    </a>
+                    <a href="serviceProvider.html" class="service-card">
+                        <h3>BECOME A SITTER/WALKER</h3>
+                        <p>Join our community and earn doing what you love.</p>
+                    </a>
+                </div>
             </article>
+            
             
         </main>
   
