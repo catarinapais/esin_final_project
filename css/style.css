@@ -75,15 +75,18 @@ article h2 {
     margin-right: 0.5em;
 }
 #menuItems li a {
-    padding: 0.5em 0.25em;
-    border-radius: 19px;
+    padding: 0.5em 0.1em;
     margin-left: 0.5em;
-    align-content: center;
+    display: flex; /* Use flexbox to center the text */
+    align-items: center; /* Center text vertically */
+    justify-content: center;
 }
-#menuItems li:last-child {
+#menuItems li.signup:last-child a {
     background-color: #D6ABAB;
     border-radius: 19px;
     align-content: center;
+    padding-left: 0.8em;
+    padding-right: 0.8em;
 }
 /*TODO: arranjar ate aqui ficar com a cor escura*/
 

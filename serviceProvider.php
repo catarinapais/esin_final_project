@@ -82,18 +82,18 @@ function makeAvailabilityTable($schedule)
   echo '</tbody>';
 }
 
-  $dbh = new PDO('sqlite:database.db');
-  $dbh->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC); //association fetching
-  $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION); //error handling
+$dbh = new PDO('sqlite:database.db');
+$dbh->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC); //association fetching
+$dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION); //error handling
 
-  try { // try catch for error handling
-    $email = 'johndoe@gmail.com';
-    $stmt = $dbh->prepare('SELECT * FROM Schedule JOIN ServiceProvider ON Schedule.service_provider = ServiceProvider.person JOIN Person ON ServiceProvider.person = Person.id WHERE Person.email = :email'); // prepared statement
-    $stmt->execute([':email' => $email]); // sem valores porque nao temos placeholders no prepared statement
-    $schedule = $stmt->fetchAll(); //fetching all schedules by the user (array of arrays)
-  } catch (Exception $e){
-    $error_msg = $e->getMessage(); // ir buscar a mensagem de erro e guardar em $error_msg
-  }
+try { // try catch for error handling
+  $email = 'johndoe@gmail.com';
+  $stmt = $dbh->prepare('SELECT * FROM Schedule JOIN ServiceProvider ON Schedule.service_provider = ServiceProvider.person JOIN Person ON ServiceProvider.person = Person.id WHERE Person.email = :email'); // prepared statement
+  $stmt->execute([':email' => $email]); // sem valores porque nao temos placeholders no prepared statement
+  $schedule = $stmt->fetchAll(); //fetching all schedules by the user (array of arrays)
+} catch (Exception $e) {
+  $error_msg = $e->getMessage(); // ir buscar a mensagem de erro e guardar em $error_msg
+}
 ?>
 
 <!DOCTYPE html>
@@ -106,6 +106,7 @@ function makeAvailabilityTable($schedule)
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link href="css/style.css" rel="stylesheet">
   <link href="css/layout.css" rel="stylesheet">
+  <link href="css/responsive.css" rel="stylesheet">
 </head>
 
 <body>
@@ -120,16 +121,16 @@ function makeAvailabilityTable($schedule)
       </div>
     </a>
     <nav id="menu">
-      <ul>
+      <input type="checkbox" id="hamburger">
+      <label class="hamburger" for="hamburger"></label>
+      <ul id="menuItems">
         <li><a href="bookingRequest.html">BOOK A SERVICE</a></li>
-        <li><a href="serviceProvider.html">DO A SERVICE</a></li>
+        <li><a href="serviceProvider.php">DO A SERVICE</a></li>
         <li><a href="account.html">ACCOUNT</a></li>
         <li><a href="aboutus.html">ABOUT US</a></li>
+        <li class="signup"><a href="register.html">REGISTER</a></li>
+        <li class="signup"><a href="login.html">LOGIN</a></li>
       </ul>
-      <div id="signup">
-        <a href="register.html">REGISTER</a>
-        <a href="login.html">LOGIN</a>
-      </div>
     </nav>
   </header>
   <main class="mainContent">

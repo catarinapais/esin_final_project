@@ -56,6 +56,7 @@ try {
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link href="css/style.css" rel="stylesheet">
         <link href="css/layout.css" rel="stylesheet">
+        <link href="css/responsive.css" rel="stylesheet">
     </head>
     <body>
         <header id="navigationBar">
@@ -67,16 +68,16 @@ try {
                 </div>
             </a>
             <nav id="menu">
-                <ul>
+                <input type="checkbox" id="hamburger"> 
+                <label class="hamburger" for="hamburger"></label>
+                <ul id="menuItems">
                     <li><a href="bookingRequest.html">BOOK A SERVICE</a></li>
                     <li><a href="serviceProvider.php">DO A SERVICE</a></li>
                     <li><a href="account.html">ACCOUNT</a></li>
                     <li><a href="aboutus.html">ABOUT US</a></li>
+                    <li class="signup"><a href="register.html">REGISTER</a></li>
+                    <li class="signup"><a href="login.html">LOGIN</a></li>
                 </ul>
-                <div id="signup">
-                    <a href="register.html">REGISTER</a>
-                    <a href="login.html">LOGIN</a>
-                </div>
             </nav>
         </header>
 
