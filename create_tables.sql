@@ -152,7 +152,10 @@ INSERT INTO Schedule (id, day_week, start_time, end_time, service_provider) VALU
 INSERT INTO PetOwner(person, avg_rating) VALUES (1, 4.5);
 INSERT INTO ServiceProvider(person, iban, service_type, avg_rating) VALUES (2, 111, 'both', 4.5);
 
+
+INSERT INTO PetOwner (person, avg_rating) VALUES (1, 4.5);
 INSERT INTO Pet (name, species, size, age, profile_picture, owner)  VALUES ('Rex', 'Dog', 'Large', 5, 'cat.jpg',1);
+
 INSERT INTO Pet (name, species, size, age, owner) VALUES ('Whiskers', 'Cat', 'Small', 3, 1);
 INSERT INTO Pet (name, species, size, age, owner) VALUES ('Buddy', 'Dog', 'Medium', 2, 1);
 

@@ -21,7 +21,8 @@ try {
             Pet.name AS pet_name, 
             Pet.species AS pet_species, 
             Pet.size AS pet_size, 
-            Pet.age AS pet_age
+            Pet.age AS pet_age,
+            Pet.profile_picture AS pet_profile_picture
         FROM 
             PetOwner
         JOIN 
@@ -82,7 +83,7 @@ try {
         </header>
 
         <main id="accountcontent">
-            <h1>Account</h1>
+       
 
             <?php if (isset($petOwnerInfo) && $petOwnerInfo): ?>
                 <!-- If $petOwnerInfo is set and contains data -->
@@ -104,12 +105,23 @@ try {
                         <img src="images/pata.png" alt="Pet" class="pet-icon">
                 </legend>
                         <?php foreach ($petOwnerInfo as $pet): ?>
-                            <fieldset class="pet">
+                        
                                 <legend> <?= htmlspecialchars($pet['pet_name']) ?></legend>
                                 <p><strong>Species:</strong> <?= htmlspecialchars($pet['pet_species']) ?></p>
                                 <p><strong>Size:</strong> <?= htmlspecialchars($pet['pet_size']) ?></p>
                                 <p><strong>Age:</strong> <?= htmlspecialchars($pet['pet_age']) ?> years</p>
-                            </fieldset>
+                              <!-- Exibir a imagem do pet -->
+                              <?php if (!empty($pet['pet_profile_picture'])): ?>
+    <img src="images/uploads/<?= htmlspecialchars($pet['pet_profile_picture']) ?>" 
+         alt="<?= htmlspecialchars($pet['pet_name']) ?>" 
+         class="pet-profile-pic">
+<?php else: ?>
+    <img src="images/imagemdefault.jpg" 
+         alt="Default picture for pet" 
+         class="pet-profile-pic">
+<?php endif; ?>
+
+                      
                         <?php endforeach; ?>
                     </section>
                 <?php else: ?>
