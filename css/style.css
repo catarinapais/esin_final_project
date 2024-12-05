@@ -2,12 +2,20 @@ body {
     background-color: #EDE8DC;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     color: #333; /* Cor padrão do texto */
+    height: 100%;
 }
+main {
+
+    flex: 1; /* Faz o conteúdo principal ocupar o espaço restante */
+}
+
+
 
 body>header, nav {
     background-color: #E7CCCC;
     padding: 0.5em 0;
 }
+
 
 a {
     color: #333; /* Cor padrão do texto */
@@ -363,3 +371,7 @@ footer {
 }
 
 
+#nopets{
+    font-weight: bold;
+    font-size: 20px;
+}
