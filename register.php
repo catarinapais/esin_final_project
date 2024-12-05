@@ -1,3 +1,7 @@
+<?php
+session_start(); 
+?>
+
 <!-- Registration page -->
  <!-- Nome, phone number, adress, email, city, iban, password, 
   service type-->
@@ -21,8 +25,15 @@
                 </div>
             </a>
         </header>
+        <?php
+        if (isset($_SESSION["msg_error"])) {
+            echo "<p class='msg_error'>{$_SESSION["msg_error"]}</p>";
+            unset($_SESSION["msg_error"]);
+        }
+        ?>
         <section id="authentication">
-            <form class="registration-form" action="register.php" method="POST"> <!-- reference to php file to be created-->
+            <!--TODO: nos campos obrigatórios, pôr um asterisco a vermelho-->
+            <form class="registration-form" action="action_register.php" method="POST"> <!-- reference to php file to be created-->
                 <h2>Register</h2>
                 <p>Name:</p>
                 <input type="text" id="name" name="name" required>
@@ -30,7 +41,7 @@
                 <p>Phone Number:</p>
                 <input type="tel" id="phone_number" name="phone_number" required>
          
-                <p>Adress:</p>
+                <p>Address:</p>
                 <input type="text" id="address" name="address" required>
          
                 <p>Email:</p>
@@ -42,7 +53,9 @@
                 <!--TODO: eu separava isto aqui, nao sei como-->
                 <!--ou explicar que a pessoa preenche estes campos se quiser ser prestadora de serviços-->
                 <p>IBAN:</p>
-                <input type="number" id="iban" name="iban" required>
+                <input type="text" id="iban" name="iban" required>
+                <!--TODO: iban está required!! não pode ser-->
+                <!--verificar se o iban cumpre com as restrições (PT50 e 30 digitos)-->
 
                 <p>Password:</p>
                 <input type="password" id="password" name="password" required>

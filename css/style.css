@@ -362,4 +362,22 @@ footer {
     text-decoration: underline;
 }
 
+.msg_error {
+    color: red;
+    font-weight: bold;
+    /*center the class*/
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-top: 2em;
+}
 
+.msg_success {
+    color: green;
+    font-weight: bold;
+    /*center the class*/
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-top: 2em;
+}

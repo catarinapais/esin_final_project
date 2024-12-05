@@ -19,15 +19,16 @@ DROP TABLE IF EXISTS Person;
 CREATE TABLE Person (
     id INTEGER PRIMARY KEY,
     name TEXT NOT NULL,
-    phone_number TEXT,
-    adress TEXT,
-    email TEXT NOT NULL,
-    city TEXT NOT NULL
+    phone_number INTEGER UNIQUE,
+    address TEXT,
+    email TEXT NOT NULL UNIQUE,
+    city TEXT NOT NULL,
+    password TEXT
 );
 
 -- Table PetOwner -- 
 CREATE TABLE PetOwner(
-    person   INTEGER PRIMARY KEY REFERENCES Person,
+    person INTEGER PRIMARY KEY REFERENCES Person,
     avg_rating REAL
 );
 
@@ -143,17 +144,18 @@ BEGIN
     WHERE id = NEW.id;
 END;
 
-INSERT INTO Person (id, name, phone_number, adress, email, city) VALUES (1, 'John Doe', '123456789', 'Rua do Ouro 100', 'johndoe@gmail.com', 'Porto');
-INSERT INTO Person (id, name, phone_number, adress, email, city) VALUES (2, 'Ema Beira', '987654321', 'Rua do Ouro 101', 'ema@gmail.com', 'Aldoar');
+INSERT INTO Person (id, name, phone_number, address, email, city) VALUES (1, 'John Doe', '123456789', 'Rua do Ouro 100', 'johndoe@gmail.com', 'Porto');
+INSERT INTO Person (id, name, phone_number, address, email, city) VALUES (2, 'Ema Beira', '987654321', 'Rua do Ouro 101', 'ema@gmail.com', 'Aldoar');
+
 INSERT INTO ServiceProvider (person, iban, service_type, avg_rating) VALUES (1, 'PT50000201231234567890154', 'sitting', 4.5);
+INSERT INTO ServiceProvider(person, iban, service_type, avg_rating) VALUES (2, '111', 'both', 4.5);
+
 INSERT INTO Schedule (id, day_week, start_time, end_time, service_provider) VALUES (1, 'Monday', '10:00', '12:00', 1);
 INSERT INTO Schedule (id, day_week, start_time, end_time, service_provider) VALUES (2, 'Tuesday', '07:00', '11:00', 1);
 
 INSERT INTO PetOwner(person, avg_rating) VALUES (1, 4.5);
-INSERT INTO ServiceProvider(person, iban, service_type, avg_rating) VALUES (2, 111, 'both', 4.5);
+INSERT INTO PetOwner (person, avg_rating) VALUES (2, 4.5);
 
-
-INSERT INTO PetOwner (person, avg_rating) VALUES (1, 4.5);
 INSERT INTO Pet (name, species, size, age, profile_picture, owner)  VALUES ('Rex', 'Dog', 'Large', 5, 'cat.jpg',1);
 
 INSERT INTO Pet (name, species, size, age, owner) VALUES ('Whiskers', 'Cat', 'Small', 3, 1);
