@@ -14,7 +14,7 @@ try {
             Person.name, 
             Person.email, 
             Person.phone_number, 
-            Person.adress, 
+            Person.address, 
             Person.city, 
             PetOwner.avg_rating,
             Pet.id AS pet_id, 
@@ -61,7 +61,7 @@ try {
     </head>
     <body>
         <header id="navigationBar">
-            <a href="initialPage.html">
+            <a href="initialPage.php">
                 <div id="logo">
                     <h1>Pet Patrol</h1>
                     <h2>Sit and Walk</h2>
@@ -72,11 +72,11 @@ try {
                 <input type="checkbox" id="hamburger"> 
                 <label class="hamburger" for="hamburger"></label>
                 <ul id="menuItems">
-                    <li><a href="bookingRequest.html">BOOK A SERVICE</a></li>
+                    <li><a href="bookingRequest.php">BOOK A SERVICE</a></li>
                     <li><a href="serviceProvider.php">DO A SERVICE</a></li>
-                    <li><a href="account.html">ACCOUNT</a></li>
+                    <li><a href="account.php">ACCOUNT</a></li>
                     <li><a href="aboutus.html">ABOUT US</a></li>
-                    <li class="signup"><a href="register.html">REGISTER</a></li>
+                    <li class="signup"><a href="register.php">REGISTER</a></li>
                     <li class="signup"><a href="login.html">LOGIN</a></li>
                 </ul>
             </nav>
@@ -92,7 +92,7 @@ try {
                     <p><strong>Name:</strong> <?= htmlspecialchars($petOwnerInfo[0]['name']) ?></p>
                     <p><strong>Email:</strong>  <?= htmlspecialchars($petOwnerInfo[0]['email']) ?></p>
                     <p><strong>Phone number:</strong>  <?= htmlspecialchars($petOwnerInfo[0]['phone_number']) ?></p>
-                    <p> <strong>Adress:</strong> <?= htmlspecialchars($petOwnerInfo[0]['adress']) ?></p>
+                    <p> <strong>Adress:</strong> <?= htmlspecialchars($petOwnerInfo[0]['address']) ?></p>
                     <p><strong>City:</strong>  <?= htmlspecialchars($petOwnerInfo[0]['city']) ?></p>
                     <p><strong>Rating:</strong>  <?= htmlspecialchars($petOwnerInfo[0]['avg_rating']) ?></p>
                 </section>

@@ -17,7 +17,7 @@ session_start();
     </head> 
     <body> 
         <header id="navigationBar">
-            <a href="initialPage.html">
+            <a href="initialPage.php">
                 <div id="logo">
                     <h1>Pet Patrol</h1>
                     <h2>Sit and Walk</h2>

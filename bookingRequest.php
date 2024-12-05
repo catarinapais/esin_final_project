@@ -4,7 +4,6 @@ try {
     $dbh = new PDO('sqlite:database.db');
     $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-    // ID do usuário logado (substitua isso com a lógica para pegar o ID do usuário atual)
     // Obter o ID da URL
     $person_id = isset($_GET['id']) ? (int)$_GET['id'] : 0;  // Garantir que o ID seja um número inteiro
 
@@ -36,7 +35,7 @@ try {
 </head>
 <body>
     <header id="navigationBar">
-        <a href="initialPage.html">
+        <a href="initialPage.php">
             <div id="logo">
                 <h1>Pet Patrol</h1>
                 <h2>Sit and Walk</h2>
@@ -47,9 +46,9 @@ try {
             <input type="checkbox" id="hamburger">
             <label class="hamburger" for="hamburger"></label>
             <ul id="menuItems">
-                <li><a href="bookingRequest.html">BOOK A SERVICE</a></li>
+                <li><a href="bookingRequest.php">BOOK A SERVICE</a></li>
                 <li><a href="serviceProvider.php">DO A SERVICE</a></li>
-                <li><a href="account.html">ACCOUNT</a></li>
+                <li><a href="account.php">ACCOUNT</a></li>
                 <li><a href="aboutus.html">ABOUT US</a></li>
                 <li class="signup"><a href="register.html">REGISTER</a></li>
                 <li class="signup"><a href="login.html">LOGIN</a></li>
@@ -175,7 +174,7 @@ try {
 </head>
 <body>
     <header id="navigationBar">
-        <a href="initialPage.html">
+        <a href="initialPage.php">
             <div id="logo">
                 <h1>Pet Patrol</h1>
                 <h2>Sit and Walk</h2>
@@ -186,11 +185,11 @@ try {
             <input type="checkbox" id="hamburger">
             <label class="hamburger" for="hamburger"></label>
             <ul id="menuItems">
-                <li><a href="bookingRequest.html">BOOK A SERVICE</a></li>
+                <li><a href="bookingRequest.php">BOOK A SERVICE</a></li>
                 <li><a href="serviceProvider.php">DO A SERVICE</a></li>
-                <li><a href="account.html">ACCOUNT</a></li>
+                <li><a href="account.php">ACCOUNT</a></li>
                 <li><a href="aboutus.html">ABOUT US</a></li>
-                <li class="signup"><a href="register.html">REGISTER</a></li>
+                <li class="signup"><a href="register.php">REGISTER</a></li>
                 <li class="signup"><a href="login.html">LOGIN</a></li>
             </ul>
         </nav>
