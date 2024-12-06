@@ -8,6 +8,36 @@ try {
     // Obter o ID da URL
     $person_id = isset($_GET['id']) ? (int)$_GET['id'] : 0;  // Garantir que o ID seja um número inteiro
 
+    // Verificar se o form foi enviado
+    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+        // Ir buscar dados do form
+        $pet_name = $_POST['pet_name'] ?? null;
+        $service_type = $_POST['service_type'] ?? null;
+        $location = $_POST['location'] ?? null;
+        $date = $_POST['date'] ?? null;
+        $start_time = $_POST['starttime'] ?? null;
+        $end_time = $_POST['endtime'] ?? null;
+        $photo_consent = $_POST['photo_consent'] ?? null;
+
+        // Inserir dados na tabela Booking
+        $stmt = $dbh->prepare('
+            INSERT INTO Booking 
+            ( date, start_time, end_time, adress_collect , photo_consent,  type, pet) 
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?)
+        ');
+        $stmt->execute([
+            $date,
+            $start_time,
+            $end_time, 
+            $location,
+            $photo_consent,
+            $service_type, 
+            $pet_name
+        ]);
+
+        echo "<p>Booking successfully submitted!</p>";
+    }
+
     // Consulta para verificar se há pets associados
     $stmt = $dbh->prepare('
         SELECT COUNT(*) AS pet_count
