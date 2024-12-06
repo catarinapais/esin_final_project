@@ -105,17 +105,16 @@ CREATE TABLE PetMedicalNeed(
     PRIMARY KEY (pet,medicalNeed)
 );
 
--- Table Booking --
 CREATE TABLE Booking (
     id INTEGER PRIMARY KEY,
     date TEXT NOT NULL,
     start_time TEXT,
     end_time TEXT CHECK(end_time IS NULL OR end_time>start_time),
-    duration REAL CHECK (duration>0),
+    duration INT CHECK (duration>0),
     adress_collect TEXT NOT NULL,
     photo_consent  TEXT NOT NULL,
     provider INTEGER NOT NULL REFERENCES ServiceProvider(person),
-    type TEXT NOT NULL REFERENCES BookingType,
+    type INTEGER NOT NULL REFERENCES BookingType,
     pet INTEGER NOT NULL REFERENCES Pet, -- (id)
     payment INTEGER REFERENCES Payment, -- (id)
     ownerReview INTEGER REFERENCES Review,-- ... --
@@ -163,4 +162,3 @@ INSERT INTO Pet (name, species, size, age, owner) VALUES ('Buddy', 'Dog', 'Mediu
 
 INSERT INTO Message(id, sender, message_body, send_time, is_read, owner, provider) VALUES (1,1,'Hello', '15:20', 0, 1, 2);
 INSERT INTO Message(id, sender, message_body, send_time, is_read, owner, provider) VALUES (2,1,'Hi', '15:21', 0, 1, 2);
-INSERT INTO Message(id, sender, message_body, send_time, is_read, owner, provider) VALUES (3,2,'How are you?', '15:22', 0, 1, 2);
