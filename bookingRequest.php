@@ -4,10 +4,16 @@ try {
     $dbh = new PDO('sqlite:database.db');
     $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-    // ID do usuário logado (substitua isso com a lógica para pegar o ID do usuário atual)
     // Obter o ID da URL
     $person_id = isset($_GET['id']) ? (int)$_GET['id'] : 0;  // Garantir que o ID seja um número inteiro
 
+// Consulta para ir buscar os pets do user
+    $stmt = $dbh->prepare('SELECT * FROM Pet WHERE owner = :owner_id');
+    $stmt->bindValue(':owner_id', $person_id, PDO::PARAM_INT);
+    $stmt->execute();
+    $pets = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    $has_pets = !empty($pets);
+  
     // Verificar se o form foi enviado
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         // Ir buscar dados do form
@@ -18,40 +24,77 @@ try {
         $start_time = $_POST['starttime'] ?? null;
         $end_time = $_POST['endtime'] ?? null;
         $photo_consent = $_POST['photo_consent'] ?? null;
+        $duration= $end_time- $start_time;
+        $service_provider_id=1; //TODO: alterar isto quando a catarina puser a dar a cena dos providers no form, tou a assumir que vai retornar o id, se for o nome devemosmudar!!
+       
+        
+        $start = new DateTime($start_time);
+        $end = new DateTime($end_time);
+        
+        // Calcular a diferença
+        $interval = $start->diff($end);
+        
+        // Obter a duração em minutos
+        $duration = ($interval->h * 60) + $interval->i; // Total de minutos
+        
+        // Definir as taxas por minuto
+        $rate_per_minute_walking = 0.50; // Taxa para Pet Walking
+        $rate_per_minute_sitting = 0.75;  // Taxa para Pet Sitting
+        
+        // Determinar a taxa com base no tipo de serviço
+        if ($service_type === 'walking') {
+            $payment = $duration * $rate_per_minute_walking; // Cálculo para Walking
+        } elseif ($service_type === 'sitting') {
+            $payment = $duration * $rate_per_minute_sitting; // Cálculo para Sitting
+        }
 
-        // Inserir dados na tabela Booking
-        $stmt = $dbh->prepare('
-            INSERT INTO Booking 
-            ( date, start_time, end_time, adress_collect , photo_consent,  type, pet) 
-            VALUES (?, ?, ?, ?, ?, ?, ?, ?)
-        ');
-        $stmt->execute([
-            $date,
-            $start_time,
-            $end_time, 
-            $location,
-            $photo_consent,
-            $service_type, 
-            $pet_name
-        ]);
-
-        echo "<p>Booking successfully submitted!</p>";
+       // Se a localização for "myplace", buscar a morada do user  a partir do id e passa-a para a variável location
+       if ($location === 'myplace') {
+        $stmt = $dbh->prepare('SELECT address FROM Person WHERE id = :person_id');
+        $stmt->bindValue(':person_id', $person_id, PDO::PARAM_INT);
+        $stmt->execute();
+        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+        $location = $result['address'] ?? null; 
+    } elseif ($location === 'providersplace') {
+        // Se a localização for "Pet Sitter/Walker's Place", buscar a morada do provider
+        if ($service_provider_id) {
+            $stmt = $dbh->prepare('
+                SELECT address FROM Person 
+                WHERE id = (SELECT person FROM ServiceProvider WHERE person = :provider_id)
+            ');
+            $stmt->bindValue(':provider_id', $service_provider_id, PDO::PARAM_INT);
+            $stmt->execute();
+            $result = $stmt->fetch(PDO::FETCH_ASSOC);
+            $location = $result['address'] ?? null; // vai buscar morada do provider
+        }
+        // Se a localização for "other", vai buscar a morada que o user inseriu no text area
+    } elseif ($location === 'other') {
+        $location = $_POST['other_address'] ?? null; // vai buscar morada que está no textarea
     }
 
-    // Consulta para verificar se há pets associados
-    $stmt = $dbh->prepare('
-        SELECT COUNT(*) AS pet_count
-        FROM Pet
-        WHERE owner = (SELECT person FROM PetOwner WHERE person = :person_id)
-    ');
-    $stmt->bindValue(':person_id', $person_id, PDO::PARAM_INT);
-    $stmt->execute();
 
-    $result = $stmt->fetch();
-    $pet_count = $result['pet_count'];
+     // Inserir dados na tabela Booking
+     $stmt = $dbh->prepare('
+     INSERT INTO Booking 
+     (date, start_time, end_time, duration, adress_collect, photo_consent, provider, type, pet, payment) 
+     VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+ ');
+ $stmt->execute([
+     $date,
+     $start_time,
+     $end_time,
+     $duration,
+     $location,
+     $photo_consent,
+     $service_provider_id,
+     $service_type,
+     $pet_name,
+     $payment
+ ]);
+        echo "<p>Booking successfully submitted!</p>";
+  
 
-    $has_pets = $pet_count > 0;
-
+}
 } catch (PDOException $e) {
     echo "Error: " . $e->getMessage();
     exit();
@@ -97,21 +140,24 @@ try {
                 <fieldset>
                     <legend>Booking</legend>
                     <p>Pet's name:</p>
-                    <select name="pet_name" id="pet-name">
-                        <option value="selecionar">Select</option>
-                        <option value="dosmeus">Dos Meus</option>
-                        <option value="pets">Pets</option>
-                    </select>
+                    <!--Pus o select a mostrar os nomes dos pets do user -->
+                <select name="pet_name" id="pet-name">
+                    <?php foreach ($pets as $pet): ?>
+                        <option value="<?php echo htmlspecialchars($pet['name']); ?>">
+                            <?php echo htmlspecialchars($pet['name']); ?>
+                        </option>
+                    <?php endforeach; ?>
+                </select>
                     <br>
 
                     <p>Service Type:</p>
                     <label for="petwalking">
-                        <input type="radio" id="petwalking" name="service_type" value="petwalking" required>
+                        <input type="radio" id="petwalking" name="service_type" value="walking" required>
                         Pet Walking
                     </label>
                     <br>
                     <label for="petsitting">
-                        <input type="radio" id="petsitting" name="service_type" value="petsitting" required>
+                        <input type="radio" id="petsitting" name="service_type" value="sitting" required>
                         Pet Sitting
                     </label>
 
@@ -127,7 +173,7 @@ try {
                     </label>
 
                     <div id="otherLocationDiv">
-                        <textarea name="other_address" id="other-address" rows="3" cols="30" placeholder="Enter address here..."></textarea>
+                    <textarea name="other_address" id="other-address" rows="3" cols="30" placeholder="Enter address here... (only if 'Other Location' is selected)"></textarea>
                     </div>
 
                     <p>Date:</p>
