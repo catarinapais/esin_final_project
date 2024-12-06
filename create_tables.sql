@@ -108,12 +108,12 @@ CREATE TABLE PetMedicalNeed(
 -- Table Booking --
 CREATE TABLE Booking (
     id INTEGER PRIMARY KEY,
+    date TEXT NOT NULL,
     start_time TEXT,
     end_time TEXT CHECK(end_time IS NULL OR end_time>start_time),
     duration REAL CHECK (duration>0),
-    accepted_by_provider BOOLEAN,
     adress_collect TEXT NOT NULL,
-    adress_dropoff TEXT NOT NULL,
+    photo_consent  TEXT NOT NULL,
     provider INTEGER NOT NULL REFERENCES ServiceProvider(person),
     type TEXT NOT NULL REFERENCES BookingType,
     pet INTEGER NOT NULL REFERENCES Pet, -- (id)

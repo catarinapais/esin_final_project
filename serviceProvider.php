@@ -113,7 +113,7 @@ try { // try catch for error handling
   <!--TODO: só mostrar esta página se a pessoa tiver posto um IBAN no site-->
   <!--ou dizer que, se quiser fazer serviços, tem de introduzir os campos iban e service type-->
   <header id="navigationBar">
-    <a href="initialPage.html">
+    <a href="initialPage.php">
       <div id="logo">
         <h1>Pet Patrol</h1>
         <h2>Sit and Walk</h2>
@@ -124,12 +124,12 @@ try { // try catch for error handling
       <input type="checkbox" id="hamburger">
       <label class="hamburger" for="hamburger"></label>
       <ul id="menuItems">
-        <li><a href="bookingRequest.html">BOOK A SERVICE</a></li>
+        <li><a href="bookingRequest.php">BOOK A SERVICE</a></li>
         <li><a href="serviceProvider.php">DO A SERVICE</a></li>
-        <li><a href="account.html">ACCOUNT</a></li>
+        <li><a href="account.php">ACCOUNT</a></li>
         <li><a href="aboutus.html">ABOUT US</a></li>
-        <li class="signup"><a href="register.html">REGISTER</a></li>
-        <li class="signup"><a href="login.html">LOGIN</a></li>
+        <li class="signup"><a href="register.php">REGISTER</a></li>
+        <li class="signup"><a href="login.php">LOGIN</a></li>
       </ul>
     </nav>
   </header>
