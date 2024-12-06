@@ -491,7 +491,7 @@ body > *:not(footer) {
     vertical-align: middle; 
 }
 
-#pets legend{
+#pets legend {
     display:flex;
     align-items: center;
 }
@@ -502,6 +502,7 @@ body > *:not(footer) {
     object-fit: cover !important; /* Força o ajuste da imagem */
     border-radius: 50% !important; /* Força o círculo */
 }
+
 
 
 
@@ -647,4 +648,53 @@ body > *:not(footer) {
 
 .form-group .registerProvider {
     margin-left: 5px; 
+}
+
+/* Style for the addPet button */
+#addPetButton {
+    display: inline-block;
+    width: 40px;
+    height: 40px;
+    background-color: #D6ABAB;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    text-align: center;
+    line-height: 40px;
+    font-size: 1.5em;
+    text-decoration: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+#addPetButton:hover {
+    background-color: #B88080;
+}
+
+/* Hide the newPetForm by default */
+#newPetForm {
+    display: none;
+}
+
+/* Show the newPetForm when the checkbox is checked */
+#toggleForm:checked + #addPetButton + #newPetForm {
+    display: block;
+    margin-top: 20px;
+}
+
+/* Change the button text when the form is visible */
+#toggleForm:checked + #addPetButton::after {
+    content: '-';
+}
+
+#toggleForm:not(:checked) + #addPetButton::after {
+    content: '+';
+}
+
+#newPetForm input[type="submit"] {
+    transition: background-color 0.3s ease;
+}
+
+#newPetForm input[type="submit"]:hover {
+    background-color: #B88080;
 }

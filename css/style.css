@@ -403,3 +403,33 @@ footer {
     padding-top: 0;
     color:#444
 }
+
+form#addPet {
+    display: inline-block; /* Ensure the form takes only the space needed */
+    margin: 0;
+    padding: 0;
+    background: none;
+    border: none;
+    box-shadow: none; /* Remove default shadow */
+}
+
+form#addPet input[type="submit"] {
+    width: 40px; /* Set the width of the button */
+    height: 40px; /* Set the height of the button */
+    background-color: #D6ABAB; /* Button background color */
+    color: white; /* Button text color */
+    border: none; /* Remove default border */
+    border-radius: 50%; /* Make the button round */
+    cursor: pointer; /* Pointer cursor on hover */
+    font-size: 2em; /* Font size */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0; /* Remove default padding */
+    box-shadow: none; /* Remove default shadow */
+    transition: background-color 0.3s ease; /* Smooth transition for background color */
+}
+
+form#addPet input[type="submit"]:hover {
+    background-color: #B88080; /* Darker background color on hover */
+}

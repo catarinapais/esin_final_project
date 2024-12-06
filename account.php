@@ -40,8 +40,6 @@ try {
     } else {
         echo "Erro na execução da consulta.";
     }
-
-
 } catch (PDOException $e) {
     // Tratamento de erro
     echo "Erro de conexão: " . $e->getMessage();
@@ -51,125 +49,169 @@ try {
 
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <title>Account</title>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link href="css/style.css" rel="stylesheet">
-        <link href="css/layout.css" rel="stylesheet">
-        <link href="css/responsive.css" rel="stylesheet">
-    </head>
-    <body>
-        <header id="navigationBar">
-            <a href="initialPage.php">
-                <div id="logo">
-                    <h1>Pet Patrol</h1>
-                    <h2>Sit and Walk</h2>
-                    <img src="images/logo1.png" alt="Logo of Pet Patrol">
-                </div>
-            </a>
-            <nav id="menu">
-                <input type="checkbox" id="hamburger"> 
-                <label class="hamburger" for="hamburger"></label>
-                <ul id="menuItems">
-                    <li><a href="bookingRequest.php">BOOK A SERVICE</a></li>
-                    <li><a href="serviceProvider.php">DO A SERVICE</a></li>
-                    <li><a href="account.php">ACCOUNT</a></li>
-                    <li><a href="aboutus.html">ABOUT US</a></li>
-                    <li class="signup"><a href="register.php">REGISTER</a></li>
-                    <li class="signup"><a href="login.html">LOGIN</a></li>
-                </ul>
-            </nav>
-        </header>
 
-        <main id="accountcontent">
-       
+<head>
+    <title>Account</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="css/style.css" rel="stylesheet">
+    <link href="css/layout.css" rel="stylesheet">
+    <link href="css/responsive.css" rel="stylesheet">
+</head>
 
-            <?php if (isset($petOwnerInfo) && $petOwnerInfo): ?>
-                <!-- If $petOwnerInfo is set and contains data -->
-                <section id="staticTags">
-                    <h2>Personal Information</h2>
-                    <p><strong>Name:</strong> <?= htmlspecialchars($petOwnerInfo[0]['name']) ?></p>
-                    <p><strong>Email:</strong>  <?= htmlspecialchars($petOwnerInfo[0]['email']) ?></p>
-                    <p><strong>Phone number:</strong>  <?= htmlspecialchars($petOwnerInfo[0]['phone_number']) ?></p>
-                    <p> <strong>Adress:</strong> <?= htmlspecialchars($petOwnerInfo[0]['address']) ?></p>
-                    <p><strong>City:</strong>  <?= htmlspecialchars($petOwnerInfo[0]['city']) ?></p>
-                    <p><strong>Rating:</strong>  <?= htmlspecialchars($petOwnerInfo[0]['avg_rating']) ?></p>
-                </section>
+<body>
+    <header id="navigationBar">
+        <a href="initialPage.php">
+            <div id="logo">
+                <h1>Pet Patrol</h1>
+                <h2>Sit and Walk</h2>
+                <img src="images/logo1.png" alt="Logo of Pet Patrol">
+            </div>
+        </a>
+        <nav id="menu">
+            <input type="checkbox" id="hamburger">
+            <label class="hamburger" for="hamburger"></label>
+            <ul id="menuItems">
+                <li><a href="bookingRequest.php">BOOK A SERVICE</a></li>
+                <li><a href="serviceProvider.php">DO A SERVICE</a></li>
+                <li><a href="account.php">ACCOUNT</a></li>
+                <li><a href="aboutus.html">ABOUT US</a></li>
+                <li class="signup"><a href="register.php">REGISTER</a></li>
+                <li class="signup"><a href="login.html">LOGIN</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main id="accountcontent">
+
+
+        <?php if (isset($petOwnerInfo) && $petOwnerInfo): ?>
+            <!-- If $petOwnerInfo is set and contains data -->
+            <section id="staticTags">
+                <h2>Personal Information</h2>
+                <p><strong>Name:</strong> <?= htmlspecialchars($petOwnerInfo[0]['name']) ?></p>
+                <p><strong>Email:</strong> <?= htmlspecialchars($petOwnerInfo[0]['email']) ?></p>
+                <p><strong>Phone number:</strong> <?= htmlspecialchars($petOwnerInfo[0]['phone_number']) ?></p>
+                <p> <strong>Adress:</strong> <?= htmlspecialchars($petOwnerInfo[0]['address']) ?></p>
+                <p><strong>City:</strong> <?= htmlspecialchars($petOwnerInfo[0]['city']) ?></p>
+                <p><strong>Rating:</strong> <?= htmlspecialchars($petOwnerInfo[0]['avg_rating']) ?></p>
+            </section>
+
+
+            <section id="pets">
+                <legend>
+                    <h2>Pets</h2>
+                    <img src="images/pata.png" alt="Pet" class="pet-icon">
+                </legend>
+
+                <!-- Add a new pet -->
+                <input type="checkbox" id="toggleForm" style="display: none;">
+                <label for="toggleForm" id="addPetButton" class="button"></label>
+                <form id="newPetForm" action="action_addPet.php" method="post">
+                    <h3>Add a New Pet</h3>
+                    <div class="form-group">
+                        <label for="name">Pet Name:<span class="required">*</span></label>
+                        <input type="text" id="name" name="name" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="species">Species:<span class="required">*</span></label>
+                        <select id="species" name="species" required>
+                            <option value="" disabled selected>Choose pet species</option>
+                            <option value="dog">Dog</option>
+                            <option value="cat">Cat</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="size">Size:<span class="required">*</span></label>
+                        <select id="size" name="size" required>
+                            <option value="" disabled selected>Choose pet size</option>
+                            <option value="small">Small</option>
+                            <option value="medium">Medium</option>
+                            <option value="large">Large</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="birthdate">Birth Date:</label>
+                        <input type="date" id="birthdate" name="birthdate">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="profile_picture">Profile Picture:</label>
+                        <input type="file" accept='image/*' id="profile_picture" name="profile_picture">
+                    </div>
+
+                    <input type="submit" value="Add Pet">
+                </form>
 
                 <!-- If there are pets -->
                 <?php if (!empty($petOwnerInfo[0]['pet_id'])): ?>
-                    <section id="pets">
-                        <legend>
-                        <h2>Pets</h2>
-                        <img src="images/pata.png" alt="Pet" class="pet-icon">
-                </legend>
-                        <?php foreach ($petOwnerInfo as $pet): ?>
-                        
-                                <legend> <?= htmlspecialchars($pet['pet_name']) ?></legend>
-                                <p><strong>Species:</strong> <?= htmlspecialchars($pet['pet_species']) ?></p>
-                                <p><strong>Size:</strong> <?= htmlspecialchars($pet['pet_size']) ?></p>
-                                <p><strong>Age:</strong> <?= htmlspecialchars($pet['pet_age']) ?> years</p>
-                              <!-- Exibir a imagem do pet -->
-                              <?php if (!empty($pet['pet_profile_picture'])): ?>
-    <img src="images/uploads/<?= htmlspecialchars($pet['pet_profile_picture']) ?>" 
-         alt="<?= htmlspecialchars($pet['pet_name']) ?>" 
-         class="pet-profile-pic">
-<?php else: ?>
-    <img src="images/imagemdefault.jpg" 
-         alt="Default picture for pet" 
-         class="pet-profile-pic">
-<?php endif; ?>
+                    <?php foreach ($petOwnerInfo as $pet): ?>
+                        <legend> <?= htmlspecialchars($pet['pet_name']) ?></legend>
+                        <p><strong>Species:</strong> <?= htmlspecialchars($pet['pet_species']) ?></p>
+                        <p><strong>Size:</strong> <?= htmlspecialchars($pet['pet_size']) ?></p>
+                        <p><strong>Age:</strong> <?= htmlspecialchars($pet['pet_age']) ?> years</p>
+                        <!-- Exibir a imagem do pet -->
+                        <?php if (!empty($pet['pet_profile_picture'])): ?>
+                            <img src="images/uploads/<?= htmlspecialchars($pet['pet_profile_picture']) ?>"
+                                alt="<?= htmlspecialchars($pet['pet_name']) ?>"
+                                class="pet-profile-pic">
+                        <?php else: ?>
+                            <img src="images/imagemdefault.jpg"
+                                alt="Default picture for pet"
+                                class="pet-profile-pic">
+                        <?php endif; ?>
+                    <?php endforeach; ?>
+            </section>
+        <?php else: ?>
+            <p>You have no pets added.</p>
+        <?php endif; ?>
 
-                      
-                        <?php endforeach; ?>
-                    </section>
-                <?php else: ?>
-                    <p>No pets found for this owner.</p>
-                <?php endif; ?>
+    <?php else: ?>
+        <p>No account information found.</p>
+    <?php endif; ?>
+    </main>
 
-            <?php else: ?>
-                <p>No account information found.</p>
-            <?php endif; ?>
-        </main>
-
-        <footer>
-            <div class="footer-container">
-                <div class="footer-section">
-                    <h3>Quick Links</h3>
-                    <ul>
-                        <li><a href="bookingRequest.html">Book a service</a></li>
-                        <li><a href="serviceProvider.html">Become a PetPatroller</a></li>
-                        <li><a href="aboutus.html">About Us</a></li>
-                        <li><a href="FAQs.html">FAQs</a></li>
-                    </ul>
-                </div>
-
-                <div class="footer-section">
-                    <h3>Contact Us</h3>
-                    <p>Email: contact@petpatrol.com</p>
-                    <p>Phone: +351 225362821</p>
-                </div>
-
-                <div class="footer-section">
-                    <h3>Our Office</h3>
-                    <p>PetPatrol HQ</p>
-                    <p>Rua Dr. Roberto Frias, 4200-465 Porto</p>
-                    <p>Open Hours: Mon-Fri, 9am - 6pm</p>
-                </div>
-
-                <div class="footer-section">
-                    <h3>Subscribe to our Newsletter</h3>
-                    <form action="/subscribe" method="post">
-                        <input type="email" name="email" placeholder="Your email address" required>
-                        <button type="submit">Subscribe</button>
-                    </form>
-                </div>
+    <footer>
+        <div class="footer-container">
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="bookingRequest.html">Book a service</a></li>
+                    <li><a href="serviceProvider.html">Become a PetPatroller</a></li>
+                    <li><a href="aboutus.html">About Us</a></li>
+                    <li><a href="FAQs.html">FAQs</a></li>
+                </ul>
             </div>
 
-            <div class="footer-legal">
-                <p>&copy; 2024 PetPatrol. All rights reserved.</p>
+            <div class="footer-section">
+                <h3>Contact Us</h3>
+                <p>Email: contact@petpatrol.com</p>
+                <p>Phone: +351 225362821</p>
             </div>
-        </footer>
-    </body>
+
+            <div class="footer-section">
+                <h3>Our Office</h3>
+                <p>PetPatrol HQ</p>
+                <p>Rua Dr. Roberto Frias, 4200-465 Porto</p>
+                <p>Open Hours: Mon-Fri, 9am - 6pm</p>
+            </div>
+
+            <div class="footer-section">
+                <h3>Subscribe to our Newsletter</h3>
+                <form action="/subscribe" method="post">
+                    <input type="email" name="email" placeholder="Your email address" required>
+                    <button type="submit">Subscribe</button>
+                </form>
+            </div>
+        </div>
+
+        <div class="footer-legal">
+            <p>&copy; 2024 PetPatrol. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+
 </html>

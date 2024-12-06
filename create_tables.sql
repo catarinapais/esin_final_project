@@ -86,8 +86,8 @@ CREATE TABLE Pet (
     id INTEGER PRIMARY KEY,
     name TEXT NOT NULL,
     species TEXT NOT NULL,
-    size REAL CHECK (size>0),
-    birth_date string,
+    size TEXT CHECK (size IN ('small', 'medium', 'large')),
+    birthdate string,
     profile_picture TEXT,
     owner INTEGER REFERENCES PetOwner
 );
