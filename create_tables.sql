@@ -19,8 +19,8 @@ DROP TABLE IF EXISTS Person;
 CREATE TABLE Person (
     id INTEGER PRIMARY KEY,
     name TEXT NOT NULL,
-    phone_number INTEGER UNIQUE,
-    address TEXT,
+    phone_number INTEGER NOT NULL UNIQUE,
+    address TEXT NOT NULL,
     email TEXT NOT NULL UNIQUE,
     city TEXT NOT NULL,
     password TEXT
@@ -87,7 +87,7 @@ CREATE TABLE Pet (
     name TEXT NOT NULL,
     species TEXT NOT NULL,
     size REAL CHECK (size>0),
-    age INTEGER CHECK (age>0),
+    birth_date string,
     profile_picture TEXT,
     owner INTEGER REFERENCES PetOwner
 );
@@ -114,7 +114,7 @@ CREATE TABLE Booking (
     duration REAL CHECK (duration>0),
     adress_collect TEXT NOT NULL,
     photo_consent  TEXT NOT NULL,
-    provider INTEGER NOT NULL REFERENCES ServiceProvider(person),
+    provider INTEGER NOT NULL REFERENCES ServiceProvider,
     type TEXT NOT NULL REFERENCES BookingType,
     pet INTEGER NOT NULL REFERENCES Pet, -- (id)
     payment INTEGER REFERENCES Payment, -- (id)
