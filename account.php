@@ -43,6 +43,7 @@ try {
     $stmt->closeCursor();
     $stmt = $dbh->prepare(
         'SELECT 
+            Booking.id AS service_id,
             Booking.type AS type,
             Booking.date AS date, 
             Booking.start_time AS start_time, 
@@ -245,7 +246,7 @@ try {
                             <?php if (empty($booking['provider_review'])): ?>
                                 No review yet</p>
                                 <form action="review.php" method="post">
-                                    <input type="hidden" name="service_id" value="<?= htmlspecialchars($service['provider_review']) ?>">
+                                    <input type="hidden" name="service_id" value="<?= htmlspecialchars($booking['service_id']) ?>">
                                     <input type="hidden" name="role" value="provider">
                                     <input type="submit" value="Add Review">
                                 </form>

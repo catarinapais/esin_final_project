@@ -35,12 +35,41 @@ try {
         JOIN PetOwner ON Pet.owner = PetOwner.person 
         JOIN Person AS Owner ON PetOwner.person = Owner.id 
         JOIN Person AS Provider ON Booking.provider = Provider.id 
-        WHERE PetOwner.person = :id' 
+        WHERE Booking.id = :id' 
     );
     $stmt->bindValue(':id', $service_id, PDO::PARAM_INT);
     // Tente executar a consulta e verificar se a execução foi bem-sucedida
     if ($stmt->execute()) {
         $serviceInfo = $stmt->fetchAll(); // todas as linhas da tabela todos os resultados (queremos todos os pets da pessoa)
+    } else {
+        echo "Erro na execução da consulta.";
+    }
+
+    $stmt->closeCursor();
+    $stmt = $dbh->prepare(
+        'SELECT 
+            Booking.type AS type,
+            Booking.date AS date, 
+            Booking.start_time AS start_time, 
+            Booking.duration AS duration,
+            Booking.ownerReview AS ownerReview,
+            Booking.providerReview AS providerReview, 
+            Pet.name AS pet_name, 
+            Pet.id AS pet_id, 
+            Pet.species AS species,
+            Owner.name AS owner_name,
+            Provider.name AS provider_name
+        FROM Booking 
+        JOIN Pet ON Booking.pet = Pet.id 
+        JOIN PetOwner ON Pet.owner = PetOwner.person 
+        JOIN Person AS Owner ON PetOwner.person = Owner.id 
+        JOIN Person AS Provider ON Booking.provider = Provider.id 
+        WHERE Booking.id = :id' 
+    );
+    $stmt->bindValue(':id', $service_id, PDO::PARAM_INT);
+    // Tente executar a consulta e verificar se a execução foi bem-sucedida
+    if ($stmt->execute()) {
+        $bookingInfo = $stmt->fetchAll(); // todas as linhas da tabela todos os resultados (queremos todos os pets da pessoa)
     } else {
         echo "Erro na execução da consulta.";
     }
@@ -87,24 +116,30 @@ try {
 
         <section id="pastService"><!--querying info about this service-->
             <h2>Past <?=$service ?></h2>
-            <h3>Pet <?= htmlspecialchars($serviceInfo[0]['type']) ?> to <?= htmlspecialchars($serviceInfo[0]['pet_name']) ?></h3>
-            <p><?= htmlspecialchars(ucfirst($role)) ?>: <?= htmlspecialchars($serviceInfo[0][$role . '_name']) ?> </p>
-            <p><?= htmlspecialchars($serviceInfo[0]['date']) ?>  <?= htmlspecialchars($serviceInfo[0]['start_time']) ?> </p>
+            <?php if ($role == "owner") {?>
+                <h3>Pet <?= htmlspecialchars($serviceInfo[0]['type']) ?> to <?= htmlspecialchars($serviceInfo[0]['pet_name']) ?></h3>
+                <p><?= htmlspecialchars(ucfirst($role)) ?>: <?= htmlspecialchars($serviceInfo[0][$role . '_name']) ?> </p>
+                <p><?= htmlspecialchars($serviceInfo[0]['date']) ?>  <?= htmlspecialchars($serviceInfo[0]['start_time']) ?> </p>
+            <?php } else if ($role == "provider") { ?>
+                <h3>Pet <?= htmlspecialchars($bookingInfo[0]['type']) ?> to <?= htmlspecialchars($bookingInfo[0]['pet_name']) ?></h3>
+                <p><?= htmlspecialchars(ucfirst($role)) ?>: <?= htmlspecialchars($bookingInfo[0][$role . '_name']) ?> </p>
+                <p><?= htmlspecialchars($bookingInfo[0]['date']) ?>  <?= htmlspecialchars($bookingInfo[0]['start_time']) ?> </p>
+            <?php } ?>
         </section>
         <section id="review">
             <form action="action_review.php" method="post">
                 <h2>Review this <?= htmlspecialchars(ucfirst($role)) ?></h2>
                 <div id="starReview">
                     <input type="radio" id="star5" name="review" value="5" required="required">
-                    <label for="star5" title="5 stars">★</label>
+                    <label for="star5" title="5 stars">&#9733;</label>
                     <input type="radio" id="star4" name="review" value="4" required="required">
-                    <label for="star4" title="4 stars">★</label>
+                    <label for="star4" title="4 stars">&#9733;</label>
                     <input type="radio" id="star3" name="review" value="3" required="required">
-                    <label for="star3" title="3 stars">★</label>
+                    <label for="star3" title="3 stars">&#9733;</label>
                     <input type="radio" id="star2" name="review" value="2" required="required">
-                    <label for="star2" title="2 stars">★</label>
+                    <label for="star2" title="2 stars">&#9733;</label>
                     <input type="radio" id="star1" name="review" value="1" required="required">
-                    <label for="star1" title="1 star">★</label>
+                    <label for="star1" title="1 star">&#9733;</label>
                 </div>
                 <label>
                     Description: 
@@ -115,6 +150,8 @@ try {
                     <input type="checkbox" name="makePublic" value="1">
                     I allow this review to be made public in the website.
                 </label>
+                <input type="hidden" name="service_id" value="<?= htmlspecialchars($service_id) ?>">
+                <input type="hidden" name="role" value="<?= htmlspecialchars($role) ?>">
                 <input type="submit" value="Submit Review">
     </body>
 </html>
