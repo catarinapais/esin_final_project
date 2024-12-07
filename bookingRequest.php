@@ -76,7 +76,7 @@ try {
      // Inserir dados na tabela Booking
      $stmt = $dbh->prepare('
      INSERT INTO Booking 
-     (date, start_time, end_time, duration, adress_collect, photo_consent, provider, type, pet, payment) 
+     (date, start_time, end_time, duration, address_collect, photo_consent, provider, type, pet, payment) 
      VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
  ');
  $stmt->execute([

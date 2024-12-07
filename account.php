@@ -6,11 +6,11 @@ try {
     $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
     // Obter o ID da URL
-    $petOwnerId = (int) $_GET['id'];  // Garantir que o ID seja um número inteiro
+    $user_id = (int) $_GET['id'];  // Garantir que o ID seja um número inteiro
 
     // Preparar a consulta para pegar as informações do PetOwner com o ID específico e os pets
-    $stmt = $dbh->prepare('
-        SELECT 
+    $stmt = $dbh->prepare(
+        'SELECT 
             Person.name, 
             Person.email, 
             Person.phone_number, 
@@ -21,22 +21,89 @@ try {
             Pet.name AS pet_name, 
             Pet.species AS pet_species, 
             Pet.size AS pet_size, 
-            Pet.age AS pet_age,
+            Pet.birthdate AS pet_age,
             Pet.profile_picture AS pet_profile_picture
         FROM 
-            PetOwner
+            PetOwner 
         JOIN 
-            Person ON PetOwner.person = Person.id
+            Person ON PetOwner.person = Person.id 
         LEFT JOIN 
-            Pet ON Pet.owner = Person.id
+            Pet ON Pet.owner = Person.id 
         WHERE 
-            PetOwner.person = :id
-    ');
-    $stmt->bindValue(':id', $petOwnerId, PDO::PARAM_INT);
-
+            PetOwner.person = :id' 
+    );
+    $stmt->bindValue(':id', $user_id, PDO::PARAM_INT);
     // Tente executar a consulta e verificar se a execução foi bem-sucedida
     if ($stmt->execute()) {
         $petOwnerInfo = $stmt->fetchAll(); // todas as linhas da tabela todos os resultados (queremos todos os pets da pessoa)
+    } else {
+        echo "Erro na execução da consulta.";
+    }
+
+    $stmt->closeCursor();
+    $stmt = $dbh->prepare(
+        'SELECT 
+            Booking.type AS type,
+            Booking.date AS date, 
+            Booking.start_time AS start_time, 
+            Booking.duration AS duration,
+            Booking.ownerReview AS ownerReview,
+            Booking.providerReview AS providerReview, 
+            Pet.name AS pet_name, 
+            Pet.id AS pet_id, 
+            Pet.species AS species,
+            Payment.price AS service_price,
+            OwnerReview.rating AS owner_review,
+            ProviderReview.rating AS provider_review
+        FROM Booking 
+        JOIN Pet ON Booking.pet = Pet.id 
+        JOIN PetOwner ON Pet.owner = PetOwner.person 
+        JOIN Payment ON Booking.payment = Payment.id 
+        JOIN Review AS OwnerReview ON Booking.ownerReview = OwnerReview.id 
+        JOIN Review AS ProviderReview ON Booking.providerReview = ProviderReview.id 
+        WHERE PetOwner.person = :id' 
+    );
+    $stmt->bindValue(':id', $user_id, PDO::PARAM_INT);
+    if ($stmt->execute()) {
+        $pastBookingsInfo = $stmt->fetchAll(); // todas as linhas da tabela todos os resultados (queremos todos os pets da pessoa)
+    } else {
+        echo "Erro na execução da consulta.";
+    }
+
+    $stmt->closeCursor();
+    $stmt = $dbh->prepare(
+        'SELECT 
+            Booking.id AS service_id,
+            Booking.type AS type,
+            Booking.date AS service_date, 
+            Booking.start_time AS service_time, 
+            Booking.duration AS service_duration,
+            OwnerReview.rating AS owner_review,
+            ProviderReview.rating AS provider_review,
+            Payment.price AS service_price
+        FROM Booking 
+        JOIN ServiceProvider ON Booking.provider = ServiceProvider.person 
+        JOIN Payment ON Booking.payment = Payment.id 
+        JOIN Review AS OwnerReview ON Booking.ownerReview = OwnerReview.id 
+        JOIN Review AS ProviderReview ON Booking.providerReview = ProviderReview.id 
+        WHERE Booking.provider = :id;' 
+    );
+    $stmt->bindValue(':id', $user_id, PDO::PARAM_INT);
+    if ($stmt->execute()) {
+        $pastServicesInfo = $stmt->fetchAll(); // todas as linhas da tabela todos os resultados (queremos todos os pets da pessoa)
+    } else {
+        echo "Erro na execução da consulta.";
+    }
+
+    $stmt->closeCursor();
+    $stmt = $dbh->prepare(
+        'SELECT *  
+        FROM ServiceProvider 
+        WHERE ServiceProvider.person = :id' 
+    );
+    $stmt->bindValue(':id', $user_id, PDO::PARAM_INT);
+    if ($stmt->execute()) {
+        $providerInfo = $stmt->fetchAll(); // todas as linhas da tabela todos os resultados (queremos todos os pets da pessoa)
     } else {
         echo "Erro na execução da consulta.";
     }
@@ -44,6 +111,7 @@ try {
     // Tratamento de erro
     echo "Erro de conexão: " . $e->getMessage();
 }
+
 ?>
 
 
@@ -84,7 +152,6 @@ try {
 
     <main id="accountcontent">
 
-
         <?php if (isset($petOwnerInfo) && $petOwnerInfo): ?>
             <!-- If $petOwnerInfo is set and contains data -->
             <section id="staticTags">
@@ -92,11 +159,108 @@ try {
                 <p><strong>Name:</strong> <?= htmlspecialchars($petOwnerInfo[0]['name']) ?></p>
                 <p><strong>Email:</strong> <?= htmlspecialchars($petOwnerInfo[0]['email']) ?></p>
                 <p><strong>Phone number:</strong> <?= htmlspecialchars($petOwnerInfo[0]['phone_number']) ?></p>
-                <p> <strong>Adress:</strong> <?= htmlspecialchars($petOwnerInfo[0]['address']) ?></p>
+                <p><strong>Address:</strong> <?= htmlspecialchars($petOwnerInfo[0]['address']) ?></p>
                 <p><strong>City:</strong> <?= htmlspecialchars($petOwnerInfo[0]['city']) ?></p>
-                <p><strong>Rating:</strong> <?= htmlspecialchars($petOwnerInfo[0]['avg_rating']) ?></p>
+                <p><strong>Rating as Owner:</strong>
+                    <?php if(!empty($petOwnerInfo[0]['avg_rating'])): ?>
+                        <?= htmlspecialchars($petOwnerInfo[0]['avg_rating']) ?>
+                    <?php else: ?>
+                        No ratings yet.
+                    <?php endif; ?>
+                </p>
+                <?php if (!empty($providerInfo[0]['iban'])): ?>
+                    <p><strong>Rating as Provider:</strong>
+                        <?php if(!empty($providerInfo[0]['avg_rating'])): ?>
+                            <?= htmlspecialchars($providerInfo[0]['avg_rating']) ?>
+                        <?php else: ?>
+                            No ratings yet.
+                        <?php endif; ?>
+                    </p>
+                <?php endif; ?>
             </section>
 
+            <!--TODO: verificar qual rating é que é para mostrar no "past services" e no "past bookings"-->
+            <section id="pastServices">
+                <h2>Past Services</h2>
+                <?php if (!empty($providerInfo[0]['iban'])): ?>
+                    <?php if (!empty($pastServicesInfo)): ?>
+                        <?php foreach ($pastServicesInfo as $service): ?>
+                            <legend> <?= htmlspecialchars($service['type']) ?></legend>
+                            <p><strong>Pet:</strong> <?= htmlspecialchars($booking['pet_name']) ?></p>
+                            <p><strong>Date:</strong> <?= htmlspecialchars($service['service_date']) ?></p>
+                            <p><strong>Time:</strong> <?= htmlspecialchars($service['service_time']) ?></p>
+                            <p><strong>Duration:</strong> <?= htmlspecialchars($service['service_duration']) ?> hours</p>
+                            <p><strong>Price:</strong> <?= htmlspecialchars($service['service_price']) ?>€</p>
+
+                            <p><strong>Your Rating:</strong>
+                            <?php if (empty($service['provider_review'])): ?>
+                                No review yet
+                            <?php else: ?>
+                                <?= htmlspecialchars($service['provider_review']) ?>
+                            <?php endif; ?></p>
+
+                            <!--review of each service (button if theres none)-->
+                            <p><strong>Owner's Review:</strong>
+                            <?php if (empty($service['owner_review'])): ?>
+                                No review yet
+                                <form action="review.php" method="post">
+                                    <input type="hidden" name="service_id" value="<?= htmlspecialchars($service['service_id']) ?>">
+                                    <input type="hidden" name="role" value="owner">
+                                    <input type="submit" value="Add Review">
+                                </form>
+                            <?php else: ?>
+                                <?= htmlspecialchars($service['owner_review']) ?>
+                            <?php endif; ?></p>
+    
+                        <?php endforeach; ?>
+                        
+                    <?php else: ?>
+                        <p>You have no past services.</p>
+                    <?php endif; ?>
+                <?php else: ?>
+                    <p>You are not eligible to provide a service.</p>
+                </section>
+            <?php endif; ?>
+
+            <?php if (!empty($petOwnerInfo[0]['pet_id'])): ?>
+                <section id="pastBookings">
+                    <h2>Past Bookings</h2>
+                    <?php if (!empty($pastBookingsInfo)): ?>
+                        <?php foreach ($pastBookingsInfo as $booking): ?>
+                            <legend> <?= htmlspecialchars($booking['type']) ?></legend>
+                            <p><strong>Pet:</strong> <?= htmlspecialchars($booking['pet_name']) ?></p>
+                            <p><strong>Date:</strong> <?= htmlspecialchars($booking['date']) ?></p>
+                            <p><strong>Time:</strong> <?= htmlspecialchars($booking['start_time']) ?></p>
+                            <p><strong>Duration:</strong> <?= htmlspecialchars($booking['duration']) ?> minutes</p>
+                            <p><strong>Price:</strong> <?= htmlspecialchars($booking['service_price']) ?>€</p>
+
+                            <p><strong>Your Rating:</strong>
+                            <?php if (empty($booking['owner_review'])): ?>
+                                No review yet
+                            <?php else: ?>
+                                <?= htmlspecialchars($booking['owner_review']) ?>
+                            <?php endif; ?></p>
+
+                            <p><strong>Provider's Rating:</strong>
+                            <?php if (empty($booking['provider_review'])): ?>
+                                No review yet</p>
+                                <form action="review.php" method="post">
+                                    <input type="hidden" name="service_id" value="<?= htmlspecialchars($service['provider_review']) ?>">
+                                    <input type="hidden" name="role" value="provider">
+                                    <input type="submit" value="Add Review">
+                                </form>
+                            <?php else: ?>
+                                <?= htmlspecialchars($booking['provider_review']) ?></p>
+                            <?php endif; ?>
+
+
+
+                        <?php endforeach; ?>
+                    <?php else: ?>
+                        <p>You have no past bookings.</p>
+                    <?php endif; ?>
+                </section>
+            <?php endif; ?>
 
             <section id="pets">
                 <legend>
@@ -165,6 +329,7 @@ try {
                         <?php endif; ?>
                     <?php endforeach; ?>
             </section>
+
         <?php else: ?>
             <p>You have no pets added.</p>
         <?php endif; ?>

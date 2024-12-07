@@ -1,3 +1,57 @@
+<?php
+session_start();
+
+$service_id = $_POST['service_id']; // id do serviço que se vai fazer review
+$role = $_POST['role']; // a quem se vai dar a review
+
+if ($role == 'owner') {
+    $service = 'Service';
+} else {
+    $service = 'Booking';
+}
+// role=owner - o provider vai dar review ao owner (pelo SERVICE feito)
+// role=provider - o owner vai dar review ao provider (pelo BOOKING feito)
+
+try {
+    $dbh = new PDO('sqlite:database.db');
+    $dbh->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
+    $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+    $stmt = $dbh->prepare(
+        'SELECT 
+            Booking.type AS type,
+            Booking.date AS date, 
+            Booking.start_time AS start_time, 
+            Booking.duration AS duration,
+            Booking.ownerReview AS ownerReview,
+            Booking.providerReview AS providerReview, 
+            Pet.name AS pet_name, 
+            Pet.id AS pet_id, 
+            Pet.species AS species,
+            Owner.name AS owner_name,
+            Provider.name AS provider_name
+        FROM Booking 
+        JOIN Pet ON Booking.pet = Pet.id 
+        JOIN PetOwner ON Pet.owner = PetOwner.person 
+        JOIN Person AS Owner ON PetOwner.person = Owner.id 
+        JOIN Person AS Provider ON Booking.provider = Provider.id 
+        WHERE PetOwner.person = :id' 
+    );
+    $stmt->bindValue(':id', $service_id, PDO::PARAM_INT);
+    // Tente executar a consulta e verificar se a execução foi bem-sucedida
+    if ($stmt->execute()) {
+        $serviceInfo = $stmt->fetchAll(); // todas as linhas da tabela todos os resultados (queremos todos os pets da pessoa)
+    } else {
+        echo "Erro na execução da consulta.";
+    }
+
+} catch (PDOException $e) {
+    // Tratamento de erro
+    echo "Erro de conexão: " . $e->getMessage();
+}
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -32,14 +86,14 @@
         </header>
 
         <section id="pastService"><!--querying info about this service-->
-            <h2>Past Service</h2>
-            <h3>Pet Sitting to Leia</h3>
-            <p>Service by: John Doe</p>
-            <p>21/12/2023 15:00</p>
+            <h2>Past <?=$service ?></h2>
+            <h3>Pet <?= htmlspecialchars($serviceInfo[0]['type']) ?> to <?= htmlspecialchars($serviceInfo[0]['pet_name']) ?></h3>
+            <p><?= htmlspecialchars(ucfirst($role)) ?>: <?= htmlspecialchars($serviceInfo[0][$role . '_name']) ?> </p>
+            <p><?= htmlspecialchars($serviceInfo[0]['date']) ?>  <?= htmlspecialchars($serviceInfo[0]['start_time']) ?> </p>
         </section>
         <section id="review">
-            <form action="account.php" method="post">
-                <h2>Review</h2>
+            <form action="action_review.php" method="post">
+                <h2>Review this <?= htmlspecialchars(ucfirst($role)) ?></h2>
                 <div id="starReview">
                     <input type="radio" id="star5" name="review" value="5" required="required">
                     <label for="star5" title="5 stars">★</label>
