@@ -1,0 +1,201 @@
+
+
+
+h2, h3 {
+    color: #444;
+    margin-bottom: 15px;
+}
+
+p {
+    line-height: 1.6;
+    margin-bottom: 10px;
+}
+
+
+
+/* Main Content */
+main {
+    display: flex;
+    padding: 20px;
+    gap: 100px;
+    margin-left: 200px;
+    margin-right: 200px;
+    
+}
+
+/* Estilizando  sidebar */
+.sidebar {
+    background-color: #E7CCCC;  /* Cor de fundo suave */
+
+    border-radius: 8px;  /* Cantos arredondados */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra sutil para dar profundidade */
+    width: 250px;  /* Largura fixa da sidebar */
+    height: 300px;  /* Altura fixa */
+    text-align: center; /* Centraliza o conteúdo */
+    margin: 0 auto;  /* Centraliza horizontalmente no contêiner pai */
+    display: flex;  /* Usa flexbox para controle interno */
+    flex-direction: column;  /* Empilha o conteúdo verticalmente */
+    justify-content: space-between;  /* Distribui o conteúdo uniformemente */
+    align-items: center;  /* Centraliza itens horizontalmente */
+}
+/* Título da sidebar */
+.sidebar h2 {
+    font-size: 1.5em;
+    color: #333;
+    margin-bottom: 10px;
+    border-bottom: 2px solid #ccc;  /* Linha abaixo do título */
+    padding-bottom: 10px;
+}
+
+/* Lista de links na sidebar */
+.sidebar ul {
+    list-style-type: none; /* Remove os pontos da lista */
+    padding-left: 0; /* Remove o padding padrão */
+}
+
+/* Estilo para cada item de lista */
+.sidebar ul li {
+    margin-bottom: 15px;  /* Espaço entre os itens */
+}
+
+/* Estilo para os links da sidebar */
+.sidebar ul li a {
+    text-decoration: none;  /* Remove o sublinhado */
+    color: #c86e9e;  /* Cor azul para os links */
+    font-size: 1.1em;  /* Tamanho de fonte um pouco maior */
+
+    display: block;
+    transition: color 0.3s ease; /* Transição suave para cor do link */
+}
+
+/* Estilo de hover nos links */
+.sidebar ul li a:hover {
+    color: #0056b3;  /* Cor mais escura quando o link é hoverizado */
+}
+
+/* Adicionando bordas aos itens da lista */
+.sidebar ul li {
+    border-bottom: 1px solid #ddd;  /* Borda leve entre os itens */
+    padding-bottom: 10px;  /* Espaço abaixo da borda */
+}
+
+/* Efeito de borda nas seções quando o mouse passa */
+.sidebar ul li:hover {
+    border-bottom: 1px solid #007bff;  /* Muda a cor da borda no hover */
+}
+
+
+/* Seções */
+.main-content {  
+     padding-top: 0px;  
+       flex: 2;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+#accountcontent section {
+ 
+    margin-bottom: 50px;
+    padding: 20px;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+}
+
+section h2 {
+    border-bottom: 2px solid #ebbfdb;
+    padding-bottom: 5px;
+    margin-bottom: 15px;
+    font-size: 1.2em;
+}
+
+/* Formulários */
+form {
+    margin-top: 20px;
+}
+
+form h3 {
+    font-size: 1.1em;
+    margin-bottom: 15px;
+}
+
+form .form-group {
+    margin-bottom: 15px;
+}
+
+form .form-group label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+form .form-group input,
+form .form-group select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+form input[type="submit"] {
+    background-color: #5cb85c;
+    color: #fff;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.3s;
+}
+
+form input[type="submit"]:hover {
+    background-color: #4cae4c;
+}
+
+/* Pets */
+#pets legend {
+    margin-top: 20px;
+    font-size: 1.1em;
+    font-weight: bold;
+    color: #5cb85c;
+}
+
+.pet-icon {
+    width: 50px;
+    height: auto;
+}
+
+.pet-profile-pic {
+    margin-top: 10px;
+    max-width: 100px;
+    border-radius: 50%;
+    border: 2px solid #5cb85c;
+}
+
+/* Botão de adicionar pet */
+#addPetButton {
+    display: inline-block;
+    background-color: #5cb85c;
+    color: white;
+    padding: 10px 15px;
+    border-radius: 5px;
+    text-align: center;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+#addPetButton:hover {
+    background-color: #4cae4c;
+}
+
+#newPetForm {
+    margin-top: 20px;
+    display: none;
+}
+
+#toggleForm:checked ~ #newPetForm {
+    display: block;
+}
+

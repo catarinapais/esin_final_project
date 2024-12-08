@@ -126,6 +126,7 @@ try {
     <link href="css/style.css" rel="stylesheet">
     <link href="css/layout.css" rel="stylesheet">
     <link href="css/responsive.css" rel="stylesheet">
+    <link href="css/account.css" rel="stylesheet">
 </head>
 
 <body>
@@ -152,7 +153,8 @@ try {
     </header>
 
     <main id="accountcontent">
-
+  
+        <div class="main-content">
         <?php if (isset($petOwnerInfo) && $petOwnerInfo): ?>
             <!-- If $petOwnerInfo is set and contains data -->
             <section id="staticTags">
@@ -222,7 +224,7 @@ try {
                     <p>You are not eligible to provide a service.</p>
                 </section>
             <?php endif; ?>
-
+            </section>
             <?php if (!empty($petOwnerInfo[0]['pet_id'])): ?>
                 <section id="pastBookings">
                     <h2>Past Bookings</h2>
@@ -338,6 +340,20 @@ try {
     <?php else: ?>
         <p>No account information found.</p>
     <?php endif; ?>
+
+   
+
+    </div>
+
+    <aside class="sidebar">
+    <h2>Sections</h2>
+    <ul>
+        <li><a href="#staticTags">Personal Information</a></li>
+        <li><a href="#pastServices">Past Services</a></li>
+        <li><a href="#pastBookings">Past Bookings</a></li>
+        <li><a href="#pets">Pets</a></li>
+    </ul>
+</aside>
     </main>
 
     <footer>
