@@ -1,5 +1,7 @@
 
-
+html {
+    scroll-behavior: smooth;
+}
 
 h2, h3 {
     color: #444;
@@ -13,75 +15,76 @@ p {
 
 
 
-/* Main Content */
 main {
-    display: flex;
-    padding: 20px;
-    gap: 100px;
-    margin-left: 200px;
-    margin-right: 200px;
+        flex: 1;  /* Ocupa o restante do espaço disponível */
+        padding: 20px; 
+  max-width: 1100px;
+  margin-left: 250px;
+
     
 }
 
-/* Estilizando  sidebar */
 .sidebar {
+    position: fixed;  /* Fixa a sidebar no lado direito */
+    top: 300px;  /* Começa no topo da página */
+    right: 80px;  /* Fixa no lado direito da janela */
+    width: 300px;  /* Largura fixa da sidebar */
+    height: 400px;  /* Altura completa da janela */
     background-color: #E7CCCC;  /* Cor de fundo suave */
-
-    border-radius: 8px;  /* Cantos arredondados */
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra sutil para dar profundidade */
-    width: 250px;  /* Largura fixa da sidebar */
-    height: 300px;  /* Altura fixa */
-    text-align: center; /* Centraliza o conteúdo */
-    margin: 0 auto;  /* Centraliza horizontalmente no contêiner pai */
-    display: flex;  /* Usa flexbox para controle interno */
-    flex-direction: column;  /* Empilha o conteúdo verticalmente */
-    justify-content: space-between;  /* Distribui o conteúdo uniformemente */
-    align-items: center;  /* Centraliza itens horizontalmente */
+    padding: 20px;  /* Espaço interno para o conteúdo */
+    box-shadow: -4px 0 6px rgba(0, 0, 0, 0.1); /* Sombra para dar profundidade */
+    display: flex;  
+    flex-direction: column;  
+    justify-content: flex-start; 
+    align-items: stretch; 
+    border-left: 2px solid #D4B4B4;
+    text-align: center;
+    border-radius: 3%;
 }
-/* Título da sidebar */
+
 .sidebar h2 {
-    font-size: 1.5em;
+    font-size: 1.9em;
     color: #333;
-    margin-bottom: 10px;
-    border-bottom: 2px solid #ccc;  /* Linha abaixo do título */
+    border-bottom: 2px solid #ccc;  
     padding-bottom: 10px;
 }
 
-/* Lista de links na sidebar */
+
 .sidebar ul {
-    list-style-type: none; /* Remove os pontos da lista */
-    padding-left: 0; /* Remove o padding padrão */
+    list-style-type: none; 
+padding-left: 0;
 }
 
+
+
+/* Ajustando o padding lateral dos links na sidebar */
+.sidebar ul li a {
+    font-weight: bold;
+    text-decoration: none;  /* Remove o sublinhado */
+    color: #ffffff;  /* Cor de destaque para os links */
+    font-size: 1.5em;  /* Tamanho de fonte maior */
+    display: block;  /* Faz com que o link ocupe a largura total do item */
+    padding: 10px 20px;  /* Largura e altura consistente para o padding */
+    transition: color 0.3s ease, background-color 0.3s ease; /* Transição suave */
+}
 /* Estilo para cada item de lista */
 .sidebar ul li {
-    margin-bottom: 15px;  /* Espaço entre os itens */
+    margin-bottom: 10px;  /* Espaço entre os itens */
+    border-bottom: 2px solid #ddd;  /* Borda leve entre os itens */
+    padding-left: 20px;  /* Ajustando o padding do lado esquerdo */
+    padding-right: 20px;  /* Ajustando o padding do lado direito */
 }
 
-/* Estilo para os links da sidebar */
-.sidebar ul li a {
-    text-decoration: none;  /* Remove o sublinhado */
-    color: #c86e9e;  /* Cor azul para os links */
-    font-size: 1.1em;  /* Tamanho de fonte um pouco maior */
-
-    display: block;
-    transition: color 0.3s ease; /* Transição suave para cor do link */
-}
-
-/* Estilo de hover nos links */
+/* Efeito de hover nos links */
 .sidebar ul li a:hover {
-    color: #0056b3;  /* Cor mais escura quando o link é hoverizado */
+    color: #fff;  /* Cor de texto branca quando hover */
+    background-color: #007bff;  /* Cor de fundo ao passar o mouse */
+    border-radius: 4px;  /* Arredondar os cantos ao passar o mouse */
 }
 
-/* Adicionando bordas aos itens da lista */
-.sidebar ul li {
-    border-bottom: 1px solid #ddd;  /* Borda leve entre os itens */
-    padding-bottom: 10px;  /* Espaço abaixo da borda */
-}
 
-/* Efeito de borda nas seções quando o mouse passa */
 .sidebar ul li:hover {
-    border-bottom: 1px solid #007bff;  /* Muda a cor da borda no hover */
+    border-bottom: 1px solid #c7c7c7;
 }
 
 
@@ -95,7 +98,7 @@ main {
 }
 
 #accountcontent section {
- 
+    padding-top: 50px;  
     margin-bottom: 50px;
     padding: 20px;
     border-radius: 8px;
@@ -153,36 +156,19 @@ form input[type="submit"]:hover {
     background-color: #4cae4c;
 }
 
-/* Pets */
-#pets legend {
-    margin-top: 20px;
-    font-size: 1.1em;
-    font-weight: bold;
-    color: #5cb85c;
-}
 
-.pet-icon {
-    width: 50px;
-    height: auto;
-}
-
-.pet-profile-pic {
-    margin-top: 10px;
-    max-width: 100px;
-    border-radius: 50%;
-    border: 2px solid #5cb85c;
-}
 
 /* Botão de adicionar pet */
 #addPetButton {
     display: inline-block;
-    background-color: #5cb85c;
+    background-color: #E7CCCC;
     color: white;
     padding: 10px 15px;
     border-radius: 5px;
     text-align: center;
     font-weight: bold;
     cursor: pointer;
+    margin-bottom: 20px;
     transition: background-color 0.3s ease;
 }
 
@@ -199,3 +185,85 @@ form input[type="submit"]:hover {
     display: block;
 }
 
+
+#pets {
+    margin: 20px auto;
+    max-width: 800px;
+    font-family: Arial, sans-serif;
+}
+
+legend h2 {
+    font-size: 1.8em;
+    margin-bottom: 10px;
+}
+
+.pet-icon {
+    width: 50px;
+    height: auto;
+    vertical-align: middle;
+}
+
+#newPetForm {
+    margin: 20px 0;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+}
+
+.pets-container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.pet-card {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    padding: 15px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.pet-image {
+    flex-shrink: 0;
+    width: 120px;
+    height: 120px;
+    border-radius: 50%; /* Forma de esfera */
+    overflow: hidden;
+    border: 2px solid #ccc; /* Borda ao redor da esfera */
+    display: flex; /* Habilita Flexbox */
+    align-items: center; /* Centraliza verticalmente */
+    justify-content: center; /* Centraliza horizontalmente */
+    background-color: #fff; /* Fundo para contraste */
+}
+
+.pet-profile-pic {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: cover; /* Garante o ajuste da imagem sem distorção */
+}
+
+/* Alinha o nome do pet (legend) no centro do cartão */
+.pet-info legend {
+    text-align: center;  /* Centraliza o nome do pet */
+    font-size: 1.5em;  /* Tamanho maior para o nome do pet */
+    margin-bottom: 10px; /* Espaço inferior para separar do conteúdo abaixo */
+}
+
+/* Se necessário, você pode ajustar outros elementos do pet */
+.pet-info p {
+    text-align: left; /* Garante que as informações (espécie, tamanho, idade) estejam alinhadas à esquerda */
+    margin-left: 0; /* Remover qualquer margem esquerda indesejada */
+}
+
+
+.pet-info legend {
+    text-align: center; 
+    font-size: 1.5em;  /* Opcional: Aumenta o tamanho da fonte do nome */
+    margin-bottom: 10px; /* Espaço inferior para separar do conteúdo abaixo */
+
+}
