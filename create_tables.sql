@@ -158,7 +158,7 @@ INSERT INTO Schedule (id, day_week, start_time, end_time, service_provider) VALU
 INSERT INTO PetOwner(person, avg_rating) VALUES (1, 4.5);
 INSERT INTO PetOwner (person, avg_rating) VALUES (2, 4.5);
 
-INSERT INTO Pet (id, name, species, size, birthdate, profile_picture, owner)  VALUES (1, 'Rex', 'Dog', 'large', '15/08/2020', 'cat.jpg',1);
+INSERT INTO Pet (id, name, species, size, birthdate, profile_picture, owner)  VALUES (1, 'Rex', 'Dog', 'large', '15/08/2020', 1);
 INSERT INTO Pet (id, name, species, size, birthdate, owner) VALUES (2, 'Whiskers', 'Cat', 'small', '15/08/2020', 1);
 INSERT INTO Pet (id, name, species, size, birthdate, owner) VALUES (3, 'Buddy', 'Dog', 'medium', '15/08/2020', 1);
 

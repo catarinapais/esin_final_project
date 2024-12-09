@@ -128,6 +128,7 @@ try {
     <link href="css/style.css" rel="stylesheet">
     <link href="css/layout.css" rel="stylesheet">
     <link href="css/responsive.css" rel="stylesheet">
+    <link href="css/account.css" rel="stylesheet">
 </head>
 
 <body>
@@ -154,7 +155,8 @@ try {
     </header>
 
     <main id="accountcontent">
-
+  
+        <div class="main-content">
         <?php if (isset($petOwnerInfo) && $petOwnerInfo): ?>
             <!-- If $petOwnerInfo is set and contains data -->
             <section id="staticTags">
@@ -224,9 +226,9 @@ try {
                     <?php endif; ?>
                 <?php else: ?>
                     <p>You are not eligible to provide a service.</p>
-                </section>
+           
             <?php endif; ?>
-
+            </section>
             <?php if (!empty($petOwnerInfo[0]['pet_id'])): ?>
                 <section id="pastBookings">
                     <h2>Past Bookings</h2>
@@ -266,63 +268,60 @@ try {
                     <?php endif; ?>
                 </section>
             <?php endif; ?>
-
             <section id="pets">
-                <legend>
-                    <h2>Pets</h2>
-                    <img src="images/pata.png" alt="Pet" class="pet-icon">
-                </legend>
+    <legend>
+        <h2>Pets</h2>
+        <img src="images/pata.png" alt="Pet" class="pet-icon">
+    </legend>
 
-                <!-- Add a new pet -->
-                <input type="checkbox" id="toggleForm" style="display: none;">
-                <label for="toggleForm" id="addPetButton" class="button"></label>
-                <form id="newPetForm" action="action_addPet.php" method="post">
-                    <h3>Add a New Pet</h3>
-                    <div class="form-group">
-                        <label for="name">Pet Name:<span class="required">*</span></label>
-                        <input type="text" id="name" name="name" required>
-                    </div>
+    <!-- Add a new pet -->
+    <input type="checkbox" id="toggleForm" style="display: none;">
+    <label for="toggleForm" id="addPetButton" class="button"></label>
+    <form id="newPetForm" action="action_addPet.php" method="post" enctype="multipart/form-data">
+        <h3>Add a New Pet</h3>
+        <div class="form-group">
+            <label for="name">Pet Name:<span class="required">*</span></label>
+            <input type="text" id="name" name="name" required>
+        </div>
 
-                    <div class="form-group">
-                        <label for="species">Species:<span class="required">*</span></label>
-                        <select id="species" name="species" required>
-                            <option value="" disabled selected>Choose pet species</option>
-                            <option value="dog">Dog</option>
-                            <option value="cat">Cat</option>
-                        </select>
-                    </div>
+        <div class="form-group">
+            <label for="species">Species:<span class="required">*</span></label>
+            <select id="species" name="species" required>
+                <option value="" disabled selected>Choose pet species</option>
+                <option value="dog">Dog</option>
+                <option value="cat">Cat</option>
+            </select>
+        </div>
 
-                    <div class="form-group">
-                        <label for="size">Size:<span class="required">*</span></label>
-                        <select id="size" name="size" required>
-                            <option value="" disabled selected>Choose pet size</option>
-                            <option value="small">Small</option>
-                            <option value="medium">Medium</option>
-                            <option value="large">Large</option>
-                        </select>
-                    </div>
+        <div class="form-group">
+            <label for="size">Size:<span class="required">*</span></label>
+            <select id="size" name="size" required>
+                <option value="" disabled selected>Choose pet size</option>
+                <option value="small">Small</option>
+                <option value="medium">Medium</option>
+                <option value="large">Large</option>
+            </select>
+        </div>
 
-                    <div class="form-group">
-                        <label for="birthdate">Birth Date:</label>
-                        <input type="date" id="birthdate" name="birthdate">
-                    </div>
+        <div class="form-group">
+            <label for="birthdate">Birth Date:</label>
+            <input type="date" id="birthdate" name="birthdate">
+        </div>
 
-                    <div class="form-group">
-                        <label for="profile_picture">Profile Picture:</label>
-                        <input type="file" accept='image/*' id="profile_picture" name="profile_picture">
-                    </div>
+        <div class="form-group">
+            <label for="profile_picture">Profile Picture:</label>
+            <input type="file" accept="image/*" id="profile_picture" name="profile_picture">
+        </div>
 
-                    <input type="submit" value="Add Pet">
-                </form>
+        <input type="submit" value="Add Pet">
+    </form>
 
-                <!-- If there are pets -->
-                <?php if (!empty($petOwnerInfo[0]['pet_id'])): ?>
-                    <?php foreach ($petOwnerInfo as $pet): ?>
-                        <legend> <?= htmlspecialchars($pet['pet_name']) ?></legend>
-                        <p><strong>Species:</strong> <?= htmlspecialchars($pet['pet_species']) ?></p>
-                        <p><strong>Size:</strong> <?= htmlspecialchars($pet['pet_size']) ?></p>
-                        <p><strong>Age:</strong> <?= htmlspecialchars($pet['pet_age']) ?> years</p>
-                        <!-- Exibir a imagem do pet -->
+    <!-- If there are pets -->
+    <?php if (!empty($petOwnerInfo[0]['pet_id'])): ?>
+        <div class="pets-container">
+            <?php foreach ($petOwnerInfo as $pet): ?>
+                <div class="pet-card">
+                    <div class="pet-image">
                         <?php if (!empty($pet['pet_profile_picture'])): ?>
                             <img src="images/uploads/<?= htmlspecialchars($pet['pet_profile_picture']) ?>"
                                 alt="<?= htmlspecialchars($pet['pet_name']) ?>"
@@ -332,16 +331,38 @@ try {
                                 alt="Default picture for pet"
                                 class="pet-profile-pic">
                         <?php endif; ?>
-                    <?php endforeach; ?>
-            </section>
-
-        <?php else: ?>
-            <p>You have no pets added.</p>
-        <?php endif; ?>
+                    </div>
+                    <div class="pet-info">
+                        <legend> <?= htmlspecialchars($pet['pet_name']) ?></legend>
+                        <p><strong>Species:</strong> <?= htmlspecialchars($pet['pet_species']) ?></p>
+                        <p><strong>Size:</strong> <?= htmlspecialchars($pet['pet_size']) ?></p>
+                        <p><strong>Age:</strong> <?= htmlspecialchars($pet['pet_age']) ?> years</p>
+                    </div>
+                </div>
+            <?php endforeach; ?>
+        </div>
+    <?php else: ?>
+        <p>You have no pets added.</p>
+    <?php endif; ?>
+</section>
 
     <?php else: ?>
         <p>No account information found.</p>
     <?php endif; ?>
+
+   
+
+    </div>
+
+    <aside class="sidebar">
+    <h2>Sections</h2>
+    <ul>
+        <li><a href="#staticTags">Personal Information</a></li>
+        <li><a href="#pastServices">Past Services</a></li>
+        <li><a href="#pastBookings">Past Bookings</a></li>
+        <li><a href="#pets">Pets</a></li>
+    </ul>
+</aside>
     </main>
 
     <footer>
