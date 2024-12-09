@@ -81,8 +81,10 @@ try {
             Booking.duration AS service_duration,
             OwnerReview.rating AS owner_review,
             ProviderReview.rating AS provider_review,
+            Pet.name AS pet_name, 
             Payment.price AS service_price
         FROM Booking 
+        JOIN Pet ON Booking.pet = Pet.id 
         JOIN ServiceProvider ON Booking.provider = ServiceProvider.person 
         JOIN Payment ON Booking.payment = Payment.id 
         JOIN Review AS OwnerReview ON Booking.ownerReview = OwnerReview.id 
@@ -162,6 +164,7 @@ try {
                 <p><strong>Phone number:</strong> <?= htmlspecialchars($petOwnerInfo[0]['phone_number']) ?></p>
                 <p><strong>Address:</strong> <?= htmlspecialchars($petOwnerInfo[0]['address']) ?></p>
                 <p><strong>City:</strong> <?= htmlspecialchars($petOwnerInfo[0]['city']) ?></p>
+                <!--TODO: calcular o review e dar update a base de dados!-->
                 <p><strong>Rating as Owner:</strong>
                     <?php if(!empty($petOwnerInfo[0]['avg_rating'])): ?>
                         <?= htmlspecialchars($petOwnerInfo[0]['avg_rating']) ?>
@@ -180,6 +183,7 @@ try {
                 <?php endif; ?>
             </section>
 
+            <!--TODO: apenas mostrar os services e os bookings antigos!!-->
             <!--TODO: verificar qual rating é que é para mostrar no "past services" e no "past bookings"-->
             <section id="pastServices">
                 <h2>Past Services</h2>
