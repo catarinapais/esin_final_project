@@ -76,6 +76,7 @@ try {
     // Tente executar a consulta e verificar se a execução foi bem sucedida
     if ($stmt->execute()) {
         $availableProviders = $stmt->fetchAll(); // todas as linhas da tabela todos os resultados (queremos todos os pets da pessoa)
+        $_SESSION['availableProviders'] = $availableProviders; // Store in session
     } else {
         echo "Erro na execução da consulta.";
     }

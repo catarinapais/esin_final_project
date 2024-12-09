@@ -15,29 +15,9 @@ session_start();
 </head>
 
 <body>
-    <header id="navigationBar">
-        <a href="initialPage.php">
-            <div id="logo">
-                <h1>Pet Patrol</h1>
-                <h2>Sit and Walk</h2>
-                <img src="images/logo1.png" alt="Logo of Pet Patrol">
-            </div>
-        </a>
-        <nav id="menu">
-            <input type="checkbox" id="hamburger">
-            <label class="hamburger" for="hamburger"></label>
-            <ul id="menuItems">
-                <li><a href="bookingRequest.php">BOOK A SERVICE</a></li>
-                <li><a href="serviceProvider.php">DO A SERVICE</a></li>
-                <li><a href="account.php">ACCOUNT</a></li>
-                <li><a href="aboutus.html">ABOUT US</a></li>
-                <li class="signup"><a href="register.php">REGISTER</a></li>
-                <li class="signup"><a href="login.html">LOGIN</a></li>
-            </ul>
-        </nav>
-    </header>
-
-
+    <?php
+    include('header.php');
+    ?>
     <main id="content">
         <?php
         if (isset($_SESSION["msg_success"])) {

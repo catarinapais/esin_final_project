@@ -1,4 +1,9 @@
 <?php
+session_start();
+
+$availableProviders = isset($_SESSION['availableProviders']) ? $_SESSION['availableProviders'] : [];
+unset($_SESSION['availableProviders']); // Clear the session data after retrieving it
+
 // Conectar ao banco de dados
 try {
     $dbh = new PDO('sqlite:database.db');

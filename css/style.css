@@ -381,13 +381,14 @@ footer {
 }
 
 .msg_success {
-    color: green;
+    color: #B88080;
     font-weight: bold;
     /*center the class*/
     display: flex;
     justify-content: center;
     align-items: center;
     padding-top: 2em;
+    font-size: 1.5em;
 }
 
 

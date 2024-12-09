@@ -1,3 +1,7 @@
+<?php
+session_start();
+?>
+
 <!-- Login page -->
  <!-- Nome ou emmail (ou username ou email) --> 
   <!-- password -->
@@ -21,12 +25,18 @@
                 </div>
             </a>
         </header>
+        <?php
+        if (isset($_SESSION["msg_error"])) {
+            echo "<p class='msg_error'>{$_SESSION["msg_error"]}</p>";
+            unset($_SESSION["msg_error"]);
+        }
+        ?>
         <section id="authentication">
-            <form class="login-form" action="login.php" method="POST">
+            <form class="login-form" action="action_login.php" method="POST">
                 <h2>Login</h2>
                 <div class="form-group"> <!-- faria mais sentido se calhar ser o mail ou o username, se for o username metemos no register para meter-->
-                    <p>Name:</p>
-                    <input type="text" id="name" name="name" required>
+                    <p>Email:</p>
+                    <input type="email" id="email" name="email" required>
                 </div>
                 <div class="form-group">
                     <p>Password:</p>
@@ -38,7 +48,7 @@
                 </div>
             </form> 
             <p>Don't have an account? 
-                <a id="authenticationLink" href="register.html">Register Here</a>
+                <a id="authenticationLink" href="register.php">Register Here</a>
             </p>
         </section>
     </body>

@@ -183,6 +183,11 @@ try {
                         <?php endif; ?>
                     </p>
                 <?php endif; ?>
+
+                <!--button for logout-->
+                <form action="action_logout.php" method="post">
+                    <input type="submit" value="Logout">
+                </form>
             </section>
 
             <!--TODO: apenas mostrar os services e os bookings antigos!!-->
