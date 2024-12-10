@@ -19,8 +19,6 @@ try {
     $dbh->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
     $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-
-
     // query for getting available providers - AvailableProviders
     // that are not doing other services at the same time - FreeProviders
     $stmt->closeCursor();
@@ -29,7 +27,8 @@ try {
             SELECT  
                 ServiceProvider.person AS provider_id, 
                 Person.name AS provider_name, 
-                Person.phone_number AS phone_number 
+                Person.phone_number AS provider_phone_number, 
+                ServiceProvider.avg_rating AS provider_avg_rating 
             FROM ServiceProvider 
             JOIN Person ON Person.id = ServiceProvider.person 
             LEFT JOIN Booking 
@@ -56,15 +55,16 @@ try {
                 Schedule.end_time <= :end_time AND 
                 ServiceProvider.service_type IN (:service_type, "both") AND 
                 Person.city = :owner_city AND 
-                Pet.name = :pet_name
+                Pet.name = :pet_name 
         )
         SELECT 
-            FreeProviders.provider_name,
-            FreeProviders.phone_number,
-            AvailableProviders.day_week,
-            AvailableProviders.schedule_start_time,
-            AvailableProviders.schedule_end_time
-        FROM FreeProviders
+            FreeProviders.provider_name, 
+            FreeProviders.phone_number, 
+            FreeProviders.provider_avg_rating, 
+            AvailableProviders.day_week, 
+            AvailableProviders.schedule_start_time, 
+            AvailableProviders.schedule_end_time 
+        FROM FreeProviders 
         JOIN AvailableProviders ON FreeProviders.provider_id = AvailableProviders.provider_id;' 
     ); // só falta verificar que o provider não tem nenhum serviço marcado para a mesma hora
     $stmt->bindValue(':date', $service_date, PDO::PARAM_INT);

@@ -80,10 +80,10 @@ try {
 
         // Inserir dados na tabela Booking
         $stmt = $dbh->prepare('
-     INSERT INTO Booking 
-     (date, start_time, end_time, duration, address_collect, photo_consent, provider, type, pet, payment) 
-     VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
- ');
+            INSERT INTO Booking 
+            (date, start_time, end_time, duration, address_collect, photo_consent, provider, type, pet, payment) 
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+        ');
         $stmt->execute([
             $date,
             $start_time,
@@ -183,6 +183,20 @@ try {
                     <input type="submit" value="Calculate">
                 </fieldset>
             </form>
+
+            <section id="availableProviders">
+                <h2>Available Pet Walkers/Pet Sitters at <?php $availableProviders[0]['date']?></h2>
+                <?php foreach ($availableProviders as $provider): ?>
+                    <article>
+                        <h3><?php echo htmlspecialchars($provider['provider_name']); ?></h3>
+                        <p>Day: <?php echo htmlspecialchars($provider['day_week']); ?></p>
+                        <p>Start Time: <?php echo htmlspecialchars($provider['schedule_start_time']); ?></p>
+                        <p>End Time: <?php echo htmlspecialchars($provider['schedule_end_time']); ?></p>
+                        <a href="bookingRequest.php?provider_id=<?php echo $provider['provider_id']; ?>">Book</a>
+                    </article>
+                <?php endforeach; ?>
+            </section>
+
         <?php else: ?>
             <p id="nopets">No pets associated with your account. Please add pets to continue.</p>
         <?php endif; ?>
@@ -192,6 +206,7 @@ try {
         * verificar se o start time e o end time incluem dentro o schedule do provider
         * garantir que o provider não tem mais bookings nesse momento
         * verificar que o owner e o provider são da mesma cidade-->
+
         
 
     </main>

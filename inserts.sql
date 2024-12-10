@@ -10,6 +10,13 @@ INSERT INTO ServiceProvider(person, iban, service_type, avg_rating) VALUES (2, '
 
 INSERT INTO Schedule (id, day_week, start_time, end_time, service_provider) VALUES (1, 'Monday', '10:00', '12:00', 1);
 INSERT INTO Schedule (id, day_week, start_time, end_time, service_provider) VALUES (2, 'Tuesday', '07:00', '11:00', 1);
+INSERT INTO Schedule (id, day_week, start_time, end_time, service_provider) VALUES (3, 'Wednesday', '08:00', '10:00', 1);
+INSERT INTO Schedule (id, day_week, start_time, end_time, service_provider) VALUES (4, 'Thursday', '09:00', '11:00', 1);
+INSERT INTO Schedule (id, day_week, start_time, end_time, service_provider) VALUES (5, 'Friday', '10:00', '12:00', 1);
+INSERT INTO Schedule (id, day_week, start_time, end_time, service_provider) VALUES (6, 'Saturday', '11:00', '13:00', 2);
+INSERT INTO Schedule (id, day_week, start_time, end_time, service_provider) VALUES (7, 'Sunday', '12:00', '14:00', 2);
+INSERT INTO Schedule (id, day_week, start_time, end_time, service_provider) VALUES (8, 'Monday', '13:00', '15:00', 2);
+INSERT INTO Schedule (id, day_week, start_time, end_time, service_provider) VALUES (9, 'Tuesday', '14:00', '16:00', 2);
 
 INSERT INTO PetOwner(person, avg_rating) VALUES (1, 4.5);
 INSERT INTO PetOwner (person, avg_rating) VALUES (2, 4.5);
