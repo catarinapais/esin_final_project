@@ -30,11 +30,13 @@ if (isset($_SESSION['email'])) {
                     <li><a href="aboutus.php">ABOUT US</a></li>
                     <li><a href="account.php"><?php echo $name; ?></a></li>
                     
-                <?php else: ?>
-                    <li><a href="aboutus.php">ABOUT US</a></li>
-                    <li class="signup"><a href="register.php">REGISTER</a></li>
-                    <li class="signup"><a href="login.php">LOGIN</a></li>
-                <?php endif; ?>
+                    <?php else: ?>
+    <li><a href="aboutus.php">ABOUT US</a></li>
+    <li class="signup"><a href="register.php" class="button-74">REGISTER</a></li>
+    <li class="signup">
+        <a href="login.php" class="button-56" role="button">LOGIN</a>
+    </li>
+<?php endif; ?>
             </ul>
         </nav>
     </header>

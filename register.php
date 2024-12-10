@@ -18,15 +18,9 @@ session_start();
 </head>
 
 <body>
-    <header id="navigationBar">
-        <a href="initialPage.php">
-            <div id="logo">
-                <h1>Pet Patrol</h1>
-                <h2>Sit and Walk</h2>
-                <img src="images/logo1.png" alt="Logo of Pet Patrol">
-            </div>
-        </a>
-    </header>
+<?php
+    include('header.php');
+    ?>
     <?php
     if (isset($_SESSION["msg_error"])) {
         echo "<p class='msg_error'>{$_SESSION["msg_error"]}</p>";
@@ -81,6 +75,7 @@ session_start();
             <a id="authenticationLink" href="login.html">Login Here</a>
         </p>
     </section>
+    <?php include('footer.php'); ?>
 </body>
 
 </html>

@@ -51,5 +51,6 @@ session_start();
                 <a id="authenticationLink" href="register.php">Register Here</a>
             </p>
         </section>
+        <?php include('footer.php'); ?>
     </body>
 </html>

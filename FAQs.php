@@ -1,3 +1,7 @@
+<?php
+session_start();
+?>
+
 <!DOCTYPE html>
 <html lang="en">
     <head> 
@@ -9,15 +13,9 @@
         <link href="css/responsive.css" rel="stylesheet">
     </head> 
     <body> 
-        <header id="navigationBar">
-            <a href="initialPage.php">
-                <div id="logo">
-                    <h1>Pet Patrol</h1>
-                    <h2>Sit and Walk</h2>
-                    <img src="images/logo1.png" alt="Logo of Pet Patrol">
-                </div>
-            </a>
-        </header>
+        <?php
+        include('header.php');
+        ?>
 
 
         <main id="FAQcontent">
@@ -101,7 +99,7 @@
             </section>
         </main>
             
-      
+        <?php include('footer.php'); ?>
 
     </body>
     </html>
