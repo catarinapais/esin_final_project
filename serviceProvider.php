@@ -1,4 +1,6 @@
 <?php
+session_start();
+
 
 //função para construir a tabela com a query
 function makeAvailabilityTable($schedule)

@@ -7,9 +7,8 @@ try {
     $dbh->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
     $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-    // Obter o ID da URL
-    $user_id = (int) $_GET['id'];  // Garantir que o ID seja um número inteiro
-
+    $user_id = $_SESSION['id'];
+    
     // Preparar a consulta para pegar as informações do PetOwner com o ID específico e os pets
     $stmt = $dbh->prepare(
         'SELECT 
@@ -169,7 +168,7 @@ try {
                 <?php endif; ?>
 
                 <!--button for logout-->
-                <form action="action_logout.php" method="post">
+                <form action="action_logout.php" method="post" id=logout>
                     <input type="submit" value="Logout">
                 </form>
             </section>
@@ -339,10 +338,9 @@ try {
         <p>No account information found.</p>
     <?php endif; ?>
 
-   
 
     </div>
-
+    </main>
     <aside class="sidebar">
     <h2>Sections</h2>
     <ul>
@@ -352,7 +350,7 @@ try {
         <li><a href="#pets">Pets</a></li>
     </ul>
 </aside>
-    </main>
+  
     <?php include('footer.php'); ?>
 </body>
 

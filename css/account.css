@@ -1,4 +1,29 @@
 
+body {
+
+    display: grid;
+    grid-template-columns: [start] 4fr [middle] 1fr [end];
+    grid-template-rows: [start] auto [nav] auto [news] 1fr [footer] auto [end];
+  }
+
+  body > header {
+    grid-column: start / end;
+  }
+
+  #maincontent {
+    grid-column: start;
+  }
+
+
+  aside {
+    grid-column: middle;
+    grid-row: nav / footer;
+  }
+
+  body > footer {
+    grid-column: start / end;
+}
+   
 html {
     scroll-behavior: smooth;
 }
@@ -14,38 +39,22 @@ p {
 }
 
 
-
-main {
-        flex: 1;  /* Ocupa o restante do espaço disponível */
-        padding: 20px; 
-  max-width: 1100px;
-  margin-left: 250px;
-
-    
-}
-
-.sidebar {
-    position: fixed;  /* Fixa a sidebar no lado direito */
-    top: 300px;  /* Começa no topo da página */
-    right: 80px;  /* Fixa no lado direito da janela */
-    width: 300px;  /* Largura fixa da sidebar */
-    height: 400px;  /* Altura completa da janela */
+aside.sidebar {
     background-color: #E7CCCC;  /* Cor de fundo suave */
     padding: 20px;  /* Espaço interno para o conteúdo */
-    box-shadow: -4px 0 6px rgba(0, 0, 0, 0.1); /* Sombra para dar profundidade */
-    display: flex;  
-    flex-direction: column;  
-    justify-content: flex-start; 
-    align-items: stretch; 
-    border-left: 2px solid #D4B4B4;
+    border-radius: 10px;  /* Bordas arredondadas */
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);  /* Sombras suaves para dar profundidade */
     text-align: center;
-    border-radius: 3%;
-}
+ 
 
+    top: 0;  /* Fixa no topo */
+
+    transition: all 0.3s ease;  /* Animação suave ao interagir */
+}
 .sidebar h2 {
     font-size: 1.9em;
-    color: #333;
-    border-bottom: 2px solid #ccc;  
+    color: #fcfcfc;
+    border-bottom: 2px solid #ffffff;  
     padding-bottom: 10px;
 }
 
@@ -70,7 +79,7 @@ padding-left: 0;
 /* Estilo para cada item de lista */
 .sidebar ul li {
     margin-bottom: 10px;  /* Espaço entre os itens */
-    border-bottom: 2px solid #ddd;  /* Borda leve entre os itens */
+    border-bottom: 2px solid #ffffff;  /* Borda leve entre os itens */
     padding-left: 20px;  /* Ajustando o padding do lado esquerdo */
     padding-right: 20px;  /* Ajustando o padding do lado direito */
 }
@@ -142,7 +151,7 @@ form .form-group select {
 }
 
 form input[type="submit"] {
-    background-color: #5cb85c;
+    background-color: #E7CCCC;
     color: #fff;
     padding: 10px 15px;
     border: none;
@@ -153,7 +162,7 @@ form input[type="submit"] {
 }
 
 form input[type="submit"]:hover {
-    background-color: #4cae4c;
+    background-color: #c181a4;
 }
 
 
@@ -173,7 +182,7 @@ form input[type="submit"]:hover {
 }
 
 #addPetButton:hover {
-    background-color: #4cae4c;
+    background-color: #c181a4;
 }
 
 #newPetForm {
@@ -267,3 +276,4 @@ legend h2 {
     margin-bottom: 10px; /* Espaço inferior para separar do conteúdo abaixo */
 
 }
+

@@ -36,7 +36,7 @@ session_start();
                 <h2>Login</h2>
                 <div class="form-group"> <!-- faria mais sentido se calhar ser o mail ou o username, se for o username metemos no register para meter-->
                     <p>Email:</p>
-                    <input type="email" id="email" name="email" required>
+                    <input type="email" id="id" name="email" required>
                 </div>
                 <div class="form-group">
                     <p>Password:</p>
