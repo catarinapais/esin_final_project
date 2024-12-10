@@ -1,4 +1,6 @@
 <?php
+session_start();
+
 try {
     // Conectar ao banco de dados SQLite
     $dbh = new PDO('sqlite:database.db');

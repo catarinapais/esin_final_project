@@ -1,5 +1,5 @@
 <?php
-  session_start();
+session_start();
 
   // get email and password from HTTP parameters
   $email = $_POST['email'];
