@@ -1,6 +1,8 @@
 <?php
 session_start();
 
+$id = $_SESSION['id'];
+$email = $_SESSION['email'];
 
 //função para construir a tabela com a query
 function makeAvailabilityTable($schedule)
@@ -89,7 +91,6 @@ $dbh->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC); //associatio
 $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION); //error handling
 
 try { // try catch for error handling
-  $email = 'johndoe@gmail.com';
   $stmt = $dbh->prepare('SELECT * FROM Schedule JOIN ServiceProvider ON Schedule.service_provider = ServiceProvider.person JOIN Person ON ServiceProvider.person = Person.id WHERE Person.email = :email'); // prepared statement
   $stmt->execute([':email' => $email]); // sem valores porque nao temos placeholders no prepared statement
   $schedule = $stmt->fetchAll(); //fetching all schedules by the user (array of arrays)

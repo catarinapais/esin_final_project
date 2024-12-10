@@ -8,7 +8,10 @@ $password = $_POST['password'];
 // Check if email and password are correct
 function loginSuccess($email, $password) {
     global $dbh;
-    $stmt = $dbh->prepare('SELECT id, email FROM Person WHERE email = ? AND password = ?');
+    $stmt = $dbh->prepare(
+      'SELECT id, name, email, phone_number, city, address
+      FROM Person 
+      WHERE email = ? AND password = ?');
     $stmt->execute(array($email, hash('sha256', $password)));
     return $stmt->fetch(); // Fetch will return the row if credentials are valid
     if ($user) {
@@ -28,6 +31,10 @@ try {
     if ($user = loginSuccess($email, $password)) {
       $_SESSION['id'] = $user['id']; // 'id' deve ser a coluna correspondente no banco
       $_SESSION['email'] = $user['email'];
+      $_SESSION['name'] = $user['name'];
+      $_SESSION['phone_number'] = $user['phone_number'];
+      $_SESSION['city'] = $user['city'];
+      $_SESSION['address'] = $user['address'];
       $_SESSION['msg_success'] = 'Welcome back!';
       header('Location: initialPage.php');
       exit();
