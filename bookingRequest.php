@@ -1,8 +1,15 @@
 <?php
 session_start();
 
-$availableProviders = isset($_SESSION['availableProviders']) ? $_SESSION['availableProviders'] : [];
-unset($_SESSION['availableProviders']); // Clear the session data after retrieving it
+
+if (isset($_SESSION['availableProviders'])) {
+    $availableProviders = $_SESSION['availableProviders'];
+}
+
+// Only unset $_SESSION['availableProviders'] when the form is resubmitted
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    unset($_SESSION['availableProviders']);
+}
 
 $id = $_SESSION['id'];
 $address = $_SESSION['address'];
@@ -103,25 +110,27 @@ try {
                     <input type="submit" value="Search for Available Pet Walkers/Pet Sitters">
                 </fieldset>
             </form>
-            <?php var_dump($_SESSION); ?>
 
             <section id="availableProviders">
-                <h2>Available Pet Walkers/Pet Sitters at <?php $availableProviders[0]['date'] ?></h2>
                 <?php if (isset($_SESSION['msg_no_providers'])) : ?>
                     <p class="msg_error"><?php echo $_SESSION['msg_no_providers']; ?></p>
                     <?php unset($_SESSION['msg_no_providers']); ?>
+                <?php endif; ?>
+
+                <?php if(!empty($availableProviders)) : ?>
+                    <h2>Available Pet Walkers/Pet Sitters at <?= $availableProviders[0]['day_week'] ?></h2>
+                    <?php foreach ($availableProviders as $provider): ?>
+                        <article class="eachProvider">
+                            <h3><?= $provider['provider_name'] ?></h3>
+                            <p><?php echo htmlspecialchars($provider['provider_phone_number']); ?></p>
+                            <p><?php echo htmlspecialchars($provider['provider_email']); ?></p>
+                            <p>Rating: <?php echo htmlspecialchars($provider['provider_avg_rating']); ?></p>
+                            <a href="bookingRequest.php?provider_id=<?php echo $provider['provider_id']; ?>">Book</a>
+                        </article>
+                    <?php endforeach; ?>
                 <?php else: ?>
                     <p> Choose one option to check for available providers. </p>
                 <?php endif; ?>
-                <?php foreach ($availableProviders as $provider): ?>
-                    <article>
-                        <h3><?php echo htmlspecialchars($provider['provider_name']); ?></h3>
-                        <p>Day: <?php echo htmlspecialchars($provider['day_week']); ?></p>
-                        <p>Start Time: <?php echo htmlspecialchars($provider['schedule_start_time']); ?></p>
-                        <p>End Time: <?php echo htmlspecialchars($provider['schedule_end_time']); ?></p>
-                        <a href="bookingRequest.php?provider_id=<?php echo $provider['provider_id']; ?>">Book</a>
-                    </article>
-                <?php endforeach; ?>
             </section>
 
         <?php else: ?>

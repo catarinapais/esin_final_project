@@ -18,23 +18,31 @@ try {
     // query for getting available providers - AvailableProviders
     // that are not doing other services at the same time - FreeProviders
     $stmt = $dbh->prepare(
-        "WITH FreeProviders AS ( 
+        "SELECT 
+            FreeProviders.provider_id, 
+            FreeProviders.provider_name, 
+            FreeProviders.provider_phone_number, 
+            FreeProviders.provider_avg_rating, 
+            FreeProviders.provider_email, 
+            AvailableProviders.day_week, 
+            AvailableProviders.schedule_start_time, 
+            AvailableProviders.schedule_end_time 
+        FROM (
             SELECT  
                 ServiceProvider.person AS provider_id, 
                 Person.name AS provider_name, 
                 Person.phone_number AS provider_phone_number, 
+                Person.email AS provider_email, 
                 ServiceProvider.avg_rating AS provider_avg_rating 
             FROM ServiceProvider 
             JOIN Person ON Person.id = ServiceProvider.person 
             LEFT JOIN Booking 
                 ON Booking.provider = ServiceProvider.person  
                 AND Booking.date = :date 
-                AND (
-                    Booking.start_time < :end_time AND Booking.end_time > :start_time
-                ) 
-            WHERE Booking.id IS NULL 
-        ), 
-        AvailableProviders AS ( 
+                AND (Booking.start_time < :end_time AND Booking.end_time > :start_time) 
+            WHERE Booking.id IS NULL
+        ) AS FreeProviders 
+        JOIN (
             SELECT 
                 Schedule.service_provider AS provider_id, 
                 Schedule.day_week AS day_week, 
@@ -44,22 +52,18 @@ try {
             JOIN ServiceProvider ON ServiceProvider.person = Schedule.service_provider 
             JOIN Person ON Person.id = ServiceProvider.person 
             WHERE 
-                Schedule.day_week = strftime('%w', :date) -- Extract day of the week
-                AND Schedule.start_time <= :start_time 
+                Schedule.start_time <= :start_time 
                 AND Schedule.end_time >= :end_time 
                 AND (ServiceProvider.service_type = :service_type OR ServiceProvider.service_type = 'both') 
                 AND Person.city = :owner_city
-        )
-        SELECT 
-            FreeProviders.provider_name, 
-            FreeProviders.provider_phone_number, 
-            FreeProviders.provider_avg_rating, 
-            AvailableProviders.day_week, 
-            AvailableProviders.schedule_start_time, 
-            AvailableProviders.schedule_end_time 
-        FROM FreeProviders 
-        JOIN AvailableProviders ON FreeProviders.provider_id = AvailableProviders.provider_id;" 
+        ) AS AvailableProviders 
+        ON FreeProviders.provider_id = AvailableProviders.provider_id;" 
     ); // só falta verificar que o provider não tem nenhum serviço marcado para a mesma hora
+    // TODO: o problema com a query é o "Schedule.day_week = strftime('%w', :date)" - ver isto
+    /* no último WHERE
+    Schedule.day_week = strftime('%w', :date) 
+                AND 
+    */
     $stmt->bindValue(':date', $service_date, PDO::PARAM_INT);
     $stmt->bindValue(':start_time', $start_time, PDO::PARAM_INT);
     $stmt->bindValue(':end_time', $end_time, PDO::PARAM_INT);
