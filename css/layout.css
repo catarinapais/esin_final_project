@@ -301,28 +301,22 @@ form button {
     z-index: 100; 
 }
 
-
 .mainContent {
-    display: grid;
-    grid-template-columns: 1fr 1fr; /* Two equal columns */
-    grid-template-rows: auto auto; /* Two rows */
-    gap: 1em; /* Optional: Add some gap between grid items */
+    display: flex;
+    flex-wrap: wrap; /* Allow items to wrap to the next line */
+    align-items: flex-start; /* Align items to the start vertically */
+    justify-content: space-around; /* Center items horizontally */
+    gap: 1em; /* Add gap between items */
 }
 
-#scheduleForm {
-    grid-column: 1 / 2; /* First column */
-    grid-row: 1 / 2; /* First row */
-}
-
-#availability {
-    grid-column: 2 / 3; /* Second column */
-    grid-row: 1 / 2; /* First row */
-}
-
+#scheduleForm,
+#availability,
 #scheduledBookings {
-    grid-column: 1 / 3; /* Span both columns */
-    grid-row: 2 / 3; /* Second row */
+    max-width: 600px; /* Optional: Limit the maximum width */
+    padding: 4em; /* Add padding */
+    padding-top: 1em;
 }
+
 
 /* Garante que o conteúdo principal expanda para preencher o espaço disponível */
 body > *:not(footer) {

@@ -126,6 +126,12 @@ try { // try catch for error handling
         </fieldset>
       </form>
     </section>
+    <section id="availability">
+      <h2>Scheduled Availability</h2>
+      <table class="availabilityTimetable">
+        <?php makeAvailabilityTable($schedule); ?>
+      </table>
+    </section>
     <section id="scheduledBookings">
       <h2>Scheduled Bookings</h2>
       <article>
@@ -136,12 +142,6 @@ try { // try catch for error handling
         <p>Medical Needs</p>
         <p>Date and Time</p>
       </article>
-    </section>
-    <section id="availability">
-      <h2>Scheduled Availability</h2>
-      <table class="availabilityTimetable">
-        <?php makeAvailabilityTable($schedule); ?>
-      </table>
     </section>
   </main>
 
