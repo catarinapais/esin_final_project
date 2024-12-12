@@ -55,13 +55,14 @@ try {
 
                     <p>Pet's name:</p>
                     <!--Pus o select a mostrar os nomes dos pets do user -->
-                    <select name="pet_name" id="pet-name">
+                    <div id="pet-selection">
                         <?php foreach ($pets as $pet): ?>
-                            <option value="<?php echo htmlspecialchars($pet['name']); ?>">
+                            <label>
+                                <input type="checkbox" name="pet_name[]" value="<?php echo htmlspecialchars($pet['name']); ?>">
                                 <?php echo htmlspecialchars($pet['name']); ?>
-                            </option>
+                            </label><br>
                         <?php endforeach; ?>
-                    </select>
+                    </div>
                     <br>
 
                     <p>Service Type:</p>
@@ -117,7 +118,7 @@ try {
                     <?php unset($_SESSION['msg_no_providers']); ?>
                 <?php endif; ?>
 
-                <?php if(!empty($availableProviders)) : ?>
+                <?php if (!empty($availableProviders)) : ?>
                     <h2>Available Pet Walkers/Pet Sitters at <?= $availableProviders[0]['day_week'] ?></h2>
                     <?php foreach ($availableProviders as $provider): ?>
                         <article class="eachProvider">

@@ -14,7 +14,11 @@
 }
 
 /* Media query for smaller screens */
-@media (max-width: 1023px) {
+@media (max-width: 1104px) {
+
+}
+
+@media (max-width: 912px) {
     #menu {
         position: relative;
     }
@@ -88,6 +92,16 @@
         background-color: #edeff0;
     }
     
+}
+
+@media (max-width: 800px) {
+    aside.sidebar {
+        display: none;
+    }
+    .pet-image {
+        max-width: 5em;
+        max-height: 5em;
+    }
 }
 
 @media (max-width: 600px) {
