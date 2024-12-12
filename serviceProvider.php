@@ -99,20 +99,7 @@ try { // try catch for error handling
 }
 ?>
 
-<!DOCTYPE html>
-<html lang="en">
 
-<head>
-  <title>Service Provider</title>
-  <!--<link rel="stylesheet" type="text/css" href="css/serviceProvider.css">-->
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link href="css/style.css" rel="stylesheet">
-  <link href="css/layout.css" rel="stylesheet">
-  <link href="css/responsive.css" rel="stylesheet">
-</head>
-
-<body>
   <!--TODO: só mostrar esta página se a pessoa tiver posto um IBAN no site-->
   <!--ou dizer que, se quiser fazer serviços, tem de introduzir os campos iban e service type-->
   <?php
@@ -159,6 +146,3 @@ try { // try catch for error handling
   </main>
 
   <?php include('footer.php'); ?>
-</body>
-
-</html>

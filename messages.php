@@ -54,19 +54,7 @@ try { // try catch for error handling
 }
 ?>
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <title>Pet Patrol - Chat</title>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="css/style.css" rel="stylesheet">
-    <link href="css/layout.css" rel="stylesheet">
-    <link href="css/responsive.css" rel="stylesheet">
-    <link href="css/messages.css" rel="stylesheet">
-</head>
 
-<body>
 <?php
     include('header.php');
     ?>
@@ -89,6 +77,3 @@ try { // try catch for error handling
         </section>
     </main>
     <?php include('footer.php'); ?>
-</body>
-
-</html>

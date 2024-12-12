@@ -52,5 +52,3 @@ session_start();
             </p>
         </section>
         <?php include('footer.php'); ?>
-    </body>
-</html>

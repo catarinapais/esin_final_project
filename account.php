@@ -119,8 +119,8 @@ try {
 ?>
 
 
-<!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE html>  
+<html lang="en">    <!-- Deixei aqui o header porque nao quis por a ligacao ao css da pagina account nas outras paginas -->
 
 <head>
     <title>Account</title>
@@ -303,9 +303,8 @@ try {
 
         <input type="submit" value="Add Pet">
     </form>
-
-    <!-- If there are pets -->
-    <?php if (!empty($petOwnerInfo[0]['pet_id'])): ?>
+   <!-- If there are pets -->
+   <?php if (!empty($petOwnerInfo[0]['pet_id'])): ?>
         <div class="pets-container">
             <?php foreach ($petOwnerInfo as $pet): ?>
                 <div class="pet-card">
@@ -352,6 +351,4 @@ try {
 </aside>
   
     <?php include('footer.php'); ?>
-</body>
-
-</html>
+ 
