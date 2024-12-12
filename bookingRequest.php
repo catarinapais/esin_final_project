@@ -32,39 +32,51 @@ try {
 ?>
 
 
-    <?php
-    include('header.php');
-    ?>
-    <main id="bookingcontent">
-        <?php if ($has_pets): ?>
-            <form action="action_findProviders.php" method="post">
-                <fieldset>
-                    <legend>Booking</legend>
+<?php
+include('header.php');
+?>
+<main id="bookingcontent">
+    <section class="error-messages">
+        <?php if (isset($_SESSION['msg_error'])) : ?>
+            <p class="msg_error"><?php echo $_SESSION['msg_error']; ?></p>
+            <?php unset($_SESSION['msg_error']); ?>
+        <?php endif; ?>
+    </section>
+    <?php if ($has_pets): ?>
+        <form action="action_findProviders.php" method="post">
+            <fieldset>
+                <legend>Booking</legend>
 
-                    <p>Pet's name:</p>
-                    <!--Pus o select a mostrar os nomes dos pets do user -->
+                <div class="form-group">
+                    <label for="pet-selection"><p>Pet's name:</p><span class="required">*</span></label>
                     <div id="pet-selection">
                         <?php foreach ($pets as $pet): ?>
                             <label>
-                                <input type="checkbox" name="pet_name[]" value="<?php echo htmlspecialchars($pet['name']); ?>">
+                                <input type="checkbox" name="pet_name[]" value="<?php echo htmlspecialchars($pet['name']); ?>" class="pet-checkbox">
                                 <?php echo htmlspecialchars($pet['name']); ?>
-                            </label><br>
+                            </label>
                         <?php endforeach; ?>
                     </div>
-                    <br>
+                </div>
 
-                    <p>Service Type:</p>
+                <div class="form-group">
+                    <label for="service_type">
+                        <p>Service Type:</p><span class="required">*</span>
+                    </label>
                     <label for="petwalking">
                         <input type="radio" id="petwalking" name="service_type" value="walking" required>
                         Pet Walking
                     </label>
-                    <br>
                     <label for="petsitting">
                         <input type="radio" id="petsitting" name="service_type" value="sitting" required>
                         Pet Sitting
                     </label>
+                </div>
 
-                    <p>Pick-Up and Drop-Off Location:</p>
+                <div class="form-group">
+                    <label for="location">
+                        <p>Pick-Up and Drop-Off Location:</p><span class="required">*</span>
+                    </label>
                     <label>
                         <input type="radio" name="location" id="myPlace" value="myplace" required> My Place
                     </label>
@@ -74,58 +86,74 @@ try {
                     <label>
                         <input type="radio" name="location" id="otherLocation" value="other" required> Other Location
                     </label>
-
                     <div id="otherLocationDiv">
                         <textarea name="other_address" id="other-address" rows="3" cols="30" placeholder="Enter address here... (only if 'Other Location' is selected)"></textarea>
                     </div>
+                </div>
 
-                    <p>Date:</p>
+                <div class="form-group">
+                    <label for="date">
+                        <p>Date:</p><span class="required">*</span>
+                    </label>
                     <input name="date" id="date" type="date" required>
-                    <p>Start Time:</p>
+                </div>
+
+                <div class="form-group">
+                    <label for="starttime">
+                        <p>Start Time:</p><span class="required">*</span>
+                    </label>
                     <input name="starttime" id="starttime" type="time" required>
+                </div>
 
-                    <p>End time:</p>
+                <div class="form-group">
+                    <label for="endtime">
+                        <p>End time:</p><span class="required">*</span>
+                    </label>
                     <input name="endtime" id="endtime" type="time" required>
-                    <br>
+                </div>
 
-                    <p>Photo Consent:</p>
+                <div class="form-group">
+                    <label for="photo_consent">
+                        <p>Photo Consent:</p><span class="required">*</span>
+                    </label>
                     <label>
                         <input type="radio" name="photo_consent" value="yes" required> Yes
                     </label>
                     <label>
                         <input type="radio" name="photo_consent" value="no" required> No
                     </label>
-                    <br>
-                    <input type="submit" value="Search for Available Pet Walkers/Pet Sitters">
-                </fieldset>
-            </form>
+                </div>
 
-            <section id="availableProviders">
-                <?php if (isset($_SESSION['msg_no_providers'])) : ?>
-                    <p class="msg_error"><?php echo $_SESSION['msg_no_providers']; ?></p>
-                    <?php unset($_SESSION['msg_no_providers']); ?>
-                <?php endif; ?>
+                <input type="submit" value="Search for Available Pet Walkers/Pet Sitters">
+            </fieldset>
+        </form>
 
-                <?php if (!empty($availableProviders)) : ?>
-                    <h2>Available Pet Walkers/Pet Sitters at <?= $availableProviders[0]['day_week'] ?></h2>
-                    <?php foreach ($availableProviders as $provider): ?>
-                        <article class="eachProvider">
-                            <h3><?= $provider['provider_name'] ?></h3>
-                            <p><?php echo htmlspecialchars($provider['provider_phone_number']); ?></p>
-                            <p><?php echo htmlspecialchars($provider['provider_email']); ?></p>
-                            <p>Rating: <?php echo htmlspecialchars($provider['provider_avg_rating']); ?></p>
-                            <a href="bookingRequest.php?provider_id=<?php echo $provider['provider_id']; ?>">Book</a>
-                        </article>
-                    <?php endforeach; ?>
-                <?php else: ?>
-                    <p> Choose one option to check for available providers. </p>
-                <?php endif; ?>
-            </section>
+        <section id="availableProviders">
+            <?php if (isset($_SESSION['msg_no_providers'])) : ?>
+                <p class="msg_error"><?php echo $_SESSION['msg_no_providers']; ?></p>
+                <?php unset($_SESSION['msg_no_providers']); ?>
+            <?php endif; ?>
 
-        <?php else: ?>
-            <p id="nopets">No pets associated with your account. Please add pets to continue.</p>
-        <?php endif; ?>
-        <!--restrições a ter em conta ao mostrar os providers disponíveis:
+            <?php if (!empty($availableProviders)) : ?>
+                <h2>Available Pet Walkers/Pet Sitters at <?= $availableProviders[0]['day_week'] ?></h2>
+                <?php foreach ($availableProviders as $provider): ?>
+                    <article class="eachProvider">
+                        <h3><?= $provider['provider_name'] ?></h3>
+                        <p><?php echo htmlspecialchars($provider['provider_phone_number']); ?></p>
+                        <p><?php echo htmlspecialchars($provider['provider_email']); ?></p>
+                        <p>Rating: <?php echo htmlspecialchars($provider['provider_avg_rating']); ?></p>
+                        <a href="bookingRequest.php?provider_id=<?php echo $provider['provider_id']; ?>">Book</a>
+                    </article>
+                <?php endforeach; ?>
+            <?php else: ?>
+                <p> Choose one option to check for available providers. </p>
+            <?php endif; ?>
+        </section>
+
+    <?php else: ?>
+        <p id="nopets">No pets associated with your account. Please add pets to continue.</p>
+    <?php endif; ?>
+    <!--restrições a ter em conta ao mostrar os providers disponíveis:
         * verificar service type da reserva e o do provider
         * verificar se o provider tem disponibilidade nesse dia  (day/day_week, ver qual)
         * verificar se o start time e o end time incluem dentro o schedule do provider
@@ -134,6 +162,6 @@ try {
 
 
 
-    </main>
+</main>
 
-    <?php include('footer.php'); ?>
+<?php include('footer.php'); ?>

@@ -91,7 +91,13 @@ $dbh->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC); //associatio
 $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION); //error handling
 
 try { // try catch for error handling
-  $stmt = $dbh->prepare('SELECT * FROM Schedule JOIN ServiceProvider ON Schedule.service_provider = ServiceProvider.person JOIN Person ON ServiceProvider.person = Person.id WHERE Person.email = :email'); // prepared statement
+  $stmt = $dbh->prepare(
+    'SELECT * 
+    FROM Schedule 
+    JOIN ServiceProvider ON Schedule.service_provider = ServiceProvider.person 
+    JOIN Person ON ServiceProvider.person = Person.id 
+    WHERE Person.email = :email'
+  ); // prepared statement
   $stmt->execute([':email' => $email]); // sem valores porque nao temos placeholders no prepared statement
   $schedule = $stmt->fetchAll(); //fetching all schedules by the user (array of arrays)
 } catch (Exception $e) {
@@ -100,49 +106,66 @@ try { // try catch for error handling
 ?>
 
 
-  <!--TODO: só mostrar esta página se a pessoa tiver posto um IBAN no site-->
-  <!--ou dizer que, se quiser fazer serviços, tem de introduzir os campos iban e service type-->
-  <?php
-    include('header.php');
-    ?>
-  <main class="mainContent">
-    <section id="scheculeForm">
-      <form action="serviceProvider.php" method="post">
-        <!--post: enviar informação (encriptada)-->
-        <!--get: receber informação (envia pelo url)-->
-        <fieldset>
-          <legend>Schedule</legend>
+<!--TODO: só mostrar esta página se a pessoa tiver posto um IBAN no site-->
+<!--ou dizer que, se quiser fazer serviços, tem de introduzir os campos iban e service type-->
+<?php
+include('header.php');
+?>
+<main class="mainContent">
+  <section id="scheculeForm">
+    <section class="error-messages">
+      <?php if (isset($_SESSION['msg_error'])) : ?>
+        <p class="msg_error"><?php echo $_SESSION['msg_error']; ?></p>
+        <?php unset($_SESSION['msg_error']); ?>
+      <?php endif; ?>
+    </section>
+    <form action="action_addAvailability.php" method="post">
+      <!--post: enviar informação (encriptada)-->
+      <!--get: receber informação (envia pelo url)-->
+      <fieldset>
+        <legend>Schedule</legend>
+        <div class="form-group">
           <p>Service Type: </p>
           <label>
             <input type="checkbox" name="serviceType" value="petSitting">Pet Sitting
             <input type="checkbox" name="serviceType" value="petWalking">Pet Walking
           </label>
-          <p>Date: <input type="date" name="serviceDate" required="required"></p>
-          <!--TODO: endtime > starttime e tem de estar entre 06:00 e 22:00-->
-          <p>Start Time: <input type="time" name="startTime" required="required"></p>
-          <p>End Time: <input type="time" name="endTime" required="required"></p>
-          <input type="submit" value="Add Availability">
-          <!--podemos usar submit em vez de button porque já dissemos o method no form-->
-        </fieldset>
-      </form>
-    </section>
-    <section id="availability">
-      <h2>Scheduled Availability</h2>
-      <table class="availabilityTimetable">
-        <?php makeAvailabilityTable($schedule); ?>
-      </table>
-    </section>
-    <section id="scheduledBookings">
-      <h2>Scheduled Bookings</h2>
-      <article>
-        <p>Service Type</p>
-        <a href="">Name Person</a>
-        <p>Name Animal</p>
-        <p>Name Species</p>
-        <p>Medical Needs</p>
-        <p>Date and Time</p>
-      </article>
-    </section>
-  </main>
+        </div>
 
-  <?php include('footer.php'); ?>
+        <div class="form-group">
+          <p>Date: <input type="date" name="serviceDate" required="required"></p>
+        </div>
+
+        <div class="form-group">
+          <p>Start Time: <input type="time" name="startTime" required="required"></p>
+        </div>
+
+        <div class="form-group">
+          <p>End Time: <input type="time" name="endTime" required="required"></p>
+        </div>
+
+        <input type="submit" value="Add Availability">
+      </fieldset>
+    </form>
+  </section>
+
+  <section id="availability">
+    <h2>Scheduled Availability</h2>
+    <table class="availabilityTimetable">
+      <?php makeAvailabilityTable($schedule); ?>
+    </table>
+  </section>
+  <section id="scheduledBookings">
+    <h2>Scheduled Bookings</h2>
+    <article>
+      <p>Service Type</p>
+      <a href="">Name Person</a>
+      <p>Name Animal</p>
+      <p>Name Species</p>
+      <p>Medical Needs</p>
+      <p>Date and Time</p>
+    </article>
+  </section>
+</main>
+
+<?php include('footer.php'); ?>

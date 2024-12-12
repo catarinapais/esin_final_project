@@ -14,6 +14,34 @@ $iban = $_POST['iban'];
 $password = $_POST['password'];
 $service_type = $_POST['service_type'];
 
+if (strlen((string)$phone_number) != 9) {
+    $_SESSION["msg_error"] = "The phone number must contain 9 digits.";
+    header('Location: register.php');
+    exit;
+} else if (!empty($iban) && empty($service_type)) {
+    $_SESSION["msg_error"] = "You must choose a service type if you want to provide a service.";
+    header('Location: register.php');
+    exit;
+} else if (!empty($service_type) && empty($iban)) {
+    $_SESSION["msg_error"] = "You must fill the IBAN (account number) if you want to provide a service.";
+    header('Location: register.php');
+    exit;
+} else if (!empty($service_type) && empty($iban)) {
+    $_SESSION["msg_error"] = "You must fill the IBAN (account number) if you want to provide a service.";
+    header('Location: register.php');
+    exit;
+} else if (!empty($iban)) {
+    if (!is_string($iban) || !preg_match('/^PT50\d{21}$/', str_replace(' ', '', $iban))) {
+        $_SESSION["msg_error"] = "Invalid IBAN. It must start with PT50 followed by 21 digits.";
+        header('Location: register.php');
+        exit;
+    }
+} else if (strlen($password) < 8) { //TODO: verificar esta condição, não está a funcionar
+    $_SESSION["msg_error"] = "The password must have at least 8 characters.";
+    header('Location: register.php');
+    exit;
+}
+
 function insertPerson($name, $phone_number, $address, $email, $city, $iban, $password, $service_type) {
     global $dbh;
     $stmt = $dbh->prepare('INSERT INTO Person (name, phone_number, address, email, city, password) VALUES (?, ?, ?, ?, ?, ?)');
@@ -53,6 +81,8 @@ try {
     $_SESSION['phone_number'] = $phone_number;
     $_SESSION['city'] = $city;
     $_SESSION['address'] = $address;
+    $_SESSION['iban'] = $iban;
+    $_SESSION['service_type'] = $service_type;
     $_SESSION["msg_success"] = "Successful Registration! Welcome, $name.";
 
     // Redirecionar para a página principal

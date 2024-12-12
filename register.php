@@ -57,7 +57,7 @@ session_start();
             <input type="submit" value="Register">
         </form>
         <p>Already have an account?
-            <a id="authenticationLink" href="login.html">Login Here</a>
+            <a id="authenticationLink" href="login.php">Login Here</a>
         </p>
     </section>
     <?php include('footer.php'); ?>

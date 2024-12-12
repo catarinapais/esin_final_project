@@ -646,7 +646,7 @@ body > *:not(footer) {
 .form-group {
     display: flex;
     flex-direction: column;
-    margin-bottom: 15px;
+    margin-bottom: 5px;
 }
 
 .form-group label {
