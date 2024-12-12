@@ -16,13 +16,13 @@ $birthdate = $_POST['birthdate'];
 // Verifica se o arquivo foi enviado
 $profile_picture = null; // Variável que armazenará o nome do arquivo da imagem
 
-if (isset($_FILES['profile_picture']) && $_FILES['profile_picture']['error'] === UPLOAD_ERR_OK) {
+if (isset($_FILES['profile_picture']) && $_FILES['profile_picture']['error'] === UPLOAD_ERR_OK) { 
     $uploadDir = 'images/uploads/'; // Diretório onde as imagens serão armazenadas
     $fileName = basename($_FILES['profile_picture']['name']); //Usa a função basename() para extrair o nome do arquivo enviado, removendo qualquer caminho extra (se houver).
-    $uploadFile = $uploadDir . $fileName; //Combina o diretório de upload com o nome do arquivo para criar o caminho completo onde o arquivo será salvo no servidor.
+    $uploadFile = $uploadDir . $fileName; //Concatena o diretório de upload com o nome do arquivo para criar o caminho completo onde o arquivo será salvo no servidor.
 
     // Verifica o tipo de arquivo
-    if (in_array(strtolower(pathinfo($fileName, PATHINFO_EXTENSION)), ['jpg', 'jpeg', 'png', 'gif'])) {
+    if (in_array(strtolower(pathinfo($fileName, PATHINFO_EXTENSION)), ['jpg', 'jpeg', 'png', 'gif'])) { //obtém a extensão do ficheiro e verifica se está dentro das extensões aceites
         if (move_uploaded_file($_FILES['profile_picture']['tmp_name'], $uploadFile)) {
             $profile_picture = $fileName; // Salva o nome do arquivo para inserir no banco de dados
         } else {
@@ -35,6 +35,10 @@ if (isset($_FILES['profile_picture']) && $_FILES['profile_picture']['error'] ===
         exit;
     }
 }
+
+
+
+
 
 // Função para inserir o pet no banco de dados
 function insertPet($name, $species, $size, $birthdate, $profile_picture, $user_id) {
