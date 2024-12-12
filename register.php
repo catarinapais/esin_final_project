@@ -2,22 +2,7 @@
 session_start();
 ?>
 
-<!-- Registration page -->
-<!-- Nome, phone number, adress, email, city, iban, password, 
-  service type-->
-<!DOCTYPE html>
-<html lang="en">
 
-<head>
-    <title> Registration Page</title>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!--define this for responsive design-->
-    <link href="css/style.css" rel="stylesheet">
-    <link href="css/layout.css" rel="stylesheet">
-    <link href="css/responsive.css" rel="stylesheet">
-</head>
-
-<body>
 <?php
     include('header.php');
     ?>
@@ -76,6 +61,3 @@ session_start();
         </p>
     </section>
     <?php include('footer.php'); ?>
-</body>
-
-</html>

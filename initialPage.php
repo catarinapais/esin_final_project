@@ -2,19 +2,7 @@
 session_start();
 ?>
 
-<!DOCTYPE html>
-<html lang="en">
 
-<head>
-    <title>Pet Patrol - Home</title>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!--define this for responsive design-->
-    <link href="css/style.css" rel="stylesheet">
-    <link href="css/layout.css" rel="stylesheet">
-    <link href="css/responsive.css" rel="stylesheet">
-</head>
-
-<body>
     <?php
     include('header.php');
     ?>
@@ -49,6 +37,3 @@ session_start();
         </article>
     </main>
     <?php include('footer.php'); ?>
-</body>
-
-</html>

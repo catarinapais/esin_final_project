@@ -48,3 +48,5 @@ session_start();
 
     </div>
 </footer>
+</body>
+</html>
