@@ -23,7 +23,7 @@ if (!empty($birthdate) && $birthdate > date('Y-m-d')) {
 $profile_picture = null; // Variável que armazenará o nome do arquivo da imagem
 
 if (isset($_FILES['profile_picture']) && $_FILES['profile_picture']['error'] === UPLOAD_ERR_OK) { 
-    $uploadDir = 'images/uploads/'; // Diretório onde as imagens serão armazenadas
+    $uploadDir = '../images/uploads/'; // Diretório onde as imagens serão armazenadas
     $fileName = basename($_FILES['profile_picture']['name']); //Usa a função basename() para extrair o nome do arquivo enviado, removendo qualquer caminho extra (se houver).
     $uploadFile = $uploadDir . $fileName; //Concatena o diretório de upload com o nome do arquivo para criar o caminho completo onde o arquivo será salvo no servidor.
 
