@@ -4,9 +4,18 @@ session_start();
 $id = $_SESSION['id'];
 $email = $_SESSION['email'];
 
+if (!isset($_SESSION['id']) || !isset($_SESSION['email'])) {
+  $_SESSION['msg_error'] = "You must be logged in to access this page!";
+  header('Location: login.php');
+  exit();
+}
+
+
 //função para construir a tabela com a query
 function makeAvailabilityTable($schedule)
 {
+
+
   //printing table headers
   echo '<thead>
     <tr>
@@ -16,7 +25,7 @@ function makeAvailabilityTable($schedule)
       <th class="tg-header">Wednesday</th>
       <th class="tg-header">Thursday</th>
       <th class="tg-header">Friday</th>
-      <th class="tg-header">Saturday</th>
+      <th class="tg-header">Saturday</th> 
       <th class="tg-header">Sunday</th>
     </tr>
   </thead>
@@ -25,7 +34,7 @@ function makeAvailabilityTable($schedule)
   $rows = 16; //from 6am to 10pm
   $columns = 8; //time + all week days
   $time = 6; //beginning of services
-
+  
   for ($i = 0; $i < $rows; $i++) {
     echo '<tr>';
     for ($j = 0; $j < $columns; $j++) {
@@ -90,6 +99,7 @@ $dbh = new PDO('sqlite:database.db');
 $dbh->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC); //association fetching
 $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION); //error handling
 
+
 try { // try catch for error handling
   $stmt = $dbh->prepare(
     'SELECT * 
@@ -103,12 +113,9 @@ try { // try catch for error handling
 } catch (Exception $e) {
   $error_msg = $e->getMessage(); // ir buscar a mensagem de erro e guardar em $error_msg
 }
-?>
 
-
-<!--TODO: só mostrar esta página se a pessoa tiver posto um IBAN no site-->
-<!--ou dizer que, se quiser fazer serviços, tem de introduzir os campos iban e service type-->
-<?php
+//TODO: só mostrar esta página se a pessoa tiver posto um IBAN no site-->
+//ou dizer que, se quiser fazer serviços, tem de introduzir os campos iban e service type-->
 include('templates/header_tpl.php');
 ?>
 <main class="mainContent">

@@ -14,6 +14,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 $id = $_SESSION['id'];
 $address = $_SESSION['address'];
 
+// Verify login in state, if not logged in, redirect to login page.
+if (!isset($_SESSION['id']) || !isset($_SESSION['email'])) {
+    $_SESSION['msg_error'] = "You must be logged in to access this page!";
+    header('Location: login.php');
+    exit();
+  }
+
 try {
     $dbh = new PDO('sqlite:database.db');
     $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
@@ -29,10 +36,7 @@ try {
     exit();
 }
 
-?>
 
-
-<?php
 include('templates/header_tpl.php');
 ?>
 <main id="bookingcontent">
