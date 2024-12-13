@@ -18,7 +18,7 @@ $description = $_POST['reviewDescription'];
 $makePublic = isset($_POST['makePublic']) ? 1 : 0; // if its set -> 1, otherwise -> 0
 
 try {
-    $dbh = new PDO('sqlite:database.db');
+    $dbh = new PDO('sqlite:../database.db');
     $dbh->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
     $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
@@ -35,7 +35,7 @@ try {
     }
     $stmt->execute([$review_id, $service_id]);
 
-    header('Location: account.php');
+    header('Location: ../account.php');
     exit;
 
 } catch (PDOException $e) {

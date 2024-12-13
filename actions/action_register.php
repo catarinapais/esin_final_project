@@ -16,29 +16,29 @@ $service_type = $_POST['service_type'];
 
 if (strlen((string)$phone_number) != 9) {
     $_SESSION["msg_error"] = "The phone number must contain 9 digits.";
-    header('Location: register.php');
+    header('Location: ../register.php');
     exit;
 } else if (!empty($iban) && empty($service_type)) {
     $_SESSION["msg_error"] = "You must choose a service type if you want to provide a service.";
-    header('Location: register.php');
+    header('Location: ../register.php');
     exit;
 } else if (!empty($service_type) && empty($iban)) {
     $_SESSION["msg_error"] = "You must fill the IBAN (account number) if you want to provide a service.";
-    header('Location: register.php');
+    header('Location: ../register.php');
     exit;
 } else if (!empty($service_type) && empty($iban)) {
     $_SESSION["msg_error"] = "You must fill the IBAN (account number) if you want to provide a service.";
-    header('Location: register.php');
+    header('Location: ../register.php');
     exit;
 } else if (!empty($iban)) {
     if (!is_string($iban) || !preg_match('/^PT50\d{21}$/', str_replace(' ', '', $iban))) {
         $_SESSION["msg_error"] = "Invalid IBAN. It must start with PT50 followed by 21 digits.";
-        header('Location: register.php');
+        header('Location: ../register.php');
         exit;
     }
 } else if (strlen($password) < 8) { //TODO: verificar esta condição, não está a funcionar
     $_SESSION["msg_error"] = "The password must have at least 8 characters.";
-    header('Location: register.php');
+    header('Location: ../register.php');
     exit;
 }
 
@@ -67,7 +67,7 @@ function insertOwner($person) {
 }
 
 try {
-    $dbh = new PDO('sqlite:database.db');
+    $dbh = new PDO('sqlite:../database.db');
     $dbh->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
     $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
@@ -86,13 +86,13 @@ try {
     $_SESSION["msg_success"] = "Successful Registration! Welcome, $name.";
 
     // Redirecionar para a página principal
-    header('Location: initialPage.php');
+    header('Location: ../initialPage.php');
     exit();
 
 } catch (PDOException $e) {
     // Em caso de erro, definir mensagem e redirecionar para a página de registro
     $_SESSION["msg_error"] = "Unsuccessful registration. Please try again.";
-    header('Location: register.php');
+    header('Location: ../register.php');
     exit();
 }
 ?>

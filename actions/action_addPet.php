@@ -1,7 +1,7 @@
 <?php
 session_start();
 if (!isset($_SESSION['id'])) {
-    header('Location: login.php');
+    header('Location: ../login.php');
     exit;
 }
 
@@ -15,7 +15,7 @@ $birthdate = $_POST['birthdate'];
 
 if (!empty($birthdate) && $birthdate > date('Y-m-d')) {
     $_SESSION['msg_error'] = "Birthdate must be in the past.";
-    header('Location: account.php#pets');
+    header('Location: ../account.php#pets');
     exit;
 }
 
@@ -54,7 +54,7 @@ function insertPet($name, $species, $size, $birthdate, $profile_picture, $user_i
 }
 
 try {
-    $dbh = new PDO('sqlite:database.db');
+    $dbh = new PDO('sqlite:../database.db');
     $dbh->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
     $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
@@ -62,7 +62,7 @@ try {
     insertPet($name, $species, $size, $birthdate, $profile_picture, $user_id);
 
     // Redirecionar para a página de conta após o sucesso
-    header('Location: account.php');
+    header('Location: ../account.php');
     exit;
 
 } catch (PDOException $e) {

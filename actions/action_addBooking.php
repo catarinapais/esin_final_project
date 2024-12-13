@@ -9,7 +9,7 @@ $address = $_SESSION['address'];
 
 // Conectar ao banco de dados
 try {
-    $dbh = new PDO('sqlite:database.db');
+    $dbh = new PDO('sqlite:../database.db');
     $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
     // Consulta para ir buscar os pets do user
