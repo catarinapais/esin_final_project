@@ -114,8 +114,6 @@ try { // try catch for error handling
   $error_msg = $e->getMessage(); // ir buscar a mensagem de erro e guardar em $error_msg
 }
 
-//TODO: só mostrar esta página se a pessoa tiver posto um IBAN no site-->
-//ou dizer que, se quiser fazer serviços, tem de introduzir os campos iban e service type-->
 include('templates/header_tpl.php');
 ?>
 <main class="mainContent">
@@ -126,6 +124,7 @@ include('templates/header_tpl.php');
         <?php unset($_SESSION['msg_error']); ?>
       <?php endif; ?>
     </section>
+    <?php if (isset($_SESSION['iban'])) : // if the person is a service provider?>
     <form action="actions/action_addAvailability.php" method="post">
       <!--post: enviar informação (encriptada)-->
       <!--get: receber informação (envia pelo url)-->
@@ -173,6 +172,9 @@ include('templates/header_tpl.php');
       <p>Date and Time</p>
     </article>
   </section>
+  <?php else: ?>
+    <p id="notAProvider">You are not entitled to provide services.</p>
+  <?php endif; ?>
 </main>
 
 <?php include('templates/footer_tpl.php'); ?>
