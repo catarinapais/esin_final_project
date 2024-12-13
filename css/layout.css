@@ -1,43 +1,42 @@
+/* Estilos do body */
 body {
     width: 100%;
     margin: 0;
     padding: 0;
-    height: 100%; /* Ocupa 100% da altura do navegador */
     display: flex;
     flex-direction: column;
-    min-height: 100%;  /* Garante que o body ocupe pelo menos 100% da altura da página */
-
+    min-height: 100%; /* Garante que o body ocupe pelo menos 100% da altura da tela */
 }
 
+/* Estilos para o conteúdo principal */
+main {
+    flex-grow: 1; /* Isso garante que o main ocupe o espaço restante disponível */
+    overflow: auto; /* Permite rolagem se o conteúdo for maior que o espaço disponível */
+}
 
-
-    
-
-.imageContainer {
-    position: relative;
+/* Estilos do footer */
+.footer-container {
     display: flex;
-    justify-content: center;
-    align-items: center;
+    flex-wrap: wrap; /* Permite que as seções quebrem para nova linha em telas menores */
+    justify-content: space-evenly;
+    max-width: 1200px; 
+    margin: 0 auto; /* Centraliza o footer na tela */
+    padding: 0 20px;
 }
 
-.imageContainer img {
-    display: block;
-    max-width: 100%;
-    margin-top: 1em;
+.footer-section {
+    flex: 1 1 200px; 
+    margin: 10px;
 }
 
-.overlayText {
-    position: absolute;
-    bottom: -10px;
-    left: 50%;
-    transform: translateX(-50%);
-    text-align: center;
-    width: 100%;
-    font-size: 2em;
-    color: #eadfdff0;
-  
+.footer-section form {
+    display: flex;
+    flex-direction: column; /* Empilha os elementos do formulário verticalmente */
+    margin: 0;
+    padding: 0;
 }
 
+/* Estilos para o header */
 #navigationBar {
     display: flex;
     align-items: center;
@@ -63,9 +62,11 @@ body {
     width: 70px;
     margin-right: 1em;
 }
+
 #logo h1 {
     grid-area: title1;
 }
+
 #logo h2 {
     grid-area: title2;
 }
@@ -76,11 +77,11 @@ body {
     justify-items: center;
     padding-top: 0;
     padding-bottom: 0;
-    height:2em;
+    height: 2em;
 }
 
 #menu ul {
-    height:100%;
+    height: 100%;
 }
 
 #menu ul {
@@ -92,25 +93,41 @@ body {
 }
 
 #menu ul li {
-    margin-right: 1em; /* Adjust spacing as needed */
+    margin-right: 1em; /* Ajusta o espaçamento entre os itens do menu */
     align-content: center;
     justify-content: center;
 }
 
 
-/* Services Section */
+/* Página inicial  */
+.button-56, .button-74 {
+    display: inline-block;
+  }
+
+.imageContainer {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.imageContainer img {
+    display: block;
+    max-width: 100%;
+    margin-top: 1em;
+}
+
+.overlayText {
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    width: 100%; 
+}
+
 #services {
     text-align: center;
     margin: 0;
     padding: 1rem;
-}
-
-#services h2 {
-    font-size: 2.2em; /* Tamanho ajustado */
-    color: #333;
-    margin-bottom: 1rem;
-    text-transform: uppercase;
-    letter-spacing: 1.2px;
 }
 
 .services-container {
@@ -120,85 +137,30 @@ body {
     flex-wrap: wrap;
 }
 
-/* Botões de Serviço */
 .service-card {
-   
-      background-color: #E7CCCC;
-      border: 2px solid #422800;
-      border-radius: 60px;
-      box-shadow: #422800 4px 4px 0 0;
-      color: #422800;
-      cursor: pointer;
       display: inline-block;
-      font-weight: 600;
-      font-size: 18px;
-      padding: 0 18px;
       width:300px;
-      line-height: 50px;
-      text-align: center;
-      text-decoration: none;
-      user-select: none;
-      -webkit-user-select: none;
-      touch-action: manipulation;
+      padding: 0 18px;
     }
     
-    .button-74:hover {
-      background-color: #fff;
-    }
-    
-    .button-74:active {
-      box-shadow: #422800 2px 2px 0 0;
-      transform: translate(2px, 2px);
-    }
-    
-    @media (min-width: 768px) {
-      .button-74 {
-        min-width: 120px;
-        padding: 0 25px;
-      }
-    }
-
-.service-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
-    background: #FAD1D1;
-}
-
-/* Ícones estilizados */
-.service-card::before {
-    content: attr(data-icon);
-    font-size: 1rem; /* Menor ícone */
-    display: block;
-    margin-bottom: 0.5rem;
-    color: #B88080;
-   
-}
-
-/* Títulos e textos */
-.service-card h3 {
-    font-size: 1.2em; /* Ajustado */
-    margin-bottom: 0.5rem;
-    color: #8C5B5B;
-}
-
 .service-card p {
-    font-size: 1em; /* Texto menor */
-    line-height: 1.3;
-    color: #333;
     margin: 0; /* Remove margens extras */
     padding:10px;
   
 }
 
-/* Responsividade */
-@media (max-width: 768px) {
-    .service-card {
-        width: 90%;
-    }
+.msg_error {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-top: 2em;
+}
 
-    .services-container {
-        gap: 1rem;
-    }
+.msg_success {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-top: 2em;
 }
 
 article {
@@ -216,7 +178,6 @@ article ul {
     gap: 2.5em; /* Add gap between items */
     padding: 0;
     margin: 0;
-    list-style: none; /* Remove bullet points */
 }
 
 article li a {
@@ -235,15 +196,12 @@ article p {
     padding: 0em 5em;
 }
 
-/* Estrutura do formulário */
+
+/* Estrutura dos formulários */
 form {
     width: 100%;
     max-width: 500px;
     margin: 50px auto; 
-    padding: 20px;
-    border: 1px solid #ddd;
-    border-radius: 10px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     display: flex;
     flex-direction: column; 
 }
@@ -252,7 +210,6 @@ form label {
     display: flex;  /* Faz os elementos filhos da label (texto e input) ficarem na mesma linha */
     align-items: center; 
     margin-bottom: 10px;   
-    font-size: 16px;
 }
 
 
@@ -262,6 +219,8 @@ form select {
     width: 100%;
     margin-left: 0;
     resize: none; /* Impede o redimensionamento */  
+    padding: 10px; /* Espaçamento interno */
+    margin-bottom: 15px; /* Espaçamento entre os campos */
 }
 
 
@@ -274,6 +233,7 @@ form input[type="checkbox"] {
 form button {
     display: block;
     width: 100%; 
+    padding: 12px;
 }
 
 #authentication {
@@ -289,18 +249,25 @@ form button {
     margin-bottom: 1em;
 }
 
-#authenticationLink:hover {
-    text-decoration: underline;
-}
-
-
-
 #navigationBar {
     position: sticky;
     top: 0;
     z-index: 100; 
 }
 
+/* Página das reviews */
+#starReview {
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: center;
+    gap: 5px;
+}
+
+#starReview input {
+    display: none;
+}
+
+/* Página Service Providers */
 .mainContent {
     display: flex;
     flex-wrap: wrap; /* Allow items to wrap to the next line */
@@ -317,268 +284,17 @@ form button {
     padding-top: 1em;
 }
 
-
-/* Garante que o conteúdo principal expanda para preencher o espaço disponível */
 body > *:not(footer) {
     flex: 1; /* Expande o conteúdo para preencher o espaço disponível */
 }
 
-/* FAQs*/
-#faq-section {
-    margin-top: 30px;
-}
-
-.faq-item {
-    background-color: #ffffff;
-    margin-bottom: 20px;
-    border-radius: 8px;
-    border: 1px solid #ddd;
-    padding: 20px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-    transition: background-color 0.3s ease, transform 0.3s ease;
-}
-
-
-.faq-item:hover {
-    background-color: #f7f7f7;
-    transform: translateY(-5px);
-}
-
-
-.faq-item h3 {
-    font-size: 1.5rem;
-    font-weight: 600;
-    color: #000000;
-    margin-bottom: 10px;
-}
-
-
-.faq-item p {
-    font-size: 1rem;
-    color: #555;
-    line-height: 1.6;
-    margin: 0;
-}
-
-
-#faq-section {
-    max-width: 900px;
-    margin: 0 auto;
-    padding: 20px;
-}
-
-#FAQcontent h1{
-    font-size: 2.5rem;
-    font-weight: bold;
-    color: #333;
-    text-align: center;
-    margin-top: 40px;
-    margin-bottom: 30px;
-    
-
-}
-
-
-
-/* Estilo para as seções */
-#accountcontent {
-    display: flex;
-    justify-content: space-between; 
-    gap: 10px; /* Espaçamento controlado entre os blocos */
-    
-  
-}
-
- #accountcontent h1 {
-    font-size: 2.5rem;
-    font-weight: bold;
-    color: #333;
-    text-align: center;
-    margin-top: 40px;
-    margin-bottom: 20px;
-    
-}
-#accountcontent section {
-    flex: 1; /* As seções ocupam proporcionalmente o mesmo espaço */
-    padding: 20px;
-    margin: 0; /* Remove a margem vertical */
-    max-width: none; /* Permite que os blocos usem o espaço do flexbox */
-}
-
-#accountcontent section h2 {
-    margin-left:40px;
-    font-size: 2rem;
-    color:  #0d0c0c;
-    margin-bottom: 15px;
-}
-
-
-#accountcontent section p {
-    font-size: 1.3rem;
-    color: #555;
-    margin: 10px 0;
-    margin-left:40px;
-    line-height: 2.5;
-}
-
-#petslInformation article {
-    display: block; 
-
-    padding: 20px; 
-    margin-top: 15px; 
-    }
-  
-
-
-#petslInformation article p {
-    font-size: 1.1rem; 
-    color: #333; 
-    margin: 8px 0; 
-    text-align: left; 
-    padding-left: 0;
-}
-
-#petslInformation a {
-    font-size:1.2rem;
-    display: inline-block; 
-    margin-top: 0; 
-    color: #D6ABAB; 
-    text-decoration: none;
-    font-weight: bold; 
-}
-
-#petslInformation a:hover {
-    text-decoration: underline; 
-}
-
-
-#accountcontent {
-    font-family: 'Segoe UI', Tahoma,Verdana, sans-serif;
-    padding: 60px 20px;
-  
-}
-
-.account-container {
-    width: 100%;
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 15px;
-}
-
-
-
-.staticTags:hover {
-    transform: translateY(-5px); /* Efeito de elevação */
-    box-shadow: 0 15px 25px rgba(0, 0, 0, 0.15);
-}
-
-.staticTags h2 {
-    font-size: 36px;
-    color: #2C3E50;
-    font-weight: 600;
-    margin-bottom: 20px;
-    text-align: center;
-    letter-spacing: 1px;
-}
-
-.staticTags p {
-    font-size: 18px;
-    color: #7F8C8D;
-    line-height: 1.8;
-    text-align: left; /* Ajustado para alinhamento à esquerda */
-    margin-bottom: 20px;
-}
-
-.staticTags p:last-child {
-    margin-bottom: 0;
-    padding-bottom: 30px;
-}
-
-.staticTags p span {
-    font-weight: bold;
-    color: #2C3E50;
-}
-
-.pet-icon {
-    width: 40px; 
-    height: 40px; 
-    margin-left: 12px; 
-    vertical-align: middle; 
-}
-
-#pets legend {
-    display:flex;
-    align-items: center;
-}
-
-.pet-profile-pic {
-    width: 150px !important; /* Força a largura */
-    height: 150px !important; /* Força a altura */
-    object-fit: cover !important; /* Força o ajuste da imagem */
-    border-radius: 50% !important; /* Força o círculo */
-}
-
-
-
 
 /* AboutUs section */
-
-#about-content {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  
-    padding: 60px 20px;
-}
 .about-container {
     width: 100%;
     max-width: 1200px;
     margin: 0 auto; 
     padding: 0 15px;
-}
-.about-section {
-    background-color: #fff;
-    padding: 10px 30px;
-    margin-bottom: 40px;
-    border-radius: 10px;
-    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
-    transition: all 0.3s ease-in-out; 
-}
-.about-section:hover {
-    transform: translateY(-5px); /* Efeito de elevação */
-    box-shadow: 0 15px 25px rgba(0, 0, 0, 0.15);
-}
-.about-section h2 {
-    font-size: 36px;
-    color: #333;;
-    font-weight: 600;
-    margin-bottom: 20px;
-    text-align: center; 
-    letter-spacing: 1px;
-}
-
-.about-section p {
-    font-size: 1.2rem;
-    color: #333;;
-    line-height: 1.8;
-    margin-bottom: 15px;
-}
-
-
-#ceos {
-    text-align: center;
-    
-}
-
-#ceos h2 {
-    font-size: 2.5rem;
-    color: #333;;
-    margin-bottom: 10px;
-    font-weight: bold;
-}
-
-#ceos p {
-    font-size: 1.2rem;
-    color: #666;
-    margin-bottom: 40px;
 }
 
 .ceo-container {
@@ -596,7 +312,6 @@ body > *:not(footer) {
     width: 240px; 
 }
 
-
 .ceo img {
     width: 200px;
     height: 200px;
@@ -607,10 +322,6 @@ body > *:not(footer) {
 }
 
 
-.ceo p {
-    font-size: 1.1rem;
-    color: #333;
-}
 
 /* Responsividade */
 @media (max-width: 768px) {
@@ -638,11 +349,7 @@ body > *:not(footer) {
 }
 
 
-#bookingcontent a {
-    text-align: center;
-    margin-top:20px
-}
-
+/* Página account*/
 .form-group {
     display: flex;
     flex-direction: column;
@@ -655,61 +362,50 @@ body > *:not(footer) {
     margin-bottom: 5px;
 }
 
-.form-group .required {
-    margin-left: 5px; 
-    color: red;
-    font-weight: bold;
-}
 
 .form-group .registerProvider {
     margin-left: 5px; 
 }
 
-/* Style for the addPet button */
-#addPetButton {
-    display: inline-block;
-    width: 40px;
-    height: 40px;
-    background-color: #D6ABAB;
-    color: white;
-    border: none;
-    border-radius: 50%;
-    text-align: center;
-    line-height: 40px;
-    font-size: 1.5em;
-    text-decoration: none;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
+.form-group .required {
+    margin-left: 5px; 
 }
 
-#addPetButton:hover {
-    background-color: #B88080;
+
+/* Footer layout */
+.footer-container {
+    display: flex;
+    flex-wrap: wrap; /* Allows sections to wrap on smaller screens */
+    justify-content: space-evenly;
+    max-width: 1200px; 
+    margin: 0 auto; /* Center the footer on the page */
+    padding: 0 20px;
 }
 
-/* Hide the newPetForm by default */
-#newPetForm {
-    display: none;
+.footer-section {
+    flex: 1 1 200px; 
+    margin: 10px;
 }
 
-/* Show the newPetForm when the checkbox is checked */
-#toggleForm:checked + #addPetButton + #newPetForm {
-    display: block;
-    margin-top: 20px;
+.footer-section form {
+    display: flex;
+    flex-direction: column; /* Stack input and button vertically */
+    margin:0;
+    padding: 0; 
 }
 
-/* Change the button text when the form is visible */
-#toggleForm:checked + #addPetButton::after {
-    content: '-';
+
+/* Página Account*/
+form#addPet {
+    display: inline-block; /* Ensure the form takes only the space needed */
+    margin: 0;
+    padding: 0;
 }
 
-#toggleForm:not(:checked) + #addPetButton::after {
-    content: '+';
-}
-
-#newPetForm input[type="submit"] {
-    transition: background-color 0.3s ease;
-}
-
-#newPetForm input[type="submit"]:hover {
-    background-color: #B88080;
+form#addPet input[type="submit"] {
+    width: 40px; 
+    height: 40px; 
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }

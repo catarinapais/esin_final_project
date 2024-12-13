@@ -278,3 +278,31 @@ legend h2 {
 
 }
 
+
+/* Hide the newPetForm by default */
+#newPetForm {
+    display: none;
+}
+
+/* Show the newPetForm when the checkbox is checked */
+#toggleForm:checked + #addPetButton + #newPetForm {
+    display: block;
+    margin-top: 20px;
+}
+
+/* Change the button text when the form is visible */
+#toggleForm:checked + #addPetButton::after {
+    content: '-';
+}
+
+#toggleForm:not(:checked) + #addPetButton::after {
+    content: '+';
+}
+
+#newPetForm input[type="submit"] {
+    transition: background-color 0.3s ease;
+}
+
+#newPetForm input[type="submit"]:hover {
+    background-color: #B88080;
+}

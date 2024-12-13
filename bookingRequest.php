@@ -154,9 +154,7 @@ include('templates/header_tpl.php');
             <?php endif; ?>
         </section>
 
-    <?php else: ?>
-        <p id="nopets">No pets associated with your account. Please add pets to continue.</p>
-    <?php endif; ?>
+  
     <!--restrições a ter em conta ao mostrar os providers disponíveis:
         * verificar service type da reserva e o do provider
         * verificar se o provider tem disponibilidade nesse dia  (day/day_week, ver qual)
@@ -164,6 +162,12 @@ include('templates/header_tpl.php');
         * garantir que o provider não tem mais bookings nesse momento
         * verificar que o owner e o provider são da mesma cidade-->
 
+        <?php else: ?>
+    <p id="nopets">
+        No pets associated with your account. 
+        Please <a href="account.php#addPetSection"> add a pet</a> to continue.
+    </p>
+<?php endif; ?>
 
 
 </main>

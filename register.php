@@ -15,6 +15,7 @@ session_start();
     <section id="authentication">
         <!--TODO: nos campos obrigatórios, pôr um asterisco a vermelho-->
         <form class="registration-form" action="actions/action_register.php" method="POST">
+
             <h2>Register</h2>
             <div class="form-group">
                 <label for="name">Name:<span class="required">*</span></label>

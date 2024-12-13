@@ -133,6 +133,7 @@ try {
 </head>
 
 <body>
+
 <?php
     include('templates/header_tpl.php');
     ?>
@@ -310,7 +311,7 @@ try {
     </form>
    <!-- If there are pets -->
    <?php if (!empty($petOwnerInfo[0]['pet_id'])): ?>
-        <div class="pets-container">
+        <div class="pets-container" id="addPetSection">
             <?php foreach ($petOwnerInfo as $pet): ?>
                 <div class="pet-card">
                     <div class="pet-image">
