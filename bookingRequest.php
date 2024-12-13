@@ -33,7 +33,7 @@ try {
 
 
 <?php
-include('header.php');
+include('templates/header_tpl.php');
 ?>
 <main id="bookingcontent">
     <section class="error-messages">
@@ -43,7 +43,7 @@ include('header.php');
         <?php endif; ?>
     </section>
     <?php if ($has_pets): ?>
-        <form action="action_findProviders.php" method="post">
+        <form action="actions/action_findProviders.php" method="post">
             <fieldset>
                 <legend>Booking</legend>
 
@@ -164,4 +164,4 @@ include('header.php');
 
 </main>
 
-<?php include('footer.php'); ?>
+<?php include('templates/footer_tpl.php'); ?>

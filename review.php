@@ -82,7 +82,7 @@ try {
 ?>
 
     <?php
-    include('header.php');
+    include('templates/header_tpl.php');
     ?>
 
         <section id="pastService"><!--querying info about this service-->
@@ -98,7 +98,7 @@ try {
             <?php } ?>
         </section>
         <section id="review">
-            <form action="action_review.php" method="post">
+            <form action="actions/action_review.php" method="post">
                 <h2>Review this <?= htmlspecialchars(ucfirst($role)) ?></h2>
                 <div id="starReview">
                     <input type="radio" id="star5" name="review" value="5" required="required">

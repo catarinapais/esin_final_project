@@ -56,7 +56,7 @@ try { // try catch for error handling
 
 
 <?php
-    include('header.php');
+    include('templates/header_tpl.php');
     ?>
     <main id="main"> 
         <h1>Chat</h1>
@@ -70,10 +70,10 @@ try { // try catch for error handling
             <div id="chatMessages">
                 <?php displayMessages($schedule); ?>
             </div>
-            <form id="messageForm" method="post" action="action_messages.php">
+            <form id="messageForm" method="post" action="actions/action_messages.php">
                 <input type="text" id="messageInput" placeholder="Type a message...">
                 <button type="submit" id="sendButton">&#128233;</button>
             </form>
         </section>
     </main>
-    <?php include('footer.php'); ?>
+    <?php include('templates/footer_tpl.php'); ?>

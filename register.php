@@ -4,7 +4,7 @@ session_start();
 
 
 <?php
-    include('header.php');
+    include('templates/header_tpl.php');
     ?>
     <?php
     if (isset($_SESSION["msg_error"])) {
@@ -14,7 +14,7 @@ session_start();
     ?>
     <section id="authentication">
         <!--TODO: nos campos obrigatórios, pôr um asterisco a vermelho-->
-        <form class="registration-form" action="action_register.php" method="POST">
+        <form class="registration-form" action="actions/action_register.php" method="POST">
             <h2>Register</h2>
             <div class="form-group">
                 <label for="name">Name:<span class="required">*</span></label>
@@ -60,4 +60,4 @@ session_start();
             <a id="authenticationLink" href="login.php">Login Here</a>
         </p>
     </section>
-    <?php include('footer.php'); ?>
+    <?php include('templates/footer_tpl.php'); ?>

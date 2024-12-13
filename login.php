@@ -21,7 +21,7 @@ session_start();
                 <div id="logo">
                     <h1>Pet Patrol</h1>
                     <h2>Sit and Walk</h2>
-                    <img src="images/logo1.png" alt="Logo of Pet Patrol">
+                    <img src="images/assets/logo1.png" alt="Logo of Pet Patrol">
                 </div>
             </a>
         </header>
@@ -32,7 +32,7 @@ session_start();
         }
         ?>
         <section id="authentication">
-            <form class="login-form" action="action_login.php" method="POST">
+            <form class="login-form" action="actions/action_login.php" method="POST">
                 <h2>Login</h2>
                 <div class="form-group"> <!-- faria mais sentido se calhar ser o mail ou o username, se for o username metemos no register para meter-->
                     <p>Email:</p>
@@ -51,4 +51,4 @@ session_start();
                 <a id="authenticationLink" href="register.php">Register Here</a>
             </p>
         </section>
-        <?php include('footer.php'); ?>
+        <?php include('templates/footer_tpl.php'); ?>

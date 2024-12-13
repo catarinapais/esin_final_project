@@ -4,7 +4,7 @@ session_start();
 ?>
 
 
-    <?php include('header.php'); ?>
+    <?php include('templates/header_tpl.php'); ?>
 
     <main id="about-content">
     <div class="about-container">
@@ -26,22 +26,22 @@ session_start();
         <p>Meet the visionary CEOs and their beloved pets who inspired the PetPatrol project!</p>
         <div class="ceo-container">
             <div class="ceo">
-                <img src="images/rui.jpg" alt="CEO 1">
+                <img src="images/assets/rui.jpg" alt="CEO 1">
                 <p>Rui with Nero</p>
                 
             </div>
             <div class="ceo">
-                <img src="images/cat.jpg" alt="CEO 2">
+                <img src="images/assets/cat.jpg" alt="CEO 2">
                 <p>Catarina with Leia, Fernando and Madalena</p>
                 
             </div>
             <div class="ceo">
-                <img src="images/ema.jpg" alt="CEO 3">
+                <img src="images/assets/ema.jpg" alt="CEO 3">
                 <p>Ema with Ziggy</p>
                 
             </div>
         </div>
     </section>
 </main>
-<?php include('footer.php'); ?>
+<?php include('templates/footer_tpl.php'); ?>
 

@@ -109,7 +109,7 @@ try { // try catch for error handling
 <!--TODO: só mostrar esta página se a pessoa tiver posto um IBAN no site-->
 <!--ou dizer que, se quiser fazer serviços, tem de introduzir os campos iban e service type-->
 <?php
-include('header.php');
+include('templates/header_tpl.php');
 ?>
 <main class="mainContent">
   <section id="scheculeForm">
@@ -119,7 +119,7 @@ include('header.php');
         <?php unset($_SESSION['msg_error']); ?>
       <?php endif; ?>
     </section>
-    <form action="action_addAvailability.php" method="post">
+    <form action="actions/action_addAvailability.php" method="post">
       <!--post: enviar informação (encriptada)-->
       <!--get: receber informação (envia pelo url)-->
       <fieldset>
@@ -168,4 +168,4 @@ include('header.php');
   </section>
 </main>
 
-<?php include('footer.php'); ?>
+<?php include('templates/footer_tpl.php'); ?>

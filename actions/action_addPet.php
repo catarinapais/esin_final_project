@@ -13,6 +13,12 @@ $species = $_POST['species'];
 $size = $_POST['size'];
 $birthdate = $_POST['birthdate'];
 
+if (!empty($birthdate) && $birthdate > date('Y-m-d')) {
+    $_SESSION['msg_error'] = "Birthdate must be in the past.";
+    header('Location: account.php#pets');
+    exit;
+}
+
 // Verifica se o arquivo foi enviado
 $profile_picture = null; // Variável que armazenará o nome do arquivo da imagem
 

@@ -31,7 +31,7 @@ if (isset($_SESSION['email'])) {
         <div id="logo">
             <h1>Pet Patrol</h1>
             <h2>Sit and Walk</h2>
-            <img src="images/logo1.png" alt="Logo of Pet Patrol">
+            <img src="images/assets/logo1.png" alt="Logo of Pet Patrol">
         </div>
     </a>
     <nav id="menu">

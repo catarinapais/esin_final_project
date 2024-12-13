@@ -134,7 +134,7 @@ try {
 
 <body>
 <?php
-    include('header.php');
+    include('templates/header_tpl.php');
     ?>
 
     <main id="accountcontent">
@@ -168,7 +168,7 @@ try {
                 <?php endif; ?>
 
                 <!--button for logout-->
-                <form action="action_logout.php" method="post" id=logout>
+                <form action="actions/action_logout.php" method="post" id=logout>
                     <input type="submit" value="Logout">
                 </form>
             </section>
@@ -259,13 +259,18 @@ try {
             <section id="pets">
     <legend>
         <h2>Pets</h2>
-        <img src="images/pata.png" alt="Pet" class="pet-icon">
+        <img src="images/assets/pata.png" alt="Pet" class="pet-icon">
     </legend>
 
     <!-- Add a new pet -->
+    <?php //TODO: dar layout a esta msg de erro ?>
+    <?php if (isset($_SESSION['msg_error'])): ?>
+        <p class="msg_error"><?= $_SESSION['msg_error'] ?></p>
+        <?php unset($_SESSION['msg_error']); ?>
+    <?php endif; ?>
     <input type="checkbox" id="toggleForm" style="display: none;">
     <label for="toggleForm" id="addPetButton" class="button"></label>
-    <form id="newPetForm" action="action_addPet.php" method="post" enctype="multipart/form-data">
+    <form id="newPetForm" action="actions/action_addPet.php" method="post" enctype="multipart/form-data">
         <h3>Add a New Pet</h3>
         <div class="form-group">
             <label for="name">Pet Name:<span class="required">*</span></label>
@@ -314,16 +319,16 @@ try {
                                 alt="<?= htmlspecialchars($pet['pet_name']) ?>"
                                 class="pet-profile-pic">
                         <?php else: ?>
-                            <img src="images/imagemdefault.jpg"
+                            <img src="images/assets/imagemdefault.jpg"
                                 alt="Default picture for pet"
                                 class="pet-profile-pic">
                         <?php endif; ?>
                     </div>
                     <div class="pet-info">
                         <legend> <?= htmlspecialchars($pet['pet_name']) ?></legend>
-                        <p><strong>Species:</strong> <?= htmlspecialchars($pet['pet_species']) ?></p>
-                        <p><strong>Size:</strong> <?= htmlspecialchars($pet['pet_size']) ?></p>
-                        <p><strong>Age:</strong> <?= htmlspecialchars($pet['pet_age']) ?> years</p>
+                        <p><strong>Species:</strong> <?= ucfirst(htmlspecialchars($pet['pet_species'])) ?></p>
+                        <p><strong>Size:</strong> <?= ucfirst(htmlspecialchars($pet['pet_size'])) ?></p>
+                        <p><strong>Birth Date:</strong> <?= htmlspecialchars($pet['pet_age']) ?></p>
                     </div>
                 </div>
             <?php endforeach; ?>
@@ -350,5 +355,5 @@ try {
     </ul>
 </aside>
   
-    <?php include('footer.php'); ?>
+    <?php include('templates/footer_tpl.php'); ?>
  

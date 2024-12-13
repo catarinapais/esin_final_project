@@ -4,7 +4,7 @@ session_start();
 
 
     <?php
-    include('header.php');
+    include('templates/header_tpl.php');
     ?>
     <main id="content">
         <?php
@@ -14,7 +14,7 @@ session_start();
         } ?>
         <article>
             <div class="imageContainer">
-                <img src="images/initial_page_img.jpeg" alt="A cat and two dogs.">
+                <img src="images/assets/initial_page_img.jpeg" alt="A cat and two dogs.">
                 <p class="overlayText">The platform for your 4-paw besties</p>
             </div>
         </article>
@@ -36,4 +36,4 @@ session_start();
             </div>
         </article>
     </main>
-    <?php include('footer.php'); ?>
+    <?php include('templates/footer_tpl.php'); ?>
