@@ -449,7 +449,7 @@ footer {
     font-weight: bold;
 }
 
-#nopets {
+#nopets, #notAProvider {
     text-align: center;
     margin-top: 20px;
     font-weight: bold;
