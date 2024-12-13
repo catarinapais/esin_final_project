@@ -1,8 +1,9 @@
 <?php
 session_start();
 
+$user_id = $_SESSION['id'];
 $provider_service_type = $_SESSION['service_type'];
-$provider_service_type = 'both'; //hard-coded mas era só para testar
+//$provider_service_type = 'both'; //hard-coded mas era só para testar
 // TODO: tirar esta linha
 
 $service_type = $_POST['serviceType'];
@@ -31,6 +32,27 @@ if (empty($service_type)) {
     header('Location: ../serviceProvider.php');
     exit;
 } 
+
+try {
+    $dbh = new PDO('sqlite:../database.db');
+    $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+    $stmt = $dbh->prepare('
+            INSERT INTO Schedule 
+            (day_week, start_time, end_time, service_provider) 
+            VALUES (?, ?, ?, ?)
+        ');
+        $stmt->execute([
+            $date,
+            $start_time,
+            $end_time,
+            $user_id
+        ]);
+        $_SESSION['msg_success'] = "Availability added successfully.";
+} catch (PDOException $e) {
+    $_SESSION['msg_error'] = "Error adding availability. Please try again.";
+    exit();
+}
 
 header('Location: ../serviceProvider.php');
 ?>

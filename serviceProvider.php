@@ -124,6 +124,12 @@ include('templates/header_tpl.php');
         <?php unset($_SESSION['msg_error']); ?>
       <?php endif; ?>
     </section>
+    <section class="success-messages">
+      <?php if (isset($_SESSION['msg_success'])) : ?>
+        <p class="msg_success"><?php echo $_SESSION['msg_success']; ?></p>
+        <?php unset($_SESSION['msg_success']); ?>
+      <?php endif; ?>
+    </section>
     <?php if (isset($_SESSION['iban'])) : // if the person is a service provider?>
     <form action="actions/action_addAvailability.php" method="post">
       <!--post: enviar informação (encriptada)-->
