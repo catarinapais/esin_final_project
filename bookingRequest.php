@@ -122,7 +122,7 @@ include('templates/header_tpl.php');
 
                 <div class="form-group">
                     <label for="photo_consent">
-                        <p>Photo Consent:</p><span class="required">*</span>
+                        <p>Do you allow us to take pictures of your pet for our social media?</p><span class="required">*</span>
                     </label>
                     <label>
                         <input type="radio" name="photo_consent" value="yes" required> Yes

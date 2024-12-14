@@ -126,8 +126,7 @@ try {
     <title>Account</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="css/style.css" rel="stylesheet">
-    <link href="css/layout.css" rel="stylesheet">
+
     <link href="css/responsive.css" rel="stylesheet">
     <link href="css/account.css" rel="stylesheet">
 </head>
@@ -137,6 +136,17 @@ try {
 <?php
     include('templates/header_tpl.php');
     ?>
+
+
+<aside class="sidebar">
+    <h2>Sections</h2>
+    <ul>
+        <li><a href="#staticTags">Personal Information</a></li>
+        <li><a href="#pastServices">Past Services</a></li>
+        <li><a href="#pastBookings">Past Bookings</a></li>
+        <li><a href="#pets">Pets</a></li>
+    </ul>
+</aside>
 
     <main id="accountcontent">
   
@@ -259,7 +269,7 @@ try {
             <?php endif; ?>
             <section id="pets">
     <legend>
-        <h2>Pets</h2>
+        <d>Pets<d>
         <img src="images/assets/pata.png" alt="Pet" class="pet-icon">
     </legend>
 
@@ -346,15 +356,7 @@ try {
 
     </div>
     </main>
-    <aside class="sidebar">
-    <h2>Sections</h2>
-    <ul>
-        <li><a href="#staticTags">Personal Information</a></li>
-        <li><a href="#pastServices">Past Services</a></li>
-        <li><a href="#pastBookings">Past Bookings</a></li>
-        <li><a href="#pets">Pets</a></li>
-    </ul>
-</aside>
+  
   
     <?php include('templates/footer_tpl.php'); ?>
  

@@ -30,11 +30,28 @@ session_start();
             <p>Rua Dr. Roberto Frias, 4200-465 Porto</p>
             <p>Open Hours: Mon-Fri, 9am - 6pm</p>
         </div>
-
-        <!-- Newsletter Section -->
-        <div class="footer-section">
+  <!-- Newsletter Section -->
+  <div class="footer-section">
             <h3>Subscribe to our Newsletter</h3>
-            <form action="/subscribe" method="post">
+
+            <?php
+            // Inicializa a variável de mensagem
+            $message = "";
+
+            // Verifica se o formulário foi enviado
+            if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+                $email = $_POST['email'];
+                $message = "Thank you for subscribing! You will hear from us soon :)";
+                // Aqui, você poderia adicionar lógica para salvar o email em um banco de dados ou arquivo, se necessário.
+            }
+
+            // Exibe a mensagem, se houver
+            if (!empty($message)) {
+                echo '<p style="color: green;">' . htmlspecialchars($message) . '</p>';
+            }
+            ?>
+
+            <form action="" method="post">
                 <input type="email" name="email" placeholder="Your email address" required>
                 <button type="submit">Subscribe</button>
             </form>

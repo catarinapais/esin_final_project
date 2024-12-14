@@ -1,113 +1,83 @@
-
+/* Corpo da página */
 body {
-
     display: grid;
-    grid-template-columns: [start] 4fr [middle] 1fr [end];
-    grid-template-rows: [start] auto [nav] auto [news] 1fr [footer] auto [end];
-  }
-
-  body > header {
-    grid-column: start / end;
-  }
-
-  #maincontent {
-    grid-column: start;
-  }
-
-
-  aside {
-    grid-column: middle;
-    grid-row: nav / footer;
-  }
-
-  body > footer {
-    grid-column: start / end;
-}
-   
-html {
-    scroll-behavior: smooth;
+    grid-template-columns: 1fr 2fr; /* Definir 1fr para a sidebar e 2fr para o conteúdo principal */
+    grid-template-rows: auto auto 1fr auto;
+    grid-gap: 20px; /* Espaçamento entre os elementos */
 }
 
-h2, h3 {
-    color: #444;
-    margin-bottom: 15px;
+/* Definir o conteúdo principal para ocupar metade da grade */
+#maincontent {
+    grid-column: 1 / 2; /* Ajusta para a coluna principal */
+    width: 100%; /* Garante que o conteúdo ocupe a largura disponível */
+    margin: 0 auto; /* Centraliza o conteúdo */
 }
 
-p {
-    line-height: 1.6;
-    margin-bottom: 10px;
-}
-
-
+/* Sidebar */
 aside.sidebar {
-    background-color: #E7CCCC;  /* Cor de fundo suave */
-    padding: 20px;  /* Espaço interno para o conteúdo */
-    border-radius: 10px;  /* Bordas arredondadas */
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);  /* Sombras suaves para dar profundidade */
+    position: sticky; /* Alterado para sticky ao invés de fixed */
+    top: 0;
+    z-index: 10; /* Aumentado para garantir que a sidebar fique acima de outros elementos */
+    grid-column: 2; /* Sidebar na coluna do meio */
+    grid-row: 2 / 5; /* Ocupa do nav até o footer */
+    background-color: #E7CCCC; /* Cor de fundo suave */
+    padding: 20px; /* Espaço interno para o conteúdo */
+    border-radius: 10px; /* Bordas arredondadas */
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); /* Sombras suaves */
     text-align: center;
- 
-
-    top: 0;  /* Fixa no topo */
-
-    transition: all 0.3s ease;  /* Animação suave ao interagir */
+    transition: all 0.3s ease; /* Animação suave ao interagir */
 }
+
+/* Títulos dentro da sidebar */
 .sidebar h2 {
     font-size: 1.9em;
     color: #fcfcfc;
-    border-bottom: 2px solid #ffffff;  
+    border-bottom: 2px solid #ffffff;
     padding-bottom: 10px;
 }
 
-
+/* Links da sidebar */
 .sidebar ul {
-    list-style-type: none; 
-padding-left: 0;
+    list-style-type: none;
+    padding-left: 0;
 }
 
+.sidebar ul li {
+    margin-bottom: 10px; /* Espaço entre os itens */
+    border-bottom: 2px solid #ffffff; /* Borda leve entre os itens */
+    padding-left: 20px; /* Ajustando o padding do lado esquerdo */
+    padding-right: 20px; /* Ajustando o padding do lado direito */
+}
 
-
-/* Ajustando o padding lateral dos links na sidebar */
 .sidebar ul li a {
     font-weight: bold;
-    text-decoration: none;  /* Remove o sublinhado */
-    color: #ffffff;  /* Cor de destaque para os links */
-    font-size: 1.5em;  /* Tamanho de fonte maior */
-    display: block;  /* Faz com que o link ocupe a largura total do item */
-    padding: 10px 20px;  /* Largura e altura consistente para o padding */
+    text-decoration: none; /* Remove o sublinhado */
+    color: #ffffff; /* Cor de destaque para os links */
+    font-size: 1.5em; /* Tamanho de fonte maior */
+    display: block; /* Faz com que o link ocupe a largura total do item */
+    padding: 10px 20px; /* Largura e altura consistente para o padding */
     transition: color 0.3s ease, background-color 0.3s ease; /* Transição suave */
-}
-/* Estilo para cada item de lista */
-.sidebar ul li {
-    margin-bottom: 10px;  /* Espaço entre os itens */
-    border-bottom: 2px solid #ffffff;  /* Borda leve entre os itens */
-    padding-left: 20px;  /* Ajustando o padding do lado esquerdo */
-    padding-right: 20px;  /* Ajustando o padding do lado direito */
 }
 
 /* Efeito de hover nos links */
 .sidebar ul li a:hover {
-    color: #fff;  /* Cor de texto branca quando hover */
-    background-color: #007bff;  /* Cor de fundo ao passar o mouse */
-    border-radius: 4px;  /* Arredondar os cantos ao passar o mouse */
+    color: #fff;
+    background-color: #007bff;
+    border-radius: 4px; /* Arredondar os cantos ao passar o mouse */
 }
 
-
-.sidebar ul li:hover {
-    border-bottom: 1px solid #c7c7c7;
-}
-
-
-/* Seções */
+/* Main content */
 .main-content {  
-     padding-top: 0px;  
-       flex: 2;
+    padding-top: 0px;  
+    flex: 2;
     padding: 20px;
     border-radius: 8px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
+/* Seções dentro do #accountcontent */
 #accountcontent section {
-    padding-top: 50px;  
+    padding-top: 50px;
     margin-bottom: 50px;
     padding: 20px;
     border-radius: 8px;
@@ -124,8 +94,8 @@ section h2 {
 
 /* Formulários */
 form {
-    margin: 1em 1em;
-    max-width: 70%;
+    width: 50% !important; /* Garantindo largura de 50% */
+    margin: 0 auto; /* Centraliza o formulário */
 }
 
 form h3 {
@@ -134,7 +104,7 @@ form h3 {
 }
 
 form .form-group {
-    margin-bottom: 15px;
+    margin-bottom: 60px;
 }
 
 form .form-group label {
@@ -166,8 +136,6 @@ form input[type="submit"]:hover {
     background-color: #c181a4;
 }
 
-
-
 /* Botão de adicionar pet */
 #addPetButton {
     display: inline-block;
@@ -186,41 +154,33 @@ form input[type="submit"]:hover {
     background-color: #c181a4;
 }
 
+/* Formulário de pet */
 #newPetForm {
-    margin-top: 20px;
-    display: none;
-}
-
-#toggleForm:checked ~ #newPetForm {
-    display: block;
-}
-
-
-#pets {
-    margin: 20px auto;
-    max-width: 800px;
-    font-family: Arial, sans-serif;
-}
-
-legend h2 {
-    font-size: 1.8em;
-    margin-bottom: 10px;
-}
-
-.pet-icon {
-    width: 50px;
-    height: auto;
-    vertical-align: middle;
-}
-
-#newPetForm {
-    margin: 20px 0;
+    width: 100%; /* O formulário agora ocupa 100% da largura disponível */
+    margin: 0 auto; /* Centraliza o formulário */
     padding: 20px;
     border: 1px solid #ddd;
     border-radius: 8px;
     background-color: #f9f9f9;
+    display: none; /* Inicialmente escondido */
 }
 
+/* Mostrar o formulário quando a caixa de seleção estiver marcada */
+#toggleForm:checked + #addPetButton + #newPetForm {
+    display: block;
+    margin-top: 20px;
+}
+
+/* Alterar o texto do botão quando o formulário estiver visível */
+#toggleForm:checked + #addPetButton::after {
+    content: '-';
+}
+
+#toggleForm:not(:checked) + #addPetButton::after {
+    content: '+';
+}
+
+/* Estilo dos cartões de pets */
 .pets-container {
     display: flex;
     flex-direction: column;
@@ -245,9 +205,9 @@ legend h2 {
     border-radius: 50%; /* Forma de esfera */
     overflow: hidden;
     border: 2px solid #ccc; /* Borda ao redor da esfera */
-    display: flex; /* Habilita Flexbox */
-    align-items: center; /* Centraliza verticalmente */
-    justify-content: center; /* Centraliza horizontalmente */
+    display: flex;
+    align-items: center;
+    justify-content: center;
     background-color: #fff; /* Fundo para contraste */
 }
 
@@ -257,52 +217,34 @@ legend h2 {
     object-fit: cover; /* Garante o ajuste da imagem sem distorção */
 }
 
-/* Alinha o nome do pet (legend) no centro do cartão */
 .pet-info legend {
-    text-align: center;  /* Centraliza o nome do pet */
-    font-size: 1.5em;  /* Tamanho maior para o nome do pet */
+    text-align: center; /* Centraliza o nome do pet */
+    font-size: 1.5em; /* Tamanho maior para o nome do pet */
     margin-bottom: 10px; /* Espaço inferior para separar do conteúdo abaixo */
 }
 
-/* Se necessário, você pode ajustar outros elementos do pet */
 .pet-info p {
     text-align: left; /* Garante que as informações (espécie, tamanho, idade) estejam alinhadas à esquerda */
     margin-left: 0; /* Remover qualquer margem esquerda indesejada */
 }
 
 
-.pet-info legend {
-    text-align: center; 
-    font-size: 1.5em;  /* Opcional: Aumenta o tamanho da fonte do nome */
-    margin-bottom: 10px; /* Espaço inferior para separar do conteúdo abaixo */
-
+/* Estilo para o legend */
+legend d{
+    font-size: 1em; 
+}
+legend {
+    display: flex; /* Usando flexbox para alinhar o título e a imagem */
+    align-items:center; /* Alinha o título e a imagem verticalmente */
+    gap: 10px; /* Adiciona espaço entre o título e a imagem */
+    margin-bottom: 15px; /* Espaço abaixo do legend */
+    border-bottom: 2px solid #ebbfdb; /* Borda rosa abaixo do título */
+    padding-bottom: 5px; /* Ajusta o padding para a borda não ficar muito grande */
 }
 
-
-/* Hide the newPetForm by default */
-#newPetForm {
-    display: none;
-}
-
-/* Show the newPetForm when the checkbox is checked */
-#toggleForm:checked + #addPetButton + #newPetForm {
-    display: block;
-    margin-top: 20px;
-}
-
-/* Change the button text when the form is visible */
-#toggleForm:checked + #addPetButton::after {
-    content: '-';
-}
-
-#toggleForm:not(:checked) + #addPetButton::after {
-    content: '+';
-}
-
-#newPetForm input[type="submit"] {
-    transition: background-color 0.3s ease;
-}
-
-#newPetForm input[type="submit"]:hover {
-    background-color: #B88080;
+/* Estilo para a imagem da pata */
+.pet-icon {
+    width: 40px; /* Define o tamanho da imagem */
+    height: 40px;
+    object-fit: cover; /* Garante que a imagem se ajuste bem ao espaço */
 }
