@@ -69,11 +69,11 @@ function retrieveReviews() {
         <article id="services">
             <h2>Book with us</h2>
             <div class="services-container">
-                <a href="bookingRequest.php?service=petsitting" class="service-card">
+                <a href="bookingRequest.php?service_type=petsitting" class="service-card">
                     <h3>PET SITTING</h3>
                     <p>Reliable and loving care for your pets at home.</p>
                 </a>
-                <a href="bookingRequest.php?service=petwalking" class="service-card">
+                <a href="bookingRequest.php?service_type=petwalking" class="service-card">
                     <h3>PET WALKING</h3>
                     <p>Healthy and fun walks for your furry friends.</p>
                 </a>

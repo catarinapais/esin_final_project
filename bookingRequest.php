@@ -47,6 +47,10 @@ include('templates/header_tpl.php');
         <?php endif; ?>
     </section>
     <?php if ($has_pets): ?>
+
+    <?php
+         $selected_service_type = $_GET['service_type'] ?? ''; // Get the service type from the query parameter, if available
+    ?>
         <form action="actions/action_findProviders.php" method="post">
             <fieldset>
                 <legend>Booking</legend>
@@ -62,20 +66,20 @@ include('templates/header_tpl.php');
                         <?php endforeach; ?>
                     </div>
                 </div>
-
                 <div class="form-group">
                     <label for="service_type">
                         <p>Service Type:</p><span class="required">*</span>
                     </label>
-                    <label for="petwalking">
-                        <input type="radio" id="petwalking" name="service_type" value="walking" required>
-                        Pet Walking
-                    </label>
-                    <label for="petsitting">
-                        <input type="radio" id="petsitting" name="service_type" value="sitting" required>
-                        Pet Sitting
-                    </label>
-                </div>
+                <label for="petwalking">
+                   <input type="radio" id="petwalking" name="service_type" value="petwalking" 
+                <?= $selected_service_type === 'petwalking' ? 'checked' : '' ?> required>
+                Pet Walking
+                </label>
+                <label for="petsitting">
+                  <input type="radio" id="petsitting" name="service_type" value="petsitting" 
+                    <?= $selected_service_type === 'petsitting' ? 'checked' : '' ?> required>
+                  Pet Sitting
+                </label>
 
                 <div class="form-group">
                     <label for="location">
