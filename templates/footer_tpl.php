@@ -9,10 +9,10 @@ session_start();
         <div class="footer-section">
             <h3>Quick Links</h3>
             <ul>
-                <li><a href="bookingRequest.html">Book a service</a></li>
-                <li><a href="serviceProvider.html">Become a PetPatroller</a></li>
-                <li><a href="aboutus.html">About Us</a></li>
-                <li><a href="FAQs.html">FAQs</a></li>
+                <li><a href="bookingRequest.php">Book a service</a></li>
+                <li><a href="serviceProvider.php">Become a PetPatroller</a></li>
+                <li><a href="aboutus.php">About Us</a></li>
+                <li><a href="FAQs.php">FAQs</a></li>
             </ul>
         </div>
 

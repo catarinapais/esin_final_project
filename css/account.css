@@ -1,3 +1,4 @@
+<<<<<<< Updated upstream
 /* Corpo da página */
 body {
     display: grid;
@@ -37,11 +38,50 @@ aside.sidebar {
 }
 
 /* Links da sidebar */
+=======
+
+#accountcontent {
+    display: grid;
+    grid-template-columns: 3fr 1fr;  /* Conteúdo principal e sidebar */
+    gap: 20px;
+    padding: 20px;
+}
+
+header {
+    grid-column: 1 / -1; /* Cabeçalho ocupa toda a largura */
+}
+
+main {
+    grid-area: main;
+}
+
+aside {
+    grid-area: aside;
+}
+
+footer {
+    grid-column: 1 / -1; /* Rodapé ocupa toda a largura */
+}
+
+
+/* Estilos para a sidebar */
+.sidebar {
+    background-color: #E7CCCC;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    transition: all 0.3s ease;
+}
+
+/* Estilos para os links da sidebar */
+>>>>>>> Stashed changes
 .sidebar ul {
     list-style-type: none;
     padding-left: 0;
 }
 
+<<<<<<< Updated upstream
 .sidebar ul li {
     margin-bottom: 10px; /* Espaço entre os itens */
     border-bottom: 2px solid #ffffff; /* Borda leve entre os itens */
@@ -58,24 +98,58 @@ aside.sidebar {
     padding: 10px 20px; /* Largura e altura consistente para o padding */
     transition: color 0.3s ease, background-color 0.3s ease; /* Transição suave */
 }
+=======
+.sidebar ul li a {
+    font-weight: bold;
+    text-decoration: none;
+    color: #ffffff;
+    font-size: 1.5em;
+    display: block;
+    padding: 10px 20px;
+    transition: color 0.3s ease, background-color 0.3s ease;
+}
 
-/* Efeito de hover nos links */
+.sidebar ul li {
+    margin-bottom: 10px;
+    border-bottom: 2px solid #ffffff;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+>>>>>>> Stashed changes
+
 .sidebar ul li a:hover {
     color: #fff;
     background-color: #007bff;
+<<<<<<< Updated upstream
     border-radius: 4px; /* Arredondar os cantos ao passar o mouse */
 }
 
 /* Main content */
 .main-content {  
     padding-top: 0px;  
+=======
+    border-radius: 4px;
+}
+
+.sidebar ul li:hover {
+    border-bottom: 1px solid #c7c7c7;
+}
+
+/* Estilo para o conteúdo principal */
+.main-content {
+    padding-top: 0;
+>>>>>>> Stashed changes
     flex: 2;
     padding: 20px;
     border-radius: 8px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
+<<<<<<< Updated upstream
 /* Seções dentro do #accountcontent */
+=======
+/* Estilo para seções */
+>>>>>>> Stashed changes
 #accountcontent section {
     padding-top: 50px;
     margin-bottom: 50px;
@@ -91,6 +165,7 @@ section h2 {
     margin-bottom: 15px;
     font-size: 1.2em;
 }
+
 
 /* Formulários */
 form {

@@ -356,7 +356,20 @@ try {
 
     </div>
     </main>
+<<<<<<< Updated upstream
   
+=======
+    
+    <aside class="sidebar">
+    <h2>Sections</h2>
+    <ul>
+        <li><a href="#staticTags">Personal Information</a></li>
+        <li><a href="#pastServices">Past Services</a></li>
+        <li><a href="#pastBookings">Past Bookings</a></li>
+        <li><a href="#pets">Pets</a></li>
+    </ul>
+</aside>
+>>>>>>> Stashed changes
   
     <?php include('templates/footer_tpl.php'); ?>
  
