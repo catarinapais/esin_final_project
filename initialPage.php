@@ -77,7 +77,7 @@ function retrieveReviews() {
                     <h3>PET WALKING</h3>
                     <p>Healthy and fun walks for your furry friends.</p>
                 </a>
-                <a href="serviceProvider.html" class="service-card">
+                <a href="serviceProvider.php" class="service-card">
                     <h3>BECOME A SITTER/WALKER</h3>
                     <p>Join our community and earn doing what you love.</p>
                 </a>
