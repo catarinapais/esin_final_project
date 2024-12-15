@@ -9,9 +9,10 @@ $password = $_POST['password'];
 function loginSuccess($email, $password) {
     global $dbh;
     $stmt = $dbh->prepare(
-      'SELECT id, name, email, phone_number, city, address
-      FROM Person 
-      WHERE email = ? AND password = ?');
+      'SELECT p.id, p.name, p.email, p.phone_number, p.city, p.address, sp.iban, sp.service_type
+      FROM Person p
+      LEFT JOIN ServiceProvider sp ON p.id = sp.person
+      WHERE p.email = ? AND p.password = ?');
     $stmt->execute(array($email, hash('sha256', $password)));
     return $stmt->fetch(); // Fetch will return the row if credentials are valid
     if ($user) {
@@ -35,6 +36,10 @@ try {
       $_SESSION['phone_number'] = $user['phone_number'];
       $_SESSION['city'] = $user['city'];
       $_SESSION['address'] = $user['address'];
+      if (!empty($user['iban'])) {
+        $_SESSION['iban'] = $user['iban'];
+        $_SESSION['service_type'] = $user['service_type'];
+    }
       $_SESSION['msg_success'] = 'Welcome back!';
       header('Location: ../initialPage.php');
       exit();

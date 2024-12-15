@@ -1,6 +1,5 @@
 <?php
 session_start();
-
 $id = $_SESSION['id'];
 $email = $_SESSION['email'];
 
@@ -139,8 +138,8 @@ include('templates/header_tpl.php');
         <div class="form-group">
           <p>Service Type: </p>
           <label>
-            <input type="checkbox" name="serviceType" value="petSitting">Pet Sitting
-            <input type="checkbox" name="serviceType" value="petWalking">Pet Walking
+            <input type="checkbox" name="service_type" value="sitting">Pet Sitting
+            <input type="checkbox" name="service_type" value="walking">Pet Walking
           </label>
         </div>
 

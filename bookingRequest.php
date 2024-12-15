@@ -71,13 +71,13 @@ include('templates/header_tpl.php');
                         <p>Service Type:</p><span class="required">*</span>
                     </label>
                 <label for="petwalking">
-                   <input type="radio" id="petwalking" name="service_type" value="petwalking" 
-                <?= $selected_service_type === 'petwalking' ? 'checked' : '' ?> required>
+                   <input type="radio" id="petwalking" name="service_type" value="walking" 
+                <?= $selected_service_type === 'petwalking' ? 'checked' : '' ?> required>  <!-- espero não ter estragado-->
                 Pet Walking
                 </label>
                 <label for="petsitting">
-                  <input type="radio" id="petsitting" name="service_type" value="petsitting" 
-                    <?= $selected_service_type === 'petsitting' ? 'checked' : '' ?> required>
+                  <input type="radio" id="petsitting" name="service_type" value="sitting"  
+                    <?= $selected_service_type === 'petsitting' ? 'checked' : '' ?> required> 
                   Pet Sitting
                 </label>
 
