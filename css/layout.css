@@ -272,7 +272,7 @@ form button {
     flex-wrap: wrap; /* Allow items to wrap to the next line */
     align-items: flex-start; /* Align items to the start vertically */
     justify-content: space-around; /* Center items horizontally */
-    gap: 1em; /* Add gap between items */
+    gap: 1.5em; /* Add gap between items */
 }
 
 #scheduleForm,
@@ -287,6 +287,18 @@ body > *:not(footer) {
     flex: 1; /* Expande o conteúdo para preencher o espaço disponível */
 }
 
+/*week navigation*/
+#week-navigation {
+    display: flex;
+    align-items: center; /* Align items vertically in the center */
+    justify-content: center; /* Center items horizontally */
+    gap: 1em; /* Add some space between items */
+    margin-bottom: 1em;
+}
+
+#week-navigation p {
+    margin: 0; /* Remove default margin */
+}
 
 /* AboutUs section */
 .about-container {
@@ -320,32 +332,6 @@ body > *:not(footer) {
     margin-bottom: 15px;
 }
 
-
-
-/* Responsividade */
-@media (max-width: 768px) {
-    .ceo-container {
-        flex-direction: column;
-        align-items: center;
-    }
-
-    .about-section {
-        padding: 20px;
-    }
-
-    #ceos h2 {
-        font-size: 2rem;
-    }
-
-    #ceos p {
-        font-size: 1rem;
-    }
-
-    .ceo img {
-        width: 150px;
-        height: 150px;
-    }
-}
 
 
 /* Página account*/

@@ -6,7 +6,7 @@ $provider_service_type = $_SESSION['service_type'];
 //$provider_service_type = 'both'; //hard-coded mas era só para testar
 // TODO: tirar esta linha
 
-$service_type = $_POST['serviceType'];
+$service_type = $_POST['service_type'];
 $date = $_POST['serviceDate'];
 $start_time = $_POST['startTime'];
 $end_time = $_POST['endTime'];

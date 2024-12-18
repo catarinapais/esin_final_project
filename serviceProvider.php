@@ -9,108 +9,119 @@ if (!isset($_SESSION['id']) || !isset($_SESSION['email'])) {
   exit();
 }
 
+function calculateWeekRange($week_offset = 0) {
+  $current_date = new DateTime();
+
+  $current_date->modify('Monday this week'); // Move to the start of the current week (Monday)
+  $current_date->modify("+$week_offset week"); // week offset (get)
+  $week_start = $current_date->format('Y-m-d'); // start date - monday
+  $current_date->modify('+6 days'); // end date - sunday
+  $week_end = $current_date->format('Y-m-d'); 
+  return [
+      'week_start' => $week_start,
+      'week_end' => $week_end,
+  ];
+}
+
 
 //função para construir a tabela com a query
-function makeAvailabilityTable($schedule)
-{
+function makeAvailabilityTable($schedule) {
+  // Map days of the week to columns
+  $dayToColumn = [
+      'Monday' => 1,
+      'Tuesday' => 2,
+      'Wednesday' => 3,
+      'Thursday' => 4,
+      'Friday' => 5,
+      'Saturday' => 6,
+      'Sunday' => 7,
+  ];
 
-
-  //printing table headers
   echo '<thead>
-    <tr>
-      <th class="tg-header">Time</th>
-      <th class="tg-header">Monday</th>
-      <th class="tg-header">Tuesday</th>
-      <th class="tg-header">Wednesday</th>
-      <th class="tg-header">Thursday</th>
-      <th class="tg-header">Friday</th>
-      <th class="tg-header">Saturday</th> 
-      <th class="tg-header">Sunday</th>
-    </tr>
+      <tr>
+          <th class="tg-header">Time</th>
+          <th class="tg-header">Monday</th>
+          <th class="tg-header">Tuesday</th>
+          <th class="tg-header">Wednesday</th>
+          <th class="tg-header">Thursday</th>
+          <th class="tg-header">Friday</th>
+          <th class="tg-header">Saturday</th>
+          <th class="tg-header">Sunday</th>
+      </tr>
   </thead>
   <tbody>';
 
-  $rows = 16; //from 6am to 10pm
-  $columns = 8; //time + all week days
-  $time = 6; //beginning of services
-  
+  $rows = 16; // from 6am to 10pm
+  $columns = 8; // time + all weekdays
+  $time = 6; // start time
+
   for ($i = 0; $i < $rows; $i++) {
-    echo '<tr>';
-    for ($j = 0; $j < $columns; $j++) {
-      if ($j == 0) {
-        echo '<td class="tg-top">' . $time . ':00 - ' . ++$time . ':00</td>'; //time column
-      } else {
-        // Determine if this cell should be marked as available
-        $class = 'tg-all';
-        if (!empty($schedule)) {
-          foreach ($schedule as $entry) {
-            $dayOfWeek = $entry['day_week'];
-            $startTime = (int)$entry['start_time'];
-            $endTime = (int)$entry['end_time'];
+      echo '<tr>';
+      for ($j = 0; $j < $columns; $j++) {
+          if ($j == 0) {
+              echo '<td class="tg-top">' . $time . ':00 - ' . ++$time . ':00</td>';
+          } else {
+              $class = 'tg-all';
 
-            // Map the day of the week to column index
-            switch ($dayOfWeek) {
-              case 'Monday':
-                $columnIndex = 1;
-                break;
-              case 'Tuesday':
-                $columnIndex = 2;
-                break;
-              case 'Wednesday':
-                $columnIndex = 3;
-                break;
-              case 'Thursday':
-                $columnIndex = 4;
-                break;
-              case 'Friday':
-                $columnIndex = 5;
-                break;
-              case 'Saturday':
-                $columnIndex = 6;
-                break;
-              case 'Sunday':
-                $columnIndex = 7;
-                break;
-              default:
-                $columnIndex = -1; // Invalid day
-            }
+              foreach ($schedule as $entry) {
+                  $date = $entry['day_week']; // Full date (YYYY-MM-DD)
+                  $startTime = (int)$entry['start_time'];
+                  $endTime = (int)$entry['end_time'];
 
-            // Calculate the row indices
-            $firstRow = $startTime - 6;
-            $lastRow = $endTime - 6 - 1;
+                  // Determine the day of the week from the full date
+                  $dateObject = new DateTime($date);
+                  $dayOfWeek = $dateObject->format('l'); // Converts to "Monday", "Tuesday", etc.
 
-            // Check if the current cell matches the schedule entry
-            if ($j == $columnIndex && $i >= $firstRow && $i <= $lastRow) {
-              $class = 'tg-available';
-              break;
-            }
+                  // Map the day to the correct column
+                  $columnIndex = $dayToColumn[$dayOfWeek] ?? -1;
+
+                  // Calculate the row indices for the time
+                  $firstRow = $startTime - 6;
+                  $lastRow = $endTime - 6 - 1;
+
+                  // Check if the current cell matches the schedule entry
+                  if ($j == $columnIndex && $i >= $firstRow && $i <= $lastRow) {
+                      $class = 'tg-available';
+                      break;
+                  }
+              }
+
+              echo '<td class="' . $class . '"></td>';
           }
-        }
-        echo '<td class="' . $class . '"></td>'; //weekday columns
       }
-    }
-    echo '</tr>';
+      echo '</tr>';
   }
   echo '</tbody>';
 }
+
+
+// get week offset from the url
+$week_offset = isset($_GET['week_offset']) ? (int)$_GET['week_offset'] : 0;
+// get week range (using the week offset)
+$week_range = calculateWeekRange($week_offset);
+// start and end dates
+$week_start = $week_range['week_start'];
+$week_end = $week_range['week_end'];
 
 $dbh = new PDO('sqlite:database.db');
 $dbh->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC); //association fetching
 $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION); //error handling
 
-
 try { // try catch for error handling
   $stmt = $dbh->prepare(
-    'SELECT * 
-    FROM Schedule 
-    JOIN ServiceProvider ON Schedule.service_provider = ServiceProvider.person 
-    JOIN Person ON ServiceProvider.person = Person.id 
-    WHERE Person.email = :email'
+    'SELECT day_week, start_time, end_time 
+        FROM Schedule 
+        WHERE service_provider = :service_provider 
+        AND day_week BETWEEN :week_start AND :week_end'
   ); // prepared statement
-  $stmt->execute([':email' => $email]); // sem valores porque nao temos placeholders no prepared statement
-  $schedule = $stmt->fetchAll(); //fetching all schedules by the user (array of arrays)
+  $stmt->execute([
+    ':service_provider' => $id,
+    ':week_start' => $week_start,
+    ':week_end' => $week_end,
+  ]); 
+  $schedule = $stmt->fetchAll(); // fetching all schedules by the user (array of arrays)
 } catch (Exception $e) {
-  $error_msg = $e->getMessage(); // ir buscar a mensagem de erro e guardar em $error_msg
+  $error_msg = "Error fetching schedule. Please try again."; // ir buscar a mensagem de erro e guardar em $error_msg
 }
 
 include('templates/header_tpl.php');
@@ -130,17 +141,15 @@ include('templates/header_tpl.php');
       <?php endif; ?>
     </section>
     <?php if (isset($_SESSION['iban'])) : // if the person is a service provider?>
-    <form action="actions/action_addAvailability.php" method="post">
+    <form action="actions/action_addAvailability.php" method="POST">
       <!--post: enviar informação (encriptada)-->
       <!--get: receber informação (envia pelo url)-->
       <fieldset>
         <legend>Schedule</legend>
         <div class="form-group">
           <p>Service Type: </p>
-          <label>
-            <input type="checkbox" name="service_type" value="sitting">Pet Sitting
-            <input type="checkbox" name="service_type" value="walking">Pet Walking
-          </label>
+          <label><input type="checkbox" name="service_type" value="sitting">Pet Sitting</label>
+          <label><input type="checkbox" name="service_type" value="walking">Pet Walking</label>
         </div>
 
         <div class="form-group">
@@ -162,6 +171,11 @@ include('templates/header_tpl.php');
 
   <section id="availability">
     <h2>Scheduled Availability</h2>
+    <section id="week-navigation">
+      <a href="?week_offset=<?php echo $week_offset - 1; ?>">&lt;</a>
+      <p><?php echo $week_start; ?> to <?php echo $week_end; ?></p>
+      <a href="?week_offset=<?php echo $week_offset + 1; ?>">&gt;</a>
+    </section>
     <table class="availabilityTimetable">
       <?php makeAvailabilityTable($schedule); ?>
     </table>

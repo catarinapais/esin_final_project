@@ -115,3 +115,28 @@
         display: none;
     }
 }
+
+
+@media (max-width: 768px) {
+    .ceo-container {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .about-section {
+        padding: 20px;
+    }
+
+    #ceos h2 {
+        font-size: 2rem;
+    }
+
+    #ceos p {
+        font-size: 1rem;
+    }
+
+    .ceo img {
+        width: 150px;
+        height: 150px;
+    }
+}
