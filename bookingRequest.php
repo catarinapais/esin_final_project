@@ -51,7 +51,7 @@ include('templates/header_tpl.php');
     <?php
          $selected_service_type = $_GET['service_type'] ?? ''; // Get the service type from the query parameter, if available
     ?>
-        <form action="actions/action_findProviders.php" method="post">
+      <form action="actions/action_addBooking.php" method="post">
             <fieldset>
                 <legend>Booking</legend>
 
@@ -121,18 +121,20 @@ include('templates/header_tpl.php');
                 </div>
 
                 <div class="form-group">
-                    <label for="photo_consent">
-                        <p>Do you allow us to take pictures of your pet for our social media?</p><span class="required">*</span>
-                    </label>
-                    <label>
-                        <input type="radio" name="photo_consent" value="yes" required> Yes
-                    </label>
-                    <label>
-                        <input type="radio" name="photo_consent" value="no" required> No
-                    </label>
-                </div>
+                <label>
+    <input type="checkbox" name="photo_consent" value="YES">
+    I allow PetPatrol to take pictures of my pet during the walks for social media.
+  </label><br>
+
+  <label>
+    <input type="checkbox" name="review_consent" value="YES">
+    I allow PetPatrol to publish my reviews and display them on the website.
+  </label><br>
+</div>
+
 
                 <input type="submit" value="Search for Available Pet Walkers/Pet Sitters">
+                <a href="pagamento.php" class="botao-estilo">Book</a>
             </fieldset>
         </form>
 

@@ -2,14 +2,14 @@
 session_start();
 
 try {
-    // Conectar ao banco de dados SQLite
+    // Connect to the SQLite database
     $dbh = new PDO('sqlite:database.db');
     $dbh->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
     $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
     $user_id = $_SESSION['id'];
-    
-    // Preparar a consulta para pegar as informações do PetOwner com o ID específico e os pets
+
+    // Prepare query to fetch pet owner info
     $stmt = $dbh->prepare(
         'SELECT 
             Person.name, 
@@ -31,17 +31,18 @@ try {
         LEFT JOIN 
             Pet ON Pet.owner = Person.id 
         WHERE 
-            PetOwner.person = :id' 
+            PetOwner.person = :id'
     );
     $stmt->bindValue(':id', $user_id, PDO::PARAM_INT);
-    // Tente executar a consulta e verificar se a execução foi bem-sucedida
     if ($stmt->execute()) {
-        $petOwnerInfo = $stmt->fetchAll(); // todas as linhas da tabela todos os resultados (queremos todos os pets da pessoa)
+        $petOwnerInfo = $stmt->fetchAll(); // Get all pets for the owner
     } else {
-        echo "Erro na execução da consulta.";
+        echo "Error in executing query.";
     }
 
     $stmt->closeCursor();
+
+    // Fetch past bookings
     $stmt = $dbh->prepare(
         'SELECT 
             Booking.id AS service_id,
@@ -63,16 +64,18 @@ try {
         JOIN Payment ON Booking.payment = Payment.id 
         JOIN Review AS OwnerReview ON Booking.ownerReview = OwnerReview.id 
         JOIN Review AS ProviderReview ON Booking.providerReview = ProviderReview.id 
-        WHERE PetOwner.person = :id' 
+        WHERE PetOwner.person = :id'
     );
     $stmt->bindValue(':id', $user_id, PDO::PARAM_INT);
     if ($stmt->execute()) {
-        $pastBookingsInfo = $stmt->fetchAll(); // todas as linhas da tabela todos os resultados (queremos todos os pets da pessoa)
+        $pastBookingsInfo = $stmt->fetchAll(); // Get all past bookings
     } else {
-        echo "Erro na execução da consulta.";
+        echo "Error in executing query.";
     }
 
     $stmt->closeCursor();
+
+    // Fetch past services
     $stmt = $dbh->prepare(
         'SELECT 
             Booking.id AS service_id,
@@ -90,33 +93,51 @@ try {
         JOIN Payment ON Booking.payment = Payment.id 
         JOIN Review AS OwnerReview ON Booking.ownerReview = OwnerReview.id 
         JOIN Review AS ProviderReview ON Booking.providerReview = ProviderReview.id 
-        WHERE Booking.provider = :id;' 
+        WHERE Booking.provider = :id'
     );
     $stmt->bindValue(':id', $user_id, PDO::PARAM_INT);
     if ($stmt->execute()) {
-        $pastServicesInfo = $stmt->fetchAll(); // todas as linhas da tabela todos os resultados (queremos todos os pets da pessoa)
+        $pastServicesInfo = $stmt->fetchAll(); // Get all past services
     } else {
-        echo "Erro na execução da consulta.";
+        echo "Error in executing query.";
     }
 
     $stmt->closeCursor();
+
+    // Fetch service provider info
     $stmt = $dbh->prepare(
         'SELECT *  
         FROM ServiceProvider 
-        WHERE ServiceProvider.person = :id' 
+        WHERE ServiceProvider.person = :id'
     );
     $stmt->bindValue(':id', $user_id, PDO::PARAM_INT);
     if ($stmt->execute()) {
-        $providerInfo = $stmt->fetchAll(); // todas as linhas da tabela todos os resultados (queremos todos os pets da pessoa)
+        $providerInfo = $stmt->fetchAll(); // Get service provider info
     } else {
-        echo "Erro na execução da consulta.";
+        echo "Error in executing query.";
+    }
+
+    // Now fetch the medical needs for each pet
+    $medicalNeeds = [];
+    foreach ($petOwnerInfo as $pet) {
+        $pet_id = $pet['pet_id'];  // Get pet ID
+        
+        // Fetch medical needs for this pet
+        $medicalStmt = $dbh->prepare(
+            "SELECT description 
+            FROM MedicalNeed 
+            JOIN PetMedicalNeed ON PetMedicalNeed.medicalNeed = MedicalNeed.id 
+            WHERE PetMedicalNeed.pet = ?"
+        );
+        $medicalStmt->execute([$pet_id]);
+        $medicalNeeds[$pet_id] = $medicalStmt->fetchAll(PDO::FETCH_ASSOC);
     }
 } catch (PDOException $e) {
-    // Tratamento de erro
-    echo "Erro de conexão: " . $e->getMessage();
+    // Handle error
+    echo "Connection error: " . $e->getMessage();
 }
-
 ?>
+
 
 
 <!DOCTYPE html>  
@@ -313,6 +334,11 @@ try {
         </div>
 
         <div class="form-group">
+            <label for="medicalneeds">Medical needs we should know about:</label>
+            <textarea name="medicalneeds" id="medicalneeds" rows="3" cols="30" ></textarea>
+        </div>
+
+        <div class="form-group">
             <label for="profile_picture">Profile Picture:</label>
             <input type="file" accept="image/*" id="profile_picture" name="profile_picture">
         </div>
@@ -339,7 +365,23 @@ try {
                         <legend> <?= htmlspecialchars($pet['pet_name']) ?></legend>
                         <p><strong>Species:</strong> <?= ucfirst(htmlspecialchars($pet['pet_species'])) ?></p>
                         <p><strong>Size:</strong> <?= ucfirst(htmlspecialchars($pet['pet_size'])) ?></p>
-                        <p><strong>Birth Date:</strong> <?= htmlspecialchars($pet['pet_age']) ?></p>
+                        <?php if (!empty($pet['pet_age'])): ?> <!-- Verifica se o campo pet_age tem algum valor -->
+        <p><strong>Birth Date:</strong> <?= htmlspecialchars($pet['pet_age']) ?></p>
+    <?php endif; ?>
+                         <!-- Display medical needs if they exist -->
+        <?php if (isset($medicalNeeds[$pet['pet_id']]) && !empty($medicalNeeds[$pet['pet_id']])): ?>
+          
+          
+            <p id="medical-needs">
+                <strong>Medical Needs:</strong>
+                <?php foreach ($medicalNeeds[$pet['pet_id']] as $need): ?>
+                    <?= htmlspecialchars($need['description']) ?>
+                <?php endforeach; ?>
+                </p>
+        <?php else: ?>
+            <p>No medical needs recorded.</p>
+        <?php endif; ?>
+
                     </div>
                 </div>
             <?php endforeach; ?>

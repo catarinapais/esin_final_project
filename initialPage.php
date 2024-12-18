@@ -36,7 +36,7 @@ function retrieveReviews() {
             JOIN Review AS OwnerReview ON Booking.ownerReview = OwnerReview.id 
             JOIN Pet ON Booking.pet = Pet.id 
             JOIN Person ON Person.id = Pet.owner 
-            WHERE Booking.photo_consent = "yes" AND Booking.ownerReview IS NOT "0";'
+            WHERE Booking.review_consent = "YES" AND Booking.ownerReview IS NOT "0";'
         ); // prepared statement
         $stmt->execute();
         $reviews = $stmt->fetchAll(); //fetching all schedules by the user (array of arrays)
