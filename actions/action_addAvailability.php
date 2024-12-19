@@ -33,6 +33,15 @@ if (empty($service_type)) {
     exit;
 } 
 
+//rounding start time to the previous hour (as explained in the form)
+$start_time_dt = new DateTime($start_time);
+$start_time_dt->setTime($start_time_dt->format('H'), 0);
+$start_time = $start_time_dt->format('H:i');
+//rounding end time to the previous hour (as explained in the form)
+$end_time_dt = new DateTime($end_time);
+$end_time_dt->setTime($end_time_dt->format('H'), 0);
+$end_time = $end_time_dt->format('H:i');
+
 try {
     $dbh = new PDO('sqlite:../database.db');
     $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);

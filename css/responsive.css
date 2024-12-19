@@ -36,7 +36,7 @@
         position: fixed; /* Use fixed position so it always stays to the left of the hamburger */
         top: 0; 
         left: 0;
-        width: 70%; /* Take up part of the screen */
+        width: 50%; /* Take up part of the screen */
         height: 100%; /* Full height of the viewport */
         background-color: #edeff0; /* Background color of the dropdown */
         margin: 0;
@@ -114,6 +114,24 @@
     #logo h1, #logo h2 {
         display: none;
     }
+
+    .services-container {
+        width: 200px;
+    }
+
+    .service-card p { 
+        font-size: small;
+        padding:10px;
+    }
+
+    .service-card h3 {
+        padding-bottom: 0;
+    }
+
+    p.overlayText {
+        display:none;
+    }
+
 }
 
 
@@ -139,4 +157,11 @@
         width: 150px;
         height: 150px;
     }
+
+    form {
+        width: 70%;
+        margin-left: auto;
+        margin-right: auto;
+    }
+  
 }

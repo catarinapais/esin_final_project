@@ -165,8 +165,10 @@ include('templates/header_tpl.php');
         </div>
 
         <input type="submit" value="Add Availability">
+        <p class="note">Please note: If you input non-rounded hours, they will be rounded down to the previous hour.</p>
       </fieldset>
     </form>
+    
   </section>
 
   <section id="availability">

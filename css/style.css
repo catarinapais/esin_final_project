@@ -670,3 +670,8 @@ form#addPet input[type="submit"]:hover {
     font-size: 1em; /* Set the font size */
     color: #000; /* Set the color of the text */
 }
+
+p.note {
+    font-weight: lighter;
+    font-size: small;
+}

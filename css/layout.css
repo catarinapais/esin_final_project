@@ -272,7 +272,7 @@ form button {
     flex-wrap: wrap; /* Allow items to wrap to the next line */
     align-items: flex-start; /* Align items to the start vertically */
     justify-content: space-around; /* Center items horizontally */
-    gap: 1.5em; /* Add gap between items */
+    gap: 2em; /* Add gap between items */
 }
 
 #scheduleForm,
