@@ -1,15 +1,6 @@
 <?php
 session_start();
-
-if (isset($_SESSION['email'])) {
-    $email = $_SESSION['email'];
-    $dbh = new PDO('sqlite:database.db');
-    $stmt = $dbh->prepare('SELECT * FROM Person WHERE email = ?;');
-    $stmt->execute(array($email));
-    $person = $stmt->fetch();
-    $name = $person['name'];
-    $stmt->closeCursor();
-}
+$name = $_SESSION['name'];
 ?>
 
 
@@ -19,7 +10,7 @@ if (isset($_SESSION['email'])) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>About Us - Pet Care</title>
+    <title>Pet Patrol</title>
     <link href="css/style.css" rel="stylesheet">
     <link href="css/layout.css" rel="stylesheet">
     <link href="css/responsive.css" rel="stylesheet">

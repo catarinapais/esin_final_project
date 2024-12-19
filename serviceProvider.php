@@ -182,14 +182,21 @@ include('templates/header_tpl.php');
   </section>
   <section id="scheduledBookings">
     <h2>Scheduled Bookings</h2>
-    <article>
-      <p>Service Type</p>
-      <a href="">Name Person</a>
-      <p>Name Animal</p>
-      <p>Name Species</p>
-      <p>Medical Needs</p>
-      <p>Date and Time</p>
-    </article>
+    <?php if (!empty($bookings)) : ?>
+      <?php foreach ($bookings as $booking) : ?>
+        <article>
+          <p>Service Type: <?php echo htmlspecialchars($booking['service_type']); ?></p>
+          <p>Client Name: <?php echo htmlspecialchars($booking['name_person']); ?></p>
+          <p>Animal Name: <?php echo htmlspecialchars($booking['name_animal']); ?></p>
+          <p>Species: <?php echo htmlspecialchars($booking['name_species']); ?></p>
+          <p>Medical Needs: <?php echo htmlspecialchars($booking['medical_needs']); ?></p>
+          <p>Date: <?php echo htmlspecialchars($booking['date']); ?></p>
+          <p>Time: <?php echo htmlspecialchars($booking['start_time'] . ' - ' . $booking['end_time']); ?></p>
+        </article>
+      <?php endforeach; ?>
+    <?php else : ?>
+      <p>No bookings scheduled.</p>
+    <?php endif; ?>
   </section>
   <?php else: ?>
     <p id="notAProvider">You are not entitled to provide services.</p>
