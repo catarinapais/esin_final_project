@@ -51,7 +51,7 @@ include('templates/header_tpl.php');
     <?php
          $selected_service_type = $_GET['service_type'] ?? ''; // Get the service type from the query parameter, if available
     ?>
-      <form action="actions/action_addBooking.php" method="post">
+      <form action="actions/action_findProviders.php" method="post">
             <fieldset>
                 <legend>Booking</legend>
 
@@ -132,11 +132,41 @@ include('templates/header_tpl.php');
   </label><br>
 </div>
 
+<input type="submit" value="Search for Available Pet Walkers/Pet Sitters">
 
-                <input type="submit" value="Search for Available Pet Walkers/Pet Sitters">
-                <a href="pagamento.php" class="botao-estilo">Book</a>
+
             </fieldset>
         </form>
+
+        <?php if (!empty($availableProviders)) : ?>
+    <h2>Available Pet Walkers/Pet Sitters at <?= $availableProviders[0]['day_week'] ?></h2>
+    <?php foreach ($availableProviders as $provider): ?>
+        <article class="eachProvider">
+            <h3><?= $provider['provider_name'] ?></h3>
+            <p><?php echo htmlspecialchars($provider['provider_phone_number']); ?></p>
+            <p><?php echo htmlspecialchars($provider['provider_email']); ?></p>
+            <p>Rating: <?php echo htmlspecialchars($provider['provider_avg_rating']); ?></p>
+
+            <!-- Formulário oculto para redirecionar para addbooking.php -->
+            <form action="actions/action_addBooking.php"  method="post">
+                <input type="hidden" name="provider_id" value="<?= $provider['provider_id'] ?>">
+                <input type="hidden" name="service_type" value="<?= $selected_service_type ?>">
+                <input type="hidden" name="pet_name" value="<?php echo implode(", ", $_POST['pet_name'] ?? []); ?>">
+                <input type="hidden" name="address" value="<?= $address ?>">
+                <input type="hidden" name="date" value="<?= $_POST['date'] ?>">
+                <input type="hidden" name="starttime" value="<?= $_POST['starttime'] ?>">
+                <input type="hidden" name="endtime" value="<?= $_POST['endtime'] ?>">
+                <input type="hidden" name="photo_consent" value="<?= $_POST['photo_consent'] ?? 'NO' ?>">
+                <input type="hidden" name="review_consent" value="<?= $_POST['review_consent'] ?? 'NO' ?>">
+
+                <button type="submit">Book</button>
+            </form>
+
+        </article>
+    <?php endforeach; ?>
+<?php else: ?>
+    <p> Choose one option to check for available providers. </p>
+<?php endif; ?>
 
         <section id="availableProviders">
             <?php if (isset($_SESSION['msg_no_providers'])) : ?>

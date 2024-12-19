@@ -3,9 +3,9 @@ session_start();
 $payment = $_SESSION['payment'] ?? 'Not defined';
 $iban = $_SESSION['iban'] ?? 'Not defined';
 
-var_dump($start_time, $end_time, $service_type);
 
-var_dump($payment);
+
+
 include('templates/header_tpl.php'); ?>
 
  <main id="payment-content">
