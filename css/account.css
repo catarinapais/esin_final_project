@@ -63,9 +63,13 @@ aside.sidebar {
 padding-left: 0;
 }
 
+.sidebar ul li {
+    margin-bottom: 10px; /* Espaço entre os itens */
+    border-bottom: 2px solid #ffffff; /* Borda leve entre os itens */
+    padding-left: 20px; /* Ajustando o padding do lado esquerdo */
+    padding-right: 20px; /* Ajustando o padding do lado direito */
+}
 
-
-/* Ajustando o padding lateral dos links na sidebar */
 .sidebar ul li a {
     font-weight: bold;
     text-decoration: none;  /* Remove o sublinhado */
@@ -75,15 +79,25 @@ padding-left: 0;
     padding: 10px 20px;  /* Largura e altura consistente para o padding */
     transition: color 0.3s ease, background-color 0.3s ease; /* Transição suave */
 }
-/* Estilo para cada item de lista */
-.sidebar ul li {
-    margin-bottom: 10px;  /* Espaço entre os itens */
-    border-bottom: 2px solid #ffffff;  /* Borda leve entre os itens */
-    padding-left: 20px;  /* Ajustando o padding do lado esquerdo */
-    padding-right: 20px;  /* Ajustando o padding do lado direito */
+=======
+.sidebar ul li a {
+    font-weight: bold;
+    text-decoration: none;
+    color: #ffffff;
+    font-size: 1.5em;
+    display: block;
+    padding: 10px 20px;
+    transition: color 0.3s ease, background-color 0.3s ease;
 }
 
-/* Efeito de hover nos links */
+.sidebar ul li {
+    margin-bottom: 10px;
+    border-bottom: 2px solid #ffffff;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+>>>>>>> Stashed changes
+
 .sidebar ul li a:hover {
     color: #fff;  /* Cor de texto branca quando hover */
     background-color: #007bff;  /* Cor de fundo ao passar o mouse */

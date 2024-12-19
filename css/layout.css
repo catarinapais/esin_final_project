@@ -394,3 +394,31 @@ form#addPet input[type="submit"] {
     align-items: center;
     justify-content: center;
 }
+
+#medical-needs {
+    display: flex;
+    align-items: center;
+    margin: 10px 0;
+}
+
+#medical-needs strong {
+    margin-right: 10px;
+}
+
+#medical-needs span {
+    font-weight: normal;
+    color: #333;
+}
+
+/* Página Booking Request*/
+.form-group label {
+    display: flex;
+    align-items: baseline; /* Alinha verticalmente a checkbox com o texto */
+    margin-bottom: 8px; /* Espaço entre os itens */
+    font-size: 14px; /* Ajusta o tamanho da fonte */
+    cursor: pointer; /* Muda o cursor para indicar clique */
+}
+
+.form-group input[type="checkbox"] {
+    margin-right: 8px; /* Espaço entre a checkbox e o texto */
+}
