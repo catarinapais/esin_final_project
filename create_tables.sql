@@ -94,7 +94,7 @@ CREATE TABLE Pet (
 
 -- Table MedicalNeed --
 CREATE TABLE MedicalNeed (
-    type TEXT PRIMARY KEY,
+    id INTEGER PRIMARY KEY,
     description TEXT
 );
 
@@ -112,7 +112,8 @@ CREATE TABLE Booking (
     end_time TEXT CHECK(end_time IS NULL OR end_time>start_time),
     duration INTEGER CHECK (duration>0),
     address_collect TEXT NOT NULL,
-    photo_consent TEXT NOT NULL,
+    photo_consent TEXT CHECK (photo_consent IN ('YES', 'NO')) NULL,
+    review_consent TEXT CHECK (review_consent IN ('YES', 'NO')) NULL,
     provider INTEGER NOT NULL REFERENCES ServiceProvider, -- (id)
     type TEXT NOT NULL REFERENCES BookingType,
     pet INTEGER NOT NULL REFERENCES Pet, -- (id)

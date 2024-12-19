@@ -8,9 +8,9 @@ unset($_SESSION["msg_success"]);
 $name = $_POST['name'];
 $phone_number = $_POST['phone_number'];
 $address = $_POST['address'];
-$email = $_POST['email'];
-$city = $_POST['city'];
-$iban = $_POST['iban'];
+$email = strtolower($_POST['email']);
+$city = strtolower($_POST['city']); //saving it in lowercase to avoid case-sensitive issues
+$iban = strtoupper($_POST['iban']); //iban em maiusculas (para verificar a sequencia do PT50)
 $password = $_POST['password'];
 $service_type = $_POST['service_type'];
 

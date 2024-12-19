@@ -29,7 +29,8 @@ try {
         $start_time = $_POST['starttime'] ?? null;
         $end_time = $_POST['endtime'] ?? null;
         $photo_consent = $_POST['photo_consent'] ?? null;
-        $duration = $end_time - $start_time;
+        $review_consent = $_POST['review_consent'] ?? null;  
+         $duration = $end_time - $start_time;
         $service_provider_id = 1; //TODO: alterar isto quando a catarina puser a dar a cena dos providers no form, tou a assumir que vai retornar o id, se for o nome devemosmudar!!
 
         $start = new DateTime($start_time);
@@ -76,8 +77,8 @@ try {
         // Inserir dados na tabela Booking
         $stmt = $dbh->prepare('
             INSERT INTO Booking 
-            (date, start_time, end_time, duration, address_collect, photo_consent, provider, type, pet, payment) 
-            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+            (date, start_time, end_time, duration, address_collect, photo_consent,review_consent, provider, type, pet, payment) 
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?)
         ');
         $stmt->execute([
             $date,
@@ -86,6 +87,7 @@ try {
             $duration,
             $location,
             $photo_consent,
+            $review_consent,
             $service_provider_id,
             $service_type,
             $pet_name,
