@@ -5,34 +5,16 @@ session_start();
 <!-- Login page -->
  <!-- Nome ou emmail (ou username ou email) --> 
   <!-- password -->
-<!DOCTYPE html>
-<html lang="en">
-    <head>
-        <title>Login</title>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!--define this for responsive design-->
-        <link href="css/style.css" rel="stylesheet">
-        <link href="css/layout.css" rel="stylesheet">
-        <link href="css/responsive.css" rel="stylesheet">
-    </head>
-    <body>
-        <header id="navigationBar">
-            <a href="initialPage.php">
-                <div id="logo">
-                    <h1>Pet Patrol</h1>
-                    <h2>Sit and Walk</h2>
-                    <img src="images/assets/logo1.png" alt="Logo of Pet Patrol">
-                </div>
-            </a>
-        </header>
-        <?php
+<?php
+  include('../templates/header_auth_tpl.php');
+  
         if (isset($_SESSION["msg_error"])) {
             echo "<p class='msg_error'>{$_SESSION["msg_error"]}</p>";
             unset($_SESSION["msg_error"]);
         }
         ?>
         <section id="authentication">
-            <form class="login-form" action="actions/action_login.php" method="POST">
+            <form class="login-form" action="../actions/action_login.php" method="POST">
                 <h2>Login</h2>
                 <div class="form-group"> <!-- faria mais sentido se calhar ser o mail ou o username, se for o username metemos no register para meter-->
                     <p>Email:</p>
@@ -51,4 +33,4 @@ session_start();
                 <a id="authenticationLink" href="register.php">Register Here</a>
             </p>
         </section>
-        <?php include('templates/footer_tpl.php'); ?>
+        <?php include('../templates/footer_tpl.php'); ?>

@@ -4,7 +4,7 @@ session_start();
 
 
         <?php
-        include('templates/header_tpl.php');
+        include('../templates/header_tpl.php');
         ?>
 
 
@@ -89,7 +89,7 @@ session_start();
             </section>
         </main>
             
-        <?php include('templates/footer_tpl.php'); ?>
+        <?php include('../templates/footer_tpl.php'); ?>
 
 
 

@@ -21,10 +21,9 @@ if (!isset($_SESSION['id']) || !isset($_SESSION['email'])) {
     exit();
   }
 
-try {
-    $dbh = new PDO('sqlite:database.db');
-    $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+require_once('../database/init.php');
 
+try {
     // Consulta para ir buscar os pets do user
     $stmt = $dbh->prepare('SELECT * FROM Pet WHERE owner = :id');
     $stmt->bindValue(':id', $id, PDO::PARAM_INT);
@@ -37,7 +36,7 @@ try {
 }
 
 
-include('templates/header_tpl.php');
+include('../templates/header_tpl.php');
 ?>
 <main id="bookingcontent">
     <section class="error-messages">
@@ -51,7 +50,7 @@ include('templates/header_tpl.php');
     <?php
          $selected_service_type = $_GET['service_type'] ?? ''; // Get the service type from the query parameter, if available
     ?>
-      <form action="actions/action_findProviders.php" method="post">
+      <form action="../actions/action_findProviders.php" method="post">
             <fieldset>
                 <legend>Booking</legend>
 
@@ -148,7 +147,7 @@ include('templates/header_tpl.php');
             <p>Rating: <?php echo htmlspecialchars($provider['provider_avg_rating']); ?></p>
 
             <!-- Formulário oculto para redirecionar para addbooking.php -->
-            <form action="actions/action_addBooking.php"  method="post">
+            <form action="../actions/action_addBooking.php"  method="post">
                 <input type="hidden" name="provider_id" value="<?= $provider['provider_id'] ?>">
                 <input type="hidden" name="service_type" value="<?= $selected_service_type ?>">
                 <input type="hidden" name="pet_name" value="<?php echo implode(", ", $_POST['pet_name'] ?? []); ?>">
@@ -208,4 +207,4 @@ include('templates/header_tpl.php');
 
 </main>
 
-<?php include('templates/footer_tpl.php'); ?>
+<?php include('../templates/footer_tpl.php'); ?>

@@ -11,10 +11,10 @@ $name = $_SESSION['name'];
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pet Patrol</title>
-    <link href="css/style.css" rel="stylesheet">
-    <link href="css/layout.css" rel="stylesheet">
-    <link href="css/responsive.css" rel="stylesheet">
-    <link href="css/messages.css" rel="stylesheet">
+    <link href="../css/style.css" rel="stylesheet">
+    <link href="../css/layout.css" rel="stylesheet">
+    <link href="../css/responsive.css" rel="stylesheet">
+    <link href="../css/messages.css" rel="stylesheet">
 </head>
 <body>
 <header id="navigationBar">
@@ -22,7 +22,7 @@ $name = $_SESSION['name'];
         <div id="logo">
             <h1>Pet Patrol</h1>
             <h2>Sit and Walk</h2>
-            <img src="images/assets/logo1.png" alt="Logo of Pet Patrol">
+            <img src="../images/assets/logo1.png" alt="Logo of Pet Patrol">
         </div>
     </a>
     <nav id="menu">

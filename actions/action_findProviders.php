@@ -13,30 +13,28 @@ $location = $_POST['location'];
 
 if (empty($pet_name)) {
     $_SESSION['msg_error'] = "Select at least one of your pets.";
-    header('Location: ../bookingRequest.php');
+    header('Location: ../views/bookingRequest.php');
     exit;
 } else if ($location == 'other' && empty($_POST['other_address'])) {
     $_SESSION['msg_error'] = "Enter the address.";
-    header('Location: ../bookingRequest.php');
+    header('Location: ../views/bookingRequest.php');
     exit;
 } else if ($service_date < date('Y-m-d')) {
     $_SESSION['msg_error'] = "Date must be in the future.";
-    header('Location: ../bookingRequest.php');
+    header('Location: ../views/bookingRequest.php');
     exit;
 } else if ($start_time >= $end_time) {
     $_SESSION['msg_error'] = "Start time must be before end time.";
-    header('Location: ../bookingRequest.php');
+    header('Location: ../views/bookingRequest.php');
     exit;
 } else if ($start_time < '06:00' || $end_time > '22:00') {
     $_SESSION['msg_error'] = "Time must be between 06:00 and 22:00.";
-    header('Location: ../bookingRequest.php');
+    header('Location: ../views/bookingRequest.php');
     exit;
 }
 
+require_once('../database/init.php');
 try {
-    $dbh = new PDO('sqlite:../database.db');
-    $dbh->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
-    $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
     // query for getting available providers - AvailableProviders
     // that are not doing other services at the same time - FreeProviders
@@ -103,10 +101,10 @@ try {
             $_SESSION['msg_no_providers'] = "No available providers that meet your needs. Choose another date or time.";
         }
         $_SESSION['availableProviders'] = $availableProviders; // Store in session
-        header('Location: ../bookingRequest.php');
+        header('Location: ../views/bookingRequest.php');
     } else {
         echo "Erro na execução da consulta.";
-        header('Location: ../bookingRequest.php');
+        header('Location: ../views/bookingRequest.php');
     }
 
 } catch (PDOException $e) {

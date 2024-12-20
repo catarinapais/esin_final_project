@@ -29,7 +29,7 @@ if (strlen((string)$phone_number) != 9) {
 }
 
 if (isset($_SESSION["msg_error"])) {
-    header('Location: ../register.php');
+    header('Location: ../views/register.php');
     exit;
 }
 
@@ -57,10 +57,8 @@ function insertOwner($person) {
     $stmt->execute(array($person));
 }
 
+require_once('../database/init.php');
 try {
-    $dbh = new PDO('sqlite:../database.db');
-    $dbh->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
-    $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
     // Inserir usuário e obter ID
     $personId = insertPerson($name, $phone_number, $address, $email, $city, $iban, $password, $service_type);
@@ -77,13 +75,13 @@ try {
     $_SESSION["msg_success"] = "Successful Registration! Welcome, $name.";
 
     // Redirecionar para a página principal
-    header('Location: ../initialPage.php');
+    header('Location: ../views/initialPage.php');
     exit();
 
 } catch (PDOException $e) {
     // Em caso de erro, definir mensagem e redirecionar para a página de registro
     $_SESSION["msg_error"] = "Unsuccessful registration. Please try again.";
-    header('Location: ../register.php');
+    header('Location: ../views/register.php');
     exit();
 }
 ?>

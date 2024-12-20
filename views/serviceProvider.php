@@ -103,9 +103,7 @@ $week_range = calculateWeekRange($week_offset);
 $week_start = $week_range['week_start'];
 $week_end = $week_range['week_end'];
 
-$dbh = new PDO('sqlite:database.db');
-$dbh->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC); //association fetching
-$dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION); //error handling
+require_once('../database/init.php');
 
 try { // try catch for error handling
   $stmt = $dbh->prepare(
@@ -124,7 +122,7 @@ try { // try catch for error handling
   $error_msg = "Error fetching schedule. Please try again."; // ir buscar a mensagem de erro e guardar em $error_msg
 }
 
-include('templates/header_tpl.php');
+include('../templates/header_tpl.php');
 ?>
 <main class="mainContent">
   <section id="scheculeForm">
@@ -141,7 +139,7 @@ include('templates/header_tpl.php');
       <?php endif; ?>
     </section>
     <?php if (isset($_SESSION['iban'])) : // if the person is a service provider?>
-    <form action="actions/action_addAvailability.php" method="POST">
+    <form action="../actions/action_addAvailability.php" method="POST">
       <!--post: enviar informação (encriptada)-->
       <!--get: receber informação (envia pelo url)-->
       <fieldset>
@@ -205,4 +203,4 @@ include('templates/header_tpl.php');
   <?php endif; ?>
 </main>
 
-<?php include('templates/footer_tpl.php'); ?>
+<?php include('../templates/footer_tpl.php'); ?>

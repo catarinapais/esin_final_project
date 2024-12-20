@@ -6,7 +6,7 @@ $iban = $_SESSION['iban'] ?? 'Not defined';
 
 
 
-include('templates/header_tpl.php'); ?>
+include('../templates/header_tpl.php'); ?>
 
  <main id="payment-content">
     <h1>Payment</h1>
@@ -24,4 +24,4 @@ include('templates/header_tpl.php'); ?>
 <p>Once we confirm the payment, we will contact you to finalize the process.</p>
     </main>
 
-<?php include('templates/footer_tpl.php'); ?>
+<?php include('../templates/footer_tpl.php'); ?>

@@ -1,8 +1,7 @@
 <?php
 session_start();
 
-function displayMessages($schedule)
-{
+function displayMessages($schedule) {
     // TODO: ver tb o dia e ordenar as mensagens
     // acho que nao vai ser preciso ordenar, uma vez que sao inseridas por ordem (?) maybe
     // make user_id a global variable
@@ -32,9 +31,7 @@ function displayMessages($schedule)
     }
 }
 
-$dbh = new PDO('sqlite:database.db');
-$dbh->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC); //association fetching
-$dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION); //error handling
+require_once('../database/init.php');
 
 try { // try catch for error handling
     $user1_id = 1; // considering this is the one logged in
@@ -56,7 +53,7 @@ try { // try catch for error handling
 
 
 <?php
-    include('templates/header_tpl.php');
+    include('../templates/header_tpl.php');
     ?>
     <main id="main"> 
         <h1>Chat</h1>
@@ -70,10 +67,10 @@ try { // try catch for error handling
             <div id="chatMessages">
                 <?php displayMessages($schedule); ?>
             </div>
-            <form id="messageForm" method="post" action="actions/action_messages.php">
+            <form id="messageForm" method="post" action="../actions/action_messages.php">
                 <input type="text" id="messageInput" placeholder="Type a message...">
                 <button type="submit" id="sendButton">&#128233;</button>
             </form>
         </section>
     </main>
-    <?php include('templates/footer_tpl.php'); ?>
+    <?php include('../templates/footer_tpl.php'); ?>

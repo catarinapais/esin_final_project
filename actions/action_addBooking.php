@@ -8,9 +8,9 @@ $id = $_SESSION['id'];
 $address = $_SESSION['address'];
 
 // Conectar ao banco de dados
+require_once('../database/init.php');
 try {
-    $dbh = new PDO('sqlite:../database.db');
-    $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
 
     // Consulta para ir buscar os pets do user
     $stmt = $dbh->prepare('SELECT * FROM Pet WHERE owner = :id');

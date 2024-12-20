@@ -20,11 +20,8 @@ function loginSuccess($email, $password) {
   }
 }
 
+require_once('../database/init.php');
 try {
-    // Connect to SQLite database
-    $dbh = new PDO('sqlite:../database.db');
-    $dbh->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
-    $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
     // Attempt login
     $user = loginSuccess($email, $password);
@@ -41,17 +38,17 @@ try {
         $_SESSION['service_type'] = $user['service_type'];
     }
       $_SESSION['msg_success'] = 'Welcome back!';
-      header('Location: ../initialPage.php');
+      header('Location: ../views/initialPage.php');
       exit();
   } else {
       $_SESSION['msg_error'] = 'Invalid email or password!';
-      header('Location: ../login.php');
+      header('Location: ../views/login.php');
       exit();
   }
   
 } catch (PDOException $e) {
     // Handle connection errors
     $_SESSION['msg_error'] = 'Error: ' . $e->getMessage();
-    header('Location: ../login.php'); // Redirect to login page
+    header('Location: ../views/login.php'); // Redirect to login page
 }
 ?>

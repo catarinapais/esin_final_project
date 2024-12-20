@@ -1,7 +1,7 @@
 <?php
 session_start();
 if (!isset($_SESSION['id'])) {
-    header('Location: ../login.php');
+    header('Location: ../views/login.php');
     exit;
 }
 
@@ -16,7 +16,7 @@ $medicalneeds = $_POST['medicalneeds'];  // Considera que medicalneeds é um tex
 
 if (!empty($birthdate) && $birthdate > date('Y-m-d')) {
     $_SESSION['msg_error'] = "Birthdate must be in the past.";
-    header('Location: ../account.php#pets');
+    header('Location: ../views/account.php#pets');
     exit;
 }
 
@@ -75,10 +75,8 @@ function insertPetMedicalNeed($pet_id, $medicalNeed_id) {
     $stmt->execute([$pet_id, $medicalNeed_id]);
 }
 
+require_once('../database/init.php');
 try {
-    $dbh = new PDO('sqlite:../database.db');
-    $dbh->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
-    $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
     // Inserir o pet e obter o ID
     $pet_id = insertPet($name, $species, $size, $birthdate, $profile_picture, $user_id); // (A função insertPet retorna o id do último petinserido)
@@ -92,7 +90,7 @@ try {
     }
 
     // Redirecionar para a página de conta após o sucesso
-    header('Location: ../account.php');
+    header('Location: ../views/account.php');
     exit;
 
 } catch (PDOException $e) {

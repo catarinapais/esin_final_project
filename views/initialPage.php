@@ -18,11 +18,10 @@ function starReview($stars) {
     return $result;
 }
 
+require_once('../database/init.php');
+
 function retrieveReviews() {
     global $reviews, $error_msg, $dbh;
-    $dbh = new PDO('sqlite:database.db');
-    $dbh->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC); //association fetching
-    $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION); //error handling
 
     try { // try catch for error handling
         $stmt = $dbh->prepare(
@@ -51,7 +50,7 @@ function retrieveReviews() {
 
 
     <?php
-    include('templates/header_tpl.php');
+    include('../templates/header_tpl.php');
     ?>
     <main id="content">
 
@@ -62,7 +61,7 @@ function retrieveReviews() {
         } ?>
         <article>
             <div class="imageContainer">
-                <img src="images/assets/initial_page_img.jpeg" alt="A cat and two dogs.">
+                <img src="../images/assets/initial_page_img.jpeg" alt="A cat and two dogs.">
                 <p class="overlayText">The platform for your 4-paw besties</p>
             </div>
         </article>
@@ -105,4 +104,4 @@ function retrieveReviews() {
         </article>
         <?php endif; ?>
     </main>
-    <?php include('templates/footer_tpl.php'); ?>
+    <?php include('../templates/footer_tpl.php'); ?>

@@ -2,11 +2,10 @@
 session_start();
 $name = $_SESSION['name'];
 
+require_once('../database/init.php');
+
 try {
-    // Connect to the SQLite database
-    $dbh = new PDO('sqlite:database.db');
-    $dbh->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
-    $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    
 
     $user_id = $_SESSION['id'];
 
@@ -147,10 +146,10 @@ try {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pet Patrol</title>
-    <link href="css/style.css" rel="stylesheet">
-    <link href="css/layout.css" rel="stylesheet">
-    <link href="css/responsive.css" rel="stylesheet">
-    <link href="css/account.css" rel="stylesheet">
+    <link href="../css/style.css" rel="stylesheet">
+    <link href="../css/layout.css" rel="stylesheet">
+    <link href="../css/responsive.css" rel="stylesheet">
+    <link href="../css/account.css" rel="stylesheet">
 </head>
 <body>
 <header id="navigationBar">
@@ -158,7 +157,7 @@ try {
         <div id="logo">
             <h1>Pet Patrol</h1>
             <h2>Sit and Walk</h2>
-            <img src="images/assets/logo1.png" alt="Logo of Pet Patrol">
+            <img src="../images/assets/logo1.png" alt="Logo of Pet Patrol">
         </div>
     </a>
     <nav id="menu">
@@ -228,7 +227,7 @@ try {
                     <?php endif; ?>
 
                     <!--button for logout-->
-                    <form action="actions/action_logout.php" method="post" id=logout>
+                    <form action="../actions/action_logout.php" method="post" id=logout>
                         <input type="submit" value="Logout">
                     </form>
                 </section>
@@ -319,7 +318,7 @@ try {
                 <section id="pets">
                     <legend>
                         <d>Pets<d>
-                                <img src="images/assets/pata.png" alt="Pet" class="pet-icon">
+                                <img src="../images/assets/pata.png" alt="Pet" class="pet-icon">
                     </legend>
 
                     <!-- Add a new pet -->
@@ -331,7 +330,7 @@ try {
                     <?php endif; ?>
                     <input type="checkbox" id="toggleForm" style="display: none;">
                     <label for="toggleForm" id="addPetButton" class="button"></label>
-                    <form id="newPetForm" action="actions/action_addPet.php" method="post" enctype="multipart/form-data">
+                    <form id="newPetForm" action="../actions/action_addPet.php" method="post" enctype="multipart/form-data">
                         <h3>Add a New Pet</h3>
                         <div class="form-group">
                             <label for="name">Pet Name:<span class="required">*</span></label>
@@ -381,11 +380,11 @@ try {
                                 <div class="pet-card">
                                     <div class="pet-image">
                                         <?php if (!empty($pet['pet_profile_picture'])): ?>
-                                            <img src="images/uploads/<?= htmlspecialchars($pet['pet_profile_picture']) ?>"
+                                            <img src="../images/uploads/<?= htmlspecialchars($pet['pet_profile_picture']) ?>"
                                                 alt="<?= htmlspecialchars($pet['pet_name']) ?>"
                                                 class="pet-profile-pic">
                                         <?php else: ?>
-                                            <img src="images/assets/imagemdefault.jpg"
+                                            <img src="../images/assets/imagemdefault.jpg"
                                                 alt="Default picture for pet"
                                                 class="pet-profile-pic">
                                         <?php endif; ?>
@@ -429,4 +428,4 @@ try {
     </main>
 
 
-    <?php include('templates/footer_tpl.php'); ?>
+    <?php include('../templates/footer_tpl.php'); ?>
