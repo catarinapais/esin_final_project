@@ -230,6 +230,12 @@ try {
                     <form action="../actions/action_logout.php" method="post" id=logout>
                         <input type="submit" value="Logout">
                     </form>
+
+                    <!-- Botão para apagar conta -->
+<form action="../actions/action_delete_account.php" method="post" id="deleteAccount">
+    <input type="submit" value="Delete Account" onclick="return confirm('Are you sure you want to delete your account? This action cannot be undone.');">
+</form>
+
                 </section>
 
                 <!--TODO: apenas mostrar os services e os bookings antigos!!-->
