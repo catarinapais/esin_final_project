@@ -34,7 +34,6 @@ try {
     exit();
 }
 
-
 include('../templates/header_tpl.php');
 ?>
 <main id="bookingcontent">
@@ -44,15 +43,17 @@ include('../templates/header_tpl.php');
             <?php unset($_SESSION['msg_error']); ?>
         <?php endif; ?>
     </section>
+    
     <?php if ($has_pets): ?>
-
         <?php
-        $selected_service_type = $_GET['service_type'] ?? ''; // Get the service type from the query parameter, if available
+        // Carregar o tipo de serviço previamente selecionado (se aplicável)
+        $selected_service_type = $_GET['service_type'] ?? '';
         ?>
-        <form action="../actions/action_findProviders.php" method="post">
+
+        <!-- Formulário inicial para selecionar critérios -->
+        <form action="" method="post" id="searchForm">
             <fieldset>
                 <legend>Booking</legend>
-
                 <div class="form-group">
                     <label for="pet-selection">
                         <p>Pet's name:</p><span class="required">*</span>
@@ -184,7 +185,6 @@ include('../templates/header_tpl.php');
             Please <a href="account.php#addPetSection"> add a pet</a> to continue.
         </p>
     <?php endif; ?>
-
 
 </main>
 
