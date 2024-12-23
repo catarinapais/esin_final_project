@@ -152,6 +152,7 @@ include('../templates/header_tpl.php');
 
                         <!-- Formulário oculto para redirecionar para addbooking.php -->
                         <form action="../actions/action_addBooking.php" method="post">
+                            <input type="hidden" name="provider_id" value="<?= htmlspecialchars($provider['provider_id']) ?>">
                             <input type="hidden" name="service_type" value="<?= htmlspecialchars($_POST['service_type'] ?? '') ?>">
                             <input type="hidden" name="pet_name" value="<?= htmlspecialchars($_POST['pet_name'] ?? '') ?>">
                             <input type="hidden" name="date" value="<?= htmlspecialchars($_POST['date'] ?? '') ?>">

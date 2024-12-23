@@ -122,6 +122,33 @@ try { // try catch for error handling
   $error_msg = "Error fetching schedule. Please try again."; // ir buscar a mensagem de erro e guardar em $error_msg
 }
 
+function retrieveFutureBookings() {
+  global $id, $bookings, $error_msg, $dbh;
+
+  try { // try catch for error handling
+      $stmt = $dbh->prepare(
+          'SELECT 
+          Booking.date, 
+          Booking.start_time, 
+          Booking.end_time, 
+          Booking.address_collect, 
+          Person.name AS provider_name, 
+          Pet.name AS pet_name  
+          FROM Booking 
+          JOIN Person ON Booking.provider = Person.id
+          JOIN Pet ON Pet.owner = ? 
+          WHERE Booking.date >= ? AND Pet.owner = ?;'
+      ); // prepared statement
+      $stmt->execute($id, date('Y-m-d'), $id);
+      $bookings = $stmt->fetchAll(); //fetching all schedules by the user (array of arrays)
+  } catch (Exception $e) {
+      $error_msg = $e->getMessage(); // ir buscar a mensagem de erro e guardar em $error_msg
+  }
+  return $bookings;
+}
+
+
+
 include('../templates/header_tpl.php');
 ?>
 <main class="mainContent">
@@ -189,6 +216,8 @@ include('../templates/header_tpl.php');
   </section>
   <section id="scheduledBookings">
     <h2>Scheduled Bookings</h2>
+    <?php retrieveFutureBookings(); ?>
+    <?= $error_msg ? '<p class="msg_error">' . $error_msg . '</p>' : '' ?>
     <?php if (!empty($bookings)) : ?>
       <?php foreach ($bookings as $booking) : ?>
         <article>
