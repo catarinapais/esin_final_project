@@ -9,10 +9,6 @@ $iban = $_SESSION['iban'] ?? 'Not defined';
 include('../templates/header_tpl.php'); ?>
 
  <main id="payment-content">
-    <?php if (isset($_SESSION["msg_success"])) {
-            echo "<p class='msg_success'>{$_SESSION["msg_success"]}</p>";
-            unset($_SESSION["msg_success"]);
-        } ?>
     <h1>Payment</h1>
     <p><strong>Amount:</strong> <?php echo htmlspecialchars($payment); ?></p>
     <p><strong>Provider's IBAN:</strong> <?php echo htmlspecialchars($iban); ?></p>

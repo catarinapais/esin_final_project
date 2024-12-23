@@ -165,9 +165,3 @@
     }
   
 }
-
-@media (max-height: 530px) {
-    aside.sidebar {
-        display: none;
-    }
-}
