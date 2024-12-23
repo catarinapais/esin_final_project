@@ -5,7 +5,7 @@ $name = $_SESSION['name'];
 require_once('../database/init.php');
 
 try {
-    
+
 
     $user_id = $_SESSION['id'];
 
@@ -121,7 +121,7 @@ try {
     $medicalNeeds = [];
     foreach ($petOwnerInfo as $pet) {
         $pet_id = $pet['pet_id'];  // Get pet ID
-        
+
         // Fetch medical needs for this pet
         $medicalStmt = $dbh->prepare(
             "SELECT description 
@@ -142,6 +142,7 @@ try {
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -151,39 +152,40 @@ try {
     <link href="../css/responsive.css" rel="stylesheet">
     <link href="../css/account.css" rel="stylesheet">
 </head>
+
 <body>
-<header id="navigationBar">
-    <a href="initialPage.php">
-        <div id="logo">
-            <h1>Pet Patrol</h1>
-            <h2>Sit and Walk</h2>
-            <img src="../images/assets/logo1.png" alt="Logo of Pet Patrol">
-        </div>
-    </a>
-    <nav id="menu">
-        <input type="checkbox" id="hamburger">
-        <label class="hamburger" for="hamburger"></label>
-        <ul id="menuItems">
-            <?php if (isset($_SESSION['email'])): ?>
-                <li><a href="bookingRequest.php">BOOK A SERVICE</a></li>
-                <li><a href="serviceProvider.php">DO A SERVICE</a></li>
-                <li><a href="aboutus.php">ABOUT US</a></li>
-                <li>
-                    <a href="account.php" class="nomedapessoa">
-                    <span class="emoji" role="img" aria-label="apple">🙎🏼</span> 
-                        <?php echo ($name); ?>
-                    </a>
-                </li>
-            <?php else: ?>
-                <li><a href="aboutus.php">ABOUT US</a></li>
-                <li class="signup"><a href="register.php" class="button-74">REGISTER</a></li>
-                <li class="signup">
-                    <a href="login.php" class="button-56" role="button">LOGIN</a>
-                </li>
-            <?php endif; ?>
-        </ul>
-    </nav>
-</header>
+    <header id="navigationBar">
+        <a href="initialPage.php">
+            <div id="logo">
+                <h1>Pet Patrol</h1>
+                <h2>Sit and Walk</h2>
+                <img src="../images/assets/logo1.png" alt="Logo of Pet Patrol">
+            </div>
+        </a>
+        <nav id="menu">
+            <input type="checkbox" id="hamburger">
+            <label class="hamburger" for="hamburger"></label>
+            <ul id="menuItems">
+                <?php if (isset($_SESSION['email'])): ?>
+                    <li><a href="bookingRequest.php">BOOK A SERVICE</a></li>
+                    <li><a href="serviceProvider.php">DO A SERVICE</a></li>
+                    <li><a href="aboutus.php">ABOUT US</a></li>
+                    <li>
+                        <a href="account.php" class="nomedapessoa">
+                            <span class="emoji" role="img" aria-label="apple">🙎🏼</span>
+                            <?php echo ($name); ?>
+                        </a>
+                    </li>
+                <?php else: ?>
+                    <li><a href="aboutus.php">ABOUT US</a></li>
+                    <li class="signup"><a href="register.php" class="button-74">REGISTER</a></li>
+                    <li class="signup">
+                        <a href="login.php" class="button-56" role="button">LOGIN</a>
+                    </li>
+                <?php endif; ?>
+            </ul>
+        </nav>
+    </header>
 
 
     <aside class="sidebar">
@@ -322,8 +324,6 @@ try {
                     </legend>
 
                     <!-- Add a new pet -->
-                    <?php //TODO: dar layout a esta msg de erro 
-                    ?>
                     <?php if (isset($_SESSION['msg_error'])): ?>
                         <p class="msg_error"><?= $_SESSION['msg_error'] ?></p>
                         <?php unset($_SESSION['msg_error']); ?>
@@ -361,10 +361,10 @@ try {
                             <input type="date" id="birthdate" name="birthdate">
                         </div>
 
-        <div class="form-group">
-            <label for="medicalneeds">Medical needs we should know about:</label>
-            <textarea name="medicalneeds" id="medicalneeds" rows="3" cols="30" ></textarea>
-        </div>
+                        <div class="form-group">
+                            <label for="medicalneeds">Medical needs we should know about:</label>
+                            <textarea name="medicalneeds" id="medicalneeds" rows="3" cols="30"></textarea>
+                        </div>
 
                         <div class="form-group">
                             <label for="profile_picture">Profile Picture:</label>
@@ -393,22 +393,22 @@ try {
                                         <legend> <?= htmlspecialchars($pet['pet_name']) ?></legend>
                                         <p><strong>Species:</strong> <?= ucfirst(htmlspecialchars($pet['pet_species'])) ?></p>
                                         <p><strong>Size:</strong> <?= ucfirst(htmlspecialchars($pet['pet_size'])) ?></p>
-                        <?php if (!empty($pet['pet_age'])): ?> <!-- Verifica se o campo pet_age tem algum valor -->
-                        <p><strong>Birth Date:</strong> <?= htmlspecialchars($pet['pet_age']) ?></p>
-    <?php endif; ?>
-                         <!-- Display medical needs if they exist -->
-        <?php if (isset($medicalNeeds[$pet['pet_id']]) && !empty($medicalNeeds[$pet['pet_id']])): ?>
-          
-          
-            <p id="medical-needs">
-                <strong>Medical Needs:</strong>
-                <?php foreach ($medicalNeeds[$pet['pet_id']] as $need): ?>
-                    <?= htmlspecialchars($need['description']) ?>
-                <?php endforeach; ?>
-                </p>
-        <?php else: ?>
-            <p>No medical needs recorded.</p>
-        <?php endif; ?>
+                                        <?php if (!empty($pet['pet_age'])): ?> <!-- Verifica se o campo pet_age tem algum valor -->
+                                            <p><strong>Birth Date:</strong> <?= htmlspecialchars($pet['pet_age']) ?></p>
+                                        <?php endif; ?>
+                                        <!-- Display medical needs if they exist -->
+                                        <?php if (isset($medicalNeeds[$pet['pet_id']]) && !empty($medicalNeeds[$pet['pet_id']])): ?>
+
+
+                                            <p id="medical-needs">
+                                                <strong>Medical Needs:</strong>
+                                                <?php foreach ($medicalNeeds[$pet['pet_id']] as $need): ?>
+                                                    <?= htmlspecialchars($need['description']) ?>
+                                                <?php endforeach; ?>
+                                            </p>
+                                        <?php else: ?>
+                                            <p>No medical needs recorded.</p>
+                                        <?php endif; ?>
 
                                     </div>
                                 </div>

@@ -11,7 +11,6 @@ $address = $_SESSION['address'];
 require_once('../database/init.php');
 try {
 
-
     // Consulta para ir buscar os pets do user
     $stmt = $dbh->prepare('SELECT * FROM Pet WHERE owner = :id');
     $stmt->bindValue(':id', $id, PDO::PARAM_INT);
@@ -23,6 +22,7 @@ try {
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         // Ir buscar dados do form
         $pet_name = $_POST['pet_name'] ?? null;
+        $pet_names_array = explode(", ", $pet_name);
         $service_type = $_POST['service_type'] ?? null;
         $location = $_POST['location'] ?? null;
         $date = $_POST['date'] ?? null;
@@ -93,10 +93,12 @@ try {
             $pet_name,
             $payment
         ]);
-        echo "<p>Booking successfully submitted!</p>";
+        $_SESSION["msg_success"] = "Booking successfully submitted!";
+        header('Location: ../views/payment.php');
     }
 } catch (PDOException $e) {
-    echo "Error: " . $e->getMessage();
+    $_SESSION["msg_error"] = "Error: " . $e->getMessage();
+    header('Location: ../views/bookingRequest.php'); //TODO: print this error_msg
     exit();
 }
 ?>
