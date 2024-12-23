@@ -14,6 +14,8 @@ $iban = strtoupper($_POST['iban']); //iban em maiusculas (para verificar a seque
 $password = $_POST['password'];
 $service_type = $_POST['service_type'];
 
+
+
 if (strlen((string)$phone_number) != 9) {
     $_SESSION["msg_error"] = "The phone number must contain 9 digits.";
 } elseif (!empty($iban) && empty($service_type)) {
@@ -73,7 +75,7 @@ try {
     $_SESSION['iban'] = $iban;
     $_SESSION['service_type'] = $service_type;
     $_SESSION["msg_success"] = "Successful Registration! Welcome, $name.";
-
+  
     // Redirecionar para a página principal
     header('Location: ../views/initialPage.php');
     exit();

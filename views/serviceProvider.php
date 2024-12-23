@@ -146,8 +146,15 @@ include('../templates/header_tpl.php');
         <legend>Schedule</legend>
         <div class="form-group">
           <p>Service Type: </p>
-          <label><input type="checkbox" name="service_type" value="sitting">Pet Sitting</label>
-          <label><input type="checkbox" name="service_type" value="walking">Pet Walking</label>
+    
+          <?php if ($_SESSION['service_type'] === 'sitting' || $_SESSION['service_type'] === 'both') : ?>
+    <label><input type="checkbox" name="service_type[]" value="sitting">Pet Sitting</label>
+<?php endif; ?>
+
+<?php if ($_SESSION['service_type'] === 'walking' || $_SESSION['service_type'] === 'both') : ?>
+    <label><input type="checkbox" name="service_type[]" value="walking">Pet Walking</label>
+<?php endif; ?>
+
         </div>
 
         <div class="form-group">
