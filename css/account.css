@@ -10,7 +10,7 @@ body {
     grid-column: start / end;
   }
 
-  #maincontent {
+  #accountcontent {
     grid-column: start;
   }
 
@@ -44,11 +44,11 @@ aside.sidebar {
     border-radius: 10px;  /* Bordas arredondadas */
     box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);  /* Sombras suaves para dar profundidade */
     text-align: center;
- 
-
-    top: 0;  /* Fixa no topo */
-
+    top: 100px;  /* Fixa no topo */
+    right: 10px;
     transition: all 0.3s ease;  /* Animação suave ao interagir */
+    position: sticky;  /* Fixa a barra lateral */
+    height: 75vh;  /* Altura total da tela */
 }
 .sidebar h2 {
     font-size: 1.9em;
@@ -213,7 +213,6 @@ form input[type="submit"]:hover {
 
 #pets {
     margin: 20px auto;
-    max-width: 800px;
     font-family: Arial, sans-serif;
 }
 
@@ -323,5 +322,6 @@ legend {
     padding-bottom: 5px; /* Ajusta o padding para a borda não ficar muito grande */
 }
 
-
-
+footer {
+    z-index: 10;
+}
