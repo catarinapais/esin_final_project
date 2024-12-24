@@ -31,7 +31,7 @@ try {
         $photo_consent = $_POST['photo_consent'] ?? null;
         $review_consent = $_POST['review_consent'] ?? null;  
          $duration = $end_time - $start_time;
-        $service_provider_id = 1; //TODO: alterar isto quando a catarina puser a dar a cena dos providers no form, tou a assumir que vai retornar o id, se for o nome devemosmudar!!
+        $service_provider_id =$_POST['provider_id'] ?? null; ; //TODO: alterar isto quando a catarina puser a dar a cena dos providers no form, tou a assumir que vai retornar o id, se for o nome devemosmudar!!
 
         $start = new DateTime($start_time);
         $end = new DateTime($end_time);
@@ -93,6 +93,9 @@ try {
             $pet_name,
             $payment
         ]);
+        $booking_id = $dbh->lastInsertId();
+       
+        $_SESSION['booking_id'] = $booking_id;
         $_SESSION["msg_success"] = "Booking successfully submitted!";
         header('Location: ../views/payment.php');
     }

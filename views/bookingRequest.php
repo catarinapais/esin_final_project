@@ -137,39 +137,48 @@ include('../templates/header_tpl.php');
         </form>
 
         <section id="availableProviders">
-            <?php if (isset($_SESSION['msg_no_providers'])) : ?>
-                <p class="msg_error"><?php echo $_SESSION['msg_no_providers']; ?></p>
-                <?php unset($_SESSION['msg_no_providers']); ?>
-            <?php endif; ?>
-            <?php if (!empty($availableProviders)) : ?>
-                <h2>Available Pet Walkers/Pet Sitters at <?= $availableProviders[0]['day_week'] ?></h2>
-                <?php foreach ($availableProviders as $provider): ?>
-                    <article class="eachProvider">
-                        <h3><?= $provider['provider_name'] ?></h3>
-                        <p><?php echo htmlspecialchars($provider['provider_phone_number']); ?></p>
-                        <p><?php echo htmlspecialchars($provider['provider_email']); ?></p>
-                        <p>Rating: <?php echo htmlspecialchars($provider['provider_avg_rating']); ?></p>
+    <?php if (isset($_SESSION['msg_no_providers'])) : ?>
+        <p class="msg_error"><?php echo $_SESSION['msg_no_providers']; ?></p>
+        <?php unset($_SESSION['msg_no_providers']); ?>
+    <?php endif; ?>
+    <?php if (!empty($availableProviders)) : ?>
+        <h2>Available Pet Walkers/Pet Sitters at <?= $availableProviders[0]['day_week'] ?></h2>
 
-                        <!-- Formulário oculto para redirecionar para addbooking.php -->
-                        <form action="../actions/action_addBooking.php" method="post">
-                            <input type="hidden" name="service_type" value="<?= htmlspecialchars($_POST['service_type'] ?? '') ?>">
-                            <input type="hidden" name="pet_name" value="<?= htmlspecialchars($_POST['pet_name'] ?? '') ?>">
-                            <input type="hidden" name="date" value="<?= htmlspecialchars($_POST['date'] ?? '') ?>">
-                            <input type="hidden" name="location" value="<?= htmlspecialchars($_POST['location'] ?? '') ?>">
-                            <input type="hidden" name="starttime" value="<?= htmlspecialchars($_POST['starttime'] ?? '') ?>">
-                            <input type="hidden" name="endtime" value="<?= htmlspecialchars($_POST['endtime'] ?? '') ?>">
-                            <input type="hidden" name="photo_consent" value="<?= htmlspecialchars($_POST['photo_consent'] ?? 'NO') ?>">
-                            <input type="hidden" name="review_consent" value="<?= htmlspecialchars($_POST['review_consent'] ?? 'NO') ?>">
+        <!-- Formulário com select para escolher o provider -->
+        <form action="../actions/action_addBooking.php" method="post">
+            <div class="form-group">
+                <label for="provider_selection">
+                    <p>Select a Pet Walker/Pet Sitter:</p><span class="required">*</span>
+                </label>
+                <select name="provider_id" id="provider_selection" required>
+                    <option value="">Select a provider</option>
+                    <?php foreach ($availableProviders as $provider): ?>
+                        <option value="<?= htmlspecialchars($provider['provider_id']) ?>">
+                            <?= htmlspecialchars($provider['provider_name']) ?> - 
+                            <?= htmlspecialchars($provider['provider_phone_number']) ?> - 
+                            Rating: <?= htmlspecialchars($provider['provider_avg_rating']) ?>
+                        </option>
+                    <?php endforeach; ?>
+                </select>
+            </div>
 
-                            <button type="submit">Book</button>
-                        </form>
+            <!-- Campos ocultos com os dados da reserva -->
+            <input type="hidden" name="service_type" value="<?= htmlspecialchars($_POST['service_type'] ?? '') ?>">
+            <input type="hidden" name="pet_name" value="<?= htmlspecialchars($_POST['pet_name'] ?? '') ?>">
+            <input type="hidden" name="date" value="<?= htmlspecialchars($_POST['date'] ?? '') ?>">
+            <input type="hidden" name="location" value="<?= htmlspecialchars($_POST['location'] ?? '') ?>">
+            <input type="hidden" name="starttime" value="<?= htmlspecialchars($_POST['starttime'] ?? '') ?>">
+            <input type="hidden" name="endtime" value="<?= htmlspecialchars($_POST['endtime'] ?? '') ?>">
+            <input type="hidden" name="photo_consent" value="<?= htmlspecialchars($_POST['photo_consent'] ?? 'NO') ?>">
+            <input type="hidden" name="review_consent" value="<?= htmlspecialchars($_POST['review_consent'] ?? 'NO') ?>">
 
-                    </article>
-                <?php endforeach; ?>
-            <?php else: ?>
-                <p> Choose one option to check for available providers. </p>
-            <?php endif; ?>
-        </section>
+            <button type="submit">Book</button>
+        </form>
+
+    <?php else: ?>
+        <p> Choose one option to check for available providers. </p>
+    <?php endif; ?>
+</section>
 
         <!--restrições a ter em conta ao mostrar os providers disponíveis:
         * verificar service type da reserva e o do provider

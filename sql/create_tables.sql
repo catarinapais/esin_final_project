@@ -106,7 +106,7 @@ CREATE TABLE PetMedicalNeed(
 );
 
 CREATE TABLE Booking (
-    id INTEGER PRIMARY KEY,
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
     date TEXT NOT NULL,
     start_time TEXT,
     end_time TEXT CHECK(end_time IS NULL OR end_time>start_time),
@@ -114,7 +114,7 @@ CREATE TABLE Booking (
     address_collect TEXT NOT NULL,
     photo_consent TEXT CHECK (photo_consent IN ('YES', 'NO')) NULL,
     review_consent TEXT CHECK (review_consent IN ('YES', 'NO')) NULL,
-    provider INTEGER NOT NULL REFERENCES ServiceProvider, -- (id)
+    provider INTEGER NOT NULL REFERENCES ServiceProvider ON DELETE CASCADE, --istoassegura que, ao excluir um provider, todos os agendamentos relacionados sejam automaticamente removidos.  
     type TEXT NOT NULL REFERENCES BookingType,
     pet INTEGER NOT NULL REFERENCES Pet, -- (id)
     payment INTEGER REFERENCES Payment, -- (id)

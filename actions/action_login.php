@@ -26,7 +26,7 @@ try {
     // Attempt login
     $user = loginSuccess($email, $password);
 
-    if ($user == loginSuccess($email, $password)) {
+    if ($user =loginSuccess($email, $password)) {
       $_SESSION['id'] = $user['id']; // 'id' deve ser a coluna correspondente no banco
       $_SESSION['email'] = $user['email'];
       $_SESSION['name'] = $user['name'];
