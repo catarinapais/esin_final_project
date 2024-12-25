@@ -675,3 +675,76 @@ p.note {
     font-weight: lighter;
     font-size: small;
 }
+
+#scheduledServices {
+    margin-top: 1em;
+    max-width: 90%;
+}
+
+.booking-info {
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 16px;
+    margin: 16px 0; /* Add spacing between bookings */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    font-size: 1em;
+    color: #333;
+    display: flex; /* Use flexbox for side-by-side layout */
+    flex-direction: row;
+    flex-wrap:wrap;
+    justify-content: space-between; /* Distribute items across the space */
+    align-items: center; /* Align items vertically */
+}
+
+.booking-details {
+    flex: 1; /* Allow the details to take more space */
+    display: grid;
+    grid-template-columns: auto auto; /* Title and description side by side */
+    column-gap: 0; /* Space between columns */
+    row-gap: 8px; /* Space between rows */
+}
+
+.booking-title {
+    font-size: 1em;
+    font-weight: bold;
+    color: #333;
+    margin: 0;
+    text-align: left; /* Ensure left alignment */
+    padding-left: 1em;
+    padding-right: 1em;
+}
+
+.booking-desc {
+    margin: 0;
+    text-align: left; /* Ensure left alignment */
+    padding-left: 1em;
+    padding-right: 1em;
+}
+
+.pet-profile-picture {
+    width: 120px; /* Adjust size */
+    height: 120px;
+    border-radius: 50%; /* Circular image */
+    object-fit: cover; /* Ensure image fits nicely */
+    margin-left: 16px; /* Space between text and image */
+    border: 2px solid #ccc; /* Border around the image */
+}
+
+.message-button {
+    background-color: #D6ABAB; /* Button background color */
+    color: white; /* Button text color */
+    border: none; /* Remove default border */
+    border-radius: 8px; /* Make the button round */
+    cursor: pointer; /* Pointer cursor on hover */
+    font-size: 1em; /* Font size */
+    padding: 0.5em 1em; /* Padding around the text */
+    box-shadow: none; /* Remove default shadow */
+    transition: background-color 0.3s ease; /* Smooth transition for background color */
+    text-align:center;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra suave */
+}
+.message-button:hover {
+    background-color: #B88080; /* Darker background color on hover */
+    text-decoration: underline;
+}

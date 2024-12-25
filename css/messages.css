@@ -31,7 +31,7 @@
 }
 
 /* Additional styles for sender and recipient messages */
-.senderMessage {
+.recipientMessage {
     background-color: #f8d7da; /* Pink-ish background */
     align-self: flex-start;
     border-radius: 15px 15px 15px 0; /* Rounded corners with a tail on the left */
@@ -40,7 +40,7 @@
     position: relative;
 }
 
-.recipientMessage {
+.senderMessage {
     background-color: #B88080; /* Pink-ish background */
     align-self: flex-end;
     border-radius: 15px 15px 0 15px; /* Rounded corners with a tail on the right */
@@ -83,5 +83,22 @@
     padding: 10px;
     cursor: pointer;
     font-size: 1.2em;
-    width:2.5em;
+    width:2.25em;
+    height:2.25em;
+}
+
+.back-button {
+    cursor: pointer;
+    font-size: 1.2em;
+    width:2.25em;
+    height:2.25em;
+}
+
+.back-button:hover {
+    text-decoration: underline;
+}
+
+h1 {
+    text-align: center;
+
 }

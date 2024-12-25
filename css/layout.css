@@ -277,7 +277,7 @@ form button {
 
 #scheduleForm,
 #availability,
-#scheduledBookings {
+#scheduledServices {
     max-width: 600px; /* Optional: Limit the maximum width */
     padding: 4em; /* Add padding */
     padding-top: 1em;

@@ -34,6 +34,40 @@ try {
     exit();
 }
 
+function retrieveFutureBookings()
+{
+  global $id, $bookings, $error_msg, $dbh;
+  try { // try catch for error handling
+    $stmt = $dbh->prepare(
+      'SELECT 
+            Booking.date, 
+            Booking.start_time, 
+            Booking.end_time, 
+            Booking.address_collect, 
+            Booking.type AS service_type, 
+            Booking.address_collect AS address, 
+            Provider.id AS provider_id, 
+            Provider.name AS provider_name, 
+            ServiceProvider.avg_rating AS provider_rating,
+            Owner.id AS owner_id, 
+            Owner.city AS owner_city, 
+            Pet.name AS pet_name, 
+            Pet.profile_picture AS pet_picture
+          FROM Booking 
+          JOIN Person AS Provider ON Booking.provider = Provider.id 
+          JOIN ServiceProvider ON ServiceProvider.person = Provider.id 
+          JOIN Pet ON Booking.pet = Pet.id 
+          JOIN Person AS Owner ON Pet.owner = Owner.id 
+          WHERE Booking.date >= ? AND Owner.id = ?;'
+    ); // prepared statement
+    $stmt->execute([date('Y-m-d'), $id]);
+    $bookings = $stmt->fetchAll(); //fetching all schedules by the user (array of arrays)
+  } catch (Exception $e) {
+    $error_msg = $e->getMessage(); // ir buscar a mensagem de erro e guardar em $error_msg
+  }
+  return $bookings;
+}
+
 
 include('../templates/header_tpl.php');
 ?>
@@ -122,7 +156,7 @@ include('../templates/header_tpl.php');
 
                     <div class="form-group">
                         <label>
-                            <input type="checkbox" name="photo_consent" value="YES">
+                            <input type="checkbox" name="photo_consent" value='YES'>
                             I allow PetPatrol to take pictures of my pet during the walks for social media.
                         </label><br>
 
@@ -137,48 +171,49 @@ include('../templates/header_tpl.php');
         </form>
 
         <section id="availableProviders">
-    <?php if (isset($_SESSION['msg_no_providers'])) : ?>
-        <p class="msg_error"><?php echo $_SESSION['msg_no_providers']; ?></p>
-        <?php unset($_SESSION['msg_no_providers']); ?>
-    <?php endif; ?>
-    <?php if (!empty($availableProviders)) : ?>
-        <h2>Available Pet Walkers/Pet Sitters at <?= $availableProviders[0]['day_week'] ?></h2>
+            <?php if (isset($_SESSION['msg_no_providers'])) : ?>
+                <p class="msg_error"><?php echo $_SESSION['msg_no_providers']; ?></p>
+                <?php unset($_SESSION['msg_no_providers']); ?>
+            <?php endif; ?>
+            <?php if (!empty($availableProviders)) : ?>
+                <h2>Available Pet Walkers/Pet Sitters at <?= $availableProviders[0]['day_week'] ?></h2>
 
-        <!-- Formulário com select para escolher o provider -->
-        <form action="../actions/action_addBooking.php" method="post">
-            <div class="form-group">
-                <label for="provider_selection">
-                    <p>Select a Pet Walker/Pet Sitter:</p><span class="required">*</span>
-                </label>
-                <select name="provider_id" id="provider_selection" required>
-                    <option value="">Select a provider</option>
-                    <?php foreach ($availableProviders as $provider): ?>
-                        <option value="<?= htmlspecialchars($provider['provider_id']) ?>">
-                            <?= htmlspecialchars($provider['provider_name']) ?> - 
-                            <?= htmlspecialchars($provider['provider_phone_number']) ?> - 
-                            Rating: <?= htmlspecialchars($provider['provider_avg_rating']) ?>
-                        </option>
-                    <?php endforeach; ?>
-                </select>
-            </div>
+                <!-- Formulário com select para escolher o provider -->
+                <form action="../actions/action_addBooking.php" method="post">
+                    <div class="form-group">
+                        <label for="provider_selection">
+                            <p>Select a Pet Walker/Pet Sitter:</p><span class="required">*</span>
+                        </label>
+                        <select name="provider_id" id="provider_selection" required>
+                            <option value="">Select a provider</option>
+                            <?php foreach ($availableProviders as $provider): ?>
+                                <option value="<?= htmlspecialchars($provider['provider_id']) ?>">
+                                    <?= htmlspecialchars($provider['provider_name']) ?> -
+                                    <?= htmlspecialchars($provider['provider_phone_number']) ?> -
+                                    Rating: <?= htmlspecialchars($provider['provider_avg_rating']) ?>
+                                </option>
+                            <?php endforeach; ?>
+                        </select>
+                    </div>
 
-            <!-- Campos ocultos com os dados da reserva -->
-            <input type="hidden" name="service_type" value="<?= htmlspecialchars($_POST['service_type'] ?? '') ?>">
-            <input type="hidden" name="pet_name" value="<?= htmlspecialchars($_POST['pet_name'] ?? '') ?>">
-            <input type="hidden" name="date" value="<?= htmlspecialchars($_POST['date'] ?? '') ?>">
-            <input type="hidden" name="location" value="<?= htmlspecialchars($_POST['location'] ?? '') ?>">
-            <input type="hidden" name="starttime" value="<?= htmlspecialchars($_POST['starttime'] ?? '') ?>">
-            <input type="hidden" name="endtime" value="<?= htmlspecialchars($_POST['endtime'] ?? '') ?>">
-            <input type="hidden" name="photo_consent" value="<?= htmlspecialchars($_POST['photo_consent'] ?? 'NO') ?>">
-            <input type="hidden" name="review_consent" value="<?= htmlspecialchars($_POST['review_consent'] ?? 'NO') ?>">
+                    <!-- Campos ocultos com os dados da reserva -->
+                    <input type="hidden" name="service_type" value="<?= htmlspecialchars($_POST['service_type'] ?? '') ?>">
+                    <input type="hidden" name="pet_name" value="<?= htmlspecialchars($_POST['pet_name'] ?? '') ?>">
+                    <input type="hidden" name="date" value="<?= htmlspecialchars($_POST['date'] ?? '') ?>">
+                    <input type="hidden" name="location" value="<?= htmlspecialchars($_POST['location'] ?? '') ?>">
+                    <input type="hidden" name="other_address" value="<?= htmlspecialchars($_POST['other_address'] ?? '') ?>">
+                    <input type="hidden" name="starttime" value="<?= htmlspecialchars($_POST['starttime'] ?? '') ?>">
+                    <input type="hidden" name="endtime" value="<?= htmlspecialchars($_POST['endtime'] ?? '') ?>">
+                    <input type="hidden" name="photo_consent" value="<?= htmlspecialchars($_POST['photo_consent'] ?? 'NO') ?>">
+                    <input type="hidden" name="review_consent" value="<?= htmlspecialchars($_POST['review_consent'] ?? 'NO') ?>">
 
-            <button type="submit">Book</button>
-        </form>
+                    <button type="submit">Book</button>
+                </form>
 
-    <?php else: ?>
-        <p> Choose one option to check for available providers. </p>
-    <?php endif; ?>
-</section>
+            <?php else: ?>
+                <p> Choose one option to check for available providers. </p>
+            <?php endif; ?>
+        </section>
 
 
         <!--restrições a ter em conta ao mostrar os providers disponíveis:
@@ -187,6 +222,38 @@ include('../templates/header_tpl.php');
         * verificar se o start time e o end time incluem dentro o schedule do provider
         * garantir que o provider não tem mais bookings nesse momento
         * verificar que o owner e o provider são da mesma cidade-->
+
+        <section id="scheduledServices">
+            <h2>Scheduled Bookings</h2>
+            <?php retrieveFutureBookings(); ?>
+            <?= $error_msg ? '<p class="msg_error">' . $error_msg . '</p>' : '' ?>
+            <?php if (!empty($bookings)) : ?>
+                <?php foreach ($bookings as $booking) : ?>
+                    <article class="booking-info">
+                        <div class="booking-details">
+                            <p class="booking-title">Date and Time: </p>
+                            <p class="booking-desc"><?php echo htmlspecialchars($booking['date'] . ', ' . $booking['start_time'] . ' - ' . $booking['end_time']); ?></p>
+                            <p class="booking-title">Address: </p>
+                            <p class="booking-desc"><?php echo htmlspecialchars($booking['address'] . ', ' . ucfirst($booking['owner_city'])); ?></p>
+                            <p class="booking-title">Service Type: </p>
+                            <p class="booking-desc"><?php echo htmlspecialchars(ucfirst($booking['service_type'])); ?></p>
+                            <p class="booking-title">Pet: </p>
+                            <p class="booking-desc"><?php echo htmlspecialchars($booking['pet_name']); ?></p>
+                            <p class="booking-title">Provider's Name: </p>
+                            <p class="booking-desc"><?php echo htmlspecialchars($booking['provider_name']); ?></p>
+                            <p class="booking-title">Provider's Rating: </p>
+                            <p class="booking-desc"><?php echo $booking['provider_rating'] !== null ? htmlspecialchars(ucfirst($booking['provider_rating'])) : 'No reviews yet.'; ?></p>
+                            <a class="message-button" href="../views/messages.php?provider=<?= $booking['provider_id'] ?>&owner=<?= $id ?>">MESSAGE</a>
+                        </div>
+                        <img src="../images/uploads/<?= htmlspecialchars($booking['pet_picture']) ?>"
+                            alt="<?= htmlspecialchars($booking['pet_name']) ?>"
+                            class="pet-profile-picture">
+                    </article>
+                <?php endforeach; ?>
+            <?php else : ?>
+                <p>No bookings scheduled.</p>
+            <?php endif; ?>
+        </section>
 
     <?php else: ?>
         <p id="nopets">

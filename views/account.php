@@ -5,7 +5,6 @@ $name = $_SESSION['name'];
 require_once('../database/init.php');
 
 try {
-    
 
     $user_id = $_SESSION['id'];
 

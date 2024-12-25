@@ -21,6 +21,7 @@ try {
     // Verificar se o form foi enviado
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         // Ir buscar dados do form
+        $provider_id = $_POST['provider_id'] ?? null;
         $pet_name = $_POST['pet_name'] ?? null;
         $pet_names_array = explode(", ", $pet_name);
         $service_type = $_POST['service_type'] ?? null;
@@ -28,10 +29,9 @@ try {
         $date = $_POST['date'] ?? null;
         $start_time = $_POST['starttime'] ?? null;
         $end_time = $_POST['endtime'] ?? null;
-        $photo_consent = $_POST['photo_consent'] ?? null;
-        $review_consent = $_POST['review_consent'] ?? null;  
-         $duration = $end_time - $start_time;
-        $service_provider_id =$_POST['provider_id'] ?? null; 
+        $photo_consent = isset($_POST['photo_consent']) ? 'YES' : 'NO';
+        $review_consent = isset($_POST['review_consent']) ? 'YES' : 'NO';
+        $duration = $end_time - $start_time;
 
         $start = new DateTime($start_time);
         $end = new DateTime($end_time);
@@ -58,12 +58,12 @@ try {
             $location = $address; // vai buscar morada do user
         } elseif ($location === 'providersplace') {
             // Se a localização for "Pet Sitter/Walker's Place", buscar a morada do provider
-            if ($service_provider_id) {
+            if ($provider_id) {
                 $stmt = $dbh->prepare('
                 SELECT address FROM Person 
                 WHERE id = (SELECT person FROM ServiceProvider WHERE person = :provider_id)
             ');
-                $stmt->bindValue(':provider_id', $service_provider_id, PDO::PARAM_INT);
+                $stmt->bindValue(':provider_id', $provider_id, PDO::PARAM_INT);
                 $stmt->execute();
                 $result = $stmt->fetch(PDO::FETCH_ASSOC);
                 $location = $result['address'] ?? null; // vai buscar morada do provider
@@ -74,34 +74,45 @@ try {
         }
 
 
-        // Inserir dados na tabela Booking
-        $stmt = $dbh->prepare('
-            INSERT INTO Booking 
-            (date, start_time, end_time, duration, address_collect, photo_consent,review_consent, provider, type, pet, payment) 
-            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?)
-        ');
-        $stmt->execute([
-            $date,
-            $start_time,
-            $end_time,
-            $duration,
-            $location,
-            $photo_consent,
-            $review_consent,
-            $service_provider_id,
-            $service_type,
-            $pet_name,
-            $payment
-        ]);
-        $booking_id = $dbh->lastInsertId();
-       
-        $_SESSION['booking_id'] = $booking_id;
+        // Inserir dados na tabela Booking para cada pet
+        foreach ($pet_names_array as $pet_name) {
+            // Buscar o ID do pet baseado no nome
+            $stmt = $dbh->prepare('SELECT id FROM Pet WHERE name = :pet_name AND owner = :owner_id');
+            $stmt->bindValue(':pet_name', $pet_name, PDO::PARAM_STR);
+            $stmt->bindValue(':owner_id', $id, PDO::PARAM_INT);
+            $stmt->execute();
+            $pet = $stmt->fetch(PDO::FETCH_ASSOC);
+
+            if ($pet) {
+                $pet_id = $pet['id'];
+
+                // Inserir os dados na tabela Booking
+                $stmt = $dbh->prepare('
+                    INSERT INTO Booking 
+                    (date, start_time, end_time, duration, address_collect, photo_consent, review_consent, provider, type, pet, payment) 
+                    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+                ');
+                $stmt->execute([
+                    $date,
+                    $start_time,
+                    $end_time,
+                    $duration,
+                    $location,
+                    $photo_consent,
+                    $review_consent,
+                    $provider_id,
+                    $service_type,
+                    $pet_id,
+                    $payment
+                ]);
+            }
+        }
         $_SESSION["msg_success"] = "Booking successfully submitted!";
         header('Location: ../views/payment.php');
     }
 } catch (PDOException $e) {
     $_SESSION["msg_error"] = "Error: " . $e->getMessage();
-    header('Location: ../views/bookingRequest.php'); //TODO: print this error_msg
+    header('Location: ../views/bookingRequest.php');
     exit();
 }
 ?>
