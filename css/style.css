@@ -748,3 +748,10 @@ p.note {
     background-color: #B88080; /* Darker background color on hover */
     text-decoration: underline;
 }
+.scrollable-bookings {
+    max-height: 500px; /* Adjust the height as needed */
+    overflow-y: auto;
+    border: 1px solid #ddd;
+    padding: 10px;
+    margin-top: 10px;
+}

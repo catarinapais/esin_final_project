@@ -232,32 +232,34 @@ include('../templates/header_tpl.php');
     <h2>Scheduled Services</h2>
     <?php retrieveFutureServices(); ?>
     <?= $error_msg ? '<p class="msg_error">' . $error_msg . '</p>' : '' ?>
-    <?php if (!empty($bookings)) : ?>
-      <?php foreach ($bookings as $booking) : ?>
-        <article class="booking-info">
-          <div class="booking-details">
-            <p class="booking-title">Date and Time: </p>
-            <p class="booking-desc"><?php echo htmlspecialchars($booking['date'] . ', ' . $booking['start_time'] . ' - ' . $booking['end_time']); ?></p>
-            <p class="booking-title">Address: </p>
-            <p class="booking-desc"><?php echo htmlspecialchars($booking['address'] . ', ' . ucfirst($booking['owner_city'])); ?></p>
-            <p class="booking-title">Service Type: </p>
-            <p class="booking-desc"><?php echo htmlspecialchars(ucfirst($booking['service_type'])); ?></p>
-            <p class="booking-title">Animal's Name: </p>
-            <p class="booking-desc"><?php echo htmlspecialchars($booking['pet_name']); ?></p>
-            <p class="booking-title">Owner's Name: </p>
-            <p class="booking-desc"><?php echo htmlspecialchars($booking['owner_name']); ?></p>
-            <p class="booking-title">Medical Needs: </p>
-            <p class="booking-desc"><?php echo htmlspecialchars(ucfirst($booking['medical_needs'])); ?></p>
-            <a class="message-button" href="../views/messages.php?provider=<?= $id ?>&owner=<?= $booking['owner_id'] ?>">MESSAGE</a>
-          </div>
-          <img src="../images/uploads/<?= htmlspecialchars($booking['pet_picture']) ?>"
-            alt="<?= htmlspecialchars($booking['pet_name']) ?>"
-            class="pet-profile-picture">
-        </article>
-      <?php endforeach; ?>
-    <?php else : ?>
-      <p>No services scheduled.</p>
-    <?php endif; ?>
+    <div class="scrollable-bookings">
+      <?php if (!empty($bookings)) : ?>
+        <?php foreach ($bookings as $booking) : ?>
+          <article class="booking-info">
+            <div class="booking-details">
+              <p class="booking-title">Date and Time: </p>
+              <p class="booking-desc"><?php echo htmlspecialchars($booking['date'] . ', ' . $booking['start_time'] . ' - ' . $booking['end_time']); ?></p>
+              <p class="booking-title">Address: </p>
+              <p class="booking-desc"><?php echo htmlspecialchars($booking['address'] . ', ' . ucfirst($booking['owner_city'])); ?></p>
+              <p class="booking-title">Service Type: </p>
+              <p class="booking-desc"><?php echo htmlspecialchars(ucfirst($booking['service_type'])); ?></p>
+              <p class="booking-title">Animal's Name: </p>
+              <p class="booking-desc"><?php echo htmlspecialchars($booking['pet_name']); ?></p>
+              <p class="booking-title">Owner's Name: </p>
+              <p class="booking-desc"><?php echo htmlspecialchars($booking['owner_name']); ?></p>
+              <p class="booking-title">Medical Needs: </p>
+              <p class="booking-desc"><?php echo htmlspecialchars(ucfirst($booking['medical_needs'])); ?></p>
+              <a class="message-button" href="../views/messages.php?provider=<?= $id ?>&owner=<?= $booking['owner_id'] ?>">MESSAGE</a>
+            </div>
+            <img src="../images/uploads/<?= htmlspecialchars($booking['pet_picture']) ?>"
+              alt="<?= htmlspecialchars($booking['pet_name']) ?>"
+              class="pet-profile-picture">
+          </article>
+        <?php endforeach; ?>
+      <?php else : ?>
+        <p>No services scheduled.</p>
+      <?php endif; ?>
+    </div>
   </section>
 <?php else: ?>
   <p id="notAProvider">You are not entitled to provide services.</p>

@@ -15,19 +15,10 @@ $password = $_POST['password'];
 $service_type = $_POST['service_type'];
 
 
-
-if (strlen((string)$phone_number) != 9) {
-    $_SESSION["msg_error"] = "The phone number must contain 9 digits.";
-} elseif (!empty($iban) && empty($service_type)) {
+if (!empty($iban) && empty($service_type)) {
     $_SESSION["msg_error"] = "You must choose a service type if you want to provide a service.";
 } elseif (!empty($service_type) && empty($iban)) {
     $_SESSION["msg_error"] = "You must fill the IBAN (account number) if you want to provide a service.";
-} elseif (!empty($iban) && (!is_string($iban) || !preg_match('/^PT50\d{21}$/', str_replace(' ', '', $iban)))) {
-    $_SESSION["msg_error"] = "Invalid IBAN. It must start with PT50 followed by 21 digits.";
-} elseif (strlen(trim($password)) < 8) {
-    $_SESSION["msg_error"] = "The password must have at least 8 characters.";
-} elseif (!preg_match('/[A-Z]/', $password) || !preg_match('/[\W_]/', $password)) {
-    $_SESSION["msg_error"] = "The password must contain at least one uppercase letter and one special character.";
 }
 
 if (isset($_SESSION["msg_error"])) {

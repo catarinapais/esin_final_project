@@ -29,8 +29,8 @@ try {
         $date = $_POST['date'] ?? null;
         $start_time = $_POST['starttime'] ?? null;
         $end_time = $_POST['endtime'] ?? null;
-        $photo_consent = isset($_POST['photo_consent']) ? 'YES' : 'NO';
-        $review_consent = isset($_POST['review_consent']) ? 'YES' : 'NO';
+        $photo_consent = $_POST['photo_consent'];
+        $review_consent = $_POST['review_consent'];
         $duration = $end_time - $start_time;
 
         $start = new DateTime($start_time);

@@ -27,7 +27,7 @@ session_start();
             </div>
             <div class="form-group">
                 <label for="phone_number">Phone Number:<span class="required">*</span></label>
-                <input type="tel" id="phone_number" name="phone_number" required>
+                <input type="tel" pattern="\d{9}" title="9-digit phone number" id="phone_number" name="phone_number" required>
             </div>
             <div class="form-group">
                 <label for="address">Address:<span class="required">*</span></label>
@@ -39,7 +39,7 @@ session_start();
             </div>
             <div class="form-group">
                 <label for="iban">IBAN:<span class="registerProvider">(In case you want to provide a service)</span></label>
-                <input type="text" id="iban" name="iban">
+                <input type="text" pattern="PT50(\s*\d\s*){21}" title="Valid portuguese IBAN" id="iban" name="iban">
             </div>
             <div class="form-group">
                 <label for="service_type">Service Type:<span class="registerProvider">(In case you want to provide a service)</span></label>
@@ -52,7 +52,7 @@ session_start();
             </div>
             <div class="form-group">
                 <label for="password">Password:<span class="required">*</span></label>
-                <input type="password" id="password" name="password" required>
+                <input type="password" pattern="(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}" title="Password must be at least 8 characters long, include one uppercase letter, one number, and one special character" id="password" name="password" required>
             </div>
             <br>
             <input type="submit" value="Register">

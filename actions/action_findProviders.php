@@ -1,7 +1,7 @@
 <?php
 session_start();
 
-$owner_id = $_SESSION['id'];
+$id = $_SESSION['id'];
 $owner_city = $_SESSION['city']; 
 
 $pet_names = $_POST['pet_name'];
@@ -10,8 +10,12 @@ $service_date = $_POST['date'];
 $start_time = $_POST['starttime'];
 $end_time = $_POST['endtime'];
 $location = $_POST['location'];
-$photo_consent = $_POST['photo_consent'] ?? null;
-$review_consent = $_POST['review_consent'] ?? null;
+$other_address = $_POST['other_address'] ?? null;
+if($location == 'other') {
+    $location = $other_address;
+}
+$photo_consent = $_POST['photo_consent'] ?? 'NO';
+$review_consent = $_POST['review_consent'] ?? 'NO';
 
 if (empty($pet_names)) {
     $_SESSION['msg_error'] = "Select at least one of your pets.";
@@ -64,6 +68,7 @@ try {
                 AND Booking.date = :date 
                 AND (Booking.start_time < :end_time AND Booking.end_time > :start_time) 
             WHERE Booking.id IS NULL
+            AND ServiceProvider.person != :id -- Exclude the specific provider ID here
         ) AS FreeProviders 
         JOIN (
             SELECT 
@@ -80,6 +85,7 @@ try {
                 AND schedule_day_week = :date 
                 AND (ServiceProvider.service_type = :service_type OR ServiceProvider.service_type = 'both') 
                 AND Person.city = :owner_city 
+                AND ServiceProvider.person != :id -- Exclude the specific provider ID here
         ) AS AvailableProviders 
         ON FreeProviders.provider_id = AvailableProviders.provider_id;" 
     ); 
@@ -93,7 +99,8 @@ try {
     $stmt->bindValue(':start_time', $start_time, PDO::PARAM_STR);
     $stmt->bindValue(':end_time', $end_time, PDO::PARAM_STR);
     $stmt->bindValue(':service_type', $service_type, PDO::PARAM_STR);
-    $stmt->bindValue(':owner_city', $owner_city, PDO::PARAM_STR);    
+    $stmt->bindValue(':owner_city', $owner_city, PDO::PARAM_STR);   
+    $stmt->bindValue(':id', $id, PDO::PARAM_INT); 
 
     //$stmt->bindValue(':pet_name', $pet_name, PDO::PARAM_STR);
 

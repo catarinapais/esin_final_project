@@ -422,3 +422,25 @@ form#addPet input[type="submit"] {
 .form-group input[type="checkbox"] {
     margin-right: 8px; /* Espaço entre a checkbox e o texto */
 }
+/* Use flexbox for normal wrapping */
+#bookingcontent {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 60px;
+}
+
+#addBooking,
+#availableProviders {
+    flex: 1;
+    min-width: 300px;
+    box-sizing: border-box;
+}
+
+#scheduledServices {
+    flex-basis: 100%;
+    margin-top: 20px;
+    text-align: center;
+}
+#availableProviders {
+    margin-top: 2em;
+}
