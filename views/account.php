@@ -388,10 +388,6 @@ try {
                                             <img src="../images/uploads/<?= htmlspecialchars($pet['pet_profile_picture']) ?>"
                                                 alt="<?= htmlspecialchars($pet['pet_name']) ?>"
                                                 class="pet-profile-pic">
-                                        <?php else: ?>
-                                            <img src="../images/assets/imagemdefault.jpg"
-                                                alt="Default picture for pet"
-                                                class="pet-profile-pic">
                                         <?php endif; ?>
                                     </div>
                                     <div class="pet-info">

@@ -41,7 +41,9 @@ if (isset($_FILES['profile_picture']) && $_FILES['profile_picture']['error'] ===
         exit;
     }
 }
-
+else{ 
+    $profile_picture = 'imagemdefault.jpg';
+}
 // Função para inserir o pet no banco de dados
 function insertPet($name, $species, $size, $birthdate, $profile_picture, $user_id) {
     global $dbh;
