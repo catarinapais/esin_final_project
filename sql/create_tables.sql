@@ -65,13 +65,8 @@ CREATE TABLE BookingType (
     type TEXT PRIMARY KEY CHECK (type IN ('sitting', 'walking'))
 );
 
--- Table Payement --
-CREATE TABLE Payment(
-    id INTEGER PRIMARY KEY,
-    is_paid INTEGER NOT NULL CHECK (is_paid IN (0,1)),
-    price REAL CHECK (price>0),
-    payment_date TEXT CHECK (is_paid = 0 OR payment_date IS NOT NULL)
-);
+-- Table Payement -- TIRAR
+
 
 -- Table Review -- 
 CREATE TABLE Review(
@@ -117,7 +112,7 @@ CREATE TABLE Booking (
     provider INTEGER NOT NULL REFERENCES ServiceProvider ON DELETE CASCADE, --istoassegura que, ao excluir um provider, todos os agendamentos relacionados sejam automaticamente removidos.  
     type TEXT NOT NULL REFERENCES BookingType,
     pet INTEGER NOT NULL REFERENCES Pet, -- (id)
-    payment INTEGER REFERENCES Payment, -- (id)
+    payment REAL CHECK (price>0),
     ownerReview INTEGER REFERENCES Review,-- ... --
     providerReview INTEGER REFERENCES Review
 );

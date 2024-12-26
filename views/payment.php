@@ -12,19 +12,18 @@ if (isset($_SESSION['booking_id'])) {
     // Consulta para obter o pagamento e o IBAN do prestador de serviços
     $stmt = $dbh->prepare('
         SELECT 
-    Payment.price,
+    Booking.payment,
     ServiceProvider.iban
 FROM 
     Booking
 INNER JOIN ServiceProvider ON Booking.provider = ServiceProvider.person
-LEFT JOIN Payment ON Booking.payment = Payment.id
 WHERE 
     Booking.id = :booking_id;
     ');
     $stmt->bindValue(':booking_id', $booking_id, PDO::PARAM_INT);
     $stmt->execute();
     $result = $stmt->fetch(PDO::FETCH_ASSOC);
-    var_dump($result);
+ 
 
     // Verifica se a consulta retornou resultados
     if ($result) {
@@ -49,15 +48,16 @@ include('../templates/header_tpl.php');
         unset($_SESSION["msg_success"]);
     } ?>
     <h1>Payment</h1>
-    <p><strong>Amount:</strong> <?php echo htmlspecialchars($payment); ?></p>
-    <p><strong>Provider's IBAN:</strong> <?php echo htmlspecialchars($iban); ?></p>
+    <p><strong>Amount:</strong> <span class="highlight"><?php echo htmlspecialchars($payment); ?> €</span></p>
+<p><strong>Provider's IBAN:</strong> <span class="highlight"><?php echo htmlspecialchars($iban); ?></span></p>
+
     <p>At the moment, payment is only available by bank transfer.</p>
 
     <h3>Payment Instructions:</h3>
     <ol>
         <li>Transfer the specified amount above to the provided IBAN.</li>
         <li>Include your name and the pet's name in the transfer description.</li>
-        <li>Send the payment receipt to the email: <strong>payments@example.com</strong>.</li>
+        <li>Send the payment receipt to the email: <strong>payments@petpatrol.com</strong>.</li>
     </ol>
 
     <p>Once we confirm the payment, we will contact you to finalize the process.</p>

@@ -14,6 +14,7 @@ session_start();
         <link href="../css/style.css" rel="stylesheet">
         <link href="../css/layout.css" rel="stylesheet">
         <link href="../css/responsive.css" rel="stylesheet">
+        <link href="../css/payment.css" rel="stylesheet">
     </head>
     <body>
         <header id="navigationBar">

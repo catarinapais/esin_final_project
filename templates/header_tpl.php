@@ -15,6 +15,7 @@ $name = $_SESSION['name'];
     <link href="../css/layout.css" rel="stylesheet">
     <link href="../css/responsive.css" rel="stylesheet">
     <link href="../css/messages.css" rel="stylesheet">
+    <link href="../css/payment.css" rel="stylesheet">
 </head>
 <body>
 <header id="navigationBar">
