@@ -107,6 +107,9 @@ try {
                 ]);
             }
         }
+        $booking_id = $dbh->lastInsertId();
+        $_SESSION['booking_id'] = $booking_id;
+    
         $_SESSION["msg_success"] = "Booking successfully submitted!";
         header('Location: ../views/payment.php');
     }
