@@ -64,16 +64,7 @@ try {
     </nav>
 </header>
 
-    <aside class="sidebar">
-        <h2>Sections</h2>
-        <ul>
-            <li><a href="#staticTags">Personal Information</a></li>
-            <li><a href="#pastServices">Past Services</a></li>
-            <li><a href="#pastBookings">Past Bookings</a></li>
-            <li><a href="#pets">Pets</a></li>
-        </ul>
-    </aside>
-
+   
     <main id="accountcontent">
 
         <div class="main-content">
@@ -116,92 +107,94 @@ try {
 
                 </section>
                 <!--TODO: verificar qual rating é que é para mostrar no "past services" e no "past bookings"-->
+               
                 <section id="pastServices">
-                    <h2>Past Services</h2>
-                    <?php if (!empty($providerInfo[0]['iban'])): ?>
-                        <?php if (!empty($pastServicesInfo)): ?>
-                            <?php foreach ($pastServicesInfo as $service): ?>
-                                <legend> <?= htmlspecialchars($service['type']) ?></legend>
-                                <p><strong>Pet:</strong> <?= htmlspecialchars($booking['pet_name']) ?></p>
-                                <p><strong>Date:</strong> <?= htmlspecialchars($service['service_date']) ?></p>
-                                <p><strong>Time:</strong> <?= htmlspecialchars($service['service_time']) ?></p>
-                                <p><strong>Duration:</strong> <?= htmlspecialchars((int)$service['service_duration']) ?> hours</p>
-                                <p><strong>Price:</strong> <?= htmlspecialchars($service['payment']) ?>€</p>
+    <h2>Past Services</h2>
+    <?php if (!empty($providerInfo[0]['iban'])): ?>
+        <?php if (!empty($pastServicesInfo)): ?>
+            <?php foreach ($pastServicesInfo as $service): ?>
+                <div class="service-box">
+                    <h3><?= htmlspecialchars($service['type']) ?></h3>
+                    <p><strong>Pet:</strong> <?= htmlspecialchars($booking['pet_name']) ?></p>
+                    <p><strong>Date:</strong> <?= htmlspecialchars($service['service_date']) ?></p>
+                    <p><strong>Time:</strong> <?= htmlspecialchars($service['service_time']) ?></p>
+                    <p><strong>Duration:</strong> <?= htmlspecialchars((int)$service['service_duration']) ?> hours</p>
+                    <p><strong>Price:</strong> <?= htmlspecialchars($service['payment']) ?>€</p>
 
-                                <p><strong>Your Rating:</strong>
-                                    <?php if (empty($service['provider_review'])): ?>
-                                        No review yet
-                                    <?php else: ?>
-                                        <?= htmlspecialchars($service['provider_review']) ?>
-                                    <?php endif; ?></p>
+                    <p><strong>Your Rating:</strong>
+                        <?php if (empty($service['provider_review'])): ?>
+                            No review yet
+                        <?php else: ?>
+                            <?= htmlspecialchars($service['provider_review']) ?>
+                        <?php endif; ?></p>
 
-                                <!--review of each service (button if theres none)-->
-                                <p><strong>Owner's Review:</strong>
-                                    <?php if (empty($service['owner_review'])): ?>
-                                        No review yet
-                                <form action="review.php" method="post">
-                                    <input type="hidden" name="service_id" value="<?= htmlspecialchars($service['service_id']) ?>">
-                                    <input type="hidden" name="role" value="owner">
-                                    <input type="submit" value="Add Review">
-                                </form>
-                            <?php else: ?>
-                                <?= htmlspecialchars($service['owner_review']) ?>
-                            <?php endif; ?></p>
+                    <p><strong>Owner's Review:</strong>
+                        <?php if (empty($service['owner_review'])): ?>
+                            No review yet
+                            <form action="review.php" method="post">
+                                <input type="hidden" name="service_id" value="<?= htmlspecialchars($service['service_id']) ?>">
+                                <input type="hidden" name="role" value="owner">
+                                <input type="submit" value="Add Review">
+                            </form>
+                        <?php else: ?>
+                            <?= htmlspecialchars($service['owner_review']) ?>
+                        <?php endif; ?>
+                    </p>
+                </div>
+            <?php endforeach; ?>
+        <?php else: ?>
+            <p>You have no past services.</p>
+        <?php endif; ?>
+    <?php else: ?>
+        <p>You are not eligible to provide a service.</p>
+    <?php endif; ?>
+</section>
 
-                        <?php endforeach; ?>
-
-                    <?php else: ?>
-                        <p>You have no past services.</p>
-                    <?php endif; ?>
-                <?php else: ?>
-                    <p>You are not eligible to provide a service.</p>
-
-                <?php endif; ?>
-                </section>
                 <?php if (!empty($petOwnerInfo[0]['pet_id'])): ?>
-                    <section id="pastBookings">
-                        <h2>Past Bookings</h2>
-                        <?php if (!empty($pastBookingsInfo)): ?>
-                            <?php foreach ($pastBookingsInfo as $booking): ?>
-                                <legend> <?= htmlspecialchars($booking['type']) ?></legend>
-                                <p><strong>Pet:</strong> <?= htmlspecialchars($booking['pet_name']) ?></p>
-                                <p><strong>Date:</strong> <?= htmlspecialchars($booking['date']) ?></p>
-                                <p><strong>Time:</strong> <?= htmlspecialchars($booking['start_time']) ?></p>
-                                <p><strong>Duration:</strong> <?= htmlspecialchars((int)$booking['duration']) ?> minutes</p>
-                                <p><strong>Price:</strong> <?= htmlspecialchars($booking['payment']) ?>€</p>
+                   <section id="pastBookings">
+    <h2>Past Bookings</h2>
+    <?php if (!empty($pastBookingsInfo)): ?>
+        <?php foreach ($pastBookingsInfo as $booking): ?>
+            <div class="booking-box">
+                <h3><?= htmlspecialchars($booking['type']) ?></h3>
+                <p><strong>Pet:</strong> <?= htmlspecialchars($booking['pet_name']) ?></p>
+                <p><strong>Date:</strong> <?= htmlspecialchars($booking['date']) ?></p>
+                <p><strong>Time:</strong> <?= htmlspecialchars($booking['start_time']) ?></p>
+                <p><strong>Duration:</strong> <?= htmlspecialchars((int)$booking['duration']) ?> minutes</p>
+                <p><strong>Price:</strong> <?= htmlspecialchars($booking['payment']) ?>€</p>
 
-                                <p><strong>Your Rating:</strong>
-                                    <?php if (empty($booking['owner_review'])): ?>
-                                        No review yet
-                                    <?php else: ?>
-                                        <?= htmlspecialchars($booking['owner_review']) ?>
-                                    <?php endif; ?></p>
-
-                                <p><strong>Provider's Rating:</strong>
-                                    <?php if (empty($booking['provider_review'])): ?>
-                                        No review yet</p>
-                                <form action="review.php" method="post">
-                                    <input type="hidden" name="service_id" value="<?= htmlspecialchars($booking['service_id']) ?>">
-                                    <input type="hidden" name="role" value="provider">
-                                    <input type="submit" value="Add Review">
-                                </form>
-                            <?php else: ?>
-                                <?= htmlspecialchars($booking['provider_review']) ?></p>
-                            <?php endif; ?>
-
-
-
-                        <?php endforeach; ?>
+                <p><strong>Your Rating:</strong>
+                    <?php if (empty($booking['owner_review'])): ?>
+                        No review yet
                     <?php else: ?>
-                        <p>You have no past bookings.</p>
-                    <?php endif; ?>
-                    </section>
+                        <?= htmlspecialchars($booking['owner_review']) ?>
+                    <?php endif; ?></p>
+
+                <p><strong>Provider's Rating:</strong>
+                    <?php if (empty($booking['provider_review'])): ?>
+                        No review yet
+                    </p>
+                    <form action="review.php" method="post">
+                        <input type="hidden" name="service_id" value="<?= htmlspecialchars($booking['service_id']) ?>">
+                        <input type="hidden" name="role" value="provider">
+                        <input type="submit" value="Add Review">
+                    </form>
+                <?php else: ?>
+                    <?= htmlspecialchars($booking['provider_review']) ?></p>
+                <?php endif; ?>
+            </div>
+        <?php endforeach; ?>
+    <?php else: ?>
+        <p>You have no past bookings.</p>
+    <?php endif; ?>
+</section>
+
                 <?php endif; ?>
                 <section id="pets">
-                    <legend>
-                        <d>Pets<d>
-                                <img src="../images/assets/pata.png" alt="Pet" class="pet-icon">
-                    </legend>
+                <legend>
+    <span>Pets</span>
+
+</legend>
 
                     <!-- Add a new pet -->
                     <?php //TODO: dar layout a esta msg de erro 
@@ -211,7 +204,9 @@ try {
                         <?php unset($_SESSION['msg_error']); ?>
                     <?php endif; ?>
                     <input type="checkbox" id="toggleForm" style="display: none;">
-                    <label for="toggleForm" id="addPetButton" class="button"></label>
+                    <label for="toggleForm" id="addPetButton" class="button">
+    <span class="add-icon">+</span> 
+</label>
                     <form id="newPetForm" action="../actions/action_addPet.php" method="post" enctype="multipart/form-data">
                         <h3>Add a New Pet</h3>
                         <div class="form-group">

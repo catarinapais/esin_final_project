@@ -1,33 +1,52 @@
-
+/* General body and layout */
 body {
-
     display: grid;
-    grid-template-columns: [start] 4fr [middle] 1fr [end];
-    grid-template-rows: [start] auto [nav] auto [news] 1fr [footer] auto [end];
-  }
-
-  body > header {
-    grid-column: start / end;
-  }
-
-  #accountcontent {
-    grid-column: start;
-  }
-
-
-  aside {
-    grid-column: middle;
-    grid-row: nav / footer;
-  }
-
-  body > footer {
-    grid-column: start / end;
-}
-   
-html {
-    scroll-behavior: smooth;
+    grid-template-columns: 1fr 3fr;  /* Ajuste no grid para dar mais largura ao conteúdo principal */
+    grid-template-rows: auto auto 1fr auto; /* Manter a estrutura de linha */
+    min-height: 100vh; /* Garantir que a altura seja 100% da tela */
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box; /* Para garantir que padding e bordas não aumentem a largura */
 }
 
+body > header,
+body > footer {
+    grid-column: 1 / -1; /* Fazer o header e footer ocuparem toda a largura */
+}
+
+/* Section layout and styling */
+#accountcontent {
+    grid-column: 1 / -1;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    min-height: calc(100vh - 80px); /* Ajuste para altura dinâmica */
+    padding: 20px;
+    width: 100%;  /* Garantir que o conteúdo use toda a largura disponível */
+    max-width: 100%; /* Garantir que o conteúdo não ultrapasse a largura da tela */
+    box-sizing: border-box; /* Garantir que padding não afete a largura */
+}
+
+#accountcontent section {
+    padding: 20px;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    margin-bottom: 50px;
+    width: 100%; /* Garantir que cada seção ocupe a largura total */
+    box-sizing: border-box; /* Certificar-se de que padding e borda não aumentem a largura total */
+}
+
+/* Scrollable containers for past services and bookings */
+#pastServices, #pastBookings {
+    height: 500px;      /* Set the desired height */
+    overflow-y: auto;   /* Add vertical scrollbar if necessary */
+    border: 1px solid #ddd;
+    padding: 10px;
+    margin-bottom: 20px; /* Space between containers */
+}
+
+/* Section headers */
 h2, h3 {
     color: #444;
     margin-bottom: 15px;
@@ -38,132 +57,22 @@ p {
     margin-bottom: 10px;
 }
 
-aside.sidebar {
-    background-color: #E7CCCC;  /* Cor de fundo suave */
-    padding: 20px;  /* Espaço interno para o conteúdo */
-    border-radius: 10px;  /* Bordas arredondadas */
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);  /* Sombras suaves para dar profundidade */
-    text-align: center;
-    top: 100px;  /* Fixa no topo */
-    right: 10px;
-    transition: all 0.3s ease;  /* Animação suave ao interagir */
-    position: sticky;  /* Fixa a barra lateral */
-    height: 75vh;  /* Altura total da tela */
-}
-.sidebar h2 {
-    font-size: 1.9em;
-    color: #fcfcfc;
-    border-bottom: 2px solid #ffffff;  
-    padding-bottom: 10px;
-}
-
-
-.sidebar ul {
-    list-style-type: none; 
-padding-left: 0;
-}
-
-.sidebar ul li {
-    margin-bottom: 10px; /* Espaço entre os itens */
-    border-bottom: 2px solid #ffffff; /* Borda leve entre os itens */
-    padding-left: 20px; /* Ajustando o padding do lado esquerdo */
-    padding-right: 20px; /* Ajustando o padding do lado direito */
-}
-
-.sidebar ul li a {
-    font-weight: bold;
-    text-decoration: none;  /* Remove o sublinhado */
-    color: #ffffff;  /* Cor de destaque para os links */
-    font-size: 1.5em;  /* Tamanho de fonte maior */
-    display: block;  /* Faz com que o link ocupe a largura total do item */
-    padding: 10px 20px;  /* Largura e altura consistente para o padding */
-    transition: color 0.3s ease, background-color 0.3s ease; /* Transição suave */
-}
-
-.sidebar ul li a {
-    font-weight: bold;
-    text-decoration: none;
-    color: #ffffff;
-    font-size: 1.5em;
-    display: block;
-    padding: 10px 20px;
-    transition: color 0.3s ease, background-color 0.3s ease;
-}
-
-.sidebar ul li {
-    margin-bottom: 10px;
-    border-bottom: 2px solid #ffffff;
-    padding-left: 20px;
-    padding-right: 20px;
-}
-
-
-.sidebar ul li a:hover {
-    color: #fff;  /* Cor de texto branca quando hover */
-    background-color: #007bff;  /* Cor de fundo ao passar o mouse */
-    border-radius: 4px;  /* Arredondar os cantos ao passar o mouse */
-}
-
-
-.sidebar ul li:hover {
-    border-bottom: 1px solid #c7c7c7;
-}
-
-
-/* Seções */
-.main-content {  
-     padding-top: 0px;  
-       flex: 2;
+/* Flexbox and centering for section content */
+.main-content {
     padding: 20px;
     border-radius: 8px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    gap: 20px; /* Added space between sections */
 }
 
-#accountcontent section {
-    padding-top: 50px;  
-    margin-bottom: 50px;
-    padding: 20px;
-    border-radius: 8px;
-    background-color: #f9f9f9;
-    border: 1px solid #ddd;
-}
-
-section h2 {
-    border-bottom: 2px solid #ebbfdb;
-    padding-bottom: 5px;
-    margin-bottom: 15px;
-    font-size: 1.2em;
-}
-
-/* Formulários */
+/* Form styling */
 form {
     margin-top: 20px;
-    width: 50% !important; /* Garantindo largura de 50% */
-    margin: 0 auto; /* Centraliza o formulário */
-
-}
-
-form h3 {
-    font-size: 1.1em;
-    margin-bottom: 15px;
-}
-
-form .form-group {
-    margin-bottom: 15px;
-}
-
-form .form-group label {
-    display: block;
-    font-weight: bold;
-    margin-bottom: 5px;
-}
-
-form .form-group input,
-form .form-group select {
-    width: 100%;
-    padding: 10px;
-    border: 1px solid #ddd;
-    border-radius: 4px;
+    width: 100%; /* Garantir que o formulário ocupe toda a largura disponível */
+    max-width: 500px; /* Controla a largura máxima do formulário */
+    margin: 0 auto;
 }
 
 form input[type="submit"] {
@@ -181,79 +90,7 @@ form input[type="submit"]:hover {
     background-color: #c181a4;
 }
 
-
-
-/* Botão de adicionar pet */
-#addPetButton {
-    display: inline-block;
-    background-color: #E7CCCC;
-    color: white;
-    padding: 10px 15px;
-    border-radius: 5px;
-    text-align: center;
-    font-weight: bold;
-    cursor: pointer;
-    margin-bottom: 20px;
-    transition: background-color 0.3s ease;
-}
-
-#addPetButton:hover {
-    background-color: #c181a4;
-}
-
-#newPetForm {
-    margin-top: 20px;
-    display: none;
-}
-
-#toggleForm:checked ~ #newPetForm {
-    display: block;
-}
-
-
-#pets {
-    margin: 20px auto;
-    font-family: Arial, sans-serif;
-}
-
-legend h2 {
-    font-size: 1.8em;
-    margin-bottom: 10px;
-}
-
-.pet-icon {
-    width: 40px;
-    height: auto;
-    object-fit: cover;
-    vertical-align: middle;
-}
-
-#newPetForm {
-    margin: 20px 0;
-    padding: 20px;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    background-color: #f9f9f9;
-    display: none;
-}
-
-
-/* Mostrar o formulário quando a caixa de seleção estiver marcada */
-#toggleForm:checked + #addPetButton + #newPetForm {
-    display: block;
-    margin-top: 20px;
-}
-
-/* Alterar o texto do botão quando o formulário estiver visível */
-#toggleForm:checked + #addPetButton::after {
-    content: '-';
-}
-
-#toggleForm:not(:checked) + #addPetButton::after {
-    content: '+';
-}
-
-
+/* Pets section */
 .pets-container {
     display: flex;
     flex-direction: column;
@@ -275,53 +112,130 @@ legend h2 {
     flex-shrink: 0;
     width: 120px;
     height: 120px;
-    border-radius: 50%; /* Forma de esfera */
+    border-radius: 50%; /* Circular image */
     overflow: hidden;
-    border: 2px solid #ccc; /* Borda ao redor da esfera */
-    display: flex; /* Habilita Flexbox */
-    align-items: center; /* Centraliza verticalmente */
-    justify-content: center; /* Centraliza horizontalmente */
-    background-color: #fff; /* Fundo para contraste */
+    border: 2px solid #ccc;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #fff;
 }
 
 .pet-profile-pic {
     max-width: 100%;
     max-height: 100%;
-    object-fit: cover; /* Garante o ajuste da imagem sem distorção */
+    object-fit: cover;
 }
 
-/* Alinha o nome do pet (legend) no centro do cartão */
+/* Center pet name */
 .pet-info legend {
-    text-align: center;  /* Centraliza o nome do pet */
-    font-size: 1.5em;  /* Tamanho maior para o nome do pet */
-    margin-bottom: 10px; /* Espaço inferior para separar do conteúdo abaixo */
+    text-align: center;
+    font-size: 1.5em;
+    margin-bottom: 10px;
+    border-bottom: 2px solid #ebbfdb;
+    padding-bottom: 5px;
 }
 
-/* Se necessário, você pode ajustar outros elementos do pet */
-.pet-info p {
-    text-align: left; /* Garante que as informações (espécie, tamanho, idade) estejam alinhadas à esquerda */
-    margin-left: 0; /* Remover qualquer margem esquerda indesejada */
+/* Make the section titles stand out */
+section h2 {
+    border-bottom: 2px solid #ebbfdb;
+    padding-bottom: 5px;
+    margin-bottom: 15px;
+    font-size: 1.2em;
 }
 
-
-.pet-info legend {
-    text-align: center; 
-    font-size: 1.5em;  /* Opcional: Aumenta o tamanho da fonte do nome */
-    margin-bottom: 10px; /* Espaço inferior para separar do conteúdo abaixo */
+/* Optional: Adjust form groups if needed */
+form .form-group label {
+    font-weight: bold;
 }
 
-legend d{
-    font-size: 1em; 
-}
-legend {
-    display: flex; /* Usando flexbox para alinhar o título e a imagem */
-    align-items:center; /* Alinha o título e a imagem verticalmente */
-    gap: 10px; /* Adiciona espaço entre o título e a imagem */
-    margin-bottom: 15px; /* Espaço abaixo do legend */
-    border-bottom: 2px solid #ebbfdb; /* Borda rosa abaixo do título */
-    padding-bottom: 5px; /* Ajusta o padding para a borda não ficar muito grande */
+/* Adding smooth scrolling for easier navigation */
+html {
+    scroll-behavior: smooth;
 }
 
+/* Footer positioning */
 footer {
     z-index: 10;
+}
+
+/* Booking and Service Box */
+.booking-box, .service-box {
+    border: 2px solid #ddd; /* Borda leve para separar cada item */
+    padding: 15px;
+    margin-bottom: 15px;
+    border-radius: 8px;
+    background-color: #f9f9f9; /* Fundo claro */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Sombra sutil */
+    display: block;
+}
+
+.booking-box + .booking-box, .service-box + .service-box {
+    margin-top: 20px; /* Maior espaçamento entre os elementos */
+}
+
+.booking-box h3, .service-box h3 {
+    margin-top: 0;
+}
+
+.booking-box p, .service-box p {
+    margin: 5px 0;
+}
+
+.booking-box .button, .service-box .button {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    text-align: center;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.booking-box .button:hover, .service-box .button:hover {
+    background-color: #45a049;
+}
+
+/* Linha de separação entre as caixas */
+.booking-box:not(:last-child), .service-box:not(:last-child) {
+    border-bottom: 3px solid #eee;
+    padding-bottom: 15px;
+    margin-bottom: 10px;
+}
+
+/* Botão de adicionar pet */
+#addPetButton {
+    display: inline-block;
+    background-color: #E7CCCC;
+    color: white;
+    padding: 10px 15px;
+    border-radius: 5px;
+    text-align: center;
+    font-weight: bold;
+    cursor: pointer;
+    margin-bottom: 20px;
+    transition: background-color 0.3s ease;
+}
+
+#addPetButton:hover {
+    background-color: #c181a4;
+}
+
+/* Formulário de adicionar pet */
+#newPetForm {
+    margin-top: 20px;
+    display: none;
+    width: 100%; /* Garantir que o formulário ocupe toda a largura disponível */
+    max-width: 500px; /* Controla a largura máxima do formulário */
+}
+
+#toggleForm:checked ~ #newPetForm {
+    display: block;
+}
+
+/* Estilos adicionais para garantir que a largura do conteúdo não seja alterada */
+#accountcontent section,
+.main-content {
+    width: 100%; /* Garantir que todo o conteúdo dentro do #accountcontent ocupe 100% da largura */
+    box-sizing: border-box; /* Certificar-se de que padding e bordas não aumentem a largura total */
 }
