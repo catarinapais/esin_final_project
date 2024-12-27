@@ -100,6 +100,7 @@ CREATE TABLE PetMedicalNeed(
     PRIMARY KEY (pet,medicalNeed)
 );
 
+-- Table Booking -- 
 CREATE TABLE Booking (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     date TEXT NOT NULL,

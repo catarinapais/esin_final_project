@@ -43,8 +43,8 @@ try {
         $duration = ($interval->h * 60) + $interval->i; // Total de minutos
 
         // Definir as taxas por minuto
-        $rate_per_minute_walking = 0.50; // Taxa para Pet Walking
-        $rate_per_minute_sitting = 0.75;  // Taxa para Pet Sitting
+        $rate_per_minute_walking = 1/6; // Taxa para Pet Walking
+        $rate_per_minute_sitting = 15/60;  // Taxa para Pet Sitting
 
         // Determinar a taxa com base no tipo de serviço
         if ($service_type === 'walking') {

@@ -35,12 +35,14 @@ try {
     $stmt->bindValue(':id', $user_id, PDO::PARAM_INT);
     if ($stmt->execute()) {
         $petOwnerInfo = $stmt->fetchAll(); // Get all pets for the owner
+       // echo "INFO: ";
+       // print_r($petOwnerInfo);
     } else {
         echo "Error in executing query.";
     }
 
     $stmt->closeCursor();
-
+    
     // Fetch past bookings
     $stmt = $dbh->prepare(
         'SELECT 
@@ -63,11 +65,13 @@ try {
         JOIN Payment ON Booking.payment = Payment.id 
         JOIN Review AS OwnerReview ON Booking.ownerReview = OwnerReview.id 
         JOIN Review AS ProviderReview ON Booking.providerReview = ProviderReview.id 
-        WHERE PetOwner.person = :id'
+        WHERE PetOwner.person = :id AND Booking.date < CURRENT_TIMESTAMP'
     );
     $stmt->bindValue(':id', $user_id, PDO::PARAM_INT);
     if ($stmt->execute()) {
         $pastBookingsInfo = $stmt->fetchAll(); // Get all past bookings
+        //echo "Fetched Bookings: ";
+        //print_r($pastBookingsInfo);
     } else {
         echo "Error in executing query.";
     }
@@ -92,7 +96,7 @@ try {
         JOIN Payment ON Booking.payment = Payment.id 
         JOIN Review AS OwnerReview ON Booking.ownerReview = OwnerReview.id 
         JOIN Review AS ProviderReview ON Booking.providerReview = ProviderReview.id 
-        WHERE Booking.provider = :id'
+        WHERE Booking.provider = :id  AND Booking.date < CURRENT_TIMESTAMP'
     );
     $stmt->bindValue(':id', $user_id, PDO::PARAM_INT);
     if ($stmt->execute()) {
@@ -236,8 +240,6 @@ try {
 </form>
 
                 </section>
-
-                <!--TODO: apenas mostrar os services e os bookings antigos!!-->
                 <!--TODO: verificar qual rating é que é para mostrar no "past services" e no "past bookings"-->
                 <section id="pastServices">
                     <h2>Past Services</h2>
