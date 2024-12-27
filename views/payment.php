@@ -10,7 +10,7 @@ if (isset($_SESSION['booking_id'])) {
     $booking_id = $_SESSION['booking_id'];
 
     try {
-        $result = getPayment($booking_id);
+        $result = getIban($booking_id);
     } catch (PDOException $e) {
         $_SESSION['msg_error'] = 'Error fetching booking data.';
         exit();
@@ -18,7 +18,7 @@ if (isset($_SESSION['booking_id'])) {
     
     // Verifica se a consulta retornou resultados
     if ($result) {
-        $payment = $result['payment'] ?? 'Not defined';
+        $payment =  $_SESSION['total_payments'][$booking_id] ?? 'Not defined';
         $iban = $result['iban'] ?? 'Not defined';
     } else {
         $payment = 'Not defined';

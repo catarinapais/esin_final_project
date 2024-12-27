@@ -57,6 +57,13 @@ try {
         } elseif ($service_type === 'sitting') {
             $payment = $duration * $rate_per_minute_sitting; // Cálculo para Sitting
         }
+        
+        // Verificar o número total de pets selecionados
+$number_of_pets = count($pet_names_array);
+
+// Calcular o pagamento total
+$total_payment = $payment * $number_of_pets;
+
 
         // Se a localização for "myplace", buscar a morada do user  a partir do id e passa-a para a variável location
         if ($location === 'myplace') {
@@ -84,6 +91,16 @@ try {
         $_SESSION["msg_success"] = "Booking successfully submitted!";
         header('Location: ../views/payment.php');
     }
+
+// Verificar se já existe um array de pagamentos na sessão
+if (!isset($_SESSION['total_payments'])) {
+    $_SESSION['total_payments'] = [];
+}
+
+// Armazenar o pagamento total  (quando se selecionam varios animais) com o booking_id como chave
+$_SESSION['total_payments'][$booking_id] = $total_payment;
+
+
 } catch (PDOException $e) {
     $_SESSION["msg_error"] = "Error: " . $e->getMessage();
     header('Location: ../views/bookingRequest.php');

@@ -110,11 +110,10 @@ function getFutureServices($user_id) {
     return $stmt->fetchAll();
 }
 
-function getPayment($booking_id) {
+function getIban($booking_id) {
     global $dbh;
     $stmt = $dbh->prepare('
         SELECT 
-            Booking.payment,
             ServiceProvider.iban
         FROM 
             Booking
