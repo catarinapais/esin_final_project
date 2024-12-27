@@ -1,6 +1,7 @@
 <?php
 session_start();
 
+
 $availableProviders = isset($_SESSION['availableProviders']) ? $_SESSION['availableProviders'] : [];
 unset($_SESSION['availableProviders']); // Clear the session data after retrieving it
 
@@ -9,6 +10,10 @@ $address = $_SESSION['address'];
 
 // Conectar ao banco de dados
 require_once('../database/init.php');
+require_once('../database/pet.php');
+require_once('../database/bookings.php');
+require_once('../database/person.php');
+
 try {
 
     // Consulta para ir buscar os pets do user
@@ -59,57 +64,23 @@ try {
         } elseif ($location === 'providersplace') {
             // Se a localização for "Pet Sitter/Walker's Place", buscar a morada do provider
             if ($provider_id) {
-                $stmt = $dbh->prepare('
-                SELECT address FROM Person 
-                WHERE id = (SELECT person FROM ServiceProvider WHERE person = :provider_id)
-            ');
-                $stmt->bindValue(':provider_id', $provider_id, PDO::PARAM_INT);
-                $stmt->execute();
-                $result = $stmt->fetch(PDO::FETCH_ASSOC);
-                $location = $result['address'] ?? null; // vai buscar morada do provider
+                $location = getPersonInfo($provider_id)['address'] ?? null;
             }
             // Se a localização for "other", vai buscar a morada que o user inseriu no text area
         } elseif ($location === 'other') {
             $location = $_POST['other_address'] ?? null; // vai buscar morada que está no textarea
         }
 
-
         // Inserir dados na tabela Booking para cada pet
         foreach ($pet_names_array as $pet_name) {
-            // Buscar o ID do pet baseado no nome
-            $stmt = $dbh->prepare('SELECT id FROM Pet WHERE name = :pet_name AND owner = :owner_id');
-            $stmt->bindValue(':pet_name', $pet_name, PDO::PARAM_STR);
-            $stmt->bindValue(':owner_id', $id, PDO::PARAM_INT);
-            $stmt->execute();
-            $pet = $stmt->fetch(PDO::FETCH_ASSOC);
-
+            $pet = getPetByName($id, $pet_name);
             if ($pet) {
                 $pet_id = $pet['id'];
-
-                // Inserir os dados na tabela Booking
-                $stmt = $dbh->prepare('
-                    INSERT INTO Booking 
-                    (date, start_time, end_time, duration, address_collect, photo_consent, review_consent, provider, type, pet, payment) 
-                    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
-                ');
-                $stmt->execute([
-                    $date,
-                    $start_time,
-                    $end_time,
-                    $duration,
-                    $location,
-                    $photo_consent,
-                    $review_consent,
-                    $provider_id,
-                    $service_type,
-                    $pet_id,
-                    $payment
-                ]);
+                insertBooking($date, $start_time, $end_time, $duration, $location, $photo_consent, $review_consent, $provider_id, $service_type, $pet_id, $payment);
             }
         }
         $booking_id = $dbh->lastInsertId();
         $_SESSION['booking_id'] = $booking_id;
-    
         $_SESSION["msg_success"] = "Booking successfully submitted!";
         header('Location: ../views/payment.php');
     }

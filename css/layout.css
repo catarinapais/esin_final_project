@@ -426,21 +426,19 @@ form#addPet input[type="submit"] {
 #bookingcontent {
     display: flex;
     flex-wrap: wrap;
-    gap: 60px;
+    align-items: flex-start; /* Align items to the start vertically */
+    justify-content: space-around; /* Center items horizontally */
+    gap: 2em;
 }
 
 #addBooking,
-#availableProviders {
-    flex: 1;
-    min-width: 300px;
-    box-sizing: border-box;
+#availableProviders,
+#scheduledServices {
+    max-width: 600px; /* Optional: Limit the maximum width */
+    padding: 3em; /* Add padding */
+    padding-top: 1em;
 }
 
-#scheduledServices {
-    flex-basis: 100%;
-    margin-top: 20px;
-    text-align: center;
-}
 #availableProviders {
     margin-top: 2em;
 }

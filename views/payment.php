@@ -3,28 +3,19 @@ session_start();
 
 
 require_once('../database/init.php');
-
+require_once('../database/bookings.php');
 
 // Verifica se o booking_id está definido na sessão
 if (isset($_SESSION['booking_id'])) {
     $booking_id = $_SESSION['booking_id'];
 
-    // Consulta para obter o pagamento e o IBAN do prestador de serviços
-    $stmt = $dbh->prepare('
-        SELECT 
-    Booking.payment,
-    ServiceProvider.iban
-FROM 
-    Booking
-INNER JOIN ServiceProvider ON Booking.provider = ServiceProvider.person
-WHERE 
-    Booking.id = :booking_id;
-    ');
-    $stmt->bindValue(':booking_id', $booking_id, PDO::PARAM_INT);
-    $stmt->execute();
-    $result = $stmt->fetch(PDO::FETCH_ASSOC);
- 
-
+    try {
+        $result = getPayment($booking_id);
+    } catch (PDOException $e) {
+        $_SESSION['msg_error'] = 'Error fetching booking data.';
+        exit();
+    }
+    
     // Verifica se a consulta retornou resultados
     if ($result) {
         $payment = $result['payment'] ?? 'Not defined';

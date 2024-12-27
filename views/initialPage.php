@@ -19,30 +19,13 @@ function starReview($stars) {
 }
 
 require_once('../database/init.php');
+require_once('../database/review.php');
 
-function retrieveReviews() {
-    global $reviews, $error_msg, $dbh;
-
-    try { // try catch for error handling
-        $stmt = $dbh->prepare(
-            'SELECT 
-            OwnerReview.rating, 
-            OwnerReview.description, 
-            OwnerReview.date_review, 
-            Person.name AS owner_name, 
-            Pet.name AS pet_name 
-            FROM Booking 
-            JOIN Review AS OwnerReview ON Booking.ownerReview = OwnerReview.id 
-            JOIN Pet ON Booking.pet = Pet.id 
-            JOIN Person ON Person.id = Pet.owner 
-            WHERE Booking.review_consent = "YES" AND Booking.ownerReview IS NOT "0";'
-        ); // prepared statement
-        $stmt->execute();
-        $reviews = $stmt->fetchAll(); //fetching all schedules by the user (array of arrays)
-    } catch (Exception $e) {
-        $error_msg = $e->getMessage(); // ir buscar a mensagem de erro e guardar em $error_msg
-    }
-    return $reviews;
+try { // try catch for error handling
+    $reviews = getPublicReviews();
+} catch (Exception $e) {
+    echo "Error: " . $e->getMessage();
+    exit();
 }
 
 
@@ -82,7 +65,6 @@ function retrieveReviews() {
                 </a>
             </div>
         </article>
-        <?php $reviews = retrieveReviews(); ?>
         <?php if(!empty($reviews)) : ?>
         <article id="reviews">
             <h2>What our clients say</h2>

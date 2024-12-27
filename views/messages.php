@@ -43,24 +43,14 @@ function displayMessages($messages) {
 
 
 require_once('../database/init.php');
+require_once('../database/message.php');
+require_once('../database/person.php');
 
 try { // try catch for error handling
-    $stmt = $dbh->prepare('SELECT * FROM Message WHERE 
-    (owner = ? AND provider = ?) OR
-    (owner = ? AND provider = ?)
-    ORDER BY send_time DESC;'); // querying all messages between these two homies
-    $stmt->execute(array($owner,$provider,$provider,$owner));
-    $messages = $stmt->fetchAll(); //fetching all messages
-
-    $stmt = $dbh->prepare(
-        'SELECT name 
-        FROM Person 
-        WHERE id = :id;'
-    ); // querying all messages between these two homies
-    $stmt->execute([':id' => $recipient]);
-    $name_recipient = $stmt->fetchAll(); //fetching name
+    $messages = getMessages($owner, $provider);
+    $name_recipient = getPersonInfo($recipient)[0]['name'];
 } catch (Exception $e) {
-    $error_msg = $e->getMessage(); // ir buscar a mensagem de erro e guardar em $error_msg
+    $error_msg = $e->getMessage();
 }
 ?>
 
@@ -78,7 +68,7 @@ try { // try catch for error handling
         <section id="chatBox">
             <div id="recipientHeader">
                 <h2 class="recipient">
-                    <?= $name_recipient[0]['name']; ?>
+                    <?= $name_recipient; ?>
                 </h2>
             </div>
             <div id="chatMessages">

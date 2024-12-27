@@ -26,31 +26,9 @@ if (isset($_SESSION["msg_error"])) {
     exit;
 }
 
-function insertPerson($name, $phone_number, $address, $email, $city, $iban, $password, $service_type) {
-    global $dbh;
-    $stmt = $dbh->prepare('INSERT INTO Person (name, phone_number, address, email, city, password) VALUES (?, ?, ?, ?, ?, ?)');
-    $stmt->execute(array($name, $phone_number, $address, $email, $city, hash('sha256', $password)));
-    $personId = $dbh->lastInsertId();
-    insertProvider($personId, $iban, $service_type);
-    insertOwner($personId);
-    return $personId; // Retorna o ID do novo usuário
-}
-
-function insertProvider($person, $iban, $service_type) {
-    global $dbh;
-    if (!empty($iban) && !empty($service_type)) {
-        $stmt = $dbh->prepare('INSERT INTO ServiceProvider (person, iban, service_type) VALUES (?, ?, ?)');
-        $stmt->execute(array($person, $iban, $service_type));
-    }
-}
-
-function insertOwner($person) {
-    global $dbh;
-    $stmt = $dbh->prepare('INSERT INTO PetOwner (person) VALUES (?)');
-    $stmt->execute(array($person));
-}
-
 require_once('../database/init.php');
+require_once('../database/person.php');
+
 try {
 
     // Inserir usuário e obter ID

@@ -1,147 +1,23 @@
 <?php
 session_start();
 $name = $_SESSION['name'];
+$user_id = $_SESSION['id'];
 
 require_once('../database/init.php');
+require_once('../database/person.php');
+require_once('../database/bookings.php');
+require_once('../database/pet.php');
 
 try {
-
-    $user_id = $_SESSION['id'];
-
-    // Prepare query to fetch pet owner info
-    $stmt = $dbh->prepare(
-        'SELECT 
-            Person.name, 
-            Person.email, 
-            Person.phone_number, 
-            Person.address, 
-            Person.city, 
-            PetOwner.avg_rating,
-            Pet.id AS pet_id, 
-            Pet.name AS pet_name, 
-            Pet.species AS pet_species, 
-            Pet.size AS pet_size, 
-            Pet.birthdate AS pet_age,
-            Pet.profile_picture AS pet_profile_picture
-        FROM 
-            PetOwner 
-        JOIN 
-            Person ON PetOwner.person = Person.id 
-        LEFT JOIN 
-            Pet ON Pet.owner = Person.id 
-        WHERE 
-            PetOwner.person = :id'
-    );
-    $stmt->bindValue(':id', $user_id, PDO::PARAM_INT);
-    if ($stmt->execute()) {
-        $petOwnerInfo = $stmt->fetchAll(); // Get all pets for the owner
-       // echo "INFO: ";
-       // print_r($petOwnerInfo);
-    } else {
-        echo "Error in executing query.";
-    }
-
-    $stmt->closeCursor();
-    
-    // Fetch past bookings
-    $stmt = $dbh->prepare(
-        'SELECT 
-            Booking.id AS service_id,
-            Booking.type AS type,
-            Booking.date AS date, 
-            Booking.start_time AS start_time, 
-            Booking.duration AS duration,
-            Booking.ownerReview AS ownerReview,
-            Booking.providerReview AS providerReview, 
-            Pet.name AS pet_name, 
-            Pet.id AS pet_id, 
-            Pet.species AS species,
-            Payment.price AS service_price,
-            OwnerReview.rating AS owner_review,
-            ProviderReview.rating AS provider_review
-        FROM Booking 
-        JOIN Pet ON Booking.pet = Pet.id 
-        JOIN PetOwner ON Pet.owner = PetOwner.person 
-        JOIN Payment ON Booking.payment = Payment.id 
-        JOIN Review AS OwnerReview ON Booking.ownerReview = OwnerReview.id 
-        JOIN Review AS ProviderReview ON Booking.providerReview = ProviderReview.id 
-        WHERE PetOwner.person = :id AND Booking.date < CURRENT_TIMESTAMP'
-    );
-    $stmt->bindValue(':id', $user_id, PDO::PARAM_INT);
-    if ($stmt->execute()) {
-        $pastBookingsInfo = $stmt->fetchAll(); // Get all past bookings
-        //echo "Fetched Bookings: ";
-        //print_r($pastBookingsInfo);
-    } else {
-        echo "Error in executing query.";
-    }
-
-    $stmt->closeCursor();
-
-    // Fetch past services
-    $stmt = $dbh->prepare(
-        'SELECT 
-            Booking.id AS service_id,
-            Booking.type AS type,
-            Booking.date AS service_date, 
-            Booking.start_time AS service_time, 
-            Booking.duration AS service_duration,
-            OwnerReview.rating AS owner_review,
-            ProviderReview.rating AS provider_review,
-            Pet.name AS pet_name, 
-            Payment.price AS service_price
-        FROM Booking 
-        JOIN Pet ON Booking.pet = Pet.id 
-        JOIN ServiceProvider ON Booking.provider = ServiceProvider.person 
-        JOIN Payment ON Booking.payment = Payment.id 
-        JOIN Review AS OwnerReview ON Booking.ownerReview = OwnerReview.id 
-        JOIN Review AS ProviderReview ON Booking.providerReview = ProviderReview.id 
-        WHERE Booking.provider = :id  AND Booking.date < CURRENT_TIMESTAMP'
-    );
-    $stmt->bindValue(':id', $user_id, PDO::PARAM_INT);
-    if ($stmt->execute()) {
-        $pastServicesInfo = $stmt->fetchAll(); // Get all past services
-    } else {
-        echo "Error in executing query.";
-    }
-
-    $stmt->closeCursor();
-
-    // Fetch service provider info
-    $stmt = $dbh->prepare(
-        'SELECT *  
-        FROM ServiceProvider 
-        WHERE ServiceProvider.person = :id'
-    );
-    $stmt->bindValue(':id', $user_id, PDO::PARAM_INT);
-    if ($stmt->execute()) {
-        $providerInfo = $stmt->fetchAll(); // Get service provider info
-    } else {
-        echo "Error in executing query.";
-    }
-
-    // Now fetch the medical needs for each pet
-    $medicalNeeds = [];
-    foreach ($petOwnerInfo as $pet) {
-        $pet_id = $pet['pet_id'];  // Get pet ID
-        
-        // Fetch medical needs for this pet
-        $medicalStmt = $dbh->prepare(
-            "SELECT description 
-            FROM MedicalNeed 
-            JOIN PetMedicalNeed ON PetMedicalNeed.medicalNeed = MedicalNeed.id 
-            WHERE PetMedicalNeed.pet = ?"
-        );
-        $medicalStmt->execute([$pet_id]);
-        $medicalNeeds[$pet_id] = $medicalStmt->fetchAll(PDO::FETCH_ASSOC);
-    }
-} catch (PDOException $e) {
-    // Handle error
+    $petOwnerInfo = getPersonInfo($user_id); // Get user info
+    $pastBookingsInfo = getPastBookings($user_id); // Fetch past bookings
+    $pastServicesInfo = getPastServices($user_id); // Fetch past services
+    $providerInfo = getProviderInfo($user_id); // Fetch service provider info
+    $medicalNeeds = fetchMedicalNeeds($petOwnerInfo); // Fetch the medical needs for each pet
+} catch (PDOException $e) { // error handling
     echo "Connection error: " . $e->getMessage();
 }
 ?>
-
-
 
 <!DOCTYPE html>
 <html lang="en">
@@ -187,7 +63,6 @@ try {
         </ul>
     </nav>
 </header>
-
 
     <aside class="sidebar">
         <h2>Sections</h2>
@@ -250,8 +125,8 @@ try {
                                 <p><strong>Pet:</strong> <?= htmlspecialchars($booking['pet_name']) ?></p>
                                 <p><strong>Date:</strong> <?= htmlspecialchars($service['service_date']) ?></p>
                                 <p><strong>Time:</strong> <?= htmlspecialchars($service['service_time']) ?></p>
-                                <p><strong>Duration:</strong> <?= htmlspecialchars($service['service_duration']) ?> hours</p>
-                                <p><strong>Price:</strong> <?= htmlspecialchars($service['service_price']) ?>€</p>
+                                <p><strong>Duration:</strong> <?= htmlspecialchars((int)$service['service_duration']) ?> hours</p>
+                                <p><strong>Price:</strong> <?= htmlspecialchars($service['payment']) ?>€</p>
 
                                 <p><strong>Your Rating:</strong>
                                     <?php if (empty($service['provider_review'])): ?>
@@ -292,8 +167,8 @@ try {
                                 <p><strong>Pet:</strong> <?= htmlspecialchars($booking['pet_name']) ?></p>
                                 <p><strong>Date:</strong> <?= htmlspecialchars($booking['date']) ?></p>
                                 <p><strong>Time:</strong> <?= htmlspecialchars($booking['start_time']) ?></p>
-                                <p><strong>Duration:</strong> <?= htmlspecialchars($booking['duration']) ?> minutes</p>
-                                <p><strong>Price:</strong> <?= htmlspecialchars($booking['service_price']) ?>€</p>
+                                <p><strong>Duration:</strong> <?= htmlspecialchars((int)$booking['duration']) ?> minutes</p>
+                                <p><strong>Price:</strong> <?= htmlspecialchars($booking['payment']) ?>€</p>
 
                                 <p><strong>Your Rating:</strong>
                                     <?php if (empty($booking['owner_review'])): ?>

@@ -26,8 +26,7 @@ function calculateWeekRange($week_offset = 0)
 
 
 //função para construir a tabela com a query
-function makeAvailabilityTable($schedule)
-{
+function makeAvailabilityTable($schedule) {
   // Map days of the week to columns
   $dayToColumn = [
     'Monday' => 1,
@@ -106,61 +105,15 @@ $week_start = $week_range['week_start'];
 $week_end = $week_range['week_end'];
 
 require_once('../database/init.php');
+require_once('../database/bookings.php');
+require_once('../database/schedule.php');
 
 try { // try catch for error handling
-  $stmt = $dbh->prepare(
-    'SELECT day_week, start_time, end_time 
-        FROM Schedule 
-        WHERE service_provider = :service_provider 
-        AND day_week BETWEEN :week_start AND :week_end'
-  ); // prepared statement
-  $stmt->execute([
-    ':service_provider' => $id,
-    ':week_start' => $week_start,
-    ':week_end' => $week_end,
-  ]);
-  $schedule = $stmt->fetchAll(); // fetching all schedules by the user (array of arrays)
+  $bookings = getFutureServices($id); // get future services
+  $schedule = getSchedule($id, $week_start, $week_end); // get schedule for the week
 } catch (Exception $e) {
-  $error_msg = "Error fetching schedule. Please try again."; // ir buscar a mensagem de erro e guardar em $error_msg
+  $error_msg = $e->getMessage(); // ir buscar a mensagem de erro e guardar em $error_msg
 }
-
-function retrieveFutureServices()
-{
-  global $id, $bookings, $error_msg, $dbh;
-
-  try { // try catch for error handling
-    $stmt = $dbh->prepare(
-      'SELECT 
-            Booking.date, 
-            Booking.start_time, 
-            Booking.end_time, 
-            Booking.address_collect, 
-            Booking.type AS service_type, 
-            Booking.address_collect AS address, 
-            Owner.id AS owner_id, 
-            Owner.name AS owner_name, 
-            Owner.city AS owner_city, 
-            Pet.name AS pet_name, 
-            Pet.species AS pet_species, 
-            Pet.profile_picture AS pet_picture, 
-            MedicalNeed.description AS medical_needs 
-          FROM Booking 
-          JOIN Person AS Provider ON Booking.provider = Provider.id 
-          JOIN Pet ON Booking.pet = Pet.id 
-          JOIN Person AS Owner ON Pet.owner = Owner.id 
-          JOIN PetMedicalNeed ON Pet.id = PetMedicalNeed.pet 
-          JOIN MedicalNeed ON PetMedicalNeed.medicalNeed = MedicalNeed.id
-          WHERE Booking.date >= ? AND Booking.provider = ?;'
-    ); // prepared statement
-    $stmt->execute([date('Y-m-d'), $id]);
-    $bookings = $stmt->fetchAll(); //fetching all schedules by the user (array of arrays)
-  } catch (Exception $e) {
-    $error_msg = $e->getMessage(); // ir buscar a mensagem de erro e guardar em $error_msg
-  }
-  return $bookings;
-}
-
-
 
 include('../templates/header_tpl.php');
 ?>
@@ -230,7 +183,6 @@ include('../templates/header_tpl.php');
   </section>
   <section id="scheduledServices">
     <h2>Scheduled Services</h2>
-    <?php retrieveFutureServices(); ?>
     <?= $error_msg ? '<p class="msg_error">' . $error_msg . '</p>' : '' ?>
     <div class="scrollable-bookings">
       <?php if (!empty($bookings)) : ?>

@@ -2,9 +2,6 @@
 session_start();
 ?>
 
-<!-- Login page -->
- <!-- Nome ou emmail (ou username ou email) --> 
-  <!-- password -->
 <?php
   include('../templates/header_auth_tpl.php');
   

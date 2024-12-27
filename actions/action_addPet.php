@@ -44,44 +44,15 @@ if (isset($_FILES['profile_picture']) && $_FILES['profile_picture']['error'] ===
 else{ 
     $profile_picture = 'imagemdefault.jpg';
 }
-// Função para inserir o pet no banco de dados
-function insertPet($name, $species, $size, $birthdate, $profile_picture, $user_id) {
-    global $dbh;
-    $stmt = $dbh->prepare('INSERT INTO Pet (name, species, size, birthdate, profile_picture, owner) VALUES (?, ?, ?, ?, ?, ?)');
-    $stmt->execute([$name, $species, $size, $birthdate, $profile_picture, $user_id]);
-    return $dbh->lastInsertId();  // Retorna o ID do pet recém inserido
-}
 
-// Função para inserir a necessidade médica
-function insertMedicalNeed($description) {
-    global $dbh;
-    // Verifica se a necessidade médica já existe
-    $stmt = $dbh->prepare('SELECT id FROM MedicalNeed WHERE description = ?');
-    $stmt->execute([$description]);
-    $existingNeed = $stmt->fetch();
-
-    // Se não existir, insere
-    if (!$existingNeed) {
-        $stmt = $dbh->prepare('INSERT INTO MedicalNeed (description) VALUES (?)');
-        $stmt->execute([$description]);
-        return $dbh->lastInsertId();  // Retorna o ID da nova necessidade médica inserida
-    } else {
-        return $existingNeed['id'];  // Se já existe, retorna o ID existente
-    }
-}
-
-// Função para associar a necessidade médica ao pet
-function insertPetMedicalNeed($pet_id, $medicalNeed_id) {
-    global $dbh;
-    $stmt = $dbh->prepare('INSERT INTO PetMedicalNeed (pet, medicalNeed) VALUES (?, ?)');
-    $stmt->execute([$pet_id, $medicalNeed_id]);
-}
 
 require_once('../database/init.php');
-try {
+require_once('../database/pet.php');
 
+try {
     // Inserir o pet e obter o ID
-    $pet_id = insertPet($name, $species, $size, $birthdate, $profile_picture, $user_id); // (A função insertPet retorna o id do último petinserido)
+    $pet_id = insertPet($name, $species, $size, $birthdate, $profile_picture, $user_id); 
+    // (A função insertPet retorna o id do último petinserido)
 
     // Processar as necessidades médicas como texto
     if (!empty($medicalneeds)) {

@@ -1,17 +1,22 @@
 <?php
 session_start();
 
+$id = $_SESSION['id'];
+$address = $_SESSION['address'];
+
 if (isset($_SESSION['availableProviders'])) {
     $availableProviders = $_SESSION['availableProviders'];
+}
+
+if (isset($_SESSION['booking_data'])) {
+    $booking_data = $_SESSION['booking_data'];
+    unset($_SESSION['booking_data']); // Clear the data after using it
 }
 
 // Only unset $_SESSION['availableProviders'] when the form is resubmitted
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     unset($_SESSION['availableProviders']);
 }
-
-$id = $_SESSION['id'];
-$address = $_SESSION['address'];
 
 // Verify login in state, if not logged in, redirect to login page.
 if (!isset($_SESSION['id']) || !isset($_SESSION['email'])) {
@@ -21,53 +26,17 @@ if (!isset($_SESSION['id']) || !isset($_SESSION['email'])) {
 }
 
 require_once('../database/init.php');
+require_once('../database/bookings.php');
+require_once('../database/pet.php');
 
 try {
-    // Consulta para ir buscar os pets do user
-    $stmt = $dbh->prepare('SELECT * FROM Pet WHERE owner = :id');
-    $stmt->bindValue(':id', $id, PDO::PARAM_INT);
-    $stmt->execute();
-    $pets = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    $bookings = getFutureBookings($id);
+    $pets = getPets($id);
     $has_pets = !empty($pets);
 } catch (PDOException $e) {
     echo "Error: " . $e->getMessage();
     exit();
 }
-
-function retrieveFutureBookings()
-{
-    global $id, $bookings, $error_msg, $dbh;
-    try { // try catch for error handling
-        $stmt = $dbh->prepare(
-            'SELECT 
-            Booking.date, 
-            Booking.start_time, 
-            Booking.end_time, 
-            Booking.address_collect, 
-            Booking.type AS service_type, 
-            Booking.address_collect AS address, 
-            Provider.id AS provider_id, 
-            Provider.name AS provider_name, 
-            ServiceProvider.avg_rating AS provider_rating,
-            Owner.id AS owner_id, 
-            Owner.city AS owner_city, 
-            Pet.name AS pet_name, 
-            Pet.profile_picture AS pet_picture
-          FROM Booking 
-          JOIN Person AS Provider ON Booking.provider = Provider.id 
-          JOIN ServiceProvider ON ServiceProvider.person = Provider.id 
-          JOIN Pet ON Booking.pet = Pet.id 
-          JOIN Person AS Owner ON Pet.owner = Owner.id 
-          WHERE Booking.date >= ? AND Owner.id = ?;'
-        ); // prepared statement
-        $stmt->execute([date('Y-m-d'), $id]);
-        $bookings = $stmt->fetchAll(); //fetching all schedules by the user (array of arrays)
-    } catch (Exception $e) {
-        $error_msg = $e->getMessage(); // ir buscar a mensagem de erro e guardar em $error_msg
-    }
-    return $bookings;
-}
-
 
 include('../templates/header_tpl.php');
 ?>
@@ -199,15 +168,15 @@ include('../templates/header_tpl.php');
                     </div>
 
                     <!-- Campos ocultos com os dados da reserva -->
-                    <input type="hidden" name="service_type" value="<?= htmlspecialchars($_POST['service_type'] ?? '') ?>">
-                    <input type="hidden" name="pet_name" value="<?= htmlspecialchars($_POST['pet_name'] ?? '') ?>">
-                    <input type="hidden" name="date" value="<?= htmlspecialchars($_POST['date'] ?? '') ?>">
-                    <input type="hidden" name="location" value="<?= htmlspecialchars($_POST['location'] ?? '') ?>">
-                    <input type="hidden" name="other_address" value="<?= htmlspecialchars($_POST['other_address'] ?? '') ?>">
-                    <input type="hidden" name="starttime" value="<?= htmlspecialchars($_POST['starttime'] ?? '') ?>">
-                    <input type="hidden" name="endtime" value="<?= htmlspecialchars($_POST['endtime'] ?? '') ?>">
-                    <input type="hidden" name="photo_consent" value="<?= htmlspecialchars($_POST['photo_consent'] ?? 'NO') ?>">
-                    <input type="hidden" name="review_consent" value="<?= htmlspecialchars($_POST['review_consent'] ?? 'NO') ?>">
+                    <input type="hidden" name="service_type" value="<?= htmlspecialchars($booking_data['service_type'] ?? '') ?>">
+                    <input type="hidden" name="pet_name" value="<?= htmlspecialchars($booking_data['pet_name'] ?? '') ?>">
+                    <input type="hidden" name="date" value="<?= htmlspecialchars($booking_data['date'] ?? '') ?>">
+                    <input type="hidden" name="location" value="<?= htmlspecialchars($booking_data['location'] ?? '') ?>">
+                    <input type="hidden" name="other_address" value="<?= htmlspecialchars($booking_data['other_address'] ?? '') ?>">
+                    <input type="hidden" name="starttime" value="<?= htmlspecialchars($booking_data['starttime'] ?? '') ?>">
+                    <input type="hidden" name="endtime" value="<?= htmlspecialchars($booking_data['endtime'] ?? '') ?>">
+                    <input type="hidden" name="photo_consent" value="<?= htmlspecialchars($booking_data['photo_consent'] ?? 'NO') ?>">
+                    <input type="hidden" name="review_consent" value="<?= htmlspecialchars($booking_data['review_consent'] ?? 'NO') ?>">
 
                     <button type="submit">Book</button>
                 </form>
@@ -219,7 +188,6 @@ include('../templates/header_tpl.php');
 
         <section id="scheduledServices">
             <h2>Scheduled Bookings</h2>
-            <?php retrieveFutureBookings(); ?>
             <?= $error_msg ? '<p class="msg_error">' . $error_msg . '</p>' : '' ?>
             <div class="scrollable-bookings">
                 <?php if (!empty($bookings)) : ?>
