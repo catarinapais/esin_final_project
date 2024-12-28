@@ -30,7 +30,7 @@ try {
     <link href="../css/layout.css" rel="stylesheet">
     <link href="../css/responsive.css" rel="stylesheet">
     <link href="../css/account.css" rel="stylesheet">
-    <link href="../css/form.css" rel="stylesheet">
+ 
 </head>
 
 <body>
@@ -98,15 +98,17 @@ try {
                         </p>
                     <?php endif; ?>
 
-                    <!--button for logout-->
+                    <div class="button-container">
                     <form action="../actions/action_logout.php" method="post" id=logout>
-                        <input type="submit" value="Logout">
+                        <input type="submit" id="logoutb" value="Logout">
                     </form>
 
                     <!-- Botão para apagar conta -->
                     <form action="../actions/action_delete_account.php" method="post" id="deleteAccount">
-                        <input type="submit" value="Delete Account" onclick="return confirm('Are you sure you want to delete your account? This action cannot be undone.');">
+                        <input type="submit" id="delete" value="Delete Account" onclick="return confirm('Are you sure you want to delete your account? This action cannot be undone.');">
                     </form>
+                    </div>
+
 
                 </section>
                 <!--TODO: verificar qual rating é que é para mostrar no "past services" e no "past bookings"-->
@@ -137,7 +139,7 @@ try {
                                     <form action="review.php" method="post">
                                         <input type="hidden" name="service_id" value="<?= htmlspecialchars($service['service_id']) ?>">
                                         <input type="hidden" name="role" value="owner">
-                                        <input type="submit" value="Add Review">
+                                        <input type="submit" id="review" value="Add Review">
                                     </form>
                                 <?php else: ?>
                                     <?= htmlspecialchars($service['owner_review']) ?>
@@ -163,7 +165,7 @@ try {
                                     <p><strong>Pet:</strong> <?= htmlspecialchars($booking['pet_name']) ?></p>
                                     <p><strong>Date:</strong> <?= htmlspecialchars($booking['date']) ?></p>
                                     <p><strong>Time:</strong> <?= htmlspecialchars($booking['start_time']) ?></p>
-                                    <p><strong>Duration:</strong> <?= htmlspecialchars((int)$booking['duration']) ?> minutes</p>
+                                    <p><strong>Duration:</strong> <?= htmlspecialchars((int)$booking['duration']) ?> hours</p>
                                     <p><strong>Price:</strong> <?= htmlspecialchars($booking['payment']) ?>€</p>
 
                                     <p><strong>Your Rating:</strong>
@@ -180,7 +182,7 @@ try {
                                     <form action="review.php" method="post">
                                         <input type="hidden" name="service_id" value="<?= htmlspecialchars($booking['service_id']) ?>">
                                         <input type="hidden" name="role" value="provider">
-                                        <input type="submit" value="Add Review">
+                                        <input type="submit" id="review" value="Add Review">
                                     </form>
                                 <?php else: ?>
                                     <?= htmlspecialchars($booking['provider_review']) ?></p>
@@ -194,11 +196,7 @@ try {
 
                 <?php endif; ?>
                 <section id="pets">
-                    <legend>
-                        <span>Pets</span>
-
-                    </legend>
-
+                        <h2>Pets</h2>
                     <!-- Add a new pet -->
                     <?php //TODO: dar layout a esta msg de erro 
                     ?>

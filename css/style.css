@@ -552,8 +552,6 @@ form#addPet input[type="submit"]:hover {
     color: #333;
 }
 
-/*review cards for the initialPage*/
-/* Flex container for reviews */
 .reviews-container {
     display: flex;
     flex-wrap: wrap; 
@@ -563,7 +561,7 @@ form#addPet input[type="submit"]:hover {
     padding-bottom: 2.5em;
 }
 
-/* Individual review cards */
+
 .review-card {
     flex: 0 0 auto; 
     width: calc(25%); 
@@ -577,14 +575,13 @@ form#addPet input[type="submit"]:hover {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
 }
 
-/* Star review styling */
 .star-review span {
     display: inline-block; 
     font-size: 1.5em; 
     color: gold; 
 }
 
-/* Review author and date styling */
+
 .review-author, .review-date, .review-desc {
     color: #555; 
     padding-left: 2em;
@@ -595,8 +592,7 @@ form#addPet input[type="submit"]:hover {
     font-style: italic; 
 }
 
-/*service provider - week navigation*/
-/*week navigation*/
+
 #week-navigation a {
     text-decoration: none; /* Remove underline from links */
     font-size: 1.5em; /* Increase the size of the symbols */
@@ -690,7 +686,7 @@ p.note {
     text-decoration: underline;
 }
 .scrollable-bookings {
-    max-height: 500px; /* Adjust the height as needed */
+    max-height: 850px; /* Adjust the height as needed */
     overflow-y: auto;
     border: 1px solid #ddd;
     padding: 10px;

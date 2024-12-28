@@ -409,7 +409,7 @@ form#addPet input[type="submit"] {
 .form-group input[type="checkbox"] {
     margin-right: 8px; /* Espaço entre a checkbox e o texto */
 }
-/* Use flexbox for normal wrapping */
+
 #bookingcontent {
     display: flex;
     flex-wrap: wrap;
