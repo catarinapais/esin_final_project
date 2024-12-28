@@ -196,45 +196,6 @@ article p {
 }
 
 
-/* Estrutura dos formulários */
-form {
-    width: 100%;
-    max-width: 500px;
-    margin: 50px auto; 
-    display: flex;
-    flex-direction: column; 
-}
-
-form label {
-    display: flex;  /* Faz os elementos filhos da label (texto e input) ficarem na mesma linha */
-    align-items: center; 
-    margin-bottom: 10px;   
-}
-
-
-form input,
-form textarea,
-form select {
-    width: 100%;
-    margin-left: 0;
-    resize: none; /* Impede o redimensionamento */  
-    padding: 10px; /* Espaçamento interno */
-    margin-bottom: 15px; /* Espaçamento entre os campos */
-}
-
-
-form input[type="radio"],
-form input[type="checkbox"] {
-    width: auto; 
-    margin-left: 10px; 
-}
-
-form button {
-    display: block;
-    width: 100%; 
-    padding: 12px;
-}
-
 #authentication {
     display: flex;
     flex-direction: column; 

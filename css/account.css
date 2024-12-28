@@ -2,31 +2,53 @@
 body {
     display: grid;
     grid-template-columns: 1fr 3fr;  /* Ajuste no grid para dar mais largura ao conteúdo principal */
-    grid-template-rows: auto auto 1fr auto; /* Manter a estrutura de linha */
+    grid-template-rows: auto 1fr auto; /* Ajuste para header e footer não serem centralizados */
     min-height: 100vh; /* Garantir que a altura seja 100% da tela */
     margin: 0;
     padding: 0;
     box-sizing: border-box; /* Para garantir que padding e bordas não aumentem a largura */
 }
 
+/* Header e Footer ocupam toda a largura */
 body > header,
 body > footer {
     grid-column: 1 / -1; /* Fazer o header e footer ocuparem toda a largura */
 }
 
-/* Section layout and styling */
+/* Seção principal - Centralizando o conteúdo */
 #accountcontent {
     grid-column: 1 / -1;
     display: flex;
-    justify-content: center;
-    align-items: flex-start;
+    justify-content: center; /* Centraliza o conteúdo horizontalmente */
+    align-items: flex-start; /* Alinha o conteúdo ao topo */
     min-height: calc(100vh - 80px); /* Ajuste para altura dinâmica */
     padding: 20px;
-    width: 100%;  /* Garantir que o conteúdo use toda a largura disponível */
-    max-width: 100%; /* Garantir que o conteúdo não ultrapasse a largura da tela */
-    box-sizing: border-box; /* Garantir que padding não afete a largura */
+    width: 80%;  /* Garantir que o conteúdo use toda a largura disponível */
+margin-left: 165px;
 }
 
+
+/* Ajuste da caixa de Informações Pessoais */
+#staticTags {
+    flex: 1 1 45%;  /* Caixa de informações pessoais ocupa 45% da largura */
+    padding: 20px;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Ajuste da caixa de Pets */
+#pets {
+    flex: 1 1 45%;  /* Caixa de pets ocupa 45% da largura */
+    padding: 20px;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Estilo das seções dentro de #accountcontent */
 #accountcontent section {
     padding: 20px;
     border-radius: 8px;
@@ -39,13 +61,22 @@ body > footer {
 
 /* Scrollable containers for past services and bookings */
 #pastServices, #pastBookings {
-    height: 500px;      /* Set the desired height */
-    overflow-y: auto;   /* Add vertical scrollbar if necessary */
+    display: flex;
+    flex-wrap: wrap; /* Permite que as caixas se movam para a próxima linha se não couberem */
+    gap: 20px; /* Espaço entre as caixas */
+    overflow-y: auto; /* Permite o scroll vertical se as caixas não couberem */
+    max-height: 400px; /* Limita a altura das secções para que o scroll seja ativado */
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
     border: 1px solid #ddd;
-    padding: 10px;
-    margin-bottom: 20px; /* Space between containers */
+    max-height: 500px; /* Ajusta a altura conforme necessário */
+    overflow-y: auto;
 }
-
+/* Adiciona uma margem no título h2 para afastar as caixas de "Past Services" e "Past Bookings" */
+#pastServices h2, #pastBookings h2 {
+    margin-bottom: 100px !important; /* Distância entre o título e as caixas */
+}
 /* Section headers */
 h2, h3 {
     color: #444;
@@ -161,13 +192,15 @@ footer {
 
 /* Booking and Service Box */
 .booking-box, .service-box {
-    border: 2px solid #ddd; /* Borda leve para separar cada item */
+    flex: 0 0 calc(33.33% - 20px); /* Define a largura das caixas (3 caixas por linha) */
+    background-color: #fff;
     padding: 15px;
-    margin-bottom: 15px;
     border-radius: 8px;
-    background-color: #f9f9f9; /* Fundo claro */
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Sombra sutil */
-    display: block;
+    border: 1px solid #ddd;
+    box-sizing: border-box;
+    min-width: 250px; /* Largura mínima das caixas */
+    max-width: 300px; /* Largura máxima das caixas */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 .booking-box + .booking-box, .service-box + .service-box {
@@ -238,4 +271,22 @@ footer {
 .main-content {
     width: 100%; /* Garantir que todo o conteúdo dentro do #accountcontent ocupe 100% da largura */
     box-sizing: border-box; /* Certificar-se de que padding e bordas não aumentem a largura total */
+}
+
+
+/* Estilo de botão básico */
+#logout {
+
+    color: white !important; /* Cor do texto */
+    padding: 10px 20px !important; /* Espaçamento interno */
+    border: none !important; /* Sem borda */
+    border-radius: 5px !important; /* Bordas arredondadas */
+    cursor: pointer !important; /* Cursor de ponteiro ao passar o mouse */
+    font-size: 16px !important; /* Tamanho da fonte */
+    transition: background-color 0.3s !important; /* Transição suave ao passar o mouse */
+}
+
+/* Efeito ao passar o mouse */
+button:hover {
+    background-color: #45a049 !important; /* Cor de fundo quando o mouse passar sobre o botão */
 }
