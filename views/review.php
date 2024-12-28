@@ -25,15 +25,16 @@ try {
 
 <?php include('../templates/header_tpl.php'); ?>
 
-<section id="pastService"><!--querying info about this service-->
-    <h2>Past <?= $service ?></h2>
-    <h3>Pet <?= htmlspecialchars($bookingInfo[0]['type']) ?> to <?= htmlspecialchars($bookingInfo[0]['pet_name']) ?></h3>
-    <p><?= htmlspecialchars(ucfirst($role)) ?>: <?= htmlspecialchars($bookingInfo[0][$role . '_name']) ?> </p>
-    <p><?= htmlspecialchars($bookingInfo[0]['date']) ?> <?= htmlspecialchars($bookingInfo[0]['start_time']) ?> </p>
+<section id="pastServicenew"><!--querying info about this service-->
+   
 </section>
 <section id="review">
     <form action="../actions/action_review.php" method="post">
-        <h2>Review this <?= htmlspecialchars(ucfirst($role)) ?></h2>
+    <h2>Past <?= $service ?></h2>
+    <h3>Pet <?= htmlspecialchars($bookingInfo[0]['type']) ?> to <?= htmlspecialchars($bookingInfo[0]['pet_name']) ?></h3>
+    <p><?= htmlspecialchars(ucfirst($role)) ?>: <?= htmlspecialchars($bookingInfo[0][$role . '_name']) ?> </p>
+    <p>Date: <?= htmlspecialchars($bookingInfo[0]['date']) ?> @ <?= htmlspecialchars($bookingInfo[0]['start_time']) ?> </p>
+        <h3>Review this <?= htmlspecialchars(ucfirst($role)) ?>:</h3>
         <div id="starReview">
             <input type="radio" id="star5" name="review" value="5" required="required">
             <label for="star5" title="5 stars">&#9733;</label>
@@ -47,7 +48,6 @@ try {
             <label for="star1" title="1 star">&#9733;</label>
         </div>
         <label>
-            Description:
             <textarea id="reviewDescription" name="reviewDescription" rows="3" cols="30" placeholder="Describe your experience!" required="required"></textarea>
         </label>
         <input type="hidden" name="service_id" value="<?= htmlspecialchars($service_id) ?>">

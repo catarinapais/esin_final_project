@@ -6,6 +6,7 @@ form {
     margin: 50px auto; 
     display: flex;
     flex-direction: column; 
+    line-height: 1; /* Ajuste o valor conforme necessário */
 }
 
 form label {
@@ -22,7 +23,7 @@ form select {
     margin-left: 0;
     resize: none; /* Impede o redimensionamento */  
     padding: 10px; /* Espaçamento interno */
-    margin-bottom: 15px; /* Espaçamento entre os campos */
+    margin-bottom: 0px; /* Espaçamento entre os campos */
 }
 
 

@@ -227,6 +227,14 @@ article p {
     display: none;
 }
 
+#review {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
 /* Página Service Providers */
 .mainContent {
     display: flex;
@@ -235,6 +243,7 @@ article p {
     justify-content: space-around; /* Center items horizontally */
     gap: 2em; /* Add gap between items */
 }
+
 
 #scheduleForm,
 #availability,

@@ -74,7 +74,9 @@ body>header, nav {
     background-color: #E7CCCC;
     padding: 0.5em 0;
 }
-
+#addBooking p{
+    margin-bottom:0px ;
+}
 
 .overlayText {
     transform: translateX(-50%);
@@ -222,6 +224,15 @@ legend {
 
 
 /* Página das reviews */
+
+#review h2{
+text-align:  center !important;
+}
+
+#review h3 {
+    text-align: initial; /* ou ajuste como for necessário */
+}
+
 #starReview label {
     font-size: 2rem;
     color: #ddd;
