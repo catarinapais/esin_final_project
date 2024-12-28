@@ -10,7 +10,6 @@ if (isset($_SESSION['availableProviders'])) {
 
 if (isset($_SESSION['booking_data'])) {
     $booking_data = $_SESSION['booking_data'];
-    unset($_SESSION['booking_data']); // Clear the data after using it
 }
 
 // Only unset $_SESSION['availableProviders'] when the form is resubmitted
@@ -142,6 +141,24 @@ include('../templates/header_tpl.php');
         </section>
 
         <section id="availableProviders">
+            <div id="priceTable">
+                <h3>Services Price Table</h3>
+            <table class="price-table">
+                <thead>
+                    <tr>
+                        <th class="tg-0lax">Pet Sitting</th>
+                        <th class="tg-0lax">Pet Walking</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="tg-0lax">15€/hour</td>
+                        <td class="tg-0lax"><span style="font-weight:400;font-style:normal">10€/hour</span></td>
+                    </tr>
+                </tbody>
+            </table>
+            <p class="small">Prices are per pet.</p>
+            </div>
             <?php if (isset($_SESSION['msg_no_providers'])) : ?>
                 <p class="msg_error"><?php echo $_SESSION['msg_no_providers']; ?></p>
                 <?php unset($_SESSION['msg_no_providers']); ?>

@@ -21,6 +21,7 @@ try {
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -30,41 +31,42 @@ try {
     <link href="../css/responsive.css" rel="stylesheet">
     <link href="../css/account.css" rel="stylesheet">
 </head>
-<body>
-<header id="navigationBar">
-    <a href="initialPage.php">
-        <div id="logo">
-            <h1>Pet Patrol</h1>
-            <h2>Sit and Walk</h2>
-            <img src="../images/assets/logo1.png" alt="Logo of Pet Patrol">
-        </div>
-    </a>
-    <nav id="menu">
-        <input type="checkbox" id="hamburger">
-        <label class="hamburger" for="hamburger"></label>
-        <ul id="menuItems">
-            <?php if (isset($_SESSION['email'])): ?>
-                <li><a href="bookingRequest.php">BOOK A SERVICE</a></li>
-                <li><a href="serviceProvider.php">DO A SERVICE</a></li>
-                <li><a href="aboutus.php">ABOUT US</a></li>
-                <li>
-                    <a href="account.php" class="nomedapessoa">
-                    <span class="emoji" role="img" aria-label="apple">🙎🏼</span> 
-                        <?php echo ($name); ?>
-                    </a>
-                </li>
-            <?php else: ?>
-                <li><a href="aboutus.php">ABOUT US</a></li>
-                <li class="signup"><a href="register.php" class="button-74">REGISTER</a></li>
-                <li class="signup">
-                    <a href="login.php" class="button-56" role="button">LOGIN</a>
-                </li>
-            <?php endif; ?>
-        </ul>
-    </nav>
-</header>
 
-   
+<body>
+    <header id="navigationBar">
+        <a href="initialPage.php">
+            <div id="logo">
+                <h1>Pet Patrol</h1>
+                <h2>Sit and Walk</h2>
+                <img src="../images/assets/logo1.png" alt="Logo of Pet Patrol">
+            </div>
+        </a>
+        <nav id="menu">
+            <input type="checkbox" id="hamburger">
+            <label class="hamburger" for="hamburger"></label>
+            <ul id="menuItems">
+                <?php if (isset($_SESSION['email'])): ?>
+                    <li><a href="bookingRequest.php">BOOK A SERVICE</a></li>
+                    <li><a href="serviceProvider.php">DO A SERVICE</a></li>
+                    <li><a href="aboutus.php">ABOUT US</a></li>
+                    <li>
+                        <a href="account.php" class="nomedapessoa">
+                            <span class="emoji" role="img" aria-label="apple">🙎🏼</span>
+                            <?php echo ($name); ?>
+                        </a>
+                    </li>
+                <?php else: ?>
+                    <li><a href="aboutus.php">ABOUT US</a></li>
+                    <li class="signup"><a href="register.php" class="button-74">REGISTER</a></li>
+                    <li class="signup">
+                        <a href="login.php" class="button-56" role="button">LOGIN</a>
+                    </li>
+                <?php endif; ?>
+            </ul>
+        </nav>
+    </header>
+
+
     <main id="accountcontent">
 
         <div class="main-content">
@@ -101,100 +103,100 @@ try {
                     </form>
 
                     <!-- Botão para apagar conta -->
-<form action="../actions/action_delete_account.php" method="post" id="deleteAccount">
-    <input type="submit" value="Delete Account" onclick="return confirm('Are you sure you want to delete your account? This action cannot be undone.');">
-</form>
+                    <form action="../actions/action_delete_account.php" method="post" id="deleteAccount">
+                        <input type="submit" value="Delete Account" onclick="return confirm('Are you sure you want to delete your account? This action cannot be undone.');">
+                    </form>
 
                 </section>
                 <!--TODO: verificar qual rating é que é para mostrar no "past services" e no "past bookings"-->
-               
+
                 <section id="pastServices">
-    <h2>Past Services</h2>
-    <?php if (!empty($providerInfo[0]['iban'])): ?>
-        <?php if (!empty($pastServicesInfo)): ?>
-            <?php foreach ($pastServicesInfo as $service): ?>
-                <div class="service-box">
-                    <h3><?= htmlspecialchars($service['type']) ?></h3>
-                    <p><strong>Pet:</strong> <?= htmlspecialchars($booking['pet_name']) ?></p>
-                    <p><strong>Date:</strong> <?= htmlspecialchars($service['service_date']) ?></p>
-                    <p><strong>Time:</strong> <?= htmlspecialchars($service['service_time']) ?></p>
-                    <p><strong>Duration:</strong> <?= htmlspecialchars((int)$service['service_duration']) ?> hours</p>
-                    <p><strong>Price:</strong> <?= htmlspecialchars($service['payment']) ?>€</p>
+                    <h2>Past Services</h2>
+                    <?php if (!empty($providerInfo[0]['iban'])): ?>
+                        <?php if (!empty($pastServicesInfo)): ?>
+                            <?php foreach ($pastServicesInfo as $service): ?>
+                                <div class="service-box">
+                                    <h3><?= htmlspecialchars($service['type']) ?></h3>
+                                    <p><strong>Pet:</strong> <?= htmlspecialchars($service['pet_name']) ?></p>
+                                    <p><strong>Date:</strong> <?= htmlspecialchars($service['service_date']) ?></p>
+                                    <p><strong>Time:</strong> <?= htmlspecialchars($service['service_time']) ?></p>
+                                    <p><strong>Duration:</strong> <?= htmlspecialchars((int)$service['service_duration']) ?> hours</p>
+                                    <p><strong>Price:</strong> <?= htmlspecialchars($service['payment']) ?>€</p>
 
-                    <p><strong>Your Rating:</strong>
-                        <?php if (empty($service['provider_review'])): ?>
-                            No review yet
-                        <?php else: ?>
-                            <?= htmlspecialchars($service['provider_review']) ?>
-                        <?php endif; ?></p>
+                                    <p><strong>Your Rating:</strong>
+                                        <?php if (empty($service['provider_review'])): ?>
+                                            No review yet
+                                        <?php else: ?>
+                                            <?= htmlspecialchars($service['provider_review']) ?>
+                                        <?php endif; ?></p>
 
-                    <p><strong>Owner's Review:</strong>
-                        <?php if (empty($service['owner_review'])): ?>
-                            No review yet
-                            <form action="review.php" method="post">
-                                <input type="hidden" name="service_id" value="<?= htmlspecialchars($service['service_id']) ?>">
-                                <input type="hidden" name="role" value="owner">
-                                <input type="submit" value="Add Review">
-                            </form>
+                                    <p><strong>Owner's Review:</strong>
+                                        <?php if (empty($service['owner_review'])): ?>
+                                            No review yet
+                                    <form action="review.php" method="post">
+                                        <input type="hidden" name="service_id" value="<?= htmlspecialchars($service['service_id']) ?>">
+                                        <input type="hidden" name="role" value="owner">
+                                        <input type="submit" value="Add Review">
+                                    </form>
+                                <?php else: ?>
+                                    <?= htmlspecialchars($service['owner_review']) ?>
+                                <?php endif; ?>
+                                </p>
+                                </div>
+                            <?php endforeach; ?>
                         <?php else: ?>
-                            <?= htmlspecialchars($service['owner_review']) ?>
+                            <p>You have no past services.</p>
                         <?php endif; ?>
-                    </p>
-                </div>
-            <?php endforeach; ?>
-        <?php else: ?>
-            <p>You have no past services.</p>
-        <?php endif; ?>
-    <?php else: ?>
-        <p>You are not eligible to provide a service.</p>
-    <?php endif; ?>
-</section>
+                    <?php else: ?>
+                        <p>You are not eligible to provide a service.</p>
+                    <?php endif; ?>
+                </section>
 
                 <?php if (!empty($petOwnerInfo[0]['pet_id'])): ?>
-                   <section id="pastBookings">
-    <h2>Past Bookings</h2>
-    <?php if (!empty($pastBookingsInfo)): ?>
-        <?php foreach ($pastBookingsInfo as $booking): ?>
-            <div class="booking-box">
-                <h3><?= htmlspecialchars($booking['type']) ?></h3>
-                <p><strong>Pet:</strong> <?= htmlspecialchars($booking['pet_name']) ?></p>
-                <p><strong>Date:</strong> <?= htmlspecialchars($booking['date']) ?></p>
-                <p><strong>Time:</strong> <?= htmlspecialchars($booking['start_time']) ?></p>
-                <p><strong>Duration:</strong> <?= htmlspecialchars((int)$booking['duration']) ?> minutes</p>
-                <p><strong>Price:</strong> <?= htmlspecialchars($booking['payment']) ?>€</p>
+                    <section id="pastBookings">
+                        <h2>Past Bookings</h2>
+                        <?php if (!empty($pastBookingsInfo)): ?>
+                            <?php foreach ($pastBookingsInfo as $booking): ?>
+                                <div class="booking-box">
+                                    <h3><?= htmlspecialchars($booking['type']) ?></h3>
+                                    <p><strong>Pet:</strong> <?= htmlspecialchars($booking['pet_name']) ?></p>
+                                    <p><strong>Date:</strong> <?= htmlspecialchars($booking['date']) ?></p>
+                                    <p><strong>Time:</strong> <?= htmlspecialchars($booking['start_time']) ?></p>
+                                    <p><strong>Duration:</strong> <?= htmlspecialchars((int)$booking['duration']) ?> minutes</p>
+                                    <p><strong>Price:</strong> <?= htmlspecialchars($booking['payment']) ?>€</p>
 
-                <p><strong>Your Rating:</strong>
-                    <?php if (empty($booking['owner_review'])): ?>
-                        No review yet
-                    <?php else: ?>
-                        <?= htmlspecialchars($booking['owner_review']) ?>
-                    <?php endif; ?></p>
+                                    <p><strong>Your Rating:</strong>
+                                        <?php if (empty($booking['owner_review'])): ?>
+                                            No review yet
+                                        <?php else: ?>
+                                            <?= htmlspecialchars($booking['owner_review']) ?>
+                                        <?php endif; ?></p>
 
-                <p><strong>Provider's Rating:</strong>
-                    <?php if (empty($booking['provider_review'])): ?>
-                        No review yet
-                    </p>
-                    <form action="review.php" method="post">
-                        <input type="hidden" name="service_id" value="<?= htmlspecialchars($booking['service_id']) ?>">
-                        <input type="hidden" name="role" value="provider">
-                        <input type="submit" value="Add Review">
-                    </form>
-                <?php else: ?>
-                    <?= htmlspecialchars($booking['provider_review']) ?></p>
-                <?php endif; ?>
-            </div>
-        <?php endforeach; ?>
-    <?php else: ?>
-        <p>You have no past bookings.</p>
-    <?php endif; ?>
-</section>
+                                    <p><strong>Provider's Rating:</strong>
+                                        <?php if (empty($booking['provider_review'])): ?>
+                                            No review yet
+                                    </p>
+                                    <form action="review.php" method="post">
+                                        <input type="hidden" name="service_id" value="<?= htmlspecialchars($booking['service_id']) ?>">
+                                        <input type="hidden" name="role" value="provider">
+                                        <input type="submit" value="Add Review">
+                                    </form>
+                                <?php else: ?>
+                                    <?= htmlspecialchars($booking['provider_review']) ?></p>
+                                <?php endif; ?>
+                                </div>
+                            <?php endforeach; ?>
+                        <?php else: ?>
+                            <p>You have no past bookings.</p>
+                        <?php endif; ?>
+                    </section>
 
                 <?php endif; ?>
                 <section id="pets">
-                <legend>
-    <span>Pets</span>
+                    <legend>
+                        <span>Pets</span>
 
-</legend>
+                    </legend>
 
                     <!-- Add a new pet -->
                     <?php //TODO: dar layout a esta msg de erro 
@@ -205,8 +207,8 @@ try {
                     <?php endif; ?>
                     <input type="checkbox" id="toggleForm" style="display: none;">
                     <label for="toggleForm" id="addPetButton" class="button">
-    <span class="add-icon">+</span> 
-</label>
+                        <span class="add-icon">+</span>
+                    </label>
                     <form id="newPetForm" action="../actions/action_addPet.php" method="post" enctype="multipart/form-data">
                         <h3>Add a New Pet</h3>
                         <div class="form-group">
@@ -238,10 +240,10 @@ try {
                             <input type="date" id="birthdate" name="birthdate">
                         </div>
 
-        <div class="form-group">
-            <label for="medicalneeds">Medical needs we should know about:</label>
-            <textarea name="medicalneeds" id="medicalneeds" rows="3" cols="30" ></textarea>
-        </div>
+                        <div class="form-group">
+                            <label for="medicalneeds">Medical needs we should know about:</label>
+                            <textarea name="medicalneeds" id="medicalneeds" rows="3" cols="30"></textarea>
+                        </div>
 
                         <div class="form-group">
                             <label for="profile_picture">Profile Picture:</label>
@@ -266,22 +268,22 @@ try {
                                         <legend> <?= htmlspecialchars($pet['pet_name']) ?></legend>
                                         <p><strong>Species:</strong> <?= ucfirst(htmlspecialchars($pet['pet_species'])) ?></p>
                                         <p><strong>Size:</strong> <?= ucfirst(htmlspecialchars($pet['pet_size'])) ?></p>
-                        <?php if (!empty($pet['pet_age'])): ?> <!-- Verifica se o campo pet_age tem algum valor -->
-                        <p><strong>Birth Date:</strong> <?= htmlspecialchars($pet['pet_age']) ?></p>
-    <?php endif; ?>
-                         <!-- Display medical needs if they exist -->
-        <?php if (isset($medicalNeeds[$pet['pet_id']]) && !empty($medicalNeeds[$pet['pet_id']])): ?>
-          
-          
-            <p id="medical-needs">
-                <strong>Medical Needs:</strong>
-                <?php foreach ($medicalNeeds[$pet['pet_id']] as $need): ?>
-                    <?= htmlspecialchars($need['description']) ?>
-                <?php endforeach; ?>
-                </p>
-        <?php else: ?>
-            <p>No medical needs recorded.</p>
-        <?php endif; ?>
+                                        <?php if (!empty($pet['pet_age'])): ?> <!-- Verifica se o campo pet_age tem algum valor -->
+                                            <p><strong>Birth Date:</strong> <?= htmlspecialchars($pet['pet_age']) ?></p>
+                                        <?php endif; ?>
+                                        <!-- Display medical needs if they exist -->
+                                        <?php if (isset($medicalNeeds[$pet['pet_id']]) && !empty($medicalNeeds[$pet['pet_id']])): ?>
+
+
+                                            <p id="medical-needs">
+                                                <strong>Medical Needs:</strong>
+                                                <?php foreach ($medicalNeeds[$pet['pet_id']] as $need): ?>
+                                                    <?= htmlspecialchars($need['description']) ?>
+                                                <?php endforeach; ?>
+                                            </p>
+                                        <?php else: ?>
+                                            <p>No medical needs recorded.</p>
+                                        <?php endif; ?>
 
                                     </div>
                                 </div>

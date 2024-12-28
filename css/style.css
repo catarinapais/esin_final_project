@@ -755,3 +755,36 @@ p.note {
     padding: 10px;
     margin-top: 10px;
 }
+
+/* Style for the price table - Booking Request */
+.price-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+    font-size: 1em;
+    font-family: 'Arial', sans-serif;
+    text-align: left;
+    border: 1px solid #333;
+}
+.price-table thead th {
+    background-color: #E7CCCC;
+    color: #333;
+    padding: 10px;
+    border-bottom: 2px solid #ddd;
+    border: 1px solid #333;
+}
+.price-table tbody td {
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+    border: 1px solid #333;
+}
+.price-table th, .price-table td {
+    text-align: center;
+}
+
+p.small {
+    font-size: 0.8em;
+    color: #666;
+    padding-top: 0;
+    padding-bottom: 1em;
+}

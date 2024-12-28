@@ -3,13 +3,13 @@ function getPublicReviews() {
     global $dbh;
     $stmt = $dbh->prepare(
         'SELECT 
-        OwnerReview.rating, 
-        OwnerReview.description, 
-        OwnerReview.date_review, 
+        ProviderReview.rating, 
+        ProviderReview.description, 
+        ProviderReview.date_review, 
         Person.name AS owner_name, 
         Pet.name AS pet_name 
         FROM Booking 
-        JOIN Review AS OwnerReview ON Booking.ownerReview = OwnerReview.id 
+        JOIN Review AS ProviderReview ON Booking.providerReview = ProviderReview.id 
         JOIN Pet ON Booking.pet = Pet.id 
         JOIN Person ON Person.id = Pet.owner 
         WHERE Booking.review_consent = "YES" AND Booking.ownerReview IS NOT "0";'
@@ -56,6 +56,5 @@ function insertReview($rating, $description, $service_id, $role) {
         $stmt = $dbh->prepare('UPDATE Booking SET providerReview = ? WHERE id = ?');
     }
     $stmt->execute([$review_id, $service_id]);
-    $_SESSION['msg_success'] = "Review added successfully.";
 }
 ?>

@@ -41,7 +41,11 @@ try { // try catch for error handling
         if (isset($_SESSION["msg_success"])) {
             echo "<p class='msg_success'>{$_SESSION["msg_success"]}</p>";
             unset($_SESSION["msg_success"]);
-        } ?>
+        } 
+        if (isset($_SESSION["msg_error"])) {
+            echo "<p class='msg_error'>{$_SESSION["msg_error"]}</p>";
+            unset($_SESSION["msg_error"]);
+        }?>
         <article>
             <div class="imageContainer">
                 <img src="../images/assets/initial_page_img.jpeg" alt="A cat and two dogs.">
@@ -51,7 +55,7 @@ try { // try catch for error handling
         <article id="services">
             <h2>Book with us</h2>
             <div class="services-container">
-                <a href="bookingRequest.php?service_type=petsitting" class="service-card">      <!--espero não ter estragado -->
+                <a href="bookingRequest.php?service_type=petsitting" class="service-card">
                     <h3>PET SITTING</h3>
                     <p>Reliable and loving care for your pets at home.</p>
                 </a>

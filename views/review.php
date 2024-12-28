@@ -50,11 +50,6 @@ try {
             Description:
             <textarea id="reviewDescription" name="reviewDescription" rows="3" cols="30" placeholder="Describe your experience!" required="required"></textarea>
         </label>
-        <label>
-            <br>
-            <input type="checkbox" name="makePublic" value="1">
-            I allow this review to be made public in the website.
-        </label>
         <input type="hidden" name="service_id" value="<?= htmlspecialchars($service_id) ?>">
         <input type="hidden" name="role" value="<?= htmlspecialchars($role) ?>">
         <input type="submit" value="Submit Review">

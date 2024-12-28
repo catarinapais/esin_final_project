@@ -119,9 +119,6 @@ function loginSuccess($email, $password) {// Check if email and password are cor
       WHERE p.email = ? AND p.password = ?');
     $stmt->execute(array($email, hash('sha256', $password)));
     return $stmt->fetch(); // Fetch will return the row if credentials are valid
-    if ($user) {
-      var_dump($user); // Mostra os dados retornados
-  }
 }
 
 function insertPerson($name, $phone_number, $address, $email, $city, $iban, $password, $service_type) {

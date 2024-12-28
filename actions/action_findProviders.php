@@ -48,6 +48,8 @@ try {
     
     if (empty($availableProviders)) {
         $_SESSION['msg_no_providers'] = "No available providers that meet your needs. Choose another date or time.";
+        $_SESSION['availableProviders'] = $availableProviders;
+        header('Location: ../views/bookingRequest.php');
     } else {
         $_SESSION['availableProviders'] = $availableProviders; // Store in session
         $_SESSION['booking_data'] = [
