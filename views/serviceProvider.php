@@ -26,7 +26,8 @@ function calculateWeekRange($week_offset = 0)
 
 
 //função para construir a tabela com a query
-function makeAvailabilityTable($schedule) {
+function makeAvailabilityTable($schedule)
+{
   // Map days of the week to columns
   $dayToColumn = [
     'Monday' => 1,
@@ -190,7 +191,7 @@ include('../templates/header_tpl.php');
           <article class="booking-info">
             <div class="booking-details">
               <p class="booking-title">Date and Time: </p>
-              <p class="booking-desc"><?php echo htmlspecialchars($booking['date'] . ', ' . $booking['start_time'] . ' - ' . $booking['end_time']); ?></p>
+              <p class="booking-desc"><?php echo htmlspecialchars($booking['service_date'] . ', ' . $booking['service_start_time'] . ' - ' . $booking['service_end_time']); ?></p>
               <p class="booking-title">Address: </p>
               <p class="booking-desc"><?php echo htmlspecialchars($booking['address'] . ', ' . ucfirst($booking['owner_city'])); ?></p>
               <p class="booking-title">Service Type: </p>
@@ -199,8 +200,10 @@ include('../templates/header_tpl.php');
               <p class="booking-desc"><?php echo htmlspecialchars($booking['pet_name']); ?></p>
               <p class="booking-title">Owner's Name: </p>
               <p class="booking-desc"><?php echo htmlspecialchars($booking['owner_name']); ?></p>
-              <p class="booking-title">Medical Needs: </p>
-              <p class="booking-desc"><?php echo htmlspecialchars(ucfirst($booking['medical_needs'])); ?></p>
+              <?php if (!empty($booking['medical_needs'])): ?>
+                <p class="booking-title">Medical Needs: </p>
+                <p class="booking-desc"><?php echo htmlspecialchars(ucfirst($booking['medical_needs'])); ?></p>
+              <?php endif; ?>
               <a class="message-button" href="../views/messages.php?provider=<?= $id ?>&owner=<?= $booking['owner_id'] ?>">MESSAGE</a>
             </div>
             <img src="../images/uploads/<?= htmlspecialchars($booking['pet_picture']) ?>"
