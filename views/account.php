@@ -30,6 +30,7 @@ try {
     <link href="../css/layout.css" rel="stylesheet">
     <link href="../css/responsive.css" rel="stylesheet">
     <link href="../css/account.css" rel="stylesheet">
+    <link href="../css/form.css" rel="stylesheet">
 </head>
 
 <body>

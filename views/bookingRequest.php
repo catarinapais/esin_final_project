@@ -178,6 +178,7 @@ include('../templates/header_tpl.php');
                                 <option value="<?= htmlspecialchars($provider['provider_id']) ?>">
                                     <?= htmlspecialchars($provider['provider_name']) ?> -
                                     <?= htmlspecialchars($provider['provider_phone_number']) ?> -
+                                    <?= htmlspecialchars($provider['provider_address']) ?> - 
                                     Rating: <?= $provider['provider_avg_rating'] !== null ? htmlspecialchars($provider['provider_avg_rating']) : 'No reviews yet.' ?>
                                 </option>
                             <?php endforeach; ?>

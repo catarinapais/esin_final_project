@@ -61,6 +61,7 @@ function searchAvailableProviders($service_date, $start_time, $end_time, $servic
             FreeProviders.provider_phone_number, 
             FreeProviders.provider_avg_rating, 
             FreeProviders.provider_email, 
+             FreeProviders.provider_address,
             AvailableProviders.schedule_day_week, 
             AvailableProviders.schedule_start_time, 
             AvailableProviders.schedule_end_time 
@@ -70,6 +71,7 @@ function searchAvailableProviders($service_date, $start_time, $end_time, $servic
                 Person.name AS provider_name, 
                 Person.phone_number AS provider_phone_number, 
                 Person.email AS provider_email, 
+                   Person.address AS provider_address,
                 ServiceProvider.avg_rating AS provider_avg_rating 
             FROM ServiceProvider 
             JOIN Person ON Person.id = ServiceProvider.person 

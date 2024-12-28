@@ -1,0 +1,112 @@
+
+/* Estrutura dos formulários */
+form {
+    width: 100%;
+    max-width: 500px;
+    margin: 50px auto; 
+    display: flex;
+    flex-direction: column; 
+}
+
+form label {
+    display: flex;  /* Faz os elementos filhos da label (texto e input) ficarem na mesma linha */
+    align-items: center; 
+    margin-bottom: 10px;   
+}
+
+
+form input,
+form textarea,
+form select {
+    width: 100%;
+    margin-left: 0;
+    resize: none; /* Impede o redimensionamento */  
+    padding: 10px; /* Espaçamento interno */
+    margin-bottom: 15px; /* Espaçamento entre os campos */
+}
+
+
+form input[type="radio"],
+form input[type="checkbox"] {
+    width: auto; 
+    margin-left: 10px; 
+}
+
+form button {
+    display: block;
+    width: 100%; 
+    padding: 12px;
+}
+
+
+/* Estilo geral para o formulário */
+form {
+    padding: 20px; /* Espaçamento interno */
+    background-color: #f9f9f9; /* Fundo claro */
+    border: 1px solid #ddd; /* Borda discreta */
+    border-radius: 8px; /* Bordas arredondadas */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra suave */
+    font-family: Arial, sans-serif; /* Fonte padrão */
+}
+
+form input,
+form textarea,
+form select {
+    border: 1px solid #ccc; /* Borda leve */
+    border-radius: 4px; /* Bordas arredondadas */
+    font-size: 16px; /* Tamanho da fonte */
+    font-family: inherit; /* Mesma fonte do formulário */
+    box-sizing: border-box; /* Inclui padding e border no tamanho total */
+    background-color: #e7e6e6;
+}
+
+form input:focus,
+form textarea:focus,
+form select:focus {
+    outline: none;
+    border-color: #4caf50;
+    box-shadow: 0 0 4px rgba(76, 175, 80, 0.6); 
+}
+
+form button {
+    background-color: #4caf50; /* Cor principal (verde) */
+    color: white; /* Texto branco */
+    border: none; /* Remove a borda */
+    border-radius: 4px; /* Bordas arredondadas */
+    font-size: 16px; /* Tamanho do texto */
+    cursor: pointer; /* Muda o cursor ao passar por cima */
+    transition: background-color 0.3s ease; /* Efeito de transição */
+}
+
+form p {
+    font-weight:  bold;
+    font-size:18px;
+    text-align: left; /* Garante alinhamento à esquerda */
+}
+
+form label {
+    color: #333;
+    font-size: 16px;
+}
+
+input[type="submit"]{
+    padding: 12px;
+    background-color: #D6ABAB;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+input[type="submit"]:hover{
+    transform: scale(1.05); /* Grows the button by 10% */
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2); /* Adds a soft shadow for depth */
+}
+
+fieldset {
+    border: 2px solid #ccc; /* Border color */
+    padding: 20px;
+    border-radius: 8px;
+}
