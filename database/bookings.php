@@ -85,10 +85,9 @@ function getFutureServices($user_id) {
     global $dbh;
     $stmt = $dbh->prepare(
         'SELECT 
-            Booking.date, 
-            Booking.start_time, 
-            Booking.end_time, 
-            Booking.address_collect, 
+            Booking.date AS service_date, 
+            Booking.start_time AS service_start_time,  
+            Booking.end_time AS service_end_time,  
             Booking.type AS service_type, 
             Booking.address_collect AS address, 
             Owner.id AS owner_id, 
@@ -102,8 +101,8 @@ function getFutureServices($user_id) {
         JOIN Person AS Provider ON Booking.provider = Provider.id 
         JOIN Pet ON Booking.pet = Pet.id 
         JOIN Person AS Owner ON Pet.owner = Owner.id 
-        JOIN PetMedicalNeed ON Pet.id = PetMedicalNeed.pet 
-        JOIN MedicalNeed ON PetMedicalNeed.medicalNeed = MedicalNeed.id
+        LEFT JOIN PetMedicalNeed ON Pet.id = PetMedicalNeed.pet
+        LEFT JOIN MedicalNeed ON PetMedicalNeed.medicalNeed = MedicalNeed.id
         WHERE Booking.date >= ? AND Booking.provider = ?;'
     ); // prepared statement
     $stmt->execute([date('Y-m-d'), $user_id]);
