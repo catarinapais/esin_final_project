@@ -27,33 +27,37 @@ try {
 
 <section id="pastServicenew"><!--querying info about this service-->
    
-</section>
 <section id="review">
     <form action="../actions/action_review.php" method="post">
-    <h2>Past <?= $service ?></h2>
-    <h3>Pet <?= htmlspecialchars($bookingInfo[0]['type']) ?> to <?= htmlspecialchars($bookingInfo[0]['pet_name']) ?></h3>
-    <p><?= htmlspecialchars(ucfirst($role)) ?>: <?= htmlspecialchars($bookingInfo[0][$role . '_name']) ?> </p>
-    <p>Date: <?= htmlspecialchars($bookingInfo[0]['date']) ?> @ <?= htmlspecialchars($bookingInfo[0]['start_time']) ?> </p>
-        <h3>Review this <?= htmlspecialchars(ucfirst($role)) ?>:</h3>
-        <div id="starReview">
-            <input type="radio" id="star5" name="review" value="5" required="required">
-            <label for="star5" title="5 stars">&#9733;</label>
-            <input type="radio" id="star4" name="review" value="4" required="required">
-            <label for="star4" title="4 stars">&#9733;</label>
-            <input type="radio" id="star3" name="review" value="3" required="required">
-            <label for="star3" title="3 stars">&#9733;</label>
-            <input type="radio" id="star2" name="review" value="2" required="required">
-            <label for="star2" title="2 stars">&#9733;</label>
-            <input type="radio" id="star1" name="review" value="1" required="required">
-            <label for="star1" title="1 star">&#9733;</label>
+        <h2>Past <?= $service ?></h2>
+        <h3>Pet <?= $bookingInfo[0]['type'] ?> to <?= $bookingInfo[0]['pet_name'] ?></h3>
+        <p><?= ucfirst($role) ?>: <?= $bookingInfo[0][$role . '_name'] ?></p>
+        <p>Date: <?= $bookingInfo[0]['date'] ?> @ <?= $bookingInfo[0]['start_time'] ?></p>
+
+        <div class="review-title-stars">
+            <h3>Review this <?= ucfirst($role) ?>:</h3>
+            <div id="starReview">
+                <input type="radio" id="star5" name="review" value="5" required="required">
+                <label for="star5" title="5 stars">&#9733;</label>
+                <input type="radio" id="star4" name="review" value="4" required="required">
+                <label for="star4" title="4 stars">&#9733;</label>
+                <input type="radio" id="star3" name="review" value="3" required="required">
+                <label for="star3" title="3 stars">&#9733;</label>
+                <input type="radio" id="star2" name="review" value="2" required="required">
+                <label for="star2" title="2 stars">&#9733;</label>
+                <input type="radio" id="star1" name="review" value="1" required="required">
+                <label for="star1" title="1 star">&#9733;</label>
+            </div>
         </div>
+
         <label>
             <textarea id="reviewDescription" name="reviewDescription" rows="3" cols="30" placeholder="Describe your experience!" required="required"></textarea>
         </label>
-        <input type="hidden" name="service_id" value="<?= htmlspecialchars($service_id) ?>">
-        <input type="hidden" name="role" value="<?= htmlspecialchars($role) ?>">
+        <input type="hidden" name="service_id" value="<?= $service_id ?>">
+        <input type="hidden" name="role" value="<?= $role ?>">
         <input type="submit" value="Submit Review">
     </form>
 </section>
+
 
 <?php include('../templates/footer_tpl.php'); ?>
