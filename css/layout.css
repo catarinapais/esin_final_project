@@ -1,25 +1,25 @@
-
+/* Geral */
 body {
     width: 100%;
     margin: 0;
     padding: 0;
     display: flex;
     flex-direction: column;
-    min-height: 100%; /* Garante que o body ocupe pelo menos 100% da altura da tela */
+    min-height: 100%; 
 }
 
 main {
     flex-grow: 1; /* Isso garante que o main ocupe o espaço restante disponível */
-    overflow: auto; /* Permite rolagem se o conteúdo for maior que o espaço disponível */
+    overflow: auto; 
 }
 
-
+/* Footer layout */
 .footer-container {
     display: flex;
-    flex-wrap: wrap; /* Permite que as seções quebrem para nova linha em telas menores */
+    flex-wrap: wrap; /* Allows sections to wrap on smaller screens */
     justify-content: space-evenly;
     max-width: 1200px; 
-    margin: 0 auto; /* Centraliza o footer na tela */
+    margin: 0 auto; /* Center the footer on the page */
     padding: 0 20px;
 }
 
@@ -30,12 +30,12 @@ main {
 
 .footer-section form {
     display: flex;
-    flex-direction: column; /* Empilha os elementos do formulário verticalmente */
-    margin: 0;
-    padding: 0;
+    flex-direction: column; /* Stack input and button vertically */
+    margin:0;
+    padding: 0; 
 }
 
-/* Estilos para o header */
+/* Header  */
 #navigationBar {
     display: flex;
     align-items: center;
@@ -92,11 +92,10 @@ main {
 }
 
 #menu ul li {
-    margin-right: 1em; /* Ajusta o espaçamento entre os itens do menu */
+    margin-right: 1em; 
     align-content: center;
     justify-content: center;
 }
-
 
 /* Página inicial  */
 .button-56, .button-74 {
@@ -143,7 +142,7 @@ main {
     }
     
 .service-card p {
-    margin: 0; /* Remove margens extras */
+    margin: 0;
     padding:10px;
   
 }
@@ -165,36 +164,35 @@ main {
 article {
     margin-top: 1.5em;
     display: flex;
-    flex-direction: column; /* Stack children vertically */
-    align-items: center; /* Center items horizontally */
-    gap: 1em; /* Add gap between items */
+    flex-direction: column; 
+    align-items: center; 
+    gap: 1em; 
 }
 
 article ul {
     display: flex;
-    flex-wrap: wrap; /* Allow items to wrap to the next line */
-    justify-content: center; /* Center items horizontally */
-    gap: 2.5em; /* Add gap between items */
+    flex-wrap: wrap; 
+    justify-content: center; 
+    gap: 2.5em; 
     padding: 0;
     margin: 0;
 }
 
 article li a {
-    display: flex; /* Use Flexbox */
-    align-items: center; /* Center items vertically */
-    justify-content: center; /* Center items horizontally */
+    display: flex; 
+    align-items: center; 
+    justify-content: center; 
     padding: 0.5em 1em;
     text-align: center;
     text-decoration: none;
-    width: 200px; /* Set a fixed width for the buttons */
-    height: 50px; /* Set a fixed height for the buttons */
+    width: 200px; 
+    height: 50px; 
 }
 
 article p {
     text-align: center;
     padding: 0em 5em;
 }
-
 
 #authentication {
     display: flex;
@@ -223,10 +221,6 @@ article p {
     gap: 5px;
 }
 
-#starReview input {
-    display: none;
-}
-
 #review {
     display: flex;
     flex-direction: column;
@@ -235,56 +229,43 @@ article p {
     text-align: center;
 }
 .review-title-stars {
-    display: flex; /* Define um layout em linha */
-    align-items: center; /* Alinha verticalmente os itens ao centro */
-    gap: 10px; /* Espaço entre o título e as estrelas */
+    display: flex; 
+    align-items: center; 
+    gap: 10px; 
 }
 
 #starReview {
-    display: flex; /* Layout em linha para as estrelas */
-    gap: 5px; /* Espaçamento entre as estrelas */
+    display: flex; 
+    gap: 5px; 
 }
-
-#starReview label {
-    font-size: 30px; /* Ajusta o tamanho das estrelas */
-    cursor: pointer; /* Torna as estrelas clicáveis */
-}
-
-
 
 /* Página Service Providers */
 .mainContent {
     display: flex;
-    flex-wrap: wrap; /* Allow items to wrap to the next line */
-    align-items: flex-start; /* Align items to the start vertically */
-    justify-content: space-around; /* Center items horizontally */
-    gap: 2em; /* Add gap between items */
+    flex-wrap: wrap; 
+    align-items: flex-start; 
+    justify-content: space-around; 
+    gap: 2em; 
 }
-
 
 #scheduleForm,
 #availability,
 #scheduledServices {
-    max-width: 600px; /* Optional: Limit the maximum width */
-    padding: 4em; /* Add padding */
+    max-width: 600px;
+    padding: 4em; 
     padding-top: 1em;
 }
 
-body > *:not(footer) {
-    flex: 1; /* Expande o conteúdo para preencher o espaço disponível */
-}
-
-/*week navigation*/
 #week-navigation {
     display: flex;
-    align-items: center; /* Align items vertically in the center */
-    justify-content: center; /* Center items horizontally */
-    gap: 1em; /* Add some space between items */
+    align-items: center; 
+    justify-content: center; 
+    gap: 1em; 
     margin-bottom: 1em;
 }
 
 #week-navigation p {
-    margin: 0; /* Remove default margin */
+    margin: 0; 
 }
 
 /* AboutUs section */
@@ -310,78 +291,7 @@ body > *:not(footer) {
     width: 240px; 
 }
 
-.ceo img {
-    width: 200px;
-    height: 200px;
-    border-radius: 50%;
-    object-fit: cover;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2); 
-    margin-bottom: 15px;
-}
-
-
-
-/* Página account*/
-.form-group {
-    display: flex;
-    flex-direction: column;
-    margin-bottom: 5px;
-}
-
-.form-group label {
-    display: flex;
-    align-items: center;
-    margin-bottom: 5px;
-}
-
-
-.form-group .registerProvider {
-    margin-left: 5px; 
-}
-
-.form-group .required {
-    margin-left: 5px; 
-}
-
-
-/* Footer layout */
-.footer-container {
-    display: flex;
-    flex-wrap: wrap; /* Allows sections to wrap on smaller screens */
-    justify-content: space-evenly;
-    max-width: 1200px; 
-    margin: 0 auto; /* Center the footer on the page */
-    padding: 0 20px;
-}
-
-.footer-section {
-    flex: 1 1 200px; 
-    margin: 10px;
-}
-
-.footer-section form {
-    display: flex;
-    flex-direction: column; /* Stack input and button vertically */
-    margin:0;
-    padding: 0; 
-}
-
-
 /* Página Account*/
-form#addPet {
-    display: inline-block; /* Ensure the form takes only the space needed */
-    margin: 0;
-    padding: 0;
-}
-
-form#addPet input[type="submit"] {
-    width: 40px; 
-    height: 40px; 
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
 #medical-needs {
     display: flex;
     align-items: center;
@@ -392,37 +302,33 @@ form#addPet input[type="submit"] {
     margin-right: 10px;
 }
 
-#medical-needs span {
-    font-weight: normal;
-    color: #333;
-}
 
 /* Página Booking Request*/
 .form-group label {
     display: flex;
-    align-items: baseline; /* Alinha verticalmente a checkbox com o texto */
-    margin-bottom: 8px; /* Espaço entre os itens */
-    font-size: 14px; /* Ajusta o tamanho da fonte */
-    cursor: pointer; /* Muda o cursor para indicar clique */
+    align-items: baseline; 
+    margin-bottom: 8px; 
+    font-size: 14px; 
+    cursor: pointer; 
 }
 
 .form-group input[type="checkbox"] {
-    margin-right: 8px; /* Espaço entre a checkbox e o texto */
+    margin-right: 8px;
 }
 
 #bookingcontent {
     display: flex;
     flex-wrap: wrap;
-    align-items: flex-start; /* Align items to the start vertically */
-    justify-content: space-around; /* Center items horizontally */
+    align-items: flex-start;
+    justify-content: space-around; 
     gap: 2em;
 }
 
 #addBooking,
 #availableProviders,
 #scheduledServices {
-    max-width: 600px; /* Optional: Limit the maximum width */
-    padding: 3em; /* Add padding */
+    max-width: 600px; 
+    padding: 3em; 
     padding-top: 1em;
 }
 

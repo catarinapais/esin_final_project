@@ -1,12 +1,12 @@
 
-/* Estrutura dos formulários */
+/* Layout dos formulários */
 form {
     width: 100%;
     max-width: 500px;
     margin: 50px auto; 
     display: flex;
     flex-direction: column; 
-    line-height: 1; /* Ajuste o valor conforme necessário */
+    line-height: 1; 
 }
 
 form label {
@@ -15,17 +15,15 @@ form label {
     margin-bottom: 10px;   
 }
 
-
 form input,
 form textarea,
 form select {
     width: 100%;
     margin-left: 0;
-    resize: none; /* Impede o redimensionamento */  
-    padding: 10px; /* Espaçamento interno */
-    margin-bottom: 0px; /* Espaçamento entre os campos */
+    resize: none; 
+    padding: 10px; 
+    margin-bottom: 0px; 
 }
-
 
 form input[type="radio"],
 form input[type="checkbox"] {
@@ -39,25 +37,23 @@ form button {
     padding: 12px;
 }
 
-
 /* Estilo geral para o formulário */
 form {
-    padding: 20px; /* Espaçamento interno */
-    background-color: #f9f9f9; /* Fundo claro */
-    border: 1px solid #ddd; /* Borda discreta */
-    border-radius: 8px; /* Bordas arredondadas */
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra suave */
-    font-family: Arial, sans-serif; /* Fonte padrão */
+    padding: 20px; 
+    background-color: #f9f9f9; 
+    border: 1px solid #ddd; 
+    border-radius: 8px; 
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    font-family: Arial, sans-serif; 
 }
 
 form input,
 form textarea,
 form select {
-    border: 1px solid #ccc; /* Borda leve */
-    border-radius: 4px; /* Bordas arredondadas */
-    font-size: 16px; /* Tamanho da fonte */
-    font-family: inherit; /* Mesma fonte do formulário */
-    box-sizing: border-box; /* Inclui padding e border no tamanho total */
+    border: 1px solid #ccc; 
+    border-radius: 4px; 
+    font-size: 16px; 
+    box-sizing: border-box;
     background-color: #e7e6e6;
 }
 
@@ -69,20 +65,10 @@ form select:focus {
     box-shadow: 0 0 4px rgba(76, 175, 80, 0.6); 
 }
 
-form button {
-    background-color: #4caf50; /* Cor principal (verde) */
-    color: white; /* Texto branco */
-    border: none; /* Remove a borda */
-    border-radius: 4px; /* Bordas arredondadas */
-    font-size: 16px; /* Tamanho do texto */
-    cursor: pointer; /* Muda o cursor ao passar por cima */
-    transition: background-color 0.3s ease; /* Efeito de transição */
-}
-
 form p {
     font-weight:  bold;
     font-size:18px;
-    text-align: left; /* Garante alinhamento à esquerda */
+    text-align: left; 
 }
 
 form label {
@@ -102,12 +88,12 @@ input[type="submit"]{
 }
 
 input[type="submit"]:hover{
-    transform: scale(1.05); /* Grows the button by 10% */
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2); /* Adds a soft shadow for depth */
+    transform: scale(1.05); 
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
 }
 
 fieldset {
-    border: 2px solid #ccc; /* Border color */
+    border: 2px solid #ccc; 
     padding: 20px;
     border-radius: 8px;
 }
