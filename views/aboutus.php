@@ -32,7 +32,7 @@ session_start();
             </div>
             <div class="ceo">
                 <img src="../images/assets/cat.jpg" alt="CEO 2">
-                <p>Catarina with Leia, Fernando and Madalena</p>
+                <p>Catarina with Madalena</p>
                 
             </div>
             <div class="ceo">

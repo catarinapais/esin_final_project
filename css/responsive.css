@@ -163,7 +163,20 @@
         margin-left: auto;
         margin-right: auto;
     }
-  
+
+    #availability .availabilityTimetable td, 
+    #availability .availabilityTimetable th {
+        padding: 7px 3px;
+        font-size: 10px;
+    }
+}
+
+@media (max-width: 454px) {
+    #availability .availabilityTimetable td, 
+    #availability .availabilityTimetable th {
+        padding: 4px 2px;
+        font-size: 7px;
+    }
 }
 
 @media (max-height: 530px) {

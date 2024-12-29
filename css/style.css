@@ -581,6 +581,12 @@ form#addPet input[type="submit"]:hover {
     color: gold; 
 }
 
+.star-review-small span {
+    display: inline-block; 
+    font-size: 1em; 
+    color: gold; 
+}
+
 
 .review-author, .review-date, .review-desc {
     color: #555; 
