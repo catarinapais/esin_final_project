@@ -45,15 +45,72 @@ function getReviewByBookingId($booking_id) {
     return $stmt->fetchAll();
 }
 
+
+function updateOwnerRating($service_id) //$service_id
+{
+    global $dbh;
+
+    $stmt = $dbh-> prepare ('SELECT Pet.owner AS owner_id FROM Booking JOIN Pet ON Booking.pet = Pet.id WHERE Booking.id = ?');
+    $stmt->execute([$service_id]);
+    $owner_id = $stmt->fetchColumn();
+
+    if ($owner_id) {
+        // Calculate the new average rating for the owner
+        $stmt = $dbh->prepare(
+            'SELECT ROUND(AVG(Review.rating),1 )AS avg_rating 
+             FROM Booking 
+             JOIN Review ON Booking.ownerReview = Review.id 
+             WHERE Booking.pet IN (SELECT id FROM Pet WHERE owner = ?)'
+        );
+        $stmt->execute([$owner_id]);
+        $avg_rating = $stmt->fetchColumn();
+
+        // Update the owner's average rating
+        $stmt = $dbh->prepare('UPDATE PetOwner SET avg_rating = ? WHERE person = ?');
+        $stmt->execute([$avg_rating, $owner_id]);
+    }
+}
+
+function updateProviderRating($service_id) {
+    global $dbh;
+
+    // Fetch the provider's ID from the Booking
+    $stmt = $dbh->prepare('SELECT provider FROM Booking WHERE id = ?');
+    $stmt->execute([$service_id]);
+    $provider_id = $stmt->fetchColumn();
+
+    if ($provider_id) {
+        // Calculate the new average rating for the provider
+        $stmt = $dbh->prepare(
+            'SELECT ROUND(AVG(Review.rating),1) AS avg_rating 
+             FROM Booking 
+             JOIN Review ON Booking.providerReview = Review.id 
+             WHERE Booking.provider = ?'
+        );
+        $stmt->execute([$provider_id]);
+        $avg_rating = $stmt->fetchColumn();
+
+        // Update the provider's average rating
+        $stmt = $dbh->prepare('UPDATE ServiceProvider SET avg_rating = ? WHERE person = ?');
+        $stmt->execute([$avg_rating, $provider_id]);
+    }
+}
+
 function insertReview($rating, $description, $service_id, $role) {
     global $dbh;
+
+    // Insert review into the Review table
     $stmt = $dbh->prepare('INSERT INTO Review (rating, description, date_review) VALUES (?, ?, ?)');
     $stmt->execute([$rating, $description, date('Y-m-d')]);
     $review_id = $dbh->lastInsertId();
+
+    // Update the review field in the Booking table
     if ($role == 'owner') {
         $stmt = $dbh->prepare('UPDATE Booking SET ownerReview = ? WHERE id = ?');
+        updateOwnerRating($service_id);
     } else {
         $stmt = $dbh->prepare('UPDATE Booking SET providerReview = ? WHERE id = ?');
+        updateProviderRating($service_id);
     }
     $stmt->execute([$review_id, $service_id]);
 }
