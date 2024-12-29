@@ -226,6 +226,7 @@ margin-bottom: 20px;
   
   #delete:hover {
     background-color: #fff;
+    color: #422800;
   }
   
   #delete:active {
@@ -364,4 +365,11 @@ margin-top: 11px;
 
 #toggleForm:checked ~ #newPetForm {
     display: block;
+}
+
+.review {
+    display: flex;
+    flex-direction: row;
+    gap: 4px;
+    flex-wrap: wrap;
 }

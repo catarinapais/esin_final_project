@@ -8,6 +8,24 @@ require_once('../database/person.php');
 require_once('../database/bookings.php');
 require_once('../database/pet.php');
 
+function starReview($stars)
+{
+    $stars = (int)$stars;
+    $count = 1;
+    $result = "<div class='star-review-small'>";
+
+    for ($i = 1; $i <= 5; $i++) {
+        if ($stars >= $count) {
+            $result .= "<span>&#x2605</span>";
+        } else {
+            $result .= "<span>&#x2606</span>";
+        }
+        $count++;
+    }
+    $result .= "</div>";
+    return $result;
+}
+
 try {
     $petOwnerInfo = getPersonInfo($user_id); // Get user info
     $pastBookingsInfo = getPastBookings($user_id); // Fetch past bookings
@@ -30,7 +48,7 @@ try {
     <link href="../css/layout.css" rel="stylesheet">
     <link href="../css/responsive.css" rel="stylesheet">
     <link href="../css/account.css" rel="stylesheet">
- 
+
 </head>
 
 <body>
@@ -99,14 +117,14 @@ try {
                     <?php endif; ?>
 
                     <div class="button-container">
-                    <form action="../actions/action_logout.php" method="post" id=logout>
-                        <input type="submit" id="logoutb" value="Logout">
-                    </form>
+                        <form action="../actions/action_logout.php" method="post" id=logout>
+                            <input type="submit" id="logoutb" value="Logout">
+                        </form>
 
-                    <!-- Botão para apagar conta -->
-                    <form action="../actions/action_delete_account.php" method="post" id="deleteAccount">
-                        <input type="submit" id="delete" value="Delete Account" onclick="return confirm('Are you sure you want to delete your account? This action cannot be undone.');">
-                    </form>
+                        <!-- Botão para apagar conta -->
+                        <form action="../actions/action_delete_account.php" method="post" id="deleteAccount">
+                            <input type="submit" id="delete" value="Delete Account" onclick="return confirm('Are you sure you want to delete your account? This action cannot be undone.');">
+                        </form>
                     </div>
 
 
@@ -123,28 +141,45 @@ try {
                                     <p><strong>Pet:</strong> <?= htmlspecialchars($service['pet_name']) ?></p>
                                     <p><strong>Date:</strong> <?= htmlspecialchars($service['service_date']) ?></p>
                                     <p><strong>Time:</strong> <?= htmlspecialchars($service['service_time']) ?></p>
-                                    <p><strong>Duration:</strong> <?= htmlspecialchars((int)$service['service_duration']) ?> hours</p>
+                                    <?php
+                                    $duration = round($service['service_duration']);
+                                    if ($duration >= 60) {
+                                        $hours = $duration / 60;
+                                        $formatted_duration = htmlspecialchars(round($hours, 2)) . ' h';
+                                    } else {
+                                        $formatted_duration = htmlspecialchars($duration) . ' min';
+                                    }
+                                    ?>
+                                    <p><strong>Duration:</strong> <?= $formatted_duration ?></p>
                                     <p><strong>Price:</strong> <?= htmlspecialchars($service['payment']) ?>€</p>
 
-                                    <p><strong>Your Rating:</strong>
+                                    <div class="review">
+                                        <p><strong>Your Rating:</strong></p>
                                         <?php if (empty($service['provider_review'])): ?>
-                                            No review yet
+                                            <p>No review yet</p>
                                         <?php else: ?>
-                                            <?= htmlspecialchars($service['provider_review']) ?>
-                                        <?php endif; ?></p>
+                                            <p><?= starReview($service['provider_review']); ?></p>
+                                        <?php endif; ?>
+                                    </div>
 
-                                    <p><strong>Owner's Review:</strong>
+                                    <div class="review">
+                                        <p><strong>Owner's Review:</strong></p>
                                         <?php if (empty($service['owner_review'])): ?>
-                                            No review yet
-                                    <form action="review.php" method="post">
-                                        <input type="hidden" name="service_id" value="<?= htmlspecialchars($service['service_id']) ?>">
-                                        <input type="hidden" name="role" value="owner">
-                                        <input type="submit" id="review" value="Add Review">
-                                    </form>
-                                <?php else: ?>
-                                    <?= htmlspecialchars($service['owner_review']) ?>
-                                <?php endif; ?>
-                                </p>
+                                            <p>No review yet</p>
+                                        <?php else: ?>
+                                            <p><?= starReview($service['owner_review']); ?></p>
+                                        <?php endif; ?>
+
+                                    </div>
+
+                                    <?php if (empty($service['owner_review'])): ?>
+                                        <form action="review.php" method="post">
+                                            <input type="hidden" name="service_id" value="<?= htmlspecialchars($service['service_id']) ?>">
+                                            <input type="hidden" name="role" value="owner">
+                                            <input type="submit" id="review" value="Add Review">
+                                        </form>
+                                    <?php endif; ?>
+
                                 </div>
                             <?php endforeach; ?>
                         <?php else: ?>
@@ -165,28 +200,44 @@ try {
                                     <p><strong>Pet:</strong> <?= htmlspecialchars($booking['pet_name']) ?></p>
                                     <p><strong>Date:</strong> <?= htmlspecialchars($booking['date']) ?></p>
                                     <p><strong>Time:</strong> <?= htmlspecialchars($booking['start_time']) ?></p>
-                                    <p><strong>Duration:</strong> <?= htmlspecialchars((int)$booking['duration']) ?> hours</p>
+                                    <?php
+                                    $duration = round($booking['duration']);
+                                    if ($duration >= 60) {
+                                        $hours = $duration / 60;
+                                        $formatted_duration = htmlspecialchars(round($hours, 2)) . ' h';
+                                    } else {
+                                        $formatted_duration = htmlspecialchars($duration) . ' min';
+                                    }
+                                    ?>
+                                    <p><strong>Duration:</strong> <?= $formatted_duration ?></p>
                                     <p><strong>Price:</strong> <?= htmlspecialchars($booking['payment']) ?>€</p>
 
-                                    <p><strong>Your Rating:</strong>
+                                    <div class="review">
+                                        <p><strong>Your Rating:</strong></p>
                                         <?php if (empty($booking['owner_review'])): ?>
-                                            No review yet
+                                            <p>No review yet</p>
                                         <?php else: ?>
-                                            <?= htmlspecialchars($booking['owner_review']) ?>
-                                        <?php endif; ?></p>
+                                            <p><?= starReview($booking['owner_review']); ?></p>
+                                        <?php endif; ?>
+                                    </div>
 
-                                    <p><strong>Provider's Rating:</strong>
+                                    <div class="review">
+                                        <p><strong>Provider's Rating:</strong></p>
                                         <?php if (empty($booking['provider_review'])): ?>
-                                            No review yet
-                                    </p>
-                                    <form action="review.php" method="post">
-                                        <input type="hidden" name="service_id" value="<?= htmlspecialchars($booking['service_id']) ?>">
-                                        <input type="hidden" name="role" value="provider">
-                                        <input type="submit" id="review" value="Add Review">
-                                    </form>
-                                <?php else: ?>
-                                    <?= htmlspecialchars($booking['provider_review']) ?></p>
-                                <?php endif; ?>
+                                            <p>No review yet</p>
+                                        <?php else: ?>
+                                            <p><?= starReview($booking['provider_review']); ?></p>
+                                        <?php endif; ?>
+                                    </div>
+
+                                    <?php if (empty($booking['provider_review'])): ?>
+                                        <form action="review.php" method="post">
+                                            <input type="hidden" name="service_id" value="<?= htmlspecialchars($booking['service_id']) ?>">
+                                            <input type="hidden" name="role" value="provider">
+                                            <input type="submit" id="review" value="Add Review">
+                                        </form>
+                                    <?php endif; ?>
+
                                 </div>
                             <?php endforeach; ?>
                         <?php else: ?>
@@ -196,7 +247,7 @@ try {
 
                 <?php endif; ?>
                 <section id="pets">
-                        <h2>Pets</h2>
+                    <h2>Pets</h2>
                     <!-- Add a new pet -->
                     <?php //TODO: dar layout a esta msg de erro 
                     ?>
