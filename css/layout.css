@@ -239,6 +239,11 @@ article p {
     gap: 5px; 
 }
 
+.star-review span {
+    display: inline-block; 
+}
+
+
 /* Página Service Providers */
 .mainContent {
     display: flex;
@@ -292,6 +297,145 @@ article p {
 }
 
 /* Página Account*/
+#accountcontent {
+    grid-column: 1 / -1;
+    display: flex;
+    justify-content: center; 
+    align-items: flex-start; 
+    min-height: calc(100vh - 80px); /* Altura dinâmica */
+    padding: 20px;
+    width: 80%;
+    margin-left: 165px;
+}
+
+#staticTags, #pets, #pastServices, #pastBookings {
+    flex: 1 1 45%; 
+    padding: 20px;
+margin-bottom: 20px;
+}
+
+#pastServices, #pastBookings {
+    overflow-x: auto; 
+    display: flex;
+    flex-wrap: wrap; 
+    justify-content: flex-start; 
+    align-items: flex-start; 
+    gap: 20px; 
+    padding: 20px;
+    max-height: 400px;
+}
+
+.booking-box:first-child {
+    margin-top: 0 !important; 
+    align-self: flex-start; 
+}
+
+.booking-box h3, .service-box h3 {
+    margin: 0;
+    text-align: center;
+}
+
+.booking-box p, .service-box p {
+    margin: 5px 0;
+}
+
+.booking-box:not(:last-child), .service-box:not(:last-child) {
+    margin-bottom: 0; 
+}
+
+.booking-box, .service-box {
+    display: flex; 
+    flex-direction: column; 
+    justify-content: space-between; 
+    height: 300px; 
+    min-height: 250px; 
+    box-sizing: border-box; 
+    flex: 1 1 calc(25% - 20px);
+    max-width: calc(25% - 20px); 
+    min-width: 250px; 
+    position: relative; 
+}
+
+.pets-container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.pet-card {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    padding: 15px;
+}
+
+.pet-image {
+    flex-shrink: 0;
+    width: 120px;
+    height: 120px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.pet-profile-pic {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: cover;
+}
+
+.button-container {
+    display: flex; 
+    justify-content: center; 
+    align-items: center; 
+    gap: 20px; 
+    margin-top: 20px; 
+}
+
+#addPetButton {
+    display: inline-block;
+}
+
+#newPetForm {
+    width: 100%;
+    max-width: 500px;
+    margin: 50px auto;
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+}
+
+#newPetForm button,
+#newPetForm input[type="submit"] {
+    display: block;
+    width: 100%;
+}
+
+#newPetForm label {
+    display: flex; 
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+#newPetForm {
+    margin-top: 20px;
+    display: none;
+    width: 100%;
+    max-width: 500px;
+}
+
+#toggleForm:checked ~ #newPetForm {
+    display: block;
+}
+
+.review {
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    gap: 4px;
+    flex-wrap: wrap;
+}
+
 #medical-needs {
     display: flex;
     align-items: center;
@@ -334,4 +478,51 @@ article p {
 
 #availableProviders {
     margin-top: 2em;
+}
+
+/* Página payment*/
+#payment-content .highlight {
+    display: inline-block;
+}
+
+/* Messages */
+#chatMessages {
+    max-height: 250px;
+    overflow-y: auto; 
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: column-reverse;
+    gap: 2px;
+}
+
+.senderMessage, .recipientMessage {
+    border-radius: 15px;
+    padding: 10px;
+    margin: 10px 0;
+    max-width: 80%;
+    position: relative;
+    display: inline-block;
+}
+
+#messageForm {
+    display: flex;
+    align-items: stretch;
+    flex-direction: row;
+}
+
+.messageContent {
+    margin: 0;
+}
+
+#messageInput {
+    flex: 1;
+    margin-right: 10px;
+}
+
+.senderMessage {
+    align-self: flex-end;
+}
+
+.recipientMessage {
+    align-self: flex-start;
 }
