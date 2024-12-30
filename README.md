@@ -1,4 +1,5 @@
-# ESIN_project_MBIO.B-6 
+# ESIN project - MBIO.B-6 
+#### Catarina Pais, Ema Beira and Rui Azevedo
 
 ## Project Vision and Purpose
 
