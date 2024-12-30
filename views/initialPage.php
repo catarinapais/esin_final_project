@@ -8,9 +8,9 @@ function starReview($stars) {
 
     for($i = 1; $i <= 5; $i++){
         if($stars >= $count){
-            $result .= "<span>&#x2605</span>";
+            $result .= "<span>&#x2605;</span>";
         } else {
-            $result .= "<span>&#x2606</span>";
+            $result .= "<span>&#x2606;</span>";
         }
         $count++;
     }
@@ -33,10 +33,8 @@ try { // try catch for error handling
 
 
     <?php
-    include('../templates/header_tpl.php');
-    ?>
+    include('../templates/header_tpl.php');?>
     <main id="content">
-
         <?php
         if (isset($_SESSION["msg_success"])) {
             echo "<p class='msg_success'>{$_SESSION["msg_success"]}</p>";
@@ -48,26 +46,26 @@ try { // try catch for error handling
         }?>
         <article>
             <div class="imageContainer">
-                <img src="../images/assets/initial_page_img.jpeg" alt="A cat and two dogs.">
+            <div class="imageContainer"><img src=
+            "../images/assets/initial_page_img.jpeg" alt="A cat and two dogs.">
                 <p class="overlayText">The platform for your 4-paw besties</p>
+            </div>
             </div>
         </article>
         <article id="services">
             <h2>Book with us</h2>
-            <div class="services-container">
-                <a href="bookingRequest.php?service_type=petsitting" class="service-card">
+            <div class="services-container"><a href=
+            "bookingRequest.php?service_type=petsitting" class="service-card">
                     <h3>PET SITTING</h3>
                     <p>Reliable and loving care for your pets at home.</p>
-                </a>
-                <a href="bookingRequest.php?service_type=petwalking" class="service-card">
+                    </a> <a href="bookingRequest.php?service_type=petwalking" class=
+                    "service-card">
                     <h3>PET WALKING</h3>
                     <p>Healthy and fun walks for your furry friends.</p>
-                </a>
-                <a href="serviceProvider.php" class="service-card">
+                    </a> <a href="serviceProvider.php" class="service-card">
                     <h3>BECOME A SITTER/WALKER</h3>
                     <p>Join our community and earn doing what you love.</p>
-                </a>
-            </div>
+                    </a></div>
         </article>
         <?php if(!empty($reviews)) : ?>
         <article id="reviews">
@@ -76,7 +74,6 @@ try { // try catch for error handling
             <?php // Retrieve last 3 reviews
             $reviewCount = count($reviews);
             $lastReviews = array_slice($reviews, max(0, $reviewCount - 3));
-
             foreach ($lastReviews as $review) : ?>
                 <article class="review-card">
                     <?php echo starReview($review['rating']); ?>
@@ -86,8 +83,7 @@ try { // try catch for error handling
                 </article>
             <?php endforeach; ?>
             </div>
-
         </article>
         <?php endif; ?>
     </main>
-    <?php include('../templates/footer_tpl.php'); ?>
+    <?php include('../templates/footer_tpl.php');?>

@@ -3,9 +3,7 @@ session_start();
 ?>
 
 <footer>
-    <div class="footer-container">
-
-        <!-- Quick Links Section -->
+<div class="footer-container"><!-- Quick Links Section -->
         <div class="footer-section">
             <h3>Quick Links</h3>
             <ul>
@@ -15,14 +13,12 @@ session_start();
                 <li><a href="FAQs.php">FAQs</a></li>
             </ul>
         </div>
-
         <!-- Contact Section -->
         <div class="footer-section">
             <h3>Contact Us</h3>
             <p>Email: contact@petpatrol.com</p>
-            <p>Phone: +351 225362821 </p>
+            <p>Phone: +351 225362821</p>
         </div>
-
         <!-- Address Section -->
         <div class="footer-section">
             <h3>Our Office</h3>
@@ -33,36 +29,28 @@ session_start();
   <!-- Newsletter Section -->
   <div class="footer-section">
             <h3>Subscribe to our Newsletter</h3>
-
             <?php
             // Inicializa a variável de mensagem
             $message = "";
-
             // Verifica se o formulário foi enviado
             if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $email = $_POST['email'];
                 $message = "Thank you for subscribing! You will hear from us soon :)";
                 // Aqui, você poderia adicionar lógica para salvar o email em um banco de dados ou arquivo, se necessário.
             }
-
             // Exibe a mensagem, se houver
             if (!empty($message)) {
                 echo '<p style="color: green;">' . htmlspecialchars($message) . '</p>';
             }
             ?>
-
-            <form action="" method="post">
-                <input type="email" name="email" placeholder="Your email address" required>
-                <button type="submit">Subscribe</button>
-            </form>
+<form action="" method="post"><input type="email" name="email"
+placeholder="Your email address" required=""> <button type=
+"submit">Subscribe</button></form>
         </div>
-
     </div>
-
     <!-- Legal Section -->
     <div class="footer-legal">
-        <p>&copy; 2024 PetPatrol. All rights reserved.</p>
-
+    <p>© 2024 PetPatrol. All rights reserved.</p>
     </div>
 </footer>
 </body>
