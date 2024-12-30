@@ -54,15 +54,15 @@ try { // try catch for error handling
         </article>
         <article id="services">
             <h2>Book with us</h2>
-            <div class="services-container"><a href=
-            "bookingRequest.php?service_type=petsitting" class="service-card">
+            <div class="services-container">
+                <a href= "bookingRequest.php?service_type=petsitting" class="service-card">
                     <h3>PET SITTING</h3>
-                    <p>Reliable and loving care for your pets at home.</p>
-                    </a> <a href="bookingRequest.php?service_type=petwalking" class=
+                    <p>Reliable and loving care for your pets at home.</p> </a> 
+                    <a href="bookingRequest.php?service_type=petwalking" class=
                     "service-card">
                     <h3>PET WALKING</h3>
-                    <p>Healthy and fun walks for your furry friends.</p>
-                    </a> <a href="serviceProvider.php" class="service-card">
+                    <p>Healthy and fun walks for your furry friends.</p> </a> 
+                    <a href="serviceProvider.php" class="service-card">
                     <h3>BECOME A SITTER/WALKER</h3>
                     <p>Join our community and earn doing what you love.</p>
                     </a></div>

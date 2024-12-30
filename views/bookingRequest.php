@@ -54,10 +54,10 @@ include('../templates/header_tpl.php');
                     </div>
                     <div class="form-group">
                         <p><label>Service Type: <span class="required">*</span> </label></p>
-                        <label for="petwalking"><input type="radio" id="petwalking" name="service_type" value="walking" required="">
-                            Pet Walking</label> <label for="petsitting"><input type="radio"
-                                id="petsitting" name="service_type" value="sitting" required="">
-                            Pet Sitting</label>
+                        <label for="petwalking"><input type="radio" id="petwalking" name="service_type" value="walking" required=""
+                        <?php echo $selected_service_type === 'petwalking' ? 'checked' : ''; ?>> Pet Walking</label> 
+                            <label for="petsitting"><input type="radio" id="petsitting" name="service_type" value="sitting" required=""
+                            <?php echo $selected_service_type === 'petsitting' ? 'checked' : ''; ?>>Pet Sitting</label>
                         <div class="form-group">
                             <p><label>Pick-Up and Drop-Off Location:<span class="required">*</span></label></p>
                             <label><input type="radio" name="location" id="myPlace" value="myplace" required=""> My Place</label> <label><input type="radio"
