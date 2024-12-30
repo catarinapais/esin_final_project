@@ -624,7 +624,7 @@ footer {
     transform: translate(2px, 2px);
   }
 
-#review {
+.review-owner, .review-provider {
     background-color: #E7CCCC;
     color: #fff;
     padding: 10px 15px;
@@ -635,7 +635,12 @@ footer {
     font-size:15px;
     transition: background-color 0.3s;
     margin: 0 auto; /* Centraliza no eixo horizontal */
-margin-top: 11px;
+    margin-top: 11px;
+    display: flex;
+    flex-direction: column;
+    align-items:baseline;
+    justify-content: center;
+    text-align: center;
 }
 
 #addPetButton:hover {
@@ -773,7 +778,7 @@ margin-top: 11px;
     margin-bottom: 850px;
 }
 
-#medical-needs span {
+.medical-needs span {
     font-weight: normal;
     color: #333;
 }

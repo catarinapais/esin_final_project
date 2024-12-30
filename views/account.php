@@ -16,9 +16,9 @@ function starReview($stars)
 
     for ($i = 1; $i <= 5; $i++) {
         if ($stars >= $count) {
-            $result .= "<span>&#x2605</span>";
+            $result .= "<span>&#x2605;</span>";
         } else {
-            $result .= "<span>&#x2606</span>";
+            $result .= "<span>&#x2606;</span>";
         }
         $count++;
     }
@@ -157,7 +157,7 @@ try {
                                         <?php if (empty($service['provider_review'])): ?>
                                             <p>No review yet</p>
                                         <?php else: ?>
-                                            <p><?= starReview($service['provider_review']); ?></p>
+                                            <?= starReview($service['provider_review']); ?>
                                         <?php endif; ?>
                                     </div>
 
@@ -166,7 +166,7 @@ try {
                                         <?php if (empty($service['owner_review'])): ?>
                                             <p>No review yet</p>
                                         <?php else: ?>
-                                            <p><?= starReview($service['owner_review']); ?></p>
+                                            <?= starReview($service['owner_review']); ?>
                                         <?php endif; ?>
 
                                     </div>
@@ -175,7 +175,7 @@ try {
                                         <form action="review.php" method="post">
                                             <input type="hidden" name="service_id" value="<?= htmlspecialchars($service['service_id']) ?>">
                                             <input type="hidden" name="role" value="owner">
-                                            <input type="submit" id="review" value="Add Review">
+                                            <input type="submit" class="review-owner" value="Add Review">
                                         </form>
                                     <?php endif; ?>
 
@@ -216,7 +216,7 @@ try {
                                         <?php if (empty($booking['owner_review'])): ?>
                                             <p>No review yet</p>
                                         <?php else: ?>
-                                            <p><?= starReview($booking['owner_review']); ?></p>
+                                            <?= starReview($booking['owner_review']); ?>
                                         <?php endif; ?>
                                     </div>
 
@@ -225,7 +225,7 @@ try {
                                         <?php if (empty($booking['provider_review'])): ?>
                                             <p>No review yet</p>
                                         <?php else: ?>
-                                            <p><?= starReview($booking['provider_review']); ?></p>
+                                            <?= starReview($booking['provider_review']); ?>
                                         <?php endif; ?>
                                     </div>
 
@@ -233,7 +233,7 @@ try {
                                         <form action="review.php" method="post">
                                             <input type="hidden" name="service_id" value="<?= htmlspecialchars($booking['service_id']) ?>">
                                             <input type="hidden" name="role" value="provider">
-                                            <input type="submit" id="review" value="Add Review">
+                                            <input type="submit" class="review-provider" value="Add Review">
                                         </form>
                                     <?php endif; ?>
 
@@ -324,7 +324,7 @@ try {
                                         <?php if (isset($medicalNeeds[$pet['pet_id']]) && !empty($medicalNeeds[$pet['pet_id']])): ?>
 
 
-                                            <p id="medical-needs">
+                                            <p class="medical-needs">
                                                 <strong>Medical Needs:</strong>
                                                 <?php foreach ($medicalNeeds[$pet['pet_id']] as $need): ?>
                                                     <?= htmlspecialchars($need['description']) ?>

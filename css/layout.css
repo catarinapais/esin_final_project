@@ -436,13 +436,13 @@ margin-bottom: 20px;
     flex-wrap: wrap;
 }
 
-#medical-needs {
+.medical-needs {
     display: flex;
     align-items: center;
     margin: 10px 0;
 }
 
-#medical-needs strong {
+.medical-needs strong {
     margin-right: 10px;
 }
 
