@@ -21,7 +21,7 @@ try {
     exit;
 } catch (PDOException $e) {
     $dbh->rollBack();
-    echo "Error deleting account: " . $e->getMessage();
+    $_SESSION['msg_error'] = "Error deleting account. Please try again.";
     exit;
 }
 ?>

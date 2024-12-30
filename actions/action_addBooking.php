@@ -102,7 +102,7 @@ $_SESSION['total_payments'][$booking_id] = $total_payment;
 
 
 } catch (PDOException $e) {
-    $_SESSION["msg_error"] = "Error: " . $e->getMessage();
+    $_SESSION['msg_error'] = "Error adding booking. Please try again.";
     header('Location: ../views/bookingRequest.php');
     exit();
 }

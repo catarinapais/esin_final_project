@@ -67,7 +67,7 @@ try {
     }
 } catch (PDOException $e) {
     // Tratamento de erro
-    echo "Erro de conexão: " . $e->getMessage();
+    $_SESSION['msg_error'] = "Error finding providers. Please try again.";
     header('Location: ../views/bookingRequest.php');
     exit;
 }

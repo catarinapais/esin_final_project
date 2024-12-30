@@ -19,7 +19,7 @@ try {
     $bookingInfo = getBookingById($service_id);
 } catch (PDOException $e) {
     // Tratamento de erro
-    echo "Erro de conexão: " . $e->getMessage();
+    $_SESSION['msg_error'] = "Connection Error.";
 }
 ?>
 

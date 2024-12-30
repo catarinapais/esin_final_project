@@ -113,7 +113,7 @@ try { // try catch for error handling
   $bookings = getFutureServices($id); // get future services
   $schedule = getSchedule($id, $week_start, $week_end); // get schedule for the week
 } catch (Exception $e) {
-  $error_msg = $e->getMessage(); // ir buscar a mensagem de erro e guardar em $error_msg
+  $_SESSION['msg_error'] = "Connection Error.";
 }
 
 include('../templates/header_tpl.php');

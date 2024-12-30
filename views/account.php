@@ -33,7 +33,7 @@ try {
     $providerInfo = getProviderInfo($user_id); // Fetch service provider info
     $medicalNeeds = fetchMedicalNeeds($petOwnerInfo); // Fetch the medical needs for each pet
 } catch (PDOException $e) { // error handling
-    echo "Connection error: " . $e->getMessage();
+    $_SESSION['msg_error'] = "Connection Error.";
 }
 ?>
 

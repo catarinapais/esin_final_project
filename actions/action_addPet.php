@@ -67,7 +67,7 @@ try {
     exit;
 
 } catch (PDOException $e) {
-    echo "Error: " . $e->getMessage();
+    $_SESSION['msg_error'] = "Error adding pets. Please try again.";
     exit;
 }
 ?>

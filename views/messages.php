@@ -50,7 +50,7 @@ try { // try catch for error handling
     $messages = getMessages($owner, $provider);
     $name_recipient = getPersonInfo($recipient)[0]['name'];
 } catch (Exception $e) {
-    $error_msg = $e->getMessage();
+    $_SESSION['msg_error'] = "Connection Error.";
 }
 ?>
 
@@ -75,7 +75,7 @@ try { // try catch for error handling
                 <?php displayMessages($messages); ?>
             </div>
             <form id="messageForm" method="post" action="../actions/action_messages.php">
-                <input type="text" name="message_body" id="messageInput" placeholder="Type a message...">
+                <input type="text" name="message_body" id="messageInput" placeholder="Type a message..." required>
                 <input type="hidden" name="send_time" value="<?= date('Y-m-d H:i:s'); ?>">
                 <input type="hidden" name="owner" value="<?= $owner; ?>">
                 <input type="hidden" name="provider" value="<?= $provider; ?>">
