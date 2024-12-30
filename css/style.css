@@ -787,6 +787,9 @@ footer {
     color:blue;
 }
 
+.registration-form label{
+    font-weight: bold;
+}
 .registerProvider {
     font-size: 1em;
     font-weight: 200;

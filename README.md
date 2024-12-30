@@ -1,4 +1,5 @@
-# ESIN_project_MBIO.B-6 
+# ESIN project - MBIO.B-6 
+#### Catarina Pais, Ema Beira and Rui Azevedo
 
 ## Project Vision and Purpose
 
@@ -22,7 +23,7 @@ This guide will help set up and run a Docker container for the `ESIN_project_MBI
 
 ## Folder Structure
 
-The project folder, `ESIN_project_MBIO.B-6`, includes the file `views/initialPage.php`, which will be the main page for the application.
+The project folder, `ESIN_project_MBIO.B-6`, includes the file `views/initialPage.php`, which will be the main page for the application. All other necessary files (SQL, HTML, CSS, PHP,  images and other files) are included as well.
 
 ---
 
@@ -31,52 +32,45 @@ The project folder, `ESIN_project_MBIO.B-6`, includes the file `views/initialPag
 ### Windows
 
 1. **Open PowerShell as Admin**:
-   - Press `Win + X` and choose "Windows PowerShell (Admin)".
+   Press `Win + X` and choose "Windows PowerShell (Admin)".
 
 2. **Go to Your C Drive**:
-   - ```powershell
+   ```powershell
      cd C:\
      ```
 
 3. **Create a Folder for the Project**:
-   - ```powershell
+   ```powershell
      mkdir ESIN_project_MBIO.B-6
      ```
 
 4. **Add Project Files**:
-   - Put all project files into the folder `C:\ESIN_project_MBIO.B-6`.
+   Put all project files into the folder `C:\ESIN_project_MBIO.B-6`.
 
 5. **Run the Docker Container**:
-   - ```powershell
+   ```powershell
      docker run -d -p 9000:8080 -it --name=php -v C:\ESIN_project_MBIO.B-6:/var/www/html gfcg/vesica-php73:dev
      ```
-   - Explanation of the command:
-     - `-d`: Runs the container in the background.
-     - `-p 9000:8080`: Maps the container's port 8080 to your machine's port 9000.
-     - `-it`: Opens an interactive terminal.
-     - `--name=php`: Names the container "php".
-     - `-v C:\ESIN_project_MBIO.B-6:/var/www/html`: Links your project folder to the container.
-     - `gfcg/vesica-php73:dev`: The Docker image being used.
 
 6. **View the Application**:
-   - Open a browser and go to `http://localhost:9000/views/initialPage.php`. This is the initial page of the project, and it should be opened like this.
+   Open a browser and go to `http://localhost:9000/views/initialPage.php`. This is the initial page of the project, and it should be opened like this.
 
 ### Linux / macOS
 
 1. **Open Terminal**.
 
 2. **Create a Project Folder**:
-   - ```bash
+   ```bash
      mkdir ~/ESIN_project_MBIO.B-6
      ```
 
 3. **Add Project Files**:
-   - Put all project files into the folder `~/ESIN_project_MBIO.B-6`.
+   Put all project files into the folder `~/ESIN_project_MBIO.B-6`.
 
 4. **Run the Docker Container**:
-   - ```bash
+   ```bash
      sudo docker run -d -p 9000:8080 -it --name=php -v ~/ESIN_project_MBIO.B-6:/var/www/html gfcg/vesica-php73:dev
      ```
 
 5. **View the Application**:
-   - Open a browser and go to `http://localhost:9000/views/initialPage.php`. 
+   Open a browser and go to `http://localhost:9000/views/initialPage.php`. 
