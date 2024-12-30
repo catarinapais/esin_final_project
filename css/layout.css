@@ -527,3 +527,17 @@ article p {
 .recipientMessage {
     align-self: flex-start;
 }
+
+
+/* Register */
+.registration-form .form-group label {
+    display: block; /* Garante que o label fique em sua própria linha */
+    margin-bottom: 7px; /* Adiciona espaço entre o label e o input */
+    text-align: initial;
+  }
+
+  .registration-form .form-group input,
+  .registration-form .form-group select {
+    margin-top: 0px; /* Adiciona espaço acima do input, se necessário */
+    margin-bottom: 20px;
+  }
