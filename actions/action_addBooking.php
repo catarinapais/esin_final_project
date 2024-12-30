@@ -59,10 +59,10 @@ try {
         }
         
         // Verificar o número total de pets selecionados
-$number_of_pets = count($pet_names_array);
+        $number_of_pets = count($pet_names_array);
 
-// Calcular o pagamento total
-$total_payment = $payment * $number_of_pets;
+        // Calcular o pagamento total
+        $total_payment = $payment * $number_of_pets;
 
 
         // Se a localização for "myplace", buscar a morada do user  a partir do id e passa-a para a variável location
@@ -71,7 +71,7 @@ $total_payment = $payment * $number_of_pets;
         } elseif ($location === 'providersplace') {
             // Se a localização for "Pet Sitter/Walker's Place", buscar a morada do provider
             if ($provider_id) {
-                $location = getPersonInfo($provider_id)['address'] ?? null;
+                $location = getProviderPersonalInfo($provider_id)[0]['provider_address'] ?? null;
             }
             // Se a localização for "other", vai buscar a morada que o user inseriu no text area
         } elseif ($location === 'other') {

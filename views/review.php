@@ -9,8 +9,8 @@ if ($role == 'owner') {
 } else {
     $service = 'Booking';
 }
-// role=owner - o provider vai dar review ao owner (pelo SERVICE feito)
-// role=provider - o owner vai dar review ao provider (pelo BOOKING feito)
+// role = owner - o provider vai dar review ao owner (pelo SERVICE feito)
+// role = provider - o owner vai dar review ao provider (pelo BOOKING feito)
 
 require_once('../database/init.php');
 require_once('../database/bookings.php');
@@ -25,9 +25,8 @@ try {
 
 <?php include('../templates/header_tpl.php'); ?>
 
-<section id="pastServicenew"><!--querying info about this service-->
    
-<section id="review">
+<section id="review-page">
     <form action="../actions/action_review.php" method="post">
         <h2>Past <?= $service ?></h2>
         <h3>Pet <?= $bookingInfo[0]['type'] ?> to <?= $bookingInfo[0]['pet_name'] ?></h3>

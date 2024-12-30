@@ -147,4 +147,27 @@ function insertOwner($person) {
     $stmt->execute(array($person));
 }
 
+function getProviderPersonalInfo($user_id) {
+    global $dbh;
+    $stmt = $dbh->prepare(
+        'SELECT 
+            Person.name, 
+            Person.email, 
+            Person.phone_number, 
+            Person.address as provider_address, 
+            Person.city, 
+            ServiceProvider.iban, 
+            ServiceProvider.service_type
+        FROM 
+            ServiceProvider 
+        JOIN 
+            Person ON ServiceProvider.person = Person.id 
+        WHERE 
+            ServiceProvider.person = :id'
+    );
+    $stmt->bindValue(':id', $user_id, PDO::PARAM_INT);
+    $stmt->execute();
+    return $stmt->fetchAll();
+}
+
 ?>

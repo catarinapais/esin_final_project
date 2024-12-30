@@ -402,7 +402,7 @@ p.note {
     text-decoration: underline;
 }
 .scrollable-bookings {
-    max-height: 850px;
+    max-height: 550px;
     overflow-y: auto;
     border: 1px solid #ddd;
     padding: 10px;
