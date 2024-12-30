@@ -3,7 +3,7 @@ session_start();
 ?>
 
 <footer>
-<div class="footer-container"><!-- Quick Links Section -->
+    <div class="footer-container"><!-- Quick Links Section -->
         <div class="footer-section">
             <h3>Quick Links</h3>
             <ul>
@@ -26,8 +26,8 @@ session_start();
             <p>Rua Dr. Roberto Frias, 4200-465 Porto</p>
             <p>Open Hours: Mon-Fri, 9am - 6pm</p>
         </div>
-  <!-- Newsletter Section -->
-  <div class="footer-section">
+        <!-- Newsletter Section -->
+        <div class="footer-section">
             <h3>Subscribe to our Newsletter</h3>
             <?php
             // Inicializa a variável de mensagem
@@ -43,15 +43,15 @@ session_start();
                 echo '<p style="color: green;">' . htmlspecialchars($message) . '</p>';
             }
             ?>
-<form action="" method="post"><input type="email" name="email"
-placeholder="Your email address" required=""> <button type=
-"submit">Subscribe</button></form>
+            <form action="" method="post"><input type="email" name="email"
+                    placeholder="Your email address" required=""> <button type="submit">Subscribe</button></form>
         </div>
     </div>
     <!-- Legal Section -->
     <div class="footer-legal">
-    <p>© 2024 PetPatrol. All rights reserved.</p>
+        <p>© 2024 PetPatrol. All rights reserved.</p>
     </div>
 </footer>
 </body>
+
 </html>
