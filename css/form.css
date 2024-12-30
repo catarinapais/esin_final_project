@@ -97,3 +97,12 @@ fieldset {
     padding: 20px;
     border-radius: 8px;
 }
+
+#scheculeForm, #addBooking {
+    width:70%;
+}
+
+textarea::placeholder {
+    font-size: 0.8em;
+    color: #999; 
+}

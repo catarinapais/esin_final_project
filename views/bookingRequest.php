@@ -64,7 +64,7 @@ include('../templates/header_tpl.php');
                                     name="location" id="providersPlace" value="providersplace"
                                     required=""> Pet Sitter/Walker's Place</label> <label><input type="radio" name="location" id="otherLocation" value="other" required=""> Other Location</label>
                             <div id="otherLocationDiv">
-                                <textarea name="other_address" id="other-address" rows="3" cols="30" placeholder="Enter address here... (only if 'Other Location' is selected)"></textarea>
+                                <textarea name="other_address" id="other-address" rows="4" cols="10" placeholder="Enter address here... (if 'Other Location' is selected)"></textarea>
                             </div>
                         </div>
                         <div class="form-group">

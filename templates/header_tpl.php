@@ -23,7 +23,9 @@ $name = $_SESSION['name'];
                 <img src="../images/assets/logo1.png" alt="Logo of Pet Patrol">
             </div>
         </a>
-        <nav id="menu"><input type="checkbox" id="hamburger">
+        <nav id="menu">
+            <input type="checkbox" id="hamburger">
+            <label class="hamburger" for="hamburger"></label>
             <ul id="menuItems">
                 <?php if (isset($_SESSION['email'])): ?>
                     <li><a href="bookingRequest.php">BOOK A SERVICE</a></li>

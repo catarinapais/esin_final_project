@@ -305,13 +305,13 @@ article p {
     min-height: calc(100vh - 80px); /* Altura dinâmica */
     padding: 20px;
     width: 80%;
-    margin-left: 165px;
+    margin: 0 auto;
 }
 
 #staticTags, #pets, #pastServices, #pastBookings {
     flex: 1 1 45%; 
     padding: 20px;
-margin-bottom: 20px;
+    margin-bottom: 20px;
 }
 
 #pastServices, #pastBookings {
