@@ -12,7 +12,7 @@ function getPublicReviews() {
         JOIN Review AS ProviderReview ON Booking.providerReview = ProviderReview.id 
         JOIN Pet ON Booking.pet = Pet.id 
         JOIN Person ON Person.id = Pet.owner 
-        WHERE Booking.review_consent = "YES" AND Booking.ownerReview IS NOT "0";'
+        WHERE Booking.review_consent = "YES";'
     ); 
     $stmt->execute();
     return $stmt->fetchAll();
