@@ -21,15 +21,15 @@ This guide will help set up and run a Docker container for the `ESIN_project_MBI
 
 ---
 
-## Folder Structure
+### Folder Structure
 
 The project folder, `ESIN_project_MBIO.B-6`, includes the file `views/initialPage.php`, which will be the main page for the application. All other necessary files (SQL, HTML, CSS, PHP,  images and other files) are included as well.
 
 ---
 
-## Running the Docker Container
+### Running the Docker Container
 
-### Windows
+#### Windows
 
 1. **Open PowerShell as Admin**:
    Press `Win + X` and choose "Windows PowerShell (Admin)".
@@ -55,7 +55,7 @@ The project folder, `ESIN_project_MBIO.B-6`, includes the file `views/initialPag
 6. **View the Application**:
    Open a browser and go to `http://localhost:9000/views/initialPage.php`. This is the initial page of the project, and it should be opened like this.
 
-### Linux / macOS
+#### Unix / macOS
 
 1. **Open Terminal**.
 
