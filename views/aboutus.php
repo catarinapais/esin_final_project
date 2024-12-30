@@ -17,6 +17,7 @@ pet care providers find each other easily and reliably. After
 working hard on this idea, we launched Pet Patrol, a platform where
 pet lovers can offer their services as sitters and walkers,
 ensuring pets get the best care possible.</p>
+</div>
         <div class="about-section">
             <h2>Our Mission</h2>
             <p>Our mission is simple: to make sure every pet gets the love,
@@ -44,7 +45,6 @@ and respect for animals.</p>
             </div>
         </div>
     </section>
-    </div>
 </main>
 <?php include('../templates/footer_tpl.php'); ?>
 
