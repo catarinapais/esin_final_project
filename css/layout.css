@@ -315,6 +315,7 @@ article p {
 }
 
 #pastServices, #pastBookings {
+    min-width: 900px !important;
     overflow-x: auto; 
     display: flex;
     flex-wrap: wrap; 
@@ -323,6 +324,7 @@ article p {
     gap: 20px; 
     padding: 20px;
     max-height: 500px;
+    min-width: calc(4 * (25% - 20px) + 60px); /* Espaço para 4 caixas */
 }
 
 .booking-box:first-child {

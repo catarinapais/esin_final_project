@@ -98,7 +98,11 @@ fieldset {
     border-radius: 8px;
 }
 
-#scheculeForm, #addBooking {
+#scheculeForm {
+    width:40%;
+}
+
+#addBooking {
     width:70%;
 }
 
