@@ -39,7 +39,6 @@ try {
 
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -47,9 +46,7 @@ try {
     <link href="../css/style.css" rel="stylesheet">
     <link href="../css/layout.css" rel="stylesheet">
     <link href="../css/responsive.css" rel="stylesheet">
-
 </head>
-
 <body>
     <header id="navigationBar">
         <a href="initialPage.php">
@@ -61,7 +58,6 @@ try {
         </a>
         <nav id="menu">
             <input type="checkbox" id="hamburger">
-            <label class="hamburger" for="hamburger"></label>
             <ul id="menuItems">
                 <?php if (isset($_SESSION['email'])): ?>
                     <li><a href="bookingRequest.php">BOOK A SERVICE</a></li>
