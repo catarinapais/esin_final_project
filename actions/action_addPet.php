@@ -14,6 +14,12 @@ $size = $_POST['size'];
 $birthdate = $_POST['birthdate'];
 $medicalneeds = $_POST['medicalneeds'];  // Considera que medicalneeds é um texto com todas as necessidades
 
+function sanitizeFileName($fileName) {
+    // Remove special characters and replace spaces with underscores
+    $sanitized = preg_replace('/[^a-zA-Z0-9._-]/', '_', $fileName);
+    return strtolower($sanitized); // Convert to lowercase for uniformity
+}
+
 if (!empty($birthdate) && $birthdate > date('Y-m-d')) {
     $_SESSION['msg_error'] = "Birthdate must be in the past.";
     header('Location: ../views/account.php#pets');
@@ -26,12 +32,13 @@ $profile_picture = null; // Variável que armazenará o nome do arquivo da image
 if (isset($_FILES['profile_picture']) && $_FILES['profile_picture']['error'] === UPLOAD_ERR_OK) { 
     $uploadDir = '../images/uploads/'; // Diretório onde as imagens serão armazenadas
     $fileName = basename($_FILES['profile_picture']['name']); // Usando basename() para obter o nome do arquivo
-    $uploadFile = $uploadDir . $fileName; // Caminho completo para onde o arquivo será armazenado no servidor
+    $sanitizedFileName = sanitizeFileName($fileName); // remove special characters and spaces
+    $uploadFile = $uploadDir . $sanitizedFileName; // Caminho completo para onde o arquivo será armazenado no servidor
 
     // Verifica o tipo de arquivo
-    if (in_array(strtolower(pathinfo($fileName, PATHINFO_EXTENSION)), ['jpg', 'jpeg', 'png', 'gif'])) { 
+    if (in_array(strtolower(pathinfo($sanitizedFileName, PATHINFO_EXTENSION)), ['jpg', 'jpeg', 'png', 'gif'])) { 
         if (move_uploaded_file($_FILES['profile_picture']['tmp_name'], $uploadFile)) {
-            $profile_picture = $fileName; // Salva o nome do arquivo para inserir no banco de dados
+            $profile_picture = $sanitizedFileName; // Salva o nome do arquivo para inserir no banco de dados
         } else {
             echo "Failed to upload file.";
             exit;
