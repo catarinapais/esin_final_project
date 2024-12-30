@@ -49,20 +49,17 @@ include('../templates/header_tpl.php');
                 <fieldset>
                     <legend>Booking</legend>
                     <div class="form-group">
-                        <p><label>Pet's name:</label></p>
-                        <label><span class="required">*</span></label>
+                        <p><label>Pet's name: <span class="required">*</span> </label></p>
                         <div id="pet-selection"><?php foreach ($pets as $pet): ?><label><input type="checkbox" name="pet_name[]" value="<?php echo htmlspecialchars($pet['name']); ?>" class="pet-checkbox"><?php echo htmlspecialchars($pet['name']); ?></label><?php endforeach; ?></div>
                     </div>
                     <div class="form-group">
-                        <p><label>Service Type:</label></p>
-                        <label><span class="required">*</span></label>
+                        <p><label>Service Type: <span class="required">*</span> </label></p>
                         <label for="petwalking"><input type="radio" id="petwalking" name="service_type" value="walking" required="">
                             Pet Walking</label> <label for="petsitting"><input type="radio"
                                 id="petsitting" name="service_type" value="sitting" required="">
                             Pet Sitting</label>
                         <div class="form-group">
-                            <p><label>Pick-Up and Drop-Off Location:</label></p>
-                            <label><span class="required">*</span></label>
+                            <p><label>Pick-Up and Drop-Off Location:<span class="required">*</span></label></p>
                             <label><input type="radio" name="location" id="myPlace" value="myplace" required=""> My Place</label> <label><input type="radio"
                                     name="location" id="providersPlace" value="providersplace"
                                     required=""> Pet Sitter/Walker's Place</label> <label><input type="radio" name="location" id="otherLocation" value="other" required=""> Other Location</label>
@@ -71,18 +68,15 @@ include('../templates/header_tpl.php');
                             </div>
                         </div>
                         <div class="form-group">
-                            <p><label>Date:</label></p>
-                            <label><span class="required">*</span></label>
+                            <p><label>Date: <span class="required">*</span></label></p>
                             <input name="date" id="date" type="date" required="">
                         </div>
                         <div class="form-group">
-                            <p><label>Start Time:</label></p>
-                            <label><span class="required">*</span></label>
+                            <p><label>Start Time: <span class="required">*</span> </label></p>
                             <input name="starttime" id="starttime" type="time" required="">
                         </div>
                         <div class="form-group">
-                            <p><label for="endtime">End time:</label></p>
-                            <label><span class="required">*</span></label>
+                            <p><label for="endtime">End time: <span class="required">*</span></label></p>
                             <input name="endtime" id="endtime" type="time" required="">
                         </div>
                         <div class="form-group"><label><input type="checkbox" name="photo_consent" value='YES'> I allow PetPatrol to take pictures of

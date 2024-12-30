@@ -21,8 +21,7 @@ function getPastBookings($user_id) {
         JOIN PetOwner ON Pet.owner = PetOwner.person 
         LEFT JOIN Review AS OwnerReview ON Booking.ownerReview = OwnerReview.id 
         LEFT JOIN Review AS ProviderReview ON Booking.providerReview = ProviderReview.id 
-        WHERE PetOwner.person = :id AND Booking.date < CURRENT_TIMESTAMP'
-    );
+        WHERE PetOwner.person = :id AND (DATETIME(Booking.date || " " || Booking.start_time)) < CURRENT_TIMESTAMP');//AND (Booking.date + INTERVAL Booking.start_time HOUR_MINUTE) < CURRENT_TIMESTAMP');
     $stmt->bindValue(':id', $user_id, PDO::PARAM_INT);
     $stmt->execute();
     return $stmt->fetchAll(); // Get all past bookings
@@ -46,8 +45,9 @@ function getPastServices($user_id) {
         JOIN ServiceProvider ON Booking.provider = ServiceProvider.person 
         LEFT JOIN Review AS OwnerReview ON Booking.ownerReview = OwnerReview.id 
         LEFT JOIN Review AS ProviderReview ON Booking.providerReview = ProviderReview.id 
-        WHERE Booking.provider = :id  AND Booking.date < CURRENT_TIMESTAMP'
-    );
+        WHERE Booking.provider = :id  
+        AND  (DATETIME(Booking.date || " " || Booking.start_time)) < CURRENT_TIMESTAMP'
+        );      //Booking.date < CURRENT_TIMESTAMP');
     $stmt->bindValue(':id', $user_id, PDO::PARAM_INT);
     $stmt->execute();
     return $stmt->fetchAll(); // Get all past services
