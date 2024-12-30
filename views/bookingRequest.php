@@ -41,105 +41,65 @@ include('../templates/header_tpl.php');
 ?>
 <main id="bookingcontent">
     <?php if ($has_pets): ?>
-
         <section id="addBooking">
-            <section class="error-messages">
-                <?php if (isset($_SESSION['msg_error'])) : ?>
-                    <p class="msg_error"><?php echo $_SESSION['msg_error']; ?></p>
-                    <?php unset($_SESSION['msg_error']); ?>
-                <?php endif; ?>
-            </section>
-            <?php
-            $selected_service_type = $_GET['service_type'] ?? ''; // Get the service type from the query parameter, if available
-            ?>
+            <section class="error-messages"><?php if (isset($_SESSION['msg_error'])) : ?><p class="msg_error"><?php echo $_SESSION['msg_error']; ?></p><?php unset($_SESSION['msg_error']); ?><?php endif; ?></section>
+            <?php $selected_service_type = $_GET['service_type'] ?? ''; // Get the service type from the query parameter, if available?>
             <form action="../actions/action_findProviders.php" method="post">
-                <fieldset>
-                    <legend>Booking</legend>
-
+            <fieldset><legend>Booking</legend>
                     <div class="form-group">
-                        <label for="pet-selection">
-                            <p>Pet's name:</p><span class="required">*</span>
-                        </label>
-                        <div id="pet-selection">
-                            <?php foreach ($pets as $pet): ?>
-                                <label>
-                                    <input type="checkbox" name="pet_name[]" value="<?php echo htmlspecialchars($pet['name']); ?>" class="pet-checkbox">
-                                    <?php echo htmlspecialchars($pet['name']); ?>
-                                </label>
-                            <?php endforeach; ?>
-                        </div>
+                    <p><label for="pet-selection">Pet's name:</label></p>
+<label for="pet-selection"><span class="required">*</span></label>
+<div id="pet-selection"><?php foreach ($pets as $pet): ?><label><input type="checkbox" name=
+"pet_name[]" value="<?php echo htmlspecialchars($pet['name']); ?>" class=
+"pet-checkbox"><?php echo htmlspecialchars($pet['name']); ?></label><?php endforeach; ?></div>
                     </div>
                     <div class="form-group">
-                        <label for="service_type">
-                            <p>Service Type:</p><span class="required">*</span>
-                        </label>
-                        <label for="petwalking">
-                            <input type="radio" id="petwalking" name="service_type" value="walking"
-                                <?= $selected_service_type === 'petwalking' ? 'checked' : '' ?> required> <!-- espero não ter estragado-->
-                            Pet Walking
-                        </label>
-                        <label for="petsitting">
-                            <input type="radio" id="petsitting" name="service_type" value="sitting"
-                                <?= $selected_service_type === 'petsitting' ? 'checked' : '' ?> required>
-                            Pet Sitting
-                        </label>
-
+                    <p><label for="service_type">Service Type:</label></p>
+<label for="service_type"><span class="required">*</span></label>
+<label for="petwalking"><input type="radio" id="petwalking" name=
+"service_type" value="walking" required=""> 
+<!-- espero não ter estragado-->
+ Pet Walking</label> <label for="petsitting"><input type="radio"
+id="petsitting" name="service_type" value="sitting" required="">
+Pet Sitting</label>
                         <div class="form-group">
-                            <label for="location">
-                                <p>Pick-Up and Drop-Off Location:</p><span class="required">*</span>
-                            </label>
-                            <label>
-                                <input type="radio" name="location" id="myPlace" value="myplace" required> My Place
-                            </label>
-                            <label>
-                                <input type="radio" name="location" id="providersPlace" value="providersplace" required> Pet Sitter/Walker's Place
-                            </label>
-                            <label>
-                                <input type="radio" name="location" id="otherLocation" value="other" required> Other Location
-                            </label>
+                        <p><label for="location">Pick-Up and Drop-Off Location:</label></p>
+<label for="location"><span class="required">*</span></label>
+<label><input type="radio" name="location" id="myPlace" value=
+"myplace" required=""> My Place</label> <label><input type="radio"
+name="location" id="providersPlace" value="providersplace"
+required=""> Pet Sitter/Walker's Place</label> <label><input type=
+"radio" name="location" id="otherLocation" value="other" required=
+""> Other Location</label>
                             <div id="otherLocationDiv">
-                                <textarea name="other_address" id="other-address" rows="3" cols="30" placeholder="Enter address here... (only if 'Other Location' is selected)"></textarea>
-                            </div>
+                            <textarea name="other_address" id="other-address" rows="3" cols=
+"30" placeholder=
+"Enter address here... (only if 'Other Location' is selected)"></textarea></div>
                         </div>
-
                         <div class="form-group">
-                            <label for="date">
-                                <p>Date:</p><span class="required">*</span>
-                            </label>
-                            <input name="date" id="date" type="date" required>
-                        </div>
-
+                        <p><label for="date">Date:</label></p>
+<label for="date"><span class="required">*</span></label>
+<input name="date" id="date" type="date" required=""></div>
                         <div class="form-group">
-                            <label for="starttime">
-                                <p>Start Time:</p><span class="required">*</span>
-                            </label>
-                            <input name="starttime" id="starttime" type="time" required>
-                        </div>
-
+                        <p><label for="starttime">Start Time:</label></p>
+<label for="starttime"><span class="required">*</span></label>
+<input name="starttime" id="starttime" type="time" required=
+""></div>
                         <div class="form-group">
-                            <label for="endtime">
-                                <p>End time:</p><span class="required">*</span>
-                            </label>
-                            <input name="endtime" id="endtime" type="time" required>
-                        </div>
-
-                        <div class="form-group">
-                            <label>
-                                <input type="checkbox" name="photo_consent" value='YES'>
-                                I allow PetPatrol to take pictures of my pet during the walks for social media.
-                            </label><br>
-
-                            <label>
-                                <input type="checkbox" name="review_consent" value="YES">
-                                I allow PetPatrol to publish my reviews and display them on the website.
-                            </label><br>
-                        </div>
-
-                        <input type="submit" value="Search for Available Pet Walkers/Pet Sitters">
+                        <p><label for="endtime">End time:</label></p>
+<label for="endtime"><span class="required">*</span></label>
+<input name="endtime" id="endtime" type="time" required=""></div>
+<div class="form-group"><label><input type="checkbox" name=
+"photo_consent" value='YES'> I allow PetPatrol to take pictures of
+my pet during the walks for social media.</label><br>
+<label><input type="checkbox" name="review_consent" value="YES"> I
+allow PetPatrol to publish my reviews and display them on the
+website.</label><br></div>
+<input type="submit" value=
+"Search for Available Pet Walkers/Pet Sitters"></div>
                 </fieldset>
             </form>
         </section>
-
         <section id="availableProviders">
             <div id="priceTable">
                 <h3>Services Price Table</h3>
@@ -153,7 +113,8 @@ include('../templates/header_tpl.php');
                 <tbody>
                     <tr>
                         <td class="tg-0lax">15€/hour</td>
-                        <td class="tg-0lax"><span style="font-weight:400;font-style:normal">10€/hour</span></td>
+                        <td class="tg-0lax"><span style=
+                        "font-weight:400;font-style:normal">10€/hour</span></td>
                     </tr>
                 </tbody>
             </table>
@@ -164,9 +125,7 @@ include('../templates/header_tpl.php');
                 <?php unset($_SESSION['msg_no_providers']); ?>
             <?php endif; ?>
             <?php if (!empty($availableProviders)) : ?>
-                <h2>Available Pet Walkers/Pet Sitters at <?= $availableProviders[0]['schedule_day_week'] ?></h2>
-
-                <!-- Formulário com select para escolher o provider -->
+                <h2>Available Pet Walkers/Pet Sitters at <?= $availableProviders[0]['schedule_day_week'] ?></h2> <!-- Formulário com select para escolher o provider -->
                 <form action="../actions/action_addBooking.php" method="post">
                     <div class="form-group">
                         <label for="provider_selection">
@@ -183,9 +142,7 @@ include('../templates/header_tpl.php');
                                 </option>
                             <?php endforeach; ?>
                         </select>
-                    </div>
-
-                    <!-- Campos ocultos com os dados da reserva -->
+                    </div><!-- Campos ocultos com os dados da reserva -->
                     <input type="hidden" name="service_type" value="<?= htmlspecialchars($booking_data['service_type'] ?? '') ?>">
                     <input type="hidden" name="pet_name" value="<?= htmlspecialchars($booking_data['pet_name'] ?? '') ?>">
                     <input type="hidden" name="date" value="<?= htmlspecialchars($booking_data['date'] ?? '') ?>">
@@ -195,15 +152,12 @@ include('../templates/header_tpl.php');
                     <input type="hidden" name="endtime" value="<?= htmlspecialchars($booking_data['endtime'] ?? '') ?>">
                     <input type="hidden" name="photo_consent" value="<?= htmlspecialchars($booking_data['photo_consent'] ?? 'NO') ?>">
                     <input type="hidden" name="review_consent" value="<?= htmlspecialchars($booking_data['review_consent'] ?? 'NO') ?>">
-
                     <button type="submit">Book</button>
                 </form>
-
             <?php else: ?>
-                <p> Choose one option to check for available providers. </p>
+                <p>Choose one option to check for available providers.</p>
             <?php endif; ?>
         </section>
-
         <section id="scheduledServices">
             <h2>Scheduled Bookings</h2>
             <?= $error_msg ? '<p class="msg_error">' . $error_msg . '</p>' : '' ?>
@@ -212,39 +166,33 @@ include('../templates/header_tpl.php');
                     <?php foreach ($bookings as $booking) : ?>
                         <article class="booking-info">
                             <div class="booking-details">
-                                <p class="booking-title">Date and Time: </p>
+                                <p class="booking-title">Date and Time:</p>
                                 <p class="booking-desc"><?php echo htmlspecialchars($booking['date'] . ', ' . $booking['start_time'] . ' - ' . $booking['end_time']); ?></p>
-                                <p class="booking-title">Address: </p>
+                                <p class="booking-title">Address:</p>
                                 <p class="booking-desc"><?php echo htmlspecialchars($booking['address'] . ', ' . ucfirst($booking['owner_city'])); ?></p>
-                                <p class="booking-title">Service Type: </p>
+                                <p class="booking-title">Service Type:</p>
                                 <p class="booking-desc"><?php echo htmlspecialchars(ucfirst($booking['service_type'])); ?></p>
-                                <p class="booking-title">Pet: </p>
+                                <p class="booking-title">Pet:</p>
                                 <p class="booking-desc"><?php echo htmlspecialchars($booking['pet_name']); ?></p>
-                                <p class="booking-title">Provider's Name: </p>
+                                <p class="booking-title">Provider's Name:</p>
                                 <p class="booking-desc"><?php echo htmlspecialchars($booking['provider_name']); ?></p>
-                                <p class="booking-title">Provider's Rating: </p>
+                                <p class="booking-title">Provider's Rating:</p>
                                 <p class="booking-desc"><?php echo $booking['provider_rating'] !== null ? htmlspecialchars(ucfirst($booking['provider_rating'])) : 'No reviews yet.'; ?></p>
-                                <a class="message-button" href="../views/messages.php?provider=<?= $booking['provider_id'] ?>&owner=<?= $id ?>">MESSAGE</a>
-                            </div>
-                            <img src="../images/uploads/<?= htmlspecialchars($booking['pet_picture']) ?>"
-                                alt="<?= htmlspecialchars($booking['pet_name']) ?>"
-                                class="pet-profile-picture">
-                        </article>
+                                <a class="message-button" href=
+"../views/messages.php?provider=<?= $booking['provider_id'] ?>&amp;owner=<?= $id ?>">MESSAGE</a></div>
+<img src="../images/uploads/<?= htmlspecialchars($booking['pet_picture']) ?>" alt="<?= htmlspecialchars($booking['pet_name']) ?>" class=
+"pet-profile-picture"></article>
                     <?php endforeach; ?>
                 <?php else : ?>
                     <p>No bookings scheduled.</p>
                 <?php endif; ?>
             </div>
         </section>
-
     <?php else: ?>
         <p id="nopets">
             No pets associated with your account.
             Please <a href="account.php#addPetSection"> add a pet</a> to continue.
         </p>
     <?php endif; ?>
-
-
 </main>
-
 <?php include('../templates/footer_tpl.php'); ?>
