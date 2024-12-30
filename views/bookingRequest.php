@@ -33,7 +33,7 @@ try {
     $pets = getPets($id);
     $has_pets = !empty($pets);
 } catch (PDOException $e) {
-    echo "Error: " . $e->getMessage();
+    $_SESSION['msg_error'] = "Connection Error.";
     exit();
 }
 

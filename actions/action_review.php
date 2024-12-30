@@ -20,7 +20,7 @@ try {
     exit;
 
 } catch (PDOException $e) {
-    echo "Erro de conexão: " . $e->getMessage();
+    $_SESSION['msg_error'] = "Error inserting the review. Please try again.";
     exit;
 }
 ?>

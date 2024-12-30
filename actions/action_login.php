@@ -48,6 +48,6 @@ try {
   }
 } catch (PDOException $e) {
   // Handle connection errors
-  $_SESSION['msg_error'] = 'Error: ' . $e->getMessage();
+  $_SESSION['msg_error'] = "Error logging in. Please try again.";
   header('Location: ../views/login.php'); // Redirect to login page
 }

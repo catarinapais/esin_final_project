@@ -496,7 +496,6 @@ margin-bottom: 20px;
 }
 
 .senderMessage, .recipientMessage {
-    border-radius: 15px;
     padding: 10px;
     margin: 10px 0;
     max-width: 80%;

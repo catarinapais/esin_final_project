@@ -13,7 +13,7 @@ require_once('../database/message.php');
 try {
     insertMessage($id, $message_body, $send_time, $owner, $provider);
 } catch (PDOException $e) {
-    echo "Error: " . $e->getMessage();
+    $_SESSION['msg_error'] = "Error sending the message. Please try again.";
     exit();
 }
 

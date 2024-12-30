@@ -1,8 +1,21 @@
-# Esin Final Project
+# ESIN_project_MBIO.B-6 
 
-# ESIN_project_MBIO.B-6 Setup and Docker Container Guide
+## Project Vision and Purpose
 
-This guide will help you set up and run a Docker container for the `ESIN_project_MBIO.B-6` folder. Please follow these steps to get started.
+PetPatrol: Sit and Walk is a web-based platform developed to provide a practical solution for pet care services. This platform allows users to book pet sitting and walking services or register as service providers to offer these services. The project focuses on creating a functional and user-friendly application that addresses real-world needs in the domain of pet care.
+
+### Project Goals
+- Develop a robust platform for booking and managing pet care services.
+- Implement a dual-role system where users can be both clients and service providers.
+- Ensure a straightforward and accessible interface suitable for diverse user groups.
+
+This project is aimed at demonstrating the practical application of web development skills using HTML, CSS, and PHP to solve a relevant problem effectively.
+
+---
+
+## Setup and Docker Container Guide
+
+This guide will help set up and run a Docker container for the `ESIN_project_MBIO.B-6` folder.
 
 
 ---
@@ -46,7 +59,7 @@ The project folder, `ESIN_project_MBIO.B-6`, includes the file `views/initialPag
      - `gfcg/vesica-php73:dev`: The Docker image being used.
 
 6. **View the Application**:
-   - Open a browser and go to `http://localhost:9000/views/initialPage.php`.
+   - Open a browser and go to `http://localhost:9000/views/initialPage.php`. This is the initial page of the project, and it should be opened like this.
 
 ### Linux / macOS
 

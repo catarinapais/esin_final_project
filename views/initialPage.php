@@ -24,7 +24,7 @@ require_once('../database/review.php');
 try { // try catch for error handling
     $reviews = getPublicReviews();
 } catch (Exception $e) {
-    echo "Error: " . $e->getMessage();
+    $_SESSION['msg_error'] = "Connection Error.";
     exit();
 }
 
