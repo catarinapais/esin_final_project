@@ -89,7 +89,10 @@
     #hamburger:checked + .hamburger + #menuItems li {
         background-color: #edeff0;
     }
-    
+
+    #scheculeForm {
+        min-width:60%;
+    }
 }
 
 @media (max-width: 800px) {
