@@ -34,7 +34,7 @@ and respect for animals.</p>
         <p>Meet the visionary CEOs and their beloved pets who inspired the
         PetPatrol project!</p>
         <div class="ceo-container">
-        <div class="ceo"><img src="../images/assets/rui.jpg" alt="CEO 1">
+        <div class="ceo"><img src="../images/assets/ruis.jpg" alt="CEO 1">
                 <p>Rui with Nero</p>
             </div>
             <div class="ceo"><img src="../images/assets/cat.jpg" alt="CEO 2">

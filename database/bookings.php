@@ -21,7 +21,7 @@ function getPastBookings($user_id) {
         JOIN PetOwner ON Pet.owner = PetOwner.person 
         LEFT JOIN Review AS OwnerReview ON Booking.ownerReview = OwnerReview.id 
         LEFT JOIN Review AS ProviderReview ON Booking.providerReview = ProviderReview.id 
-        WHERE PetOwner.person = :id AND (DATETIME(Booking.date || " " || Booking.start_time)) < CURRENT_TIMESTAMP');
+        WHERE PetOwner.person = :id AND (DATETIME(Booking.date || " " || Booking.end_time)) < CURRENT_TIMESTAMP');
     $stmt->bindValue(':id', $user_id, PDO::PARAM_INT);
     $stmt->execute();
     return $stmt->fetchAll(); // Get all past bookings
@@ -46,8 +46,8 @@ function getPastServices($user_id) {
         LEFT JOIN Review AS OwnerReview ON Booking.ownerReview = OwnerReview.id 
         LEFT JOIN Review AS ProviderReview ON Booking.providerReview = ProviderReview.id 
         WHERE Booking.provider = :id  
-        AND  (DATETIME(Booking.date || " " || Booking.start_time)) < CURRENT_TIMESTAMP'
-        );      //Booking.date < CURRENT_TIMESTAMP');
+        AND  (DATETIME(Booking.date || " " || Booking.end_time)) < CURRENT_TIMESTAMP'
+        );    
     $stmt->bindValue(':id', $user_id, PDO::PARAM_INT);
     $stmt->execute();
     return $stmt->fetchAll(); // Get all past services
@@ -75,9 +75,9 @@ function getFutureBookings($user_id) {
         JOIN ServiceProvider ON ServiceProvider.person = Provider.id 
         JOIN Pet ON Booking.pet = Pet.id 
         JOIN Person AS Owner ON Pet.owner = Owner.id 
-        WHERE Booking.date >= ? AND Owner.id = ?;'
-    ); // prepared statement
-    $stmt->execute([date('Y-m-d'), $user_id]);
+        WHERE DATETIME(Booking.date || " "|| Booking.end_time) >= ? AND Owner.id = ?;'
+    ); 
+    $stmt->execute([date('Y-m-d H:i:s'), $user_id]);
     return $stmt->fetchAll();
 }
 
@@ -103,9 +103,9 @@ function getFutureServices($user_id) {
         JOIN Person AS Owner ON Pet.owner = Owner.id 
         LEFT JOIN PetMedicalNeed ON Pet.id = PetMedicalNeed.pet
         LEFT JOIN MedicalNeed ON PetMedicalNeed.medicalNeed = MedicalNeed.id
-        WHERE Booking.date >= ? AND Booking.provider = ?;'
-    ); // prepared statement
-    $stmt->execute([date('Y-m-d'), $user_id]);
+        WHERE DATETIME(Booking.date || " "||Booking.end_time) >= ? AND Booking.provider = ?;'
+    ); 
+    $stmt->execute([date('Y-m-d H:i:s'), $user_id]);
     return $stmt->fetchAll();
 }
 
